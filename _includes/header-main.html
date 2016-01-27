@@ -1,0 +1,40 @@
+<header class="header header-blog">
+    <div class="container">
+        <span><a href="/"><img class="logo" style="padding-top:13px;width:54px" src="/assets/images/logo/ace.png" alt="ACE" /></a></span>
+        <nav class="main-nav navbar-right" role="navigation">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar-collapse" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    {% for my_page in site.pages %}
+                        {% if my_page.title and my_page.category != 'docs' and my_page.category != 'hidden' %}
+                            <li class="nav-item"><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    <!-- An extra entry: -->
+                    <li class="nav-item"><a href="/docs/getting-started/">Getting Started</a></li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Docs <i class="fa fa-angle-down"></i></a>
+                        <ul class="dropdown-menu">
+                    {% for my_page in site.pages %}
+                        {% if my_page.category == 'docs' %}
+                            <li><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                            <!-- Make sure this is last: -->
+                            <li><a href="/docs/ref/">UI Framework Reference</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item nav-item-cta last"><a class="btn btn-cta btn-cta-primary" style="color:white;background-color:#682079" href="https://github.com/adnathan/ace"><i class="fa fa-github"></i>View on Github</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
