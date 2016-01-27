@@ -3,7 +3,7 @@ layout: default
 ---
 <section class="promo section section-on-bg">
     <div class="container text-center">
-        <h2 class="title">Ace = JavaScript +&nbsp;<i style="background:white;color:#3399FF;white-space:nowrap"> Native UI </i>&nbsp;+ iOS + Android</h2>
+        <h2 class="title">Ace = JavaScript +&nbsp;<i style="color:#3399FF;background:white;white-space:nowrap">&nbsp;Native UI&nbsp;</i>&nbsp;+ iOS + Android</h2>
         <h4 style="font-size:large;font-weight:bold;margin-top:-10px">for Apache Cordova</h2>
 
         <br/>
@@ -14,8 +14,8 @@ layout: default
 <div class="sections-wrapper">
 
     <div style="text-align:center;position:relative;top:-30px">
-        <p class="nonsmall-only"><a style="font-size:large" class="btn btn-cta btn-cta-intro" href="https://github.com/adnathan/ace">$ cordova plugin add https://github.com/adnathan/ace.git</a></p>
-        <p class="small-only"><a style="font-size:large" class="btn btn-cta btn-cta-intro" href="https://github.com/adnathan/ace"><i class="fa fa-github"></i>View on Github</a></p>
+        <p class="greater-than-xsmall"><a style="font-size:large" class="btn btn-cta btn-cta-intro" href="https://github.com/adnathan/ace">$ cordova plugin add https://github.com/adnathan/ace.git</a></p>
+        <p class="xsmall-or-less"><a style="font-size:large" class="btn btn-cta btn-cta-intro" href="https://github.com/adnathan/ace"><i class="fa fa-github"></i>View on Github</a></p>
     </div>
 
         <section id="why" class="section why">
@@ -26,6 +26,7 @@ layout: default
                     <div class="content col-sm-3">
                       <span class="number" style="float:left">1</span>
                       <h2 class="title" style="padding-left:84px;margin-top:6px;text-align:left"><b>Mix native UI with HTML</b></h2>
+                      <h3 class="title" style="font-size: small;padding-left:84px;text-align:left"><b>GET THE BEST OF BOTH WORLDS</b></h3>
                         <div class="desc">
                             <p>What's the big deal about native UI?</p>
                             <ul>
@@ -35,7 +36,6 @@ layout: default
                                 <li>Respects user accessibility settings</li>
                             </ul>
                             <p>Yet with HTML, you can still leverage your web skills, code, and familiar frameworks like Ionic, Bootstrap, and Ember.</p>
-                            <p>With Ace, you get the best of both worlds.</p>
                         </div>
                     </div>
                     <figure class="figure col-sm-6">
@@ -67,7 +67,7 @@ layout: default
                 </div>
 
                 <div class="row item">
-                    <div>
+                    <div style="margin-left:14px;margin-right:14px">
                       <span class="number" style="float:left">2</span>
                       <h2 class="title" style="padding-left:84px;margin-top:6px;text-align:left"><b>Use a cross-platform native UI framework</b></h2>
                       <h3 class="title" style="font-size: small;padding-left:84px;text-align:left"><b>...OR JUST USE RAW NATIVE CONTROLS DIRECTLY</b></h3>
@@ -76,30 +76,30 @@ layout: default
                             <p>Or, you can use platform-specific native controls directly. You've got many options:</p>
                       </div>
                     </div>
-<center>
-                            <table border="0">
-                                <tr>
-                                    <th></th>
-                                    <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Cross-Platform<br/>(Write Once)</th>
-                                    <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Platform-Specific<br/>(Write Twice)</th>
-                                </tr>
-                                <tr>
-                                    <th class="title alt" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">JavaScript</th>
-                                    <td class="alt" style="border-right:1px solid #682079">
+                    <div class="greater-than-small">
+                    <table align="center" border="0">
+                        <tr>
+                            <th></th>
+                            <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Cross-Platform<br/>(Write Once)</th>
+                            <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Platform-Specific<br/>(Write Twice)</th>
+                        </tr>
+                        <tr>
+                            <th class="title alt" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">JavaScript</th>
+                            <td class="alt" style="border-right:1px solid #682079">
 <pre class="js"><span class="js-id">var</span> button = <span class="js-id">new</span> ace.Button();</pre>
 </td>
                                     <td class="alt" style="border-right:1px solid #682079">
-<pre class="js"><span class="js-id">var</span> button;
+    <pre class="js"><span class="js-id">var</span> button;
 <span class="js-id">if</span> (ace.platform == <span class="js-string">"iOS"</span>)
   button = <span class="js-id">new</span> ace.NativeObject(<span class="js-string">"UIButton"</span>);
 <span class="js-id">else if</span> (ace.platform == <span class="js-string">"Android"</span>)
   button = <span class="js-id">new</span> ace.NativeObject(<span class="js-string">"android.widget.Button"</span>);
 </pre>
 </td>
-                                </tr>
-                                <tr>
-                                    <th class="title" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">XAML</th>
-                                    <td style="border-right:1px solid #682079">
+                        </tr>
+                        <tr>
+                            <th class="title" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">XAML</th>
+                            <td style="border-right:1px solid #682079">
 <pre class="xaml">&lt;<span class="xaml-tag">Button</span> /&gt;</pre>
 </td>
                                     <td style="border-right:1px solid #682079">
@@ -111,28 +111,93 @@ layout: default
 &lt;/<span class="xaml-tag">if</span>:<span class="xaml-tag">Android</span>&gt;
 </pre>
 </td>
-                                </tr>
-                                <tr>
-                                    <th class="title alt" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Android XML</th>
-                                    <td class="alt" style="text-align:center;vertical-align:middle;color:#999;border-right:1px solid #682079"><i style="font-size:35px" class="fa fa-android"></i>&nbsp;&nbsp;<span style="position:relative;top:-8px">only</span></td>
-                                    <td class="alt" style="border-right:1px solid #682079">
+                        </tr>
+                        <tr>
+                            <th class="title alt" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Android XML</th>
+                            <td class="alt" style="text-align:center;vertical-align:middle;color:#999;border-right:1px solid #682079"><i style="font-size:35px" class="fa fa-android"></i>&nbsp;&nbsp;<span style="position:relative;top:-8px">only</span></td>
+                            <td class="alt" style="border-right:1px solid #682079">
 <pre class="xml">&lt;Button <span class="xml-attr">android:layout_width</span><span class="xml-eq">=</span><span class="xml-string">"wrap_content"</span>
         <span class="xml-attr">android:layout_height</span><span class="xml-eq">=</span><span class="xml-string">"wrap_content"</span> /&gt;</pre>
 </td>
-                                </tr>
-                                <tr>
-                                    <th class="title" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Interface Builder<br/>(NIB/XIB)</th>
-                                    <td style="text-align:center;vertical-align:middle;color:#999;border-right:1px solid #682079"><i style="font-size:35px" class="fa fa-apple"></i>&nbsp;&nbsp;<span style="position:relative;top:-8px">only</span></td>
-                                    <td style="border-right:1px solid #682079"><img height="62" style="margin-left:12px" src="/assets/images/home/ib.png"/></td>
-                                </tr>
-                            </table>
-</center>
+                        </tr>
+                        <tr>
+                            <th class="title" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Interface Builder<br/>(NIB/XIB)</th>
+                            <td style="text-align:center;vertical-align:middle;color:#999;border-right:1px solid #682079"><i style="font-size:35px" class="fa fa-apple"></i>&nbsp;&nbsp;<span style="position:relative;top:-8px">only</span></td>
+                            <td style="border-right:1px solid #682079"><img height="62" style="margin-left:12px" src="/assets/images/home/ib.png"/></td>
+                        </tr>
+                    </table>
+                    </div>
+                    <div class="small-or-less">
+                    <table align="center" border="0">
+                        <tr>
+                            <th></th>
+                            <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Cross-Platform<br/>(Write Once)</th>
+                        </tr>
+                        <tr>
+                            <th class="title alt" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">JavaScript</th>
+                            <td class="alt" style="border-right:1px solid #682079">
+<pre class="js"><span class="js-id">var</span> button = <span class="js-id">new</span> ace.Button();</pre>
+</td>
+                        </tr>
+                        <tr>
+                            <th class="title" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">XAML</th>
+                            <td style="border-right:1px solid #682079">
+<pre class="xaml">&lt;<span class="xaml-tag">Button</span> /&gt;</pre>
+</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th class="title" style="text-align:center;line-height:1;font-size:medium;font-weight:bold;padding:12px">Platform-Specific<br/>(Write Twice)</th>
+                        </tr>
+                        <tr>
+                            <th class="title alt" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">JavaScript</th>
+                            <td class="alt" style="border-right:1px solid #682079">
+    <pre class="js"><span class="js-id">var</span> button;
+<span class="js-id">if</span> (ace.platform == <span class="js-string">"iOS"</span>)
+  button = <span class="js-id">new</span> ace.NativeObject(<span class="js-string">"UIButton"</span>);
+<span class="js-id">else if</span> (ace.platform == <span class="js-string">"Android"</span>)
+  button = <span class="js-id">new</span> ace.NativeObject(<span class="js-string">"android.widget.Button"</span>);
+</pre>
+</td>
+                        </tr>
+                        <tr>
+                            <th class="title" style="text-align:center;font-size:medium;font-weight:bold;padding:12px;border-right:1px solid #682079">XAML</th>
+                            <td style="border-right:1px solid #682079">
+<pre class="xaml">&lt;<span class="xaml-tag">if</span>:<span class="xaml-tag">iOS</span>&gt;
+  &lt;<span class="xaml-tag">ios</span>:<span class="xaml-tag">UIButton</span> /&gt;
+&lt;/<span class="xaml-tag">if</span>:<span class="xaml-tag">iOS</span>&gt;
+&lt;<span class="xaml-tag">if</span>:<span class="xaml-tag">Android</span>&gt;
+  &lt;<span class="xaml-tag">android</span>:<span class="xaml-tag">Button</span> /&gt;
+&lt;/<span class="xaml-tag">if</span>:<span class="xaml-tag">Android</span>&gt;
+</pre>
+</td>
+                        </tr>
+                        <tr>
+                            <th class="title alt" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Android XML</th>
+                            <td class="alt" style="border-right:1px solid #682079">
+<pre class="xml">&lt;Button <span class="xml-attr">android:layout_width</span><span class="xml-eq">=</span><span class="xml-string">"wrap_content"</span>
+        <span class="xml-attr">android:layout_height</span><span class="xml-eq">=</span><span class="xml-string">"wrap_content"</span> /&gt;</pre>
+</td>
+                        </tr>
+                        <tr>
+                            <th class="title" style="text-align:center;font-size:medium;line-height:1;font-weight:bold;padding:12px;border-right:1px solid #682079">Interface Builder<br/>(NIB/XIB)</th>
+                            <td style="border-right:1px solid #682079"><img height="62" style="margin-left:12px" src="/assets/images/home/ib.png"/></td>
+                        </tr>
+                    </table>
+                    </div>
+
                       <div class="desc" style="margin-left:85px">
                             <br/>
                             <p>If you decide to use markup, you can link to it directly from your HTML, regardless of its type:</p>
-<pre class="xaml">&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>native://page.xaml</b>"&gt;<span class="xaml-content">Navigate to an all-native page</span>&lt;/<span class="xaml-tag">a</span>&gt;
-&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>android://page.xml</b>"&gt;<span class="xaml-content">Navigate to an Android XML page</span>&lt;/<span class="xaml-tag">a</span>&gt;
-&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>ios://page.xib</b>"&gt;<span class="xaml-content">Navigate to a page created in Interface Builder</span>&lt;/<span class="xaml-tag">a</span>&gt;
+<pre class="xaml">&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>native://page.xaml</b>"&gt;
+<span class="xaml-content">&nbsp;&nbsp;Go to an all-native page</span>
+&lt;/<span class="xaml-tag">a</span>&gt;
+&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>android://page.xml</b>"&gt;
+<span class="xaml-content">&nbsp;&nbsp;Go to an Android XML page</span>
+&lt;/<span class="xaml-tag">a</span>&gt;
+&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>ios://page.xib</b>"&gt;
+&nbsp;&nbsp;<span class="xaml-content">Go to a page created in Interface Builder</span>
+&lt;/<span class="xaml-tag">a</span>&gt;
 </pre>
                       </div>
                 </div>

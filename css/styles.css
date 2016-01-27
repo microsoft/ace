@@ -17,10 +17,16 @@ p {
   margin-bottom: 15px;
   line-height: 1.5;
 }
-.small-only {
+.small-or-less {
     display: none;
 }
-.nonsmall-only {
+.xsmall-or-less {
+    display: none;
+}
+.greater-than-small {
+    display: block;
+}
+.greater-than-xsmall {
     display: block;
 }
 a {
@@ -2378,10 +2384,16 @@ span.xml-string {
 }
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
-  .small-only {
+  .small-or-less {
       display: block;
   }
-  .nonsmall-only {
+  .xsmall-or-less {
+      display: block;
+  }
+  .greater-than-small {
+      display: none;
+  }
+  .greater-than-xsmall {
       display: none;
   }
   .config-wrapper {
@@ -2618,6 +2630,20 @@ span.xml-string {
   }
 }
 /* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .small-or-less {
+      display: block;
+  }
+  .xsmall-or-less {
+      display: none;
+  }
+  .greater-than-small {
+      display: none;
+  }
+  .greater-than-xsmall {
+      display: block;
+  }
+}
 @media (min-width: 768px) {
   .config-wrapper {
     display: none;
