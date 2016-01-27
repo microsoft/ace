@@ -10,23 +10,17 @@ An Apache Cordova plugin that enables you to easily add native UI and native cod
 
 ## Quick Start
 
-**1. Add the plugin to your project**
-
-However you use Cordova (Visual Studio or command-line tools), you can install this plugin the standard way.  For example:
+**Just add the plugin to your Cordova project.** Whether you use Visual Studio or command-line tools, Windows or Mac, you can add this plugin the standard way.  For example:
 ```
 cordova plugin add https://github.com/adnathan/ace.git
 ```
 or, in Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**.
 
-**2. Follow the samples and docs**
-
-```
-You can find samples in the samples folder of this repository.
-```
+Then follow the samples and docs. You can find samples in the samples folder of this repository.
 
 ## Community
 
-* Have a question that's not a feature request or bug report? [Discuss on Stack Overflow](https://stackoverflow.com/questions/tagged/ace)
+* Have a question that's not a feature request or bug report? [Discuss on Stack Overflow](https://stackoverflow.com/questions/tagged/ace-plugin)
 * Have a feature request or find a bug? [Submit an issue](https://github.com/adnathan/ace/issues)
 * Please [contribute](https://github.com/adnathan/ace/blob/master/CONTRIBUTING.md) to the source code!
 
