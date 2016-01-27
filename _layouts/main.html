@@ -6,11 +6,13 @@
   <body class="blog-page blog-page-single">
 
     {% include header-main.html %}
+    <h1 align="center" style="text-transform: uppercase; margin-bottom:50px">{{page.title}}</h1>
 
-    <div>
+    <div class="container">
     {{ content }}
     </div>
 
+    <p style="margin-top:50px"></p>
     {% include footer.html %}
   </body>
 
