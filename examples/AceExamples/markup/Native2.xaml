@@ -1,15 +1,13 @@
 ﻿<Page xmlns:ace="using:run.ace" ace:Frame.Title="Page with ListBox">
+
     <ListBox ace:On.Loaded="addToListBox(this)">
         <ListBoxItem>Prime numbers starting after 1000</ListBoxItem>
     </ListBox>
+    
     <Page.BottomAppBar>
-        <CommandBar>
-            <!-- TODO: Make android accept this as menu items if there's no topappbar -->
+        <ace:TabBar>
             <AppBarButton Label="Numbers" />
             <AppBarButton Label="Letters" />
-            <AppBarButton Icon="Find" Label="Search" />
-            <AppBarButton Icon="Bookmarks" Label="Bookmarks" />
-            <AppBarButton Icon="Camera" Label="Camera" />
-        </CommandBar>
+        </ace:TabBar>
     </Page.BottomAppBar>
 </Page>

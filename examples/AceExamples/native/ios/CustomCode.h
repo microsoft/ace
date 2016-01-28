@@ -3,4 +3,4 @@
 
 // DO NOT RENAME THIS FILE!
 
-// #import "MyClass.m"
+#import "MyAlgorithm.m"

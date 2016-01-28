@@ -1,4 +1,6 @@
 ﻿# .gitignore
+bin/
+bld/
 .vs/
 node_modules/
 [Pp]lugins/
