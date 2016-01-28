@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+  This adds XAML compilation support to your Visual Studio project.
+
+  To leverage this:
+
+  1) Copy this file and Ace.BuildTasks.dll to the same folder as your project.
+  2) Add the following line as a child of the root <Project> element in your
+     project file:
+    
+     <Import Project="Ace.targets" />
+
+-->
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask TaskName="Ace.BuildTasks.CompileXamlToXbf" AssemblyFile="Ace.BuildTasks.dll"/>
+
+  <PropertyGroup>
+    <!-- Hook into clean and build targets -->
+    <CleanDependsOn>CleanXbf;$(CleanDependsOn)</CleanDependsOn>
+    <MDABuildDependsOn>CompileXamlToXbf;$(MDABuildDependsOn)</MDABuildDependsOn>
+    <XbfOutputDir>$(MSBuildProjectDirectory)\www\xbf</XbfOutputDir>
+  </PropertyGroup>
+
+  <Target Name="CompileXamlToXbf" Condition="'$(BuildingProject)' != 'false'">
+    <!-- Create the output folder if needed -->
+    <MakeDir Directories="$(XbfOutputDir)" Condition="!Exists('$(XbfOutputDir)')" />
+    <!-- Do the compilation -->
+    <CompileXamlToXbf
+	  InputFolder="$(MSBuildProjectDirectory)"
+	  OutputFolder="$(XbfOutputDir)" />
+  </Target>
+
+  <Target Name="CleanXbf">
+    <!-- Clean the output folder -->
+    <RemoveDir Directories="$(XbfOutputDir)" />
+  </Target>
+
+</Project>
