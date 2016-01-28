@@ -28,8 +28,12 @@ public class TabBar extends android.widget.Toolbar implements
 
     public void setTitle(String title, android.app.Activity activity) {
         //if (!(activity instanceof ActionBarActivity)) {
-            android.app.ActionBar mainActionBar = activity.getActionBar();
-            mainActionBar.setTitle(title);
+            android.app.ActionBar actionBar = activity.getActionBar();
+            if (actionBar == null) {
+                throw new RuntimeException(
+                    "Cannot set title on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
+            }
+            actionBar.setTitle(title);
         //}
         //else {
         //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
