@@ -85,7 +85,7 @@
             [((UIView*)instance).layer setValue:self forKey:@"Ace.Handle"];
         }
         else {
-            throw @"NYI"; // _nativeHandleLookup.put(instance, this.value);
+            // TODO: _nativeHandleLookup.put(instance, this.value);
         }
     }
     else {
@@ -94,7 +94,7 @@
             [((UIView*)instance).layer setValue:self forKey:@"Ace.Handle"];
         }
         else {
-            throw @"NYI"; // _managedHandleLookup.put(instance, this.value);
+            // TODO: _managedHandleLookup.put(instance, this.value);
         }
     }
 }
