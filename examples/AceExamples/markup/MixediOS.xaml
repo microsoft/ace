@@ -1,0 +1,43 @@
+﻿<StackPanel xmlns:ios="using:ios"
+            xmlns:ace="using:run.ace">
+    <TextBlock FontSize="22" Margin="0,20,0,0" FontWeight="Bold" HorizontalAlignment="Center">
+        Mixing and Matching
+    </TextBlock>
+    <ios:UILabel FontSize="22" FontWeight="Bold" TextAlignment="1">
+        Native Abstractions
+    </ios:UILabel>
+
+    <!--
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
+    -->
+        <ios:UIButton Name="iosButton" Background="red" Content="A" />
+        <Button Name="xamlButton" Background="yellow" ace:On.Click="ace.goBack()">B</Button>
+        <ios:UIButton Background="lime">C</ios:UIButton>
+    <!--
+    </StackPanel>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
+    -->
+        <ios:UISwitch Margin="10" />
+        <ios:UISwitch Margin="10" On="True" />
+    <!--
+        <ios:UISwitch Margin="10" />
+        <ios:UISwitch Margin="10" On="True" />
+        <ios:UISwitch Margin="10" />
+    </StackPanel>
+    -->
+    
+    <ios:UIStepper Margin="10" />
+    <ios:UIStepper Margin="10" TintColor="Chartreuse" />
+    <ios:UIStepper Margin="10" TintColor="#800f" />
+
+    
+    <ios:UIPageControl 
+        PageIndicatorTintColor="DarkOrange" 
+        CurrentPageIndicatorTintColor="DeepSkyBlue" 
+        NumberOfPages="10" 
+        CurrentPage="2"
+        Height="50" />
+
+    <HyperlinkButton NavigateUri="native://Conditional.xaml">Next</HyperlinkButton>
+</StackPanel>

@@ -1,0 +1,19 @@
+﻿<StackPanel xmlns:ace="using:run.ace"
+            xmlns:if="using:if"
+            xmlns:ios="using:ios"
+            xmlns:android="using:android.widget"
+            xmlns:myNamespace="using:myNamespace">
+    <TextBlock FontSize="22" FontWeight="Bold" Margin="20" HorizontalAlignment="Center">
+        8/8: Conditional XAML
+    </TextBlock>
+
+    <!-- Show either a stepper or rating bar -->
+    <if:iOS>
+        <ios:UIStepper Margin="20" />
+    </if:iOS>
+    <if:Android>
+        <android:RatingBar Rating="1" StepSize="1" Margin="20" Width="280" />
+    </if:Android>
+
+    <Button ace:On.Click="ace.goBack()">Back</Button>
+</StackPanel>

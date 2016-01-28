@@ -1,0 +1,7 @@
+﻿# .gitignore
+.vs/
+node_modules/
+[Pp]lugins/
+[Pp]latforms/
+
+*.user

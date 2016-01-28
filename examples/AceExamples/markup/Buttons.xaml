@@ -1,0 +1,7 @@
+﻿<StackPanel>
+    <Button Name="button1">Add Custom Control</Button>
+    <Button Name="button2">Add Button</Button>
+    <Button Name="button3">Show Toast</Button>
+    <Button Name="button4" Foreground="#ff0" Background="transparent">Show Fullscreen Popup</Button>
+    <Button Name="button5" Background="#60f0">Invoke Android API</Button>
+</StackPanel>

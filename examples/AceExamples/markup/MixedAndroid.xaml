@@ -1,0 +1,26 @@
+﻿<StackPanel xmlns:android="using:android.widget" 
+            Padding="20">
+    <TextBlock FontSize="22" FontWeight="Bold" HorizontalAlignment="Center">
+        7/8: Mixing and Matching
+    </TextBlock>
+    <android:TextView TextSize="22" FontWeight="Bold" Gravity="1">
+        Native Abstractions
+    </android:TextView>
+
+    <android:LinearLayout Margin="15" Gravity="1">
+        <android:Button Name="androidButton" Background="red" Text="A" />
+        <Button Name="xamlButton" Background="yellow">B</Button>
+        <android:Button Background="lime">C</android:Button>
+    </android:LinearLayout>
+
+    <android:TextView FontSize="18" FontStyle="Italic" HorizontalAlignment="Center">
+        Android TextView with only cross-platform properties set
+    </android:TextView>
+
+    <android:Switch Margin="15" ShowText="True">Enable this feature</android:Switch>
+    <Canvas>
+        <android:RatingBar Rating="3.5" StepSize="0.5" />
+    </Canvas>
+
+    <HyperlinkButton NavigateUri="native://Conditional.xaml">Next</HyperlinkButton>
+</StackPanel>

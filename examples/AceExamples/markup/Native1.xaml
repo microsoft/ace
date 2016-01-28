@@ -1,0 +1,36 @@
+﻿<StackPanel xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ace="using:run.ace">
+    <StackPanel.Resources>
+        <!-- A style to apply to two buttons below -->
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="60"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Violet"/>
+            <Setter Property="Background" Value="SteelBlue"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+        </Style>
+    </StackPanel.Resources>
+    
+    <DatePicker Padding="15" Header="Choose a date" ace:On.DateChanged="onDateChanged(this)"/>
+    <TimePicker Padding="15" Header="Choose a time" ace:On.TimeChanged="onTimeChanged(this)"/>
+    <TextBlock Name="textBlock" FontSize="20" Padding="15" Foreground="Green">
+        Text
+    </TextBlock>
+    <ToggleSwitch Header="ToggleSwitch" IsOn="True" Padding="15"/>
+    <Button Background="Red" ace:On.Click="ace.goBack()">
+        Back
+    </Button>
+
+    <!-- A canvas with manually-positioned buttons -->
+    <Canvas Margin="15">
+        <Button Style="{StaticResource MyButtonStyle}">A</Button>
+        <Button Style="{StaticResource MyButtonStyle}" Canvas.Left="150">B</Button>
+        <Button Canvas.Top="110" Width="100" Height="100">C</Button>
+        <HyperlinkButton Background="Lime" Canvas.Left="150" Canvas.Top="110"
+                         Width="150" Height="100"
+                         NavigateUri="native://Native2.xaml">
+            Another Page
+        </HyperlinkButton>
+    </Canvas>
+    
+</StackPanel>
