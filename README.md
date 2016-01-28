@@ -1,4 +1,4 @@
-![alt tag](http://ace.run/assets/images/logo/ace.png) Visit our [homepage](http://ace.run/) & [get started](http://ace.run/docs/getting-started/) in minutes!
+![Ace Logo](http://ace.run/assets/images/logo/ace.png) Visit our [homepage](http://ace.run/) & [get started](http://ace.run/docs/getting-started/) in minutes!
 
 # What is Ace?
 
