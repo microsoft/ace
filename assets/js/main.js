@@ -36,13 +36,6 @@ $(document).ready(function() {
     $('.panel').on('hidden.bs.collapse', toggleIcon);
     $('.panel').on('shown.bs.collapse', toggleIcon);    
     
-     /* ======= Testimonial Bootstrap Carousel ======= */
-     /* Ref: http://getbootstrap.com/javascript/#carousel */
-    $('#testimonials-carousel').carousel({
-      interval: 8000 
-    });
-    
-    
     /* ======= Style Switcher ======= */    
     $('#config-trigger').on('click', function(e) {
         var $panel = $('#config-panel');

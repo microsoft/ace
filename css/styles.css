@@ -736,61 +736,6 @@ span.xml-string {
   font-size: 16px;
   margin-bottom: 15px;
 }
-/* ======= Testimonials ======= */
-.testimonials {
-  background: #f5f5f5;
-  padding-top: 60px;
-  padding-bottom: 120px;
-}
-.testimonials .carousel-indicators {
-  bottom: -60px;
-  z-index: auto;
-}
-.testimonials .carousel-indicators li {
-  background: #cccccc;
-  border: none;
-  margin: 1px;
-}
-.testimonials .carousel-indicators li.active {
-  background: #f19180;
-  border: none;
-  width: 10px;
-  height: 10px;
-  margin: 1px;
-}
-.testimonials .title {
-  font-size: 36px;
-  font-weight: 300;
-  margin-top: 0;
-  margin-bottom: 60px;
-}
-.testimonials .item .profile {
-  position: absolute;
-  left: 0;
-}
-.testimonials .item .content {
-  padding-left: 210px;
-}
-.testimonials .item blockquote {
-  font-size: 20px;
-  font-weight: 300;
-  border-left: 0;
-  padding: 0;
-  position: relative;
-}
-.testimonials .item blockquote .fa {
-  position: absolute;
-  color: #6DC2E9;
-  font-size: 22px;
-  left: -45px;
-}
-.testimonials .item .source {
-  color: #682079;
-}
-.testimonials .item .source .title {
-  font-size: 16px;
-  color: #666666;
-}
 /* ======= Press ======= */
 .press {
   padding-top: 80px;
