@@ -104,5 +104,7 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.jpg" width="480" height="800" />
   </platform>
-  <vs:plugin name="cordova-plugin-ace" version="0.0.1-dev" src="https://github.com/adnathan/ace.git" />
+  <vs:plugin name="cordova-plugin-ace" version="0.0.3" src="https://github.com/adnathan/ace.git" />
+  <plugin name="cordova-plugin-ace" />
+  <preference name="ShowTitle" value="True" />
 </widget>

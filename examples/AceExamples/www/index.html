@@ -14,13 +14,42 @@
     <link href="css/index.css" rel="stylesheet" />
 </head>
 <body>
-    <a href="native://Native1.xaml">Link to Native1.xaml</a>
+
+    <!-- DOCKED -->
+    <div id="div-0">
+        <h1>Docked UI Examples</h1>
+
+        <a id="dockTabs">Tap here to dock a native UI Page w/ title + TabBar</a>
+
+        <br /><br />
+
+        <a id="dockGrid">Tap here to dock a native UI Grid</a>
+
+        <br /><br />
+
+        <a id="dockRestore">Tap here to restore to no docked native UI</a>
+    </div>
+
+    <!-- OVERLAY -->
+    <div id="div-1" style="display:none">
+        <h1>Overlay UI Examples</h1>
+
+    </div>
+
+    <!-- FULLSCREEN -->
+    <div id="div-2" style="display:none">
+        <h1>Fullscreen UI Examples</h1>
+
+        <a href="native://Native1.xaml">Link to Native1.xaml</a>
+    </div>
 
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
 
+    <script src="example-script/docked-ui.js"></script>
+    <script src="example-script/eventHandlers.js"></script>
+
     <script src="scripts/index.js"></script>
-    <script src="scripts/eventHandlers.js"></script>
 </body>
 </html>
