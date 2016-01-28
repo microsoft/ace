@@ -1,17 +1,20 @@
 Ace welcomes and strongly encourages community contributions! Please don't be shy!
 
-## Issue Contribution 
+## Issue Contribution
 
-* An issue contribution must have a tracking approved issue (Milestone = Community) by Ace team in [Issues](https://github.com/adnathan/ace/issues). 
-* Your PR should have a link to the issue that you are fixing. 
+* Your PR should have a link to [the issue](https://github.com/adnathan/ace/issues) that you are fixing. 
 
 ## Feature Contribution
 
-Features are new or improved functionality to Ace. For example, 
+Features are new or improved functionality. For example, 
 * Exposing a new Android/iOS control through the cross-platform framework.
 * Implementing more properties on existing controls.
 
-Feature contributions are welcomed, but need to be approved (Milestone = Community) by Ace collaborators.
+Feature contributions are welcomed, but need to be approved by Ace collaborators.
+
+## Documentation Contribution
+
+* Want to fix or add to the documentation at http://ace.run? Please submit a PR! The website lives in the gh-pages branch of this repository. 
 
 ## Legal
 
