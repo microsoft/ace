@@ -1,0 +1,6 @@
+<resources>
+    <integer name="grid_rowproperty">2</integer>
+    <integer name="grid_columnproperty">3</integer>
+    <integer name="grid_rowspanproperty">4</integer>
+    <integer name="grid_columnspanproperty">5</integer>
+</resources>

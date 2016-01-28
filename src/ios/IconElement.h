@@ -1,0 +1,2 @@
+@interface IconElement : NSObject
+@end

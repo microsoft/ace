@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="cordova-plugin-ace"
+      version="0.0.1-dev">
+
+  <name>Ace</name>
+  <description>Enables you to mix native UI and native code with your JavaScript and HTML.</description>
+  <license>MIT</license>
+  <keywords>cordova,native,ui,xaml</keywords>
+  <repo>https://github.com/adnathan/ace.git</repo> 
+  <issue>https://github.com/adnathan/ace/issues</issue> 
+
+  <!-- Sets up app native folders for convenience -->
+  <hook type="after_plugin_install" src="plugin_hooks/after_plugin_install.js" />
+
+  <!-- Platform-neutral JavaScript: -->
+
+  <!-- These must be listed first: -->
+  <js-module src="www/ToNative.js">
+    <merges target="ace.ToNative" />
+  </js-module>
+  <js-module src="www/Extensions.js">
+    <merges target="ace.Extensions" />
+  </js-module>
+  <js-module src="www/ace.js">
+    <merges target="ace" />
+  </js-module>
+
+  <js-module src="www/framework/platformHelpers/android.js">
+    <merges target="ace.android" />
+  </js-module>
+
+  <js-module src="www/framework/primitives/NativeObject.js">
+    <merges target="ace.NativeObject" />
+  </js-module>
+  <js-module src="www/framework/primitives/KnownNativeObject.js">
+    <merges target="ace.KnownNativeObject" />
+  </js-module>
+  <js-module src="www/framework/primitives/WrappedNativeObject.js">
+    <merges target="ace.WrappedNativeObject" />
+  </js-module>
+  <js-module src="www/framework/primitives/UIElement.js">
+    <merges target="ace.UIElement" />
+  </js-module>
+  <js-module src="www/framework/primitives/Control.js">
+    <merges target="ace.Control" />
+  </js-module>
+  <js-module src="www/framework/primitives/ContentControl.js">
+    <merges target="ace.ContentControl" />
+  </js-module>
+  <js-module src="www/framework/primitives/UserControl.js">
+    <merges target="ace.UserControl" />
+  </js-module>
+  <js-module src="www/framework/primitives/ItemsControl.js">
+    <merges target="ace.ItemsControl" />
+  </js-module>
+  <js-module src="www/framework/primitives/Selector.js">
+    <merges target="ace.Selector" />
+  </js-module>
+  <js-module src="www/framework/primitives/SelectorItem.js">
+    <merges target="ace.SelectorItem" />
+  </js-module>
+
+  <js-module src="www/framework/collections/Dictionary.js">
+    <merges target="ace.Dictionary" />
+  </js-module>
+  <js-module src="www/framework/collections/ObservableCollection.js">
+    <merges target="ace.ObservableCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/CommandBarElementCollection.js">
+    <merges target="ace.CommandBarElementCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/InlineCollection.js">
+    <merges target="ace.InlineCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/ItemCollection.js">
+    <merges target="ace.ItemCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/ResourceDictionary.js">
+    <merges target="ace.ResourceDictionary" />
+  </js-module>
+  <js-module src="www/framework/collections/SetterBaseCollection.js">
+    <merges target="ace.SetterBaseCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/UIElementCollection.js">
+    <merges target="ace.UIElementCollection" />
+  </js-module>
+
+  <js-module src="www/framework/panels/Panel.js">
+    <merges target="ace.Panel" />
+  </js-module>
+  <js-module src="www/framework/panels/Canvas.js">
+    <merges target="ace.Canvas" />
+  </js-module>
+  <js-module src="www/framework/panels/Grid.js">
+    <merges target="ace.Grid" />
+  </js-module>
+  <js-module src="www/framework/panels/StackPanel.js">
+    <merges target="ace.StackPanel" />
+  </js-module>
+  
+  <js-module src="www/framework/Frame.js">
+    <merges target="ace.Frame" />
+  </js-module>
+  <js-module src="www/framework/Page.js">
+    <merges target="ace.Page" />
+  </js-module>
+  <js-module src="www/framework/ButtonBase.js">
+    <merges target="ace.ButtonBase" />
+  </js-module>
+  <js-module src="www/framework/Button.js">
+    <merges target="ace.Button" />
+  </js-module>
+  <js-module src="www/framework/CommandBar.js">
+    <merges target="ace.CommandBar" />
+  </js-module>
+  <js-module src="www/framework/DatePicker.js">
+    <merges target="ace.DatePicker" />
+  </js-module>
+  <js-module src="www/framework/AppBarButton.js">
+    <merges target="ace.AppBarButton" />
+  </js-module>
+  <js-module src="www/framework/HyperlinkButton.js">
+    <merges target="ace.HyperlinkButton" />
+  </js-module>
+  <js-module src="www/framework/ListBox.js">
+    <merges target="ace.ListBox" />
+  </js-module>
+  <js-module src="www/framework/ListBoxItem.js">
+    <merges target="ace.ListBoxItem" />
+  </js-module>
+  <js-module src="www/framework/Popup.js">
+    <merges target="ace.Popup" />
+  </js-module>
+  <js-module src="www/framework/Style.js">
+    <merges target="ace.Style" />
+  </js-module>
+  <js-module src="www/framework/Setter.js">
+    <merges target="ace.Setter" />
+  </js-module>
+  <js-module src="www/framework/StaticResource.js">
+    <merges target="ace.StaticResource" />
+  </js-module>
+  <js-module src="www/framework/TextBlock.js">
+    <merges target="ace.TextBlock" />
+  </js-module>
+  <js-module src="www/framework/TimePicker.js">
+    <merges target="ace.TimePicker" />
+  </js-module>
+  <js-module src="www/framework/ToggleSwitch.js">
+    <merges target="ace.ToggleSwitch" />
+  </js-module>
+  <js-module src="www/framework/WebView.js">
+    <merges target="ace.WebView" />
+  </js-module>
+
+  <js-module src="www/xbf/BinaryReader.js">
+    <merges target="ace.BinaryReader" />
+  </js-module>
+  <js-module src="www/xbf/NodeType.js">
+    <merges target="ace.NodeType" />
+  </js-module>
+  <js-module src="www/xbf/XamlNode.js">
+    <merges target="ace.XamlNode" />
+  </js-module>
+  <js-module src="www/xbf/XbfReader.js">
+    <merges target="ace.XbfReader" />
+  </js-module>
+  <js-module src="www/xbf/NodeToElement.js">
+    <merges target="ace.NodeToElement" />
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="NativeHost">
+        <param name="ios-package" value="NativeHost"/>
+        <param name="onload" value="true"/>
+      </feature>
+    </config-file>
+
+    <!-- iOS-specific JavaScript: -->
+    <js-module src="www/iOS/platform.js">
+      <merges target="ace.platform" />
+    </js-module>
+
+    <header-file src="src/ios/AceNavigationController.h" />
+    <source-file src="src/ios/AceNavigationController.m" />
+    <header-file src="src/ios/AceViewController.h" />
+    <source-file src="src/ios/AceViewController.mm" />
+    <header-file src="src/ios/AppBarButton.h" />
+    <source-file src="src/ios/AppBarButton.m" />
+    <header-file src="src/ios/BitmapIcon.h" />
+    <source-file src="src/ios/BitmapIcon.m" />
+    <header-file src="src/ios/Brush.h" />
+    <source-file src="src/ios/Brush.m" />
+    <header-file src="src/ios/BrushConverter.h" />
+    <source-file src="src/ios/BrushConverter.m" />
+    <header-file src="src/ios/Button.h" />
+    <source-file src="src/ios/Button.mm" />
+    <header-file src="src/ios/Canvas.h" />
+    <source-file src="src/ios/Canvas.mm" />
+    <header-file src="src/ios/ColumnDefinition.h" />
+    <source-file src="src/ios/ColumnDefinition.mm" />
+    <header-file src="src/ios/ColumnDefinitionCollection.h" />
+    <source-file src="src/ios/ColumnDefinitionCollection.m" />
+    <header-file src="src/ios/CommandBar.h" />
+    <source-file src="src/ios/CommandBar.mm" />
+    <header-file src="src/ios/CommandBarElementCollection.h" />
+    <source-file src="src/ios/CommandBarElementCollection.m" />
+    <header-file src="src/ios/CustomActionSheet.h" />
+    <source-file src="src/ios/CustomActionSheet.m" />
+    <header-file src="src/ios/DatePicker.h" />
+    <source-file src="src/ios/DatePicker.mm" />
+    <header-file src="src/ios/Dictionary.h" />
+    <source-file src="src/ios/Dictionary.m" />
+    <header-file src="src/ios/FontWeightConverter.h" />
+    <source-file src="src/ios/FontWeightConverter.mm" />
+    <header-file src="src/ios/Frame.h" />
+    <source-file src="src/ios/Frame.mm" />
+    <header-file src="src/ios/Grid.h" />
+    <source-file src="src/ios/Grid.mm" />
+    <header-file src="src/ios/GridLength.h" />
+    <source-file src="src/ios/GridLength.m" />
+    <header-file src="src/ios/GridLengthConverter.h" />
+    <source-file src="src/ios/GridLengthConverter.m" />
+    <header-file src="src/ios/Handle.h" />
+    <source-file src="src/ios/Handle.mm" />
+    <header-file src="src/ios/HyperlinkButton.h" />
+    <source-file src="src/ios/HyperlinkButton.mm" />
+    <header-file src="src/ios/IconElement.h" />
+    <source-file src="src/ios/IconElement.mm" />
+    <header-file src="src/ios/IFireEvents.h" />
+    <header-file src="src/ios/IHaveProperties.h" />
+    <header-file src="src/ios/IncomingMessages.h" />
+    <source-file src="src/ios/IncomingMessages.mm" />
+    <header-file src="src/ios/InlineCollection.h" />
+    <source-file src="src/ios/InlineCollection.m" />
+    <header-file src="src/ios/IRecieveCollectionChanges.h" />
+    <header-file src="src/ios/ItemCollection.h" />
+    <source-file src="src/ios/ItemCollection.m" />
+    <header-file src="src/ios/ItemsControl.h" />
+    <source-file src="src/ios/ItemsControl.mm" />
+    <header-file src="src/ios/KnownColors.h" />
+    <source-file src="src/ios/KnownColors.m" />
+    <header-file src="src/ios/ListBox.h" />
+    <source-file src="src/ios/ListBox.mm" />
+    <header-file src="src/ios/ListBoxItem.h" />
+    <source-file src="src/ios/ListBoxItem.mm" />
+    <header-file src="src/ios/NativeEventAttacher.h" />
+    <source-file src="src/ios/NativeEventAttacher.mm" />
+    <header-file src="src/ios/NativeHost.h" />
+    <source-file src="src/ios/NativeHost.mm" />
+    <header-file src="src/ios/ObservableCollection.h" />
+    <source-file src="src/ios/ObservableCollection.m" />
+    <header-file src="src/ios/OutgoingMessages.h" />
+    <source-file src="src/ios/OutgoingMessages.mm" />
+    <header-file src="src/ios/Parsers.h" />
+    <source-file src="src/ios/Parsers.m" />
+    <header-file src="src/ios/Page.h" />
+    <source-file src="src/ios/Page.mm" />
+    <header-file src="src/ios/Popup.h" />
+    <source-file src="src/ios/Popup.mm" />
+    <header-file src="src/ios/ResourceDictionary.h" />
+    <source-file src="src/ios/ResourceDictionary.m" />
+    <header-file src="src/ios/RowDefinition.h" />
+    <source-file src="src/ios/RowDefinition.mm" />
+    <header-file src="src/ios/RowDefinitionCollection.h" />
+    <source-file src="src/ios/RowDefinitionCollection.m" />
+    <header-file src="src/ios/Selector.h" />
+    <source-file src="src/ios/Selector.mm" />
+    <header-file src="src/ios/Setter.h" />
+    <source-file src="src/ios/Setter.mm" />
+    <header-file src="src/ios/SetterBaseCollection.h" />
+    <source-file src="src/ios/SetterBaseCollection.m" />
+    <header-file src="src/ios/SolidColorBrush.h" />
+    <source-file src="src/ios/SolidColorBrush.m" />
+    <header-file src="src/ios/StackPanel.h" />
+    <source-file src="src/ios/StackPanel.mm" />
+    <header-file src="src/ios/StaticResource.h" />
+    <source-file src="src/ios/StaticResource.mm" />
+    <header-file src="src/ios/Style.h" />
+    <source-file src="src/ios/Style.mm" />
+    <header-file src="src/ios/SymbolIcon.h" />
+    <source-file src="src/ios/SymbolIcon.mm" />
+    <header-file src="src/ios/TabBar.h" />
+    <source-file src="src/ios/TabBar.mm" />
+    <header-file src="src/ios/TextBlock.h" />
+    <source-file src="src/ios/TextBlock.mm" />
+    <header-file src="src/ios/Thickness.h" />
+    <source-file src="src/ios/Thickness.mm" />
+    <header-file src="src/ios/TimePicker.h" />
+    <source-file src="src/ios/TimePicker.mm" />
+    <header-file src="src/ios/ToggleSwitch.h" />
+    <source-file src="src/ios/ToggleSwitch.mm" />
+    <header-file src="src/ios/UIElementCollection.h" />
+    <source-file src="src/ios/UIElementCollection.m" />
+    <header-file src="src/ios/UILabelHelper.h" />
+    <source-file src="src/ios/UILabelHelper.mm" />
+    <header-file src="src/ios/UIViewHelper.h" />
+    <source-file src="src/ios/UIViewHelper.mm" />
+    <header-file src="src/ios/Utils.h" />
+    <source-file src="src/ios/Utils.mm" />
+    <header-file src="src/ios/WebView.h" />
+    <source-file src="src/ios/WebView.mm" />
+
+    <!-- For custom code: -->
+    <framework src="QuartzCore.framework" />
+  </platform>
+
+  <!-- android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="NativeHost">
+        <param name="android-package" value="run.ace.NativeHost"/>
+        <param name="onload" value="true"/>
+      </feature>
+    </config-file>
+    <!-- Add AceActivity to the manifest -->
+    <config-file target="AndroidManifest.xml" parent="/manifest/application">
+      <activity xmlns:android="http://schemas.android.com/apk/res/android" android:name="run.ace.AceActivity">
+      </activity>
+    </config-file>
+
+    <!--
+    <framework src="com.android.support:appcompat-v7:22.0.+" custom="false" />
+    -->
+    
+    <!-- Copies the app's native code and resources -->
+    <hook type="before_compile" src="plugin_hooks/android_before_compile.js" />
+    <!-- Also do it before run, as "cordova run android" doesn't invoke the 
+         before_compile hook even when it compiles! -->
+    <hook type="before_run" src="plugin_hooks/android_before_compile.js" />
+
+    <!-- Android-specific JavaScript: -->
+    <js-module src="www/android/platform.js">
+      <merges target="ace.platform" />
+    </js-module>
+
+    <source-file src="src/android/res/values/ace_ids.xml" target-dir="res/values" />
+
+    <source-file src="src/android/appwidgets/AppWidgetData.java" target-dir="src/run/ace/appwidgets" />
+    <source-file src="src/android/appwidgets/AppWidgetProvider.java" target-dir="src/run/ace/appwidgets" />
+    <source-file src="src/android/appwidgets/AppWidgetService.java" target-dir="src/run/ace/appwidgets" />
+    
+    <source-file src="src/android/collections/ColumnDefinitionCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/CommandBarElementCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/Dictionary.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/ItemCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/InlineCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/ObservableCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/ResourceDictionary.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/RowDefinitionCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/SetterBaseCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/UIElementCollection.java" target-dir="src/run/ace/framework" />
+
+    <source-file src="src/android/converters/BrushConverter.java" target-dir="src/run/ace" />
+    <source-file src="src/android/converters/FontWeightConverter.java" target-dir="src/run/ace" />
+    <source-file src="src/android/converters/NamedColor.java" target-dir="src/run/ace" />
+
+    <source-file src="src/android/framework/AppBarButton.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Brush.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Button.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Canvas.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ColumnDefinition.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/CommandBar.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/DatePicker.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Frame.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Grid.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GridLength.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GridLengthConverter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GridUnitType.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/HyperlinkButton.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ListBox.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ListBoxItem.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Page.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Popup.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/RowDefinition.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Setter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/SolidColorBrush.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/StackPanel.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/StaticResource.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Style.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/TabBar.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/TextBlock.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Thickness.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/TimePicker.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ToggleSwitch.java" target-dir="src/run/ace/framework" />
+
+    <source-file src="src/android/host/AceActivity.java" target-dir="src/run/ace" />
+    <source-file src="src/android/host/IncomingMessages.java" target-dir="src/run/ace" />
+    <source-file src="src/android/host/NativeEventAttacher.java" target-dir="src/run/ace" />
+    <source-file src="src/android/host/NativeHost.java" target-dir="src/run/ace" />
+    <source-file src="src/android/host/OutgoingMessages.java" target-dir="src/run/ace" />
+
+    <source-file src="src/android/Handle.java" target-dir="src/run/ace" />
+    <source-file src="src/android/IFireEvents.java" target-dir="src/run/ace" />
+    <source-file src="src/android/IHaveProperties.java" target-dir="src/run/ace" />
+    <source-file src="src/android/IRecieveCollectionChanges.java" target-dir="src/run/ace" />
+    <source-file src="src/android/Utils.java" target-dir="src/run/ace" />
+
+    <source-file src="src/android/propertyHelpers/ViewGroupHelper.java" target-dir="src/run/ace" />
+    <source-file src="src/android/propertyHelpers/ViewHelper.java" target-dir="src/run/ace" />
+    <source-file src="src/android/propertyHelpers/TextViewHelper.java" target-dir="src/run/ace" />
+  </platform>
+</plugin>
