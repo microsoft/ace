@@ -24,11 +24,13 @@ In Visual Studio, open **config.xml** then add the plugin under **Plugins**, **C
 
 If you're using a command-line interface, do one of the following:
 
-        cordova plugin add cordova-plugin-ace
+<pre style="width:300px">
+ cordova plugin add cordova-plugin-ace
 
-        taco    plugin add cordova-plugin-ace
+ taco    plugin add cordova-plugin-ace
 
-        ionic   plugin add cordova-plugin-ace
+ ionic   plugin add cordova-plugin-ace
+</pre>
 
 This will retrieve the latest version of the plugin [from npm](https://www.npmjs.com/package/cordova-plugin-ace).
 
@@ -48,7 +50,9 @@ to the root of your project.
 
 * Add the following line as a child of the root &lt;Project&gt; element in your project file:
 
-        <Import Project="Ace.targets" />
+<pre style="width:300px">
+   &lt;Import Project="Ace.targets" />
+</pre>
 
 With this in place, any .xaml files in your project get compiled to a binary file placed in the www\xbf folder every time you build. 
 This enables you to leverage the markup in your app.

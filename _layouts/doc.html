@@ -6,7 +6,22 @@
   <body class="blog-page blog-page-single">
 
     {% include header-main.html %}
-    <h1 align="center" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px">{{page.title}}</h1>
+    
+    <table width="100%">
+        <tr>
+            <td style="vertical-align:top" nowrap>
+                <div style="margin-top:18px;margin-left:18px;font-size:small">
+            {% for my_page in site.pages %}
+                {% if my_page.category == 'docs' %}
+                    <p><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></p>
+                {% endif %}
+            {% endfor %}
+                    <!-- Make sure this is last: -->
+                    <p><a href="/docs/ref/">UI Framework Reference</a></p>
+                </ul>
+            </td>
+            <td style="vertical-align:top" width="100%">
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">{{page.title}}</h1>
 
     <div style="background-color:#3399FF;color:white;foreground:bold;text-align:center;margin-left:50px;margin-right:50px;padding:20px">
     This website is being rapidly updated. Not finding what you're looking for? <a style="color:yellow" href="https://twitter.com/aceplugin">Let us know!</a>
@@ -14,10 +29,15 @@
     Interested in contributing to the code or the website?  <a style="color:yellow" href="https://github.com/adnathan/ace/blob/master/CONTRIBUTING.md">Please do!</a>
     </div>
 
-    <div class="container">
+    <div class="container" style="margin-left:50px">
     {{ content }}
     </div>
 
+           </td>
+        </tr>
+    </table>
+    
+ 
     <p style="margin-top:50px"></p>
     {% include footer.html %}
   </body>
