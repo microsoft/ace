@@ -523,26 +523,33 @@ span.xml-string {
 .promo .btn-cta {
   font-size: 18px;
 }
-.promo .btn-link {
-  color: #fff;
+.btn-link {
+  color: #682079;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 12px;
-  -webkit-opacity: 0.7;
-  -moz-opacity: 0.7;
-  opacity: 0.7;
   text-decoration: none;
 }
-.promo .btn-link:hover {
-  -webkit-opacity: 1;
-  -moz-opacity: 1;
-  opacity: 1;
+.btn-link:visited {
+  color: #682079;
   text-decoration: none;
 }
-.promo .btn-link:focus {
+.btn-link:link {
+  color: #682079;
+  text-decoration: none;
+}
+.btn-link:active {
+  color: #682079;
+  text-decoration: none;
+}
+.btn-link:hover {
+  color: #3399FF;
+  text-decoration: none;
+}
+.btn-link:focus {
   outline: none;
 }
-.promo .btn-link .fa {
+.btn-link .fa {
   margin-right: 5px;
   font-size: 18px;
   position: relative;
@@ -2484,9 +2491,6 @@ span.xml-string {
   .promo.section .intro {
     margin-bottom: 30px;
   }
-  .promo .btn-link {
-    margin-top: 15px;
-  }
   .why .item .content {
     margin-bottom: 60px;
   }
@@ -2728,9 +2732,6 @@ span.xml-string {
   .promo.section .intro {
     margin-bottom: 30px;
   }
-  .promo .btn-link {
-    margin-top: 15px;
-  }
   .why .item .content {
     margin-bottom: 60px;
   }
@@ -2847,9 +2848,6 @@ span.xml-string {
   }
   .promo.section .intro {
     margin-bottom: 45px;
-  }
-  .promo .btn-link {
-    margin-top: 15px;
   }
   .why .item .content {
     margin-bottom: inherit;
