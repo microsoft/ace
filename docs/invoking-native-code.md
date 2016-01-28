@@ -3,6 +3,10 @@ layout: doc
 title: Invoking Native Code
 category: docs
 permalink: /docs/native-code/
+section1: Include in Your Project
+section2: NativeObject
+section3: Platform-Specific
+section4: Real-World Examples
 ---
 
 <br/>
@@ -14,6 +18,8 @@ or your own custom native code. For the latter two cases, you need to include th
 
 <br/>
 
+<a name="one"/>
+
 ## Include Native Code in Your Project
 Cordova apps with Ace installed can include any native code and resources in the project's <b>native</b> folder. Code (and resources in the case of Android) 
 placed here gets compiled into your project:
@@ -21,6 +27,8 @@ placed here gets compiled into your project:
 <img width="50%" src="/assets/images/docs/native-folder.png"/>
 
 <br/>
+
+<a name="two"/>
 
 ## Using NativeObject to Invoke Native Code
 
@@ -72,6 +80,8 @@ ace.NativeObject.setField("NameOfNativeClass", "Field1", 7);
 
 <br/>
 
+<a name="three"/>
+
 ## Writing Platform-Specific Code
 
 When you directly invoke native APIs, the code you write will be platform-specific. You can handle this 
@@ -122,6 +132,8 @@ var obj = new ace.NativeObject("my.package.MyClass");
 </pre>
 
 <br/>
+
+<a name="four"/>
 
 ## Real-World Examples
 

@@ -13,11 +13,37 @@
                 <div style="margin-top:18px;margin-left:18px;font-size:small">
             {% for my_page in site.pages %}
                 {% if my_page.category == 'docs' %}
-                    <p><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></p>
+                    <p><b><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></b></p>
+                    {% if my_page.section1 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#one">{{ my_page.section1 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section2 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#two">{{ my_page.section2 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section3 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#three">{{ my_page.section3 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section4 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#four">{{ my_page.section4 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section5 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#five">{{ my_page.section5 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section6 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#six">{{ my_page.section6 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section7 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#seven">{{ my_page.section7 }}</a></p>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
                     <!-- Make sure this is last: -->
-                    <p><a href="/docs/ref/">UI Framework Reference</a></p>
+                    <p><b><a href="/docs/ref/">UI Framework Reference</a></b></p>
+                    <p style="margin-left:12px"><a href="/docs/ref/#one">Layout Panels</a></p>
+                    <p style="margin-left:12px"><a href="/docs/ref/#two">Controls</a></p>
+                    <p style="margin-left:12px"><a href="/docs/ref/#three">Ace</a></p>
+                    <p style="margin-left:12px"><a href="/docs/ref/#four">Platform Helpers</a></p>
+                    <p style="margin-left:12px"><a href="/docs/ref/#five">NativeObject</a></p>
                 </ul>
             </td>
             <td style="vertical-align:top" width="100%">

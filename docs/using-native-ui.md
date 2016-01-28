@@ -3,6 +3,11 @@ layout: doc
 title: Using Native UI
 category: docs
 permalink: /docs/native-ui/
+section1: Docking
+section2: Overlaying
+section3: Fullscreen
+section4: Widget
+section5: Floating
 ---
 
 <br/>
@@ -17,6 +22,8 @@ There are many options for adding native UI into your app.
 * On Android, you can create widgets or even have floating UI in a transparent activity.
 
 <br/>
+
+<a name="one"/>
 
 ## Docking Native UI
 
@@ -137,6 +144,8 @@ ace.Grid.setColumn(webView, 1);
 root.getChildren().add(webView);
 </pre>
 
+<a name="two"/>
+
 ## Overlaying Native UI
 
 <img class="img-responsive;height:218px" src="/assets/images/home/overlay.png" height="218"/>
@@ -172,6 +181,8 @@ ace.load("android://vector_graphics.xml", function (root) {
 </pre>
 
 <br/>
+
+<a name="three"/>
 
 ## Fullscreen Native UI
 
@@ -444,3 +455,21 @@ if (ace.platform == "iOS") {
         function () { ace.Frame.hideNavigationBar(); });
 }
 </pre>
+
+<br/>
+
+<a name="four"/>
+
+## Creating an Android Widget
+
+Check out the <a href="/apps">PhoneGap Day app</a> for an example of this.
+
+<a name="five"/>
+
+<br/>
+
+<br/>
+
+## Creating Floating UI on Android
+
+Documentation coming soon.
