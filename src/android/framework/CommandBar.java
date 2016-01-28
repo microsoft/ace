@@ -1,13 +1,13 @@
 package Windows.UI.Xaml.Controls;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBar;
+//import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import run.ace.*;
 
-public class CommandBar extends android.widget.Toolbar implements IHaveProperties, ActionBar.TabListener {
+public class CommandBar extends android.widget.Toolbar implements IHaveProperties {
     ObservableCollection _primaryCommands;
     ObservableCollection _secondaryCommands;
 	
@@ -16,17 +16,16 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
     }
 
     public void setTitle(String title, android.app.Activity activity) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             mainActionBar.setTitle(title);
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setTitle(title);
-            }
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.setTitle(title);
+        //    }
+        //}
     }
     
     public void onMenuItemClicked(int index) {
@@ -34,8 +33,7 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
     }
         
     public void show(android.app.Activity activity, android.view.Menu menu) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.show();
@@ -47,25 +45,24 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
             }
             throw new RuntimeException(
                 "Cannot use TabBar on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-                for (int i = 0; i < _primaryCommands.size(); i++) {
-                    menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label); 
-                    menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
-                }
-                return;
-            }
-            throw new RuntimeException(
-                "Unable to get the action bar from the current activity.");
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.show();
+        //        for (int i = 0; i < _primaryCommands.size(); i++) {
+        //            menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label); 
+        //            menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
+        //        }
+        //        return;
+        //    }
+        //    throw new RuntimeException(
+        //        "Unable to get the action bar from the current activity.");
+        //}
 	}
 
     public static void remove(android.app.Activity activity, android.view.Menu menu) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.hide();
@@ -73,24 +70,26 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
                 menu.clear();
                 return;
             }
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.hide();
-                actionBar.setTitle(null);
-                menu.clear();
-                return;
-            }
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.hide();
+        //        actionBar.setTitle(null);
+        //        menu.clear();
+        //        return;
+        //    }
+        //}
 	}
 
+/*
 	public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
  	}
 	public void onTabUnselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
  	}
 	public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
  	}
+*/
 
 	// IHaveProperties.setProperty
 	public void setProperty(String propertyName, Object propertyValue)

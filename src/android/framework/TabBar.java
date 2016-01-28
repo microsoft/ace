@@ -3,8 +3,8 @@ package run.ace;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBar;
+//import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import Windows.UI.Xaml.Controls.*;
 
 public class TabBar extends android.widget.Toolbar implements 
-    ActionBar.TabListener, 
+    //ActionBar.TabListener, 
     android.app.ActionBar.TabListener, 
     IHaveProperties, IRecieveCollectionChanges {
 
@@ -27,22 +27,20 @@ public class TabBar extends android.widget.Toolbar implements
     }
 
     public void setTitle(String title, android.app.Activity activity) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             mainActionBar.setTitle(title);
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setTitle(title);
-            }
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.setTitle(title);
+        //    }
+        //}
     }
         
     public void show(android.app.Activity activity) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.show();
@@ -63,34 +61,33 @@ public class TabBar extends android.widget.Toolbar implements
             }
             throw new RuntimeException(
                 "Cannot use TabBar on the main page in Android unless you set <preference name=\"ShowTitle\" value=\"true\"/> in config.xml.");
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.show();
-                actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);            
-                for (int i = 0; i < _primaryCommands.size(); i++) {
-                    ActionBar.Tab tab = actionBar.newTab();
-                    AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
-                    if (abb.icon != null) {
-                        tab.setCustomView(getCustomTabView(abb, actionBar.getThemedContext()));
-                    }
-                    else {
-                        tab.setText(abb.label);
-                    }
-                    tab.setTabListener(this);
-                    actionBar.addTab(tab);
-                }
-                return;
-            }
-            throw new RuntimeException(
-                "Unable to get TabBar from the current activity.");
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.show();
+        //        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);            
+        //        for (int i = 0; i < _primaryCommands.size(); i++) {
+        //            ActionBar.Tab tab = actionBar.newTab();
+        //            AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
+        //            if (abb.icon != null) {
+        //                tab.setCustomView(getCustomTabView(abb, actionBar.getThemedContext()));
+        //            }
+        //            else {
+        //                tab.setText(abb.label);
+        //            }
+        //            tab.setTabListener(this);
+        //            actionBar.addTab(tab);
+        //        }
+        //        return;
+        //    }
+        //    throw new RuntimeException(
+        //        "Unable to get TabBar from the current activity.");
+        //}
 	}
 
     public static void remove(android.app.Activity activity) {
-        if (!(activity instanceof ActionBarActivity)) {
-            // This is the main activity
+        //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.hide();
@@ -98,16 +95,16 @@ public class TabBar extends android.widget.Toolbar implements
                 mainActionBar.removeAllTabs();
                 return;
             }
-        }
-        else {
-            ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.hide();
-                actionBar.setTitle(null);
-                actionBar.removeAllTabs();
-                return;
-            }
-        }
+        //}
+        //else {
+        //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
+        //    if (actionBar != null) {
+        //        actionBar.hide();
+        //        actionBar.setTitle(null);
+        //        actionBar.removeAllTabs();
+        //        return;
+        //    }
+        //}
 	}
     
     View getCustomTabView(AppBarButton abb, Context themedContext) {
@@ -159,6 +156,7 @@ public class TabBar extends android.widget.Toolbar implements
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
  	}
 
+/*
 	public void onTabSelected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
         int index = tab.getPosition();
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
@@ -169,6 +167,7 @@ public class TabBar extends android.widget.Toolbar implements
         int index = tab.getPosition();
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
  	}
+*/
 
 	// IHaveProperties.setProperty
 	public void setProperty(String propertyName, Object propertyValue)
