@@ -8,7 +8,7 @@
                           ace:On.Click="onTabClick(this, 1)" />
             <AppBarButton Label="Fullscreen" 
                           ace:On.Click="onTabClick(this, 2)" />
-            <AppBarButton Label="More" 
+            <AppBarButton Label="Code" 
                           ace:On.Click="onTabClick(this, 3)" />
         </ace:TabBar>
     </Page.BottomAppBar>

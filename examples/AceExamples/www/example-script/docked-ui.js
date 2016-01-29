@@ -47,7 +47,7 @@ function onTabClick(tab, index) {
     _nativePage.setTitle(tab.getLabel());
 
     // Show the correct HTML based on the native tab click
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 4; i++) {
         if (i == index) {
             document.getElementById("div-" + i).style.display = "block";
         }
