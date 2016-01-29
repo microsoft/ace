@@ -12,6 +12,7 @@ NSMutableArray* _visiblePopups;
     
     // Fullscreen by default
     _isFullScreen = true;
+	_hasExplicitSize = false;
     
     return self;
 }
@@ -47,6 +48,12 @@ NSMutableArray* _visiblePopups;
         _visiblePopups = [[NSMutableArray alloc] init];
     }
     [_visiblePopups addObject:self];
+
+	if (!_hasExplicitSize && _content != nil) {
+		// Auto-size
+		[_content layoutSubviews];
+		[self layoutSubviews];
+	}
 }
 
 - (void) Hide {
@@ -63,11 +70,11 @@ NSMutableArray* _visiblePopups;
 - (void) SetX:(int)x andY:(int)y {
     CGRect newFrame = self.frame;
     
-    //TODO: Need to measure (only matters for hit testing) - do in layoutSubviews
-    newFrame.size.width = 250;
-    newFrame.size.height = 640;
-    
     y += [UIApplication sharedApplication].statusBarFrame.size.height;
+
+	if (![Frame getNavigationController].navigationBarHidden) {
+		y += 44;
+	}
 
     newFrame.origin.x = x;
     newFrame.origin.y = y;
@@ -77,12 +84,18 @@ NSMutableArray* _visiblePopups;
 }
 
 - (void) SetX:(int)x andY:(int)y width:(int)width height:(int)height {
+	_hasExplicitSize = true;
+
     CGRect newFrame = self.frame;
     
     newFrame.size.width = width;
     newFrame.size.height = height;
     
     y += [UIApplication sharedApplication].statusBarFrame.size.height;
+
+	if (![Frame getNavigationController].navigationBarHidden) {
+		y += 44;
+	}
 
     newFrame.origin.x = x;
     newFrame.origin.y = y;
@@ -103,15 +116,16 @@ NSMutableArray* _visiblePopups;
 - (void)layoutSubviews {
     [super layoutSubviews];
     if (_isFullScreen) {
-        if ([Frame getNavigationController].navigationBarHidden) {
-            self.frame = [UIScreen mainScreen].applicationFrame;
-        }
-        else {
-            //TODO
-            CGRect r = [UIScreen mainScreen].applicationFrame;
+        self.frame = [UIScreen mainScreen].applicationFrame;
+		if (![Frame getNavigationController].navigationBarHidden) {
+            CGRect r = self.frame;
             self.frame = CGRectMake(r.origin.x, r.origin.y + 44, r.size.width, r.size.height - 44);
-        }
-    }
+		}
+	}
+	else if (!_hasExplicitSize && _content != nil) {
+		// Match the size of the content
+		self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _content.frame.size.width, _content.frame.size.height);
+	}
 }
 
 @end

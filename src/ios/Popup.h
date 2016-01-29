@@ -4,6 +4,7 @@
 {
     UIView* _content;
     BOOL _isFullScreen;
+	BOOL _hasExplicitSize;
 }
 
 + (void) CloseAll;
