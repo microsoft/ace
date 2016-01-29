@@ -1,0 +1,4 @@
+﻿<StackPanel>
+    <Button Name="button1" Background="#600f">Add Button</Button>
+    <Button Name="button2" Background="#60f0">Show Fullscreen Popup</Button>
+</StackPanel>

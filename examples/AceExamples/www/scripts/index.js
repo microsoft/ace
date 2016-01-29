@@ -15,6 +15,7 @@
         // Cordova has been loaded. Perform any initialization that requires Cordova here.
 
         docked_ui_init();
+        overlay_ui_init();
         invoke_code_init();
     };
 
