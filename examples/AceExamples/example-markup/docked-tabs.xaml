@@ -3,14 +3,19 @@
     <Page.BottomAppBar>
         <ace:TabBar>
             <AppBarButton Label="Docked" 
+                          Icon="www/images/info-{platform}.png" 
                           ace:On.Click="onTabClick(this, 0)" />
             <AppBarButton Label="Overlay" 
+                          Icon="www/images/info-{platform}.png" 
                           ace:On.Click="onTabClick(this, 1)" />
             <AppBarButton Label="Fullscreen" 
+                          Icon="www/images/info-{platform}.png" 
                           ace:On.Click="onTabClick(this, 2)" />
             <AppBarButton Label="Code" 
+                          Icon="www/images/info-{platform}.png" 
                           ace:On.Click="onTabClick(this, 3)" />
             <AppBarButton Label="Platform-Specific UI" 
+                          Icon="www/images/info-{platform}.png" 
                           ace:On.Click="onTabClick(this, 4)" />
         </ace:TabBar>
     </Page.BottomAppBar>
