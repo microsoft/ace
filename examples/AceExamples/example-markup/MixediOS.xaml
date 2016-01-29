@@ -11,7 +11,7 @@
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
     -->
         <ios:UIButton Name="iosButton" Background="red" Content="A" />
-        <Button Name="xamlButton" Background="yellow" ace:On.Click="ace.goBack()">B</Button>
+        <Button Name="xamlButton" Background="yellow" ace:On.Click="ace.goBack()">Back</Button>
         <ios:UIButton Background="lime">C</ios:UIButton>
     <!--
     </StackPanel>

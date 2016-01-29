@@ -80,14 +80,26 @@
         <div id="spotForOutput"></div>
     </div>
 
+    <!-- PLATFORM-SPECIFIC UI -->
+    <div id="div-4" style="display:none">
+        <h1>Platform-Specific UI</h1>
+
+        <a id="mixedLink">Tap here for MixediOS.xaml on iOS,<br/>MixedAndroid.xaml on Android</a>
+
+        <br/><br/>
+
+        <a href="native://Conditional.xaml">Conditional.xaml</a>
+    </div>
+
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="cordova.js"></script>
     <script src="scripts/platformOverrides.js"></script>
 
     <script src="example-script/docked-ui.js"></script>
     <script src="example-script/overlay-ui.js"></script>
+    <script src="example-script/fullscreen-ui.js"></script>
     <script src="example-script/invoke-code.js"></script>
-    <script src="example-script/eventHandlers.js"></script>
+    <script src="example-script/platform-specific-ui.js"></script>
 
     <script src="scripts/index.js"></script>
 </body>

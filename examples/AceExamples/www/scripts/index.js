@@ -17,6 +17,7 @@
         docked_ui_init();
         overlay_ui_init();
         invoke_code_init();
+        platform_specific_ui_init();
     };
 
     function onPause() {

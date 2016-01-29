@@ -1,4 +1,4 @@
-﻿<Page xmlns:ace="using:run.ace" ace:Frame.Title="Native Page">
+﻿<Page xmlns:ace="using:run.ace" ace:Frame.Title="Docked">
     <!-- A tab bar -->
     <Page.BottomAppBar>
         <ace:TabBar>
@@ -10,6 +10,8 @@
                           ace:On.Click="onTabClick(this, 2)" />
             <AppBarButton Label="Code" 
                           ace:On.Click="onTabClick(this, 3)" />
+            <AppBarButton Label="Platform-Specific UI" 
+                          ace:On.Click="onTabClick(this, 4)" />
         </ace:TabBar>
     </Page.BottomAppBar>
 </Page>
