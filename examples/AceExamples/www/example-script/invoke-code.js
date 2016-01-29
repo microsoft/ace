@@ -2,6 +2,8 @@
     document.getElementById("codeBattery").addEventListener('click', invokeBattery, false);
     document.getElementById("codeDevice").addEventListener('click', invokeDeviceInfo, false);
     document.getElementById("codeMisc").addEventListener('click', invokeMisc, false);
+    document.getElementById("codeCustom1").addEventListener('click', invokeIsPrime, false);
+    document.getElementById("codeCustom2").addEventListener('click', invokeGetNextPrime, false);
 }
 
 function invokeBattery() {
@@ -116,7 +118,7 @@ function invokeMisc() {
         //
         ace.NativeObject.invoke("UIDevice", "currentDevice", function (device) {
             if (proximityHandle == null) {
-                document.getElementById("spotForProximityOutput").innerHTML = "<h2>Monitoring proximity...</h2>";
+                document.getElementById("spotForOutput").innerHTML = "<h2>Monitoring proximity...</h2>";
 
                 // Turn on proximity monitoring
                 device.invoke("setProximityMonitoringEnabled", true);
@@ -126,7 +128,7 @@ function invokeMisc() {
                     device.invoke("proximityState", function (isClose) {
                         if (isClose) {
                             // The user is close
-                            document.getElementById("spotForProximityOutput").innerHTML += "<h2>CLOSE!</h2>";
+                            document.getElementById("spotForOutput").innerHTML += "<h2>CLOSE!</h2>";
                         }
                     });
                 }, 1000);
@@ -139,8 +141,35 @@ function invokeMisc() {
                 // Turn off proximity monitoring
                 device.invoke("setProximityMonitoringEnabled", false);
 
-                document.getElementById("spotForProximityOutput").innerHTML = "";
+                document.getElementById("spotForOutput").innerHTML = "";
             }
+        });
+    }
+}
+
+function invokeIsPrime() {
+    // Vary the string based on the current platform
+    var className = ace.valueOn({ android: "mypackage.MyAlgorithm", ios: "MyAlgorithm" });
+
+    // Invoke a static method with one parameter
+    ace.NativeObject.invoke(className, "isPrime", 19, function (result) { alert("Is 19 prime? " + result); });
+}
+
+function invokeGetNextPrime() {
+    // Vary the string based on the current platform
+    var className = ace.valueOn({ android: "mypackage.MyAlgorithm", ios: "MyAlgorithm" });
+
+    // Create an instance of the native class
+    var obj = new ace.NativeObject(className);
+
+    // Invoke an instance method with one parameter and no return value
+    obj.invoke("setStartingNumber", 100);
+
+    document.getElementById("spotForOutput").innerHTML = "";
+    for (var i = 0; i < 100; i++) {
+        // Invoke an instance method with no parameters and a return value
+        obj.invoke("getNextPrime", function (result) {
+            document.getElementById("spotForOutput").innerHTML += "<h2>" + result + "</h2>";
         });
     }
 }
