@@ -12,6 +12,9 @@
 
     [self addSubview:_header];
     [self addSubview:_switch];
+    
+    // Initialize this wrapping view to the size of the switch
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _switch.frame.size.width, _switch.frame.size.height);
 
     // Touches on the header should toggle the switch
     _header.userInteractionEnabled = true;
@@ -77,11 +80,18 @@
     #define LEFTMARGIN 20
     #define RIGHTMARGIN 20
     
-    _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN, 
-                               (self.frame.size.height - _switch.frame.size.height) / 2,
-                               _switch.frame.size.width, _switch.frame.size.height);
+    if (_header.text == nil) {
+        // Whatever size was given to this this wrapping view should be given entirely to the switch
+        _switch.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    }
+    else {
+        // Do the normal header + switch layout
+        _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN,
+                                   (self.frame.size.height - _switch.frame.size.height) / 2,
+                                   _switch.frame.size.width, _switch.frame.size.height);
                                
-    _header.frame = CGRectMake(LEFTMARGIN, 0, self.frame.size.width - LEFTMARGIN, self.frame.size.height);
+        _header.frame = CGRectMake(LEFTMARGIN, 0, self.frame.size.width - LEFTMARGIN, self.frame.size.height);
+    }
 }
 
 @end

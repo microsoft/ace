@@ -18,7 +18,7 @@
     [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
     [_dropDownButton addTarget:self action:@selector(OnDropDownOpened:) forControlEvents:UIControlEventTouchUpInside];
     _dropDownButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
     
     [self.contentView addSubview:_dropDownButton];
     
