@@ -42,6 +42,8 @@ function invokeBattery() {
     }
 }
 
+var proximityHandle = null;
+
 function invokeDeviceInfo() {
     if (ace.platform == "Android") {
         //
@@ -117,7 +119,7 @@ function invokeMisc() {
         // BOOL isClose = [device proximityState];
         //
         ace.NativeObject.invoke("UIDevice", "currentDevice", function (device) {
-            if (proximityHandle == null) {
+            if (!proximityHandle) {
                 document.getElementById("spotForOutput").innerHTML = "<h2>Monitoring proximity...</h2>";
 
                 // Turn on proximity monitoring

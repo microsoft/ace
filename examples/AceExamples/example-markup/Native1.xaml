@@ -16,9 +16,7 @@
     <TextBlock Name="textBlock" FontSize="20" Padding="15" Foreground="Green">
         Text
     </TextBlock>
-    <!--
     <ToggleSwitch Header="ToggleSwitch" IsOn="True" Padding="15"/>
-    -->
     <Button Background="Red" ace:On.Click="ace.goBack()">
         Back
     </Button>
