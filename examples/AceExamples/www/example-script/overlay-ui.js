@@ -75,15 +75,9 @@ function toggleJSButtons() {
 }
 
 function togglePlatformSpecificUI() {
-    if (ace.platform != "Android") {
-        alert("This is for Android only.");
-        return;
-    }
-
     if (popup3 == null) {
         popup3 = new ace.Popup();
         popup3.setPosition(140, 205);
-        popup3.setBackground("#4f00");
 
         if (ace.platform == "iOS") {
             // Create a UISegmentedControl
@@ -97,6 +91,9 @@ function togglePlatformSpecificUI() {
 
             // Select the last segment
             uiSegmentedControl.invoke("setSelectedSegmentIndex", 3);
+            
+            // Size the control
+            uiSegmentedControl.invoke("sizeToFit");
 
             popup3.setContent(uiSegmentedControl);
         }
