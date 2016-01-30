@@ -1,7 +1,7 @@
 ﻿function overlay_ui_init() {
     document.getElementById("overlayXaml").addEventListener('click', toggleXamlButtons, false);
     document.getElementById("overlayJS").addEventListener('click', toggleJSButtons, false);
-    document.getElementById("overlayAndroid").addEventListener('click', toggleAndroidButtons, false);
+    document.getElementById("overlayPlatformSpecific").addEventListener('click', togglePlatformSpecificUI, false);
 }
 
 var popup1 = null;
@@ -12,7 +12,6 @@ function toggleXamlButtons() {
     if (popup1 == null) {
         popup1 = new ace.Popup();
         // Purposely overlap HTML to show off translucency
-        // popup1.setRect({ x: 140, y: 0, width: 240, height: 120 });
         popup1.setPosition(140, 0);
         popup1.setBackground("#4f00");
 
@@ -39,7 +38,6 @@ function toggleXamlButtons() {
 function toggleJSButtons() {
     if (popup2 == null) {
         popup2 = new ace.Popup();
-        // popup2.setRect({ x: 140, y: 0, width: 240, height: 120 });
         popup2.setPosition(5, 205);
         popup2.setBackground("#4f00");
 
@@ -76,7 +74,7 @@ function toggleJSButtons() {
     }
 }
 
-function toggleAndroidButtons() {
+function togglePlatformSpecificUI() {
     if (ace.platform != "Android") {
         alert("This is for Android only.");
         return;
@@ -84,49 +82,68 @@ function toggleAndroidButtons() {
 
     if (popup3 == null) {
         popup3 = new ace.Popup();
-        // popup3.setRect({ x: 140, y: 0, width: 240, height: 120 });
         popup3.setPosition(140, 205);
         popup3.setBackground("#4f00");
 
-        // Create the LinearLayout and its Buttons
-        var linearLayout = new ace.NativeObject("android.widget.LinearLayout");
-        var button1 = new ace.NativeObject("android.widget.Button");
-        var button2 = new ace.NativeObject("android.widget.Button");
+        if (ace.platform == "iOS") {
+            // Create a UISegmentedControl
+            var uiSegmentedControl = new ace.NativeObject("UISegmentedControl");
 
-        // Make the LinearLayout vertical rather than horizontal
-        ace.NativeObject.getField("android.widget.LinearLayout", "VERTICAL", function (vertical) {
-            linearLayout.invoke("setOrientation", vertical);
+            // Add four segments
+            uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "One", 0, false);
+            uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Two", 1, false);
+            uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Three", 2, false);
+            uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Four", 3, false);
 
-            // Set the text of each Button
-            button1.invoke("setText", "Add Button");
-            button2.invoke("setText", "Show Fullscreen Popup");
+            // Select the last segment
+            uiSegmentedControl.invoke("setSelectedSegmentIndex", 3);
 
-            // Change the background colors
-            ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#660000ff", function (color) {
-                ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color, function (tintList) {
-                    button1.invoke("setBackgroundTintList", tintList);
+            popup3.setContent(uiSegmentedControl);
+        }
+        else if (ace.platform == "Android") {
 
-                    ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#6600ff00", function (color2) {
-                        ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color2, function (tintList2) {
-                            button2.invoke("setBackgroundTintList", tintList2);
+            // This is just like the cross-platform StackPanel and
+            // Buttons, but done with raw Android controls
 
-                            // Add the Buttons to the LinearLayout
-                            linearLayout.invoke("addView", button1);
-                            linearLayout.invoke("addView", button2);
+            // Create the LinearLayout and its Buttons
+            var linearLayout = new ace.NativeObject("android.widget.LinearLayout");
+            var button1 = new ace.NativeObject("android.widget.Button");
+            var button2 = new ace.NativeObject("android.widget.Button");
+
+            // Make the LinearLayout vertical rather than horizontal
+            ace.NativeObject.getField("android.widget.LinearLayout", "VERTICAL", function (vertical) {
+                linearLayout.invoke("setOrientation", vertical);
+
+                // Set the text of each Button
+                button1.invoke("setText", "Add Button");
+                button2.invoke("setText", "Show Fullscreen Popup");
+
+                // Change the background colors
+                ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#660000ff", function (color) {
+                    ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color, function (tintList) {
+                        button1.invoke("setBackgroundTintList", tintList);
+
+                        ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#6600ff00", function (color2) {
+                            ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color2, function (tintList2) {
+                                button2.invoke("setBackgroundTintList", tintList2);
+
+                                // Add the Buttons to the LinearLayout
+                                linearLayout.invoke("addView", button1);
+                                linearLayout.invoke("addView", button2);
+                            });
                         });
-                    });
 
+                    });
                 });
             });
-        });
 
-        // Place the root LinearLayout inside the popup
-        popup3.setContent(linearLayout);
+            // Place the root LinearLayout inside the popup
+            popup3.setContent(linearLayout);
 
-        // Attach click event handlers to the Buttons
-        button1.addEventListener("setOnClickListener", function () { addAndroidButton(linearLayout); });
-        button2.addEventListener("setOnClickListener", showFullscreenPopup);
-
+            // Attach click event handlers to the Buttons
+            button1.addEventListener("setOnClickListener", function () { addAndroidButton(linearLayout); });
+            button2.addEventListener("setOnClickListener", showFullscreenPopup);
+        }
 
         // Show the popup
         popup3.show();
