@@ -1,6 +1,6 @@
 ![Ace Logo](http://ace.run/assets/images/logo/ace.png) Visit our [homepage](http://ace.run/) & [get started](http://ace.run/docs/getting-started/) in minutes!
 
-# What is Ace?
+## WHAT IS ACE?
 
 An Apache Cordova plugin that enables you to easily add native UI and native code to your JavaScript and HTML.
 
@@ -8,7 +8,9 @@ An Apache Cordova plugin that enables you to easily add native UI and native cod
 * Use a cross-platform native UI framework
 * Call native code without additional plugins
 
-## Quick Start
+![Ace Diagram](http://ace.run/assets/images/github/intro.png)
+
+## QUICK START
 
 **Just add the plugin to your Cordova project.** Whether you use Visual Studio or command-line tools, Windows or Mac, you can add this plugin the standard way.  For example:
 ```
@@ -18,12 +20,20 @@ or, in Visual Studio, open **config.xml** then add the plugin under **Plugins**,
 
 Then follow the examples and docs. You can find examples in the examples folder of this repository.
 
-## Community
+## RUNNING THE EXAMPLES
+Go to the examples/AceExamples subfolder, then run:
+```
+cordova prepare
+cordova run android
+cordova run ios
+```
+Or, using Visual Studio, open examples/AceExamples/AceExamples.sln, and then either deploy to an Android emulator, Android device, or iOS remote device.
+
+## COMMUNITY
 
 * Have a question that's not a feature request or bug report? [Discuss on Stack Overflow](https://stackoverflow.com/questions/tagged/ace-plugin)
 * Have a feature request or find a bug? [Submit an issue](https://github.com/adnathan/ace/issues)
 * Please [contribute](https://github.com/adnathan/ace/blob/master/CONTRIBUTING.md) to the source code!
-
 
 ## LICENSE
 
