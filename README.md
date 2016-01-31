@@ -12,6 +12,27 @@ An Apache Cordova plugin that enables you to easily add native UI and native cod
 
 ## QUICK START
 
+### RUNNING THE EXAMPLES
+**From a Command Prompt (Windows) or Terminal (Mac):**
+
+* Install NPM, which is [included in the Node.js installation](https://nodejs.org/en/download/), if you haven't already.
+* Install Cordova using NPM (this might require executing with sudo on a Mac):
+```
+npm install -g cordova
+```
+* Go to the examples/AceExamples subfolder, then run:
+```
+cordova prepare
+cordova run android
+cordova run ios
+```
+**Or, Using Visual Studio:**
+
+* Ensure you have [Tools for Apache Cordova](https://www.visualstudio.com/en-us/features/cordova-vs.aspx) installed
+* Open examples/AceExamples/AceExamples.sln
+* Deploy to either an Android emulator, Android device, or iOS remote device
+
+### ADDING TO A NEW OR EXISTING CORDOVA PROJECT
 **Just add the plugin to your Cordova project.** Whether you use Visual Studio or command-line tools, Windows or Mac, you can add this plugin the standard way.  For example:
 ```
 cordova plugin add cordova-plugin-ace
@@ -19,15 +40,6 @@ cordova plugin add cordova-plugin-ace
 or, in Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at https://github.com/adnathan/ace.git or a local copy that you download.
 
 Then follow the examples and docs. You can find examples in the examples folder of this repository.
-
-## RUNNING THE EXAMPLES
-Go to the examples/AceExamples subfolder, then run:
-```
-cordova prepare
-cordova run android
-cordova run ios
-```
-Or, using Visual Studio, open examples/AceExamples/AceExamples.sln, and then either deploy to an Android emulator, Android device, or iOS remote device.
 
 ## COMMUNITY
 
