@@ -15,7 +15,7 @@ An Apache Cordova plugin that enables you to easily add native UI and native cod
 ### RUNNING THE EXAMPLES
 **From a Command Prompt (Windows) or Terminal (Mac):**
 
-* Install NPM, which is [included in the Node.js installation](https://nodejs.org/en/download/), if you haven't already.
+* Install NPM, which is [included in the Node.js installation](https://nodejs.org/en/download/), if you haven't already
 * Install Cordova using NPM (this might require executing with sudo on a Mac):
 ```
 npm install -g cordova
