@@ -154,6 +154,9 @@
   <js-module src="www/framework/StaticResource.js">
     <merges target="ace.StaticResource" />
   </js-module>
+  <js-module src="www/framework/TabBar.js">
+    <merges target="ace.TabBar" />
+  </js-module>
   <js-module src="www/framework/TextBlock.js">
     <merges target="ace.TextBlock" />
   </js-module>
