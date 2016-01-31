@@ -39,8 +39,13 @@ function onInitializeFailed(error) {
 }
 
 function defaultOnError(error) {
-    alert("ERROR: " + error);
-    throw new Error("Native error: " + error);
+    var help = "See http://ace.run/docs/errors for help.";
+    // So this doesn't block the throwing below:
+    setTimeout(function () {
+        alert("NATIVE ERROR\r\n\r\n" + help
+            + "\r\n\r\n" + error);
+    }, 0);
+    throw new Error("Native error: " + error + "\r\n\r\n" + help);
 }
 
 ToNative.errorHandler = function (handler) {

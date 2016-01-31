@@ -228,13 +228,13 @@ BOOL _initialized;
     }
 
     // Get the file contents
-    path = [[NSBundle mainBundle] pathForResource:path ofType:@"xbf"];
-    if (path == nil) {
-        throw [NSString stringWithFormat:@"Markup file %@.xbf does not exist", path];
+    NSString* absolutePath = [[NSBundle mainBundle] pathForResource:path ofType:@"xbf"];
+    if (absolutePath == nil) {
+        throw [NSString stringWithFormat:@"Compiled markup file %@.xbf does not exist.", path];
     }
-    NSData* data = [NSData dataWithContentsOfFile:path];
+    NSData* data = [NSData dataWithContentsOfFile:absolutePath];
     if (data == nil) {
-        throw [NSString stringWithFormat:@"Could not read markup file %@.xbf", path];
+        throw [NSString stringWithFormat:@"Could not read compiled markup file %@.xbf", path];
     }
     return data;
 }
