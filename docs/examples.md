@@ -10,8 +10,15 @@ permalink: /docs/examples/
 <td width="50%" valign="top" style="padding-left:24px;padding-right:24px">
 <h2 align="center"><a href="https://github.com/adnathan/ace/tree/master/examples/AceExamples">Ace Examples</a></h2>
 A suite of <a href="https://github.com/adnathan/ace/tree/master/examples/AceExamples">short, simple examples</a> covering a wide range of features and scenarios. A great starting point!
-<br/><br/>
 Works on iOS and Android, and in Visual Studio.
+<br/><br/>
+From a command prompt, run:
+<pre>
+cordova prepare
+cordova run android
+cordova run ios
+</pre>
+Or, using Visual Studio, open AceExamples.sln, and then either deploy to an Android emulator, Android device, or iOS remote device.
 <br/><br/>
 </td>
 <td width="50%" valign="top" style="padding-left:24px;padding-right:24px">
