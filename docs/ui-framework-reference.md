@@ -123,7 +123,7 @@ Events (attach with addEventListener):
 
 Base Classes:
 
-<a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
+<a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
 
 <br/>
 
@@ -237,7 +237,7 @@ Events (attach with addEventListener):
 
 Base Classes:
 
-<a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
+<a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
 
 <br/>
 
