@@ -10,8 +10,9 @@ NodeToElement.createElement = function (node, parent, root) {
     var typeName = node.getTypeName();
     var element = null;
 
-    // Built-in controls are in Windows.UI.Xaml, Windows.UI.Xaml.Controls, Windows.UI.Xaml.Documents
-    if (ace[typeName] && namespace.startsWith("Windows.UI.Xaml")) {
+    // Built-in controls are in Windows.UI.Xaml, Windows.UI.Xaml.Controls, Windows.UI.Xaml.Documents,
+    // and run.ace.
+    if (ace[typeName] && (namespace.startsWith("Windows.UI.Xaml") || namespace == "run.ace")) {
         // This is a built-in element with an available strongly-typed wrapper.
         element = new ace[typeName]();
     }
