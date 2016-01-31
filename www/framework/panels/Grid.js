@@ -21,4 +21,27 @@ Grid.setRow = function (element, value) { element.set("Grid.Row", value); };
 Grid.getRowSpan = function (element) { return element.get("Grid.RowSpan"); };
 Grid.setRowSpan = function (element, value) { element.set("Grid.RowSpan", value); };
 
+// Regular properties
+Grid.prototype.getColumnDefinitions = function () {
+    // Give an empty collection by default rather than null
+    var definitions = this.get("Grid.ColumnDefinitions");
+    if (!definitions) {
+        definitions = new ace.ColumnDefinitionCollection();
+        this.setColumnDefinitions(definitions);
+    }
+    return definitions;
+};
+Grid.prototype.setColumnDefinitions = function (collection) { this.set("Grid.ColumnDefinitions", collection); };
+
+Grid.prototype.getRowDefinitions = function () {
+    // Give an empty collection by default rather than null
+    var definitions = this.get("Grid.RowDefinitions");
+    if (!definitions) {
+        definitions = new ace.RowDefinitionCollection();
+        this.setRowDefinitions(definitions);
+    }
+    return definitions;
+};
+Grid.prototype.setRowDefinitions = function (collection) { this.set("Grid.RowDefinitions", collection); };
+
 module.exports = Grid;

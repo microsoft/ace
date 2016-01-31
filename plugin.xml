@@ -8,8 +8,8 @@
   <description>Enables you to mix native UI and native code with your JavaScript and HTML.</description>
   <license>MIT</license>
   <keywords>cordova,native,ui,xaml</keywords>
-  <repo>https://github.com/adnathan/ace.git</repo> 
-  <issue>https://github.com/adnathan/ace/issues</issue> 
+  <repo>https://github.com/adnathan/ace.git</repo>
+  <issue>https://github.com/adnathan/ace/issues</issue>
 
   <!-- Sets up app native folders for convenience -->
   <hook type="after_plugin_install" src="plugin_hooks/after_plugin_install.js" />
@@ -68,6 +68,9 @@
   <js-module src="www/framework/collections/ObservableCollection.js">
     <merges target="ace.ObservableCollection" />
   </js-module>
+  <js-module src="www/framework/collections/ColumnDefinitionCollection.js">
+    <merges target="ace.ColumnDefinitionCollection" />
+  </js-module>
   <js-module src="www/framework/collections/CommandBarElementCollection.js">
     <merges target="ace.CommandBarElementCollection" />
   </js-module>
@@ -79,6 +82,9 @@
   </js-module>
   <js-module src="www/framework/collections/ResourceDictionary.js">
     <merges target="ace.ResourceDictionary" />
+  </js-module>
+  <js-module src="www/framework/collections/RowDefinitionCollection.js">
+    <merges target="ace.RowDefinitionCollection" />
   </js-module>
   <js-module src="www/framework/collections/SetterBaseCollection.js">
     <merges target="ace.SetterBaseCollection" />
@@ -99,7 +105,7 @@
   <js-module src="www/framework/panels/StackPanel.js">
     <merges target="ace.StackPanel" />
   </js-module>
-  
+
   <js-module src="www/framework/Frame.js">
     <merges target="ace.Frame" />
   </js-module>
@@ -111,6 +117,9 @@
   </js-module>
   <js-module src="www/framework/Button.js">
     <merges target="ace.Button" />
+  </js-module>
+  <js-module src="www/framework/ColumnDefinition.js">
+    <merges target="ace.ColumnDefinition" />
   </js-module>
   <js-module src="www/framework/CommandBar.js">
     <merges target="ace.CommandBar" />
@@ -132,6 +141,9 @@
   </js-module>
   <js-module src="www/framework/Popup.js">
     <merges target="ace.Popup" />
+  </js-module>
+  <js-module src="www/framework/RowDefinition.js">
+    <merges target="ace.RowDefinition" />
   </js-module>
   <js-module src="www/framework/Style.js">
     <merges target="ace.Style" />
@@ -326,10 +338,10 @@
     <!--
     <framework src="com.android.support:appcompat-v7:22.0.+" custom="false" />
     -->
-    
+
     <!-- Copies the app's native code and resources -->
     <hook type="before_compile" src="plugin_hooks/android_before_compile.js" />
-    <!-- Also do it before run, as "cordova run android" doesn't invoke the 
+    <!-- Also do it before run, as "cordova run android" doesn't invoke the
          before_compile hook even when it compiles! -->
     <hook type="before_run" src="plugin_hooks/android_before_compile.js" />
 
@@ -343,7 +355,7 @@
     <source-file src="src/android/appwidgets/AppWidgetData.java" target-dir="src/run/ace/appwidgets" />
     <source-file src="src/android/appwidgets/AppWidgetProvider.java" target-dir="src/run/ace/appwidgets" />
     <source-file src="src/android/appwidgets/AppWidgetService.java" target-dir="src/run/ace/appwidgets" />
-    
+
     <source-file src="src/android/collections/ColumnDefinitionCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/CommandBarElementCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/Dictionary.java" target-dir="src/run/ace/framework" />
