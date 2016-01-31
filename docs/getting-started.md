@@ -4,6 +4,11 @@ title: Getting Started
 category: docs
 permalink: /docs/getting-started/
 ---
+
+<br/>
+
+> These are instructions for adding Ace to a Cordova project. To get started with a pre-built example, [go to the Examples page](/docs/examples) instead.
+
 ## 1. Start a Cordova Project
 There are many options for getting started with Cordova:
 
