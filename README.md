@@ -35,6 +35,13 @@ Or, using Visual Studio, open examples/AceExamples/AceExamples.sln, and then eit
 * Have a feature request or find a bug? [Submit an issue](https://github.com/adnathan/ace/issues)
 * Please [contribute](https://github.com/adnathan/ace/blob/master/CONTRIBUTING.md) to the source code!
 
+## DEVELOPMENT
+
+The easiest way to test plugin code changes is to copy the examples/AceExamples folder *outside of* the plugin folder, 
+remove the Ace plugin from the project, and then add it back using a path to your local ace folder with your code changes.
+
+Just remember to copy any enhancements you make to the AceExamples project back to the original location!
+
 ## LICENSE
 
 Ace is licensed under the MIT Open Source license.
