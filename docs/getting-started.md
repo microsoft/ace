@@ -5,9 +5,32 @@ category: docs
 permalink: /docs/getting-started/
 ---
 
+# Running the Examples
+
+**From a Command Prompt (Windows) or Terminal (Mac):**
+
+* Install NPM, which is [included in the Node.js installation](https://nodejs.org/en/download/), if you haven't already
+* Install Cordova using NPM (this might require executing with sudo on a Mac):
+
+    <pre>npm install -g cordova</pre>
+
+* Go to the examples/AceExamples subfolder, then run:
+
+    <pre>cordova prepare
+cordova run android
+cordova run ios</pre>
+
+**Or, Using Visual Studio:**
+
+* Ensure you have [Tools for Apache Cordova](https://www.visualstudio.com/en-us/features/cordova-vs.aspx) installed
+* Open examples/AceExamples/AceExamples.sln
+* Deploy to either an Android emulator, Android device, or iOS remote device
+
 <br/>
 
-> These are instructions for adding Ace to a Cordova project. To get started with a pre-built example, [go to the Examples page](/docs/examples) instead.
+# Adding Ace to a New or Existing Cordova Project
+
+<br/>
 
 ## 1. Start a Cordova Project
 There are many options for getting started with Cordova:
@@ -23,7 +46,7 @@ There are many options for getting started with Cordova:
 <br/>
 
 ## 2. Add the Ace Plugin to Your Project
-In Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at **https://github.com/adnathan/ace.git** or a local copy that you download (to a path with no spaces).
+In Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at **https://github.com/adnathan/ace** or a local copy that you download (to a path with no spaces).
 
 <img width="50%" src="/assets/images/docs/getting-started/vsconfig.png"/>
 
@@ -55,9 +78,7 @@ to the root of your project.
 
 * Add the following line as a child of the root &lt;Project&gt; element in your project file:
 
-<pre style="width:300px">
-   &lt;Import Project="Ace.targets" />
-</pre>
+    <pre>&lt;Import Project="Ace.targets" /></pre>
 
 With this in place, any .xaml files in your project get compiled to a binary file placed in the www\xbf folder every time you build. 
 This enables you to leverage the markup in your app.
@@ -71,7 +92,3 @@ manually copying the .xbf files to the www\xbf folder. You can then add these to
 
 ## 4. Create Your App
 With Ace added to your project, you can now leverage its features. Read the rest of the docs to understand what you can do, and refer to the example projects in [the plugin's examples folder](https://github.com/adnathan/ace/tree/master/examples).
-
-<br/>
-
-## 5. Enjoy!
