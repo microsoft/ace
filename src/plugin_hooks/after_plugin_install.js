@@ -58,8 +58,9 @@ module.exports = function (context) {
     // First check if the dependency required by this script, fs-extra,
     // is already installed.
     try {
-        var stats = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
-        // fs-extra is already installed.
+        var stats1 = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
+        var stats2 = fs.statSync(path.join(__dirname, '../../../../node_modules/xcode/package.json'));
+        // fs-extra and xcode are already installed.
         // Just do the initial copy then exit, because attempting to install
         // it again can report (harmless) errors, such as when installing
         // multiple platforms simultaneously.
@@ -67,7 +68,7 @@ module.exports = function (context) {
         return;
     }
     catch (err) {
-        // fs-extra is not yet installed, so proceed.
+        // A dependency is not yet installed, so proceed.
     }
 
     // Load npm
