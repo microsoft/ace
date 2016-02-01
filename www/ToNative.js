@@ -262,8 +262,8 @@ ToNative.loadXbf = function (uri, onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "loadXbf", [uri]);
 };
 
-ToNative.loadAndroidXml = function (uri, onSuccess, onError) {
-    exec(onSuccess, onError, "NativeHost", "loadAndroidXml", [uri]);
+ToNative.loadPlatformSpecificMarkup = function (uri, onSuccess, onError) {
+    exec(onSuccess, onError, "NativeHost", "loadPlatformSpecificMarkup", [uri]);
 };
 
 ToNative.getAndroidId = function (name, onSuccess, onError) {

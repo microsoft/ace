@@ -24,6 +24,15 @@ function convertAndroidUrlToPath(url) {
     return filename;
 }
 
+// Convert an ios:// NIB/XIB URL to a path
+function convertiOSUrlToPath(url) {
+    var path = url.substr("ios://".length);
+    if (path.toLowerCase().endsWith(".nib") || path.toLowerCase().endsWith(".xib")) {
+        path = path.substr(0, path.length - ".nib".length);
+    }
+    return path;
+}
+
 module.exports = {
     valueOn: function (platformValues) {
         return platformValues[ace.platform.toLowerCase()];
@@ -63,7 +72,12 @@ module.exports = {
             else if (url.startsWith("android://")) {
                 // ANDROID XML
                 url = convertAndroidUrlToPath(url);
-                ace.ToNative.loadAndroidXml(url, function(handle) { onLoaded(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
+                ace.ToNative.loadPlatformSpecificMarkup(url, function(handle) { onLoaded(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
+            }
+            else if (url.startsWith("ios://")) {
+                // INTERFACE BUILDER NIB/XIB
+                url = convertiOSUrlToPath(url);
+                ace.ToNative.loadPlatformSpecificMarkup(url, function(handle) { onLoaded(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
             }
             else {
                 throw new Error("Unsupported url for navigate: " + url);
@@ -88,7 +102,12 @@ module.exports = {
         else if (url.startsWith("android://")) {
             // ANDROID XML
             url = convertAndroidUrlToPath(url);
-            ace.ToNative.loadAndroidXml(url, function (handle) { onSuccess(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
+            ace.ToNative.loadPlatformSpecificMarkup(url, function (handle) { onSuccess(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
+        }
+        else if (url.startsWith("ios://")) {
+            // INTERFACE BUILDER NIB/XIB
+            url = convertAndroidUrlToPath(url);
+            ace.ToNative.loadPlatformSpecificMarkup(url, function (handle) { onSuccess(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
         }
         else {
             throw new Error("Unsupported url for load: " + url);

@@ -34,7 +34,7 @@ BOOL _initialized;
 
 // Called when the URL of the webview changes
 - (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
-    if ([[request.URL absoluteString] hasPrefix:@"native://"]) {
+    if ([[request.URL absoluteString] hasPrefix:@"native://"] || [[request.URL absoluteString] hasPrefix:@"ios://"]) {
         [OutgoingMessages raiseEvent:@"ace.navigate" handle:nil eventData:[request.URL absoluteString]];
         return true;
     }
@@ -237,6 +237,45 @@ BOOL _initialized;
         throw [NSString stringWithFormat:@"Could not read compiled markup file %@.xbf", path];
     }
     return data;
+}
+
+// Loads an Interface Builder NIB/XIB file
+- (void)loadPlatformSpecificMarkup:(CDVInvokedUrlCommand*)command {
+    try {
+        NSString* path = [command argumentAtIndex:0];
+        UIView* content = nil;
+        
+        // A NIB/XIB can contain multiple roots
+        NSArray* roots = [[NSBundle mainBundle] loadNibNamed:path owner:nil options:nil];
+        
+        // Just find the first one that's a UIView
+        for (id root in roots) {
+            if ([root isKindOfClass:[UIView class]]) {
+                content = (UIView*)root;
+                break;
+            }
+        }
+        
+        if (content == nil) {
+            throw [NSString stringWithFormat:@"Could not find a root UIView inside '%@'", path];
+        }
+
+        // Send the object as a handle
+        AceHandle* handle = [[AceHandle alloc] init];
+        [handle register:content];
+
+        CDVPluginResult* r = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:[handle toJSON]];
+        [self.commandDelegate sendPluginResult:r callbackId:command.callbackId];
+    }
+    catch (NSString* s) {
+        CDVPluginResult* r = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:s];
+        [self.commandDelegate sendPluginResult:r callbackId:command.callbackId];
+    }
+    catch (NSException* ex) {
+        NSString* s = [NSString stringWithFormat:@"%@\r\n%@", [ex description], [NSThread callStackSymbols]];
+        CDVPluginResult* r = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:s];
+        [self.commandDelegate sendPluginResult:r callbackId:command.callbackId];
+    }
 }
 
 - (void) sendOutgoingMessage:(NSArray*)data {

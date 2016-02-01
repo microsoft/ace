@@ -181,8 +181,8 @@ public class NativeHost extends CordovaPlugin {
             }
             */
 		}
-		else if (action.equals("loadAndroidXml")) {
-			this.loadAndroidXml(args.getString(0), callbackContext);
+		else if (action.equals("loadPlatformSpecificMarkup")) {
+			this.loadPlatformSpecificMarkup(args.getString(0), callbackContext);
 		}
 		else if (action.equals("getAndroidId")) {
 			this.getAndroidId(args.getString(0), callbackContext);
@@ -323,7 +323,8 @@ public class NativeHost extends CordovaPlugin {
         return buffer.toByteArray();
     }
 
-	void loadAndroidXml(String uri, CallbackContext callbackContext) {
+    // Loads an Android XML file
+	void loadPlatformSpecificMarkup(String uri, CallbackContext callbackContext) {
 		try {
             View content = readAndroidXml(uri);
             if (content == null) {

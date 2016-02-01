@@ -11,11 +11,12 @@ var fs = require('fs');
 // need to go in order to be compiled into the final result.
 //
 // On iOS, the header file explains how to #import custom native code
-// so it will get compiled into the final result.
+// so it will get compiled into the final result. The Resources subfolder
+// is where any .xib files should go.
 //
 function copyInitialFiles () {
     var fsextra = require('fs-extra');
-    var projectFolder = path.join(__dirname, '../../..');
+    var projectFolder = path.join(__dirname, '../../../..');
     
     try {
         // Place initial native folders
@@ -23,6 +24,7 @@ function copyInitialFiles () {
         fsextra.ensureDirSync(path.join(projectFolder, "native/android/res"));
         fsextra.ensureDirSync(path.join(projectFolder, "native/android/libs"));
         fsextra.ensureDirSync(path.join(projectFolder, "native/ios"));
+        fsextra.ensureDirSync(path.join(projectFolder, "native/ios/resources"));
 
         // Place initial iOS header file
         var iosHeaderDestFile = path.join(projectFolder, 'native/ios/CustomCode.h');
@@ -51,12 +53,12 @@ module.exports = function (context) {
     var Q = context.requireCordovaModule('q');
     var npm = context.requireCordovaModule('npm');
 
-    var pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../package.json'), 'utf-8'));
+    var pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8'));
 
     // First check if the dependency required by this script, fs-extra,
     // is already installed.
     try {
-        var stats = fs.statSync(path.join(__dirname, '../../../node_modules/fs-extra/package.json'));
+        var stats = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
         // fs-extra is already installed.
         // Just do the initial copy then exit, because attempting to install
         // it again can report (harmless) errors, such as when installing

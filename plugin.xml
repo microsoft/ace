@@ -12,7 +12,7 @@
   <issue>https://github.com/adnathan/ace/issues</issue> 
 
   <!-- Sets up app native folders for convenience -->
-  <hook type="after_plugin_install" src="plugin_hooks/after_plugin_install.js" />
+  <hook type="after_plugin_install" src="src/plugin_hooks/after_plugin_install.js" />
 
   <!-- Platform-neutral JavaScript: -->
 
@@ -180,6 +180,9 @@
       </feature>
     </config-file>
 
+    <!-- Adds any iOS resources to the project file -->
+    <hook type="after_prepare" src="src/plugin_hooks/ios_after_prepare.js" />
+
     <!-- iOS-specific JavaScript: -->
     <js-module src="www/iOS/platform.js">
       <merges target="ace.platform" />
@@ -328,10 +331,10 @@
     -->
     
     <!-- Copies the app's native code and resources -->
-    <hook type="before_compile" src="plugin_hooks/android_before_compile.js" />
+    <hook type="before_compile" src="src/plugin_hooks/android_before_compile.js" />
     <!-- Also do it before run, as "cordova run android" doesn't invoke the 
          before_compile hook even when it compiles! -->
-    <hook type="before_run" src="plugin_hooks/android_before_compile.js" />
+    <hook type="before_run" src="src/plugin_hooks/android_before_compile.js" />
 
     <!-- Android-specific JavaScript: -->
     <js-module src="www/android/platform.js">
