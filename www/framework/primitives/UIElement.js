@@ -58,18 +58,29 @@ UIElement.prototype.setResources = function (resources) { this.set("FrameworkEle
 
 UIElement.prototype.getStyle = function () { return this.get("FrameworkElement.Style"); };
 UIElement.prototype.setStyle = function (style) {
-    var setters = style.getSetters();
-    var targetType = style.getTargetType();
+    if (style instanceof ace.Style) {
+        var setters = style.getSetters();
+        var targetType = style.getTargetType();
 
-    // Set each of the properties in the Style
-    for (var i = 0; i < setters.size() ; i++) {
-        var propertyName = setters.get(i).getProperty();
-        if (propertyName.indexOf(".") == -1) {
-            propertyName = targetType + "." + propertyName;
+        // Set each of the properties in the Style
+        for (var i = 0; i < setters.size() ; i++) {
+            var propertyName = setters.get(i).getProperty();
+            if (propertyName.indexOf(".") == -1) {
+                propertyName = targetType + "." + propertyName;
+            }
+            this.set(propertyName, setters.get(i).getValue());
         }
-        this.set(propertyName, setters.get(i).getValue());
     }
-    this.set("FrameworkElement.Style", style);
+    else {
+        // Treat as JSON
+        for (var key in style) {
+            //TODO: Need typeName for proper prefix
+            this.set("FrameworkElement." + key, style[key]);
+        }
+    }
+    // Don't bother sending to the native side.
+    // Just cache locally for the sake of getStyle()
+    this.invalidate("FrameworkElement.Style", style);
 };
 
 UIElement.prototype.getWidth = function () { return this.get("FrameworkElement.Width"); };
