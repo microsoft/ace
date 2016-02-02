@@ -1,6 +1,5 @@
 var path = require('path');
-var fs = require('fs-extra');
-var xcode = require('xcode');
+var fs = require('fs');
 
 if (!String.prototype.endsWith) {
     String.prototype.endsWith = function (substring) {
@@ -8,13 +7,16 @@ if (!String.prototype.endsWith) {
     };
 }
 
-module.exports = function (context) {
+function copyiOSResources() {
+    var xcode = require('xcode');
+    var fsextra = require('fs-extra');
+
     var hasResources = false;
     
 	var iosAppResourcesFolder = null;
     try {
         iosAppResourcesFolder = path.join(__dirname, '../../../../native/ios/resources');
-        var resources = fs.readdirSync(iosAppResourcesFolder);
+        var resources = fsextra.readdirSync(iosAppResourcesFolder);
         if (resources.length > 0) {
             hasResources = true;
         }
@@ -32,7 +34,7 @@ module.exports = function (context) {
 
     // Find the path to the generated .xcodeproj folder
     var projectFolder = null;
-    var items = fs.readdirSync(iosFolder);
+    var items = fsextra.readdirSync(iosFolder);
     for (var i in items) {
         if (items[i].toLowerCase().endsWith(".xcodeproj")) {
             projectFolder = path.join(iosFolder, items[i]);
@@ -50,7 +52,7 @@ module.exports = function (context) {
     var targetResourcesFolder = path.join(codeFolder, "Resources"); 
 
     // Copy any resources to the Resources folder in the project
-    fs.copySync(iosAppResourcesFolder, targetResourcesFolder);
+    fsextra.copySync(iosAppResourcesFolder, targetResourcesFolder);
 
     // Now edit the .pbxproj file inside the project folder
     var pbxFilePath = path.join(projectFolder, 'project.pbxproj');
@@ -63,13 +65,47 @@ module.exports = function (context) {
        }
        else {
            // Add each custom resource
-           var resources = fs.readdirSync(iosAppResourcesFolder);
+           var resources = fsextra.readdirSync(iosAppResourcesFolder);
            for (var i in resources) {
                project.addResourceFile(resources[i]);
            }
 
            // Replace the file
-           fs.writeFileSync(pbxFilePath, project.writeSync());
+           fsextra.writeFileSync(pbxFilePath, project.writeSync());
        }
+    });
+}
+
+module.exports = function (context) {
+    // Make sure the dependencies are installed
+    try {
+        var stats1 = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
+        var stats2 = fs.statSync(path.join(__dirname, '../../../../node_modules/xcode/package.json'));
+        
+        // We're good.
+        copyiOSResources();
+        return;
+    }
+    catch (err) {
+        // A dependency is not yet installed, so proceed.
+    }
+
+    // Execute 'npm install' on dependencies mentioned in the plugin's package.json.
+    var Q = context.requireCordovaModule('q');
+    var npm = context.requireCordovaModule('npm');
+
+    var pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '../../package.json'), 'utf-8'));
+
+    // Load npm
+    return Q.ninvoke(npm, 'load', {
+        loaded: false
+    }).then(function() {
+        // Invoke npm install on each key@value
+        return Q.ninvoke(npm.commands, 'install', Object.keys(pkg.dependencies).map(function(p) {
+            return p + '@' + pkg.dependencies[p];
+        }));
+    }).then(function() {
+        // We're good.
+        copyiOSResources();
     });
 };
