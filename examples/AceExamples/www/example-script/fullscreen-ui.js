@@ -1,5 +1,19 @@
 function fullscreen_ui_init() {
     document.getElementById("navigateToProgrammaticGrid").addEventListener('click', navigateToProgrammaticGrid, false);
+
+    // Global navigated handler:
+    ace.addEventListener("navigated", function (root, url) {
+        console.log("NAVIGATED: " + url);
+        if (url == "ios://ios_sample.xib") {
+            // So we have a back button:
+            ace.Frame.showNavigationBar();
+        }
+    });
+
+    // Global navigating handler:
+    ace.addEventListener("navigating", function (oldContent, newContent) {
+        console.log("NAVIGATING: " + oldContent + " -> " + newContent);
+    });
 }
 
 function navigateToProgrammaticGrid() {
