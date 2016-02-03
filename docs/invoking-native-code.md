@@ -9,14 +9,10 @@ section3: Platform-Specific
 section4: Real-World Examples
 ---
 
-<br/>
-
 > Be sure to check out [the sample code](https://github.com/adnathan/ace/tree/master/examples) to see this in action
 
 You can invoke native code from JavaScript using <b>NativeObject</b>, whether it's platform APIs, third-party code, 
 or your own custom native code. For the latter two cases, you need to include the code in your project.
-
-<br/>
 
 <a name="one"/>
 
@@ -25,8 +21,6 @@ Cordova apps with Ace installed can include any native code and resources in the
 placed here gets compiled into your project:
 
 <img width="50%" src="/assets/images/docs/native-folder.png"/>
-
-<br/>
 
 <a name="two"/>
 

@@ -10,8 +10,6 @@ section4: Widget
 section5: Floating
 ---
 
-<br/>
-
 > Be sure to check out [the sample code](https://github.com/adnathan/ace/tree/master/examples) to see this in action
 
 There are many options for adding native UI into your app.

@@ -5,8 +5,6 @@ category: hidden
 permalink: /docs/errors/
 ---
 
-<br/>
-
 ## Failure to load/navigate to .xaml file
 **Symptoms:**
 

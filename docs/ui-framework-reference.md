@@ -5,8 +5,6 @@ category: hidden
 permalink: /docs/ref/
 ---
 
-<br/>
-
 <a name="one"/>
 
 ## LAYOUT PANELS

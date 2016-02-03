@@ -5,6 +5,26 @@ category: docs
 permalink: /docs/styling/
 ---
 
+<div style="background-color:#3399FF;color:white;foreground:bold;padding:20px">
+<b>SUMMARY</b>
+<br/>
+<ul>
+<li>A <i>style</i> is a collection of properties and their values.</li>
+<li>HTML content can be styled with CSS, as always.</li>
+<li>Native content can be styled with Style objects that can be defined in XAML or JavaScript.</li>
+<li>In JavaScript, you can use JSON, such as:</li>
+<pre>
+{
+  FontWeight: "Bold",
+  Foreground: "Violet",
+  Background: "SteelBlue"
+}</pre>
+</ul>
+
+</div>
+
+<br/>
+
 For the **HTML** in your app, you style it the same ways as always, such as using **CSS**. However, 
 this topic discusses how you style **native controls**.
 
