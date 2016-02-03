@@ -211,6 +211,8 @@
     <source-file src="src/ios/AppBarButton.m" />
     <header-file src="src/ios/BitmapIcon.h" />
     <source-file src="src/ios/BitmapIcon.m" />
+    <header-file src="src/ios/BitmapImage.h" />
+    <source-file src="src/ios/BitmapImage.mm" />
     <header-file src="src/ios/Brush.h" />
     <source-file src="src/ios/Brush.m" />
     <header-file src="src/ios/BrushConverter.h" />
@@ -255,6 +257,10 @@
     <source-file src="src/ios/IncomingMessages.mm" />
     <header-file src="src/ios/InlineCollection.h" />
     <source-file src="src/ios/InlineCollection.m" />
+    <header-file src="src/ios/Image.h" />
+    <source-file src="src/ios/Image.mm" />
+    <header-file src="src/ios/ImageSource.h" />
+    <source-file src="src/ios/ImageSource.mm" />
     <header-file src="src/ios/IRecieveCollectionChanges.h" />
     <header-file src="src/ios/ItemCollection.h" />
     <source-file src="src/ios/ItemCollection.m" />
