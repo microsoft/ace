@@ -189,270 +189,7 @@ ace.load("android://vector_graphics.xml", function (root) {
 One way to accomplish fullscreen native UI is to replace the WebView, as shown in the <b>Docking Native UI</b> section, 
 but then keeping the WebView hidden.
 
-Another way is to *navigate* to a new all-native page.  If your page is defined in markup, you can use a hyperlink:
-
-<pre style="color:blue">&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>native://page.xaml</b>"&gt;
-<span class="xaml-content">&nbsp;&nbsp;Go to an all-native page</span>
-&lt;/<span class="xaml-tag">a</span>&gt;
-&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>android://page.xml</b>"&gt;
-<span class="xaml-content">&nbsp;&nbsp;Go to an Android XML page</span>
-&lt;/<span class="xaml-tag">a</span>&gt;
-&lt;<span class="xaml-tag">a</span> <span class="xaml-attr">href</span>="<b>ios://page.xib</b>"&gt;
-&nbsp;&nbsp;<span class="xaml-content">Go to an Interface Builder page</span>
-&lt;/<span class="xaml-tag">a</span>&gt;
-</pre>
-
-or you can change the document's location in JavaScript:
-
-<pre>
-document.location.href = "native://page.xaml";
-document.location.href = "android://page.xml";
-document.location.href = "ios://page.xib";
-</pre>
-
-or you can call a navigate API:
-
-<pre>
-ace.navigate("native://page.xaml");
-</pre>
-
-and take advantage of the fact that navigate returns the root UI object from the new page:
-
-<pre>
-ace.navigate("native://page.xaml", function (root) {
-    // Navigation done
-    root.setBackground("Salmon");
-});
-</pre>
-
-and handle a navigating-away event:
-
-<pre>
-ace.navigate("native://page.xaml", function (root) {
-    // Navigation done
-    root.setBackground("Salmon");
-    root.findName("someControlOnThePage").setForeground("LemonChiffon");
-}, function (root) {
-    // Navigating away
-});
-</pre>
-
-> Whether you get a cross-platform UI object from XAML or programmatically, you can retrieve sub-objects 
-> by name with the findName API.
-
-You can use the navigate API with programmatically-created UI. You just pass navigate the root UI object instead of a URL:
-
-<b>Navigate to Cross-Platform Programmatically-Created Content</b>
-
-<pre>
-// Create all the UI elements
-var stackPanel = new ace.StackPanel();
-var datePicker = new ace.DatePicker();
-var timePicker = new ace.TimePicker();
-var textBlock = new ace.TextBlock();
-var toggleSwitch = new ace.ToggleSwitch();
-var button1 = new ace.Button();
-var button2 = new ace.Button();
-var button3 = new ace.Button();
-var button4 = new ace.Button();
-var canvas = new ace.Canvas();
-var hyperlinkButton = new ace.HyperlinkButton();
-
-// Add elements to the root StackPanel
-stackPanel.getChildren().add(datePicker);
-stackPanel.getChildren().add(timePicker);
-stackPanel.getChildren().add(textBlock);
-stackPanel.getChildren().add(toggleSwitch);
-stackPanel.getChildren().add(button1);
-stackPanel.getChildren().add(canvas);
-
-// Add elements to the Canvas
-canvas.setMargin(15);
-canvas.getChildren().add(button2);
-canvas.getChildren().add(button3);
-canvas.getChildren().add(button4);
-canvas.getChildren().add(hyperlinkButton);
-
-// Set properties on DatePicker and attach an event
-datePicker.setPadding(15);
-datePicker.setHeader("Choose a date");
-datePicker.addEventListener("datechanged", function () { onDateChanged(datePicker); });
-
-// Set properties on TimePicker and attach an event
-timePicker.setPadding(15);
-timePicker.setHeader("Choose a time");
-timePicker.addEventListener("timechanged", function () { onTimeChanged(timePicker); });
-
-// Set properties on TextBlock
-textBlock.setName("textBlock");
-textBlock.setFontSize(20);
-textBlock.setPadding(15);
-textBlock.setForeground("Green");
-textBlock.setText("Text");
-
-// Set properties on ToggleSwitch
-toggleSwitch.setHeader("ToggleSwitch");
-toggleSwitch.setIsOn(true);
-toggleSwitch.setPadding(15);
-
-// Set properties (and an event handler) on 4 Buttons
-button1.setBackground("Red");
-button1.setContent("Back");
-button1.addEventListener("click", function () { ace.Frame.goBack(); });
-button2.setContent("A");
-button3.setContent("B");
-ace.Canvas.setLeft(button3, 150);
-button4.setContent("C");
-button4.setWidth(100);
-button4.setHeight(100);
-ace.Canvas.setTop(button4, 110);
-
-// Create a Style
-var style = new ace.Style();
-style.setTargetType("Button");
-
-var setter1 = new ace.Setter();
-setter1.setProperty("FontSize");
-setter1.setValue(60);
-style.getSetters().add(setter1);
-
-var setter2 = new ace.Setter();
-setter2.setProperty("FontWeight");
-setter2.setValue("Bold");
-style.getSetters().add(setter2);
-
-var setter3 = new ace.Setter();
-setter3.setProperty("Foreground");
-setter3.setValue("Violet");
-style.getSetters().add(setter3);
-
-var setter4 = new ace.Setter();
-setter4.setProperty("Background");
-setter4.setValue("SteelBlue");
-style.getSetters().add(setter4);
-
-var setter5 = new ace.Setter();
-setter5.setProperty("Width");
-setter5.setValue(100);
-style.getSetters().add(setter5);
-
-var setter6 = new ace.Setter();
-setter6.setProperty("Height");
-setter6.setValue(100);
-style.getSetters().add(setter6);
-
-// Apply the Style to buttons 2 and 3
-button2.setStyle(style);
-button3.setStyle(style);
-
-// Set properties on HyperlinkButton
-hyperlinkButton.setBackground("Lime");
-hyperlinkButton.setNavigateUri("native://Native2.xaml");
-hyperlinkButton.setContent("Another Page");
-hyperlinkButton.setWidth(150);
-hyperlinkButton.setHeight(100);
-ace.Canvas.setLeft(hyperlinkButton, 150);
-ace.Canvas.setTop(hyperlinkButton, 110);
-
-// Set the background to a unique color
-stackPanel.setBackground("Moccasin");
-
-// Navigate to the root instance
-ace.navigate(stackPanel);
-</pre>
-
-<b>Navigate to Raw Android-Specific Programmatically-Created Content</b>
-
-<pre>
-if (ace.platform == "Android") {
-    // Create all the views
-    var relativeLayout = new ace.NativeObject("android.widget.RelativeLayout");
-    var radioGroup = new ace.NativeObject("android.widget.RadioGroup");
-    var radioButton1 = new ace.NativeObject("android.widget.RadioButton");
-    var radioButton2 = new ace.NativeObject("android.widget.RadioButton");
-    var radioButton3 = new ace.NativeObject("android.widget.RadioButton");
-    var colorWheel = new ace.NativeObject("com.larswerkman.holocolorpicker.ColorPicker");
-    var seekBar = new ace.NativeObject("android.widget.SeekBar");
-    var editText = new ace.NativeObject("android.widget.EditText");
-
-    // Set ids to be used by RelativePanel
-    var radioGroupId = 100;
-    var colorWheelId = 200;
-    var seekBarId = 300;
-    radioGroup.invoke("setId", radioGroupId);
-    colorWheel.invoke("setId", colorWheelId);
-    seekBar.invoke("setId", seekBarId);
-
-    // Set up the RadioGroup and its RadioButtons
-    radioButton1.invoke("setText", "Choice 1");
-    radioButton2.invoke("setText", "Choice 2");
-    radioButton3.invoke("setText", "Choice 3");
-    radioGroup.invoke("addView", radioButton1);
-    radioGroup.invoke("addView", radioButton2);
-    radioGroup.invoke("addView", radioButton3);
-    relativeLayout.invoke("addView", radioGroup);
-
-    // Set the background to yellow
-    ace.NativeObject.getField("android.graphics.Color", "YELLOW", function (color) {
-        relativeLayout.invoke("setBackgroundColor", color);
-    });
-
-    // Retrieve four constants
-    ace.NativeObject.getField("android.view.ViewGroup$LayoutParams", "MATCH_PARENT", function (match_parent) {
-        ace.NativeObject.getField("android.view.ViewGroup$LayoutParams", "WRAP_CONTENT", function (wrap_content) {
-            ace.NativeObject.getField("android.widget.RelativeLayout", "RIGHT_OF", function (right_of) {
-                ace.NativeObject.getField("android.widget.RelativeLayout", "BELOW", function (below) {
-
-                    // Add colorWheel to the right of radioGroup
-                    var p = new ace.NativeObject("android.widget.RelativeLayout$LayoutParams", match_parent, wrap_content);
-                    p.invoke("addRule", right_of, radioGroupId);
-                    colorWheel.invoke("setLayoutParams", p);
-                    relativeLayout.invoke("addView", colorWheel);
-
-                    // Add seekBar below colorWheel
-                    p = new ace.NativeObject("android.widget.RelativeLayout$LayoutParams", match_parent, wrap_content);
-                    p.invoke("addRule", below, colorWheelId);
-                    seekBar.invoke("setLayoutParams", p);
-                    relativeLayout.invoke("addView", seekBar);
-
-                    // Add editText below seekBar
-                    p = new ace.NativeObject("android.widget.RelativeLayout$LayoutParams", match_parent, wrap_content);
-                    p.invoke("addRule", below, seekBarId);
-                    editText.invoke("setLayoutParams", p);
-                    relativeLayout.invoke("addView", editText);
-
-                    // Navigate to the root instance
-                    ace.navigate(relativeLayout);
-                });
-            });
-        });
-    });
-}
-</pre>
-
-<b>Navigate to Raw iOS-Specific Programmatically-Created Content</b>
-
-<pre>
-if (ace.platform == "iOS") {
-    // Create a UISegmentedControl
-    var uiSegmentedControl = new ace.NativeObject("UISegmentedControl");
-
-    // Add four segments
-    uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "One", 0, false);
-    uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Two", 1, false);
-    uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Three", 2, false);
-    uiSegmentedControl.invoke("insertSegmentWithTitle:atIndex:animated:", "Four", 3, false);
-
-    // Select the last segment
-    uiSegmentedControl.invoke("setSelectedSegmentIndex", 3);
-
-    // Navigate to the single control
-    ace.navigate(uiSegmentedControl,
-        // Just so we have a way to get back:
-        function () { ace.Frame.showNavigationBar(); },
-        function () { ace.Frame.hideNavigationBar(); });
-}
-</pre>
+Another way is to *navigate* to a new all-native page. See [the Navigation topic](/docs/navigation) for all the ways to perform navigation.
 
 <br/>
 
@@ -460,13 +197,154 @@ if (ace.platform == "iOS") {
 
 ## Creating an Android Widget
 
-Check out the <a href="/apps">PhoneGap Day app</a> for an example of this.
+Check out the <a href="/apps">PhoneGap Day app</a> for an example of this. Because Ace enables you to 
+include arbitrary Java and resources in your app, you can build completely-custom widgets the same way 
+you would in a pure native app. However, Ace provides some standard widget functionality that makes this 
+even easier.
+
+### 1. Define Widget(s) in AndroidManifest.xml.
+
+Copy the already-produced AndroidManifest.xml from your project's platforms/android folder to the native/android/res 
+folder so you can overwrite it with your custom entries.
+
+Add the following under the &lt;application> element to get a list-based widget:
+
+<pre>
+&lt;receiver android:label="List" android:name="<i>your.package.name</i>.ListWidgetProvider">
+  &lt;intent-filter>
+    &lt;action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+  &lt;/intent-filter>
+  &lt;meta-data android:name="android.appwidget.provider" android:resource="@xml/list_widget_info" />
+&lt;/receiver>
+&lt;service android:exported="false" android:name="run.ace.AppWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" />
+</pre>
+
+### 2. Add the Necessary Android Resources
+
+Add a native/android/res/xml/list_widget_info.xml file with the following content:
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;appwidget-provider
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:minWidth="180dip"
+  android:minHeight="180dip"
+  android:updatePeriodMillis="3600000"
+  android:previewImage="@drawable/list_widget_preview"
+  android:initialLayout="@layout/list_widget_layout">
+&lt;/appwidget-provider>
+</pre>
+
+Add an appropriate preview image as native/android/res/drawable/list_widget_preview.png.
+
+Add a native/android/res/layout/list_widget_layout file defining the widget layout:
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_widget_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:loopViews="true" />
+</pre>
+
+Add a native/android/res/layout/list_widget_view file defining the layout of each widget item:
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?>
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_widget_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  &lt;TextView 
+    android:id="@+id/list_widget_item_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:textColor="#ffffff"
+    android:textSize="40px" />
+&lt;/FrameLayout>
+</pre>
+
+### 3. Add a WidgetProvider Java Class
+
+Place this anywhere under native/android/src. The class and package name must match what you specified 
+in AndroidManifest.xml. This class tells Ace about the resources you've defined.
+
+<pre>
+package <i>your.package.name</i>;
+
+public class ListWidgetProvider extends run.ace.AppWidgetProvider {
+  @Override protected int getLayoutResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_layout", "layout", context);
+  }
+
+  @Override protected int getViewResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_view", "id", context);
+  }
+
+  @Override protected int getItemResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item", "id", context);
+  }
+
+  @Override protected int getItemTextResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item_text", "id", context);
+  }
+
+  @Override protected int getItemLayoutResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item", "layout", context);
+  }
+}
+</pre>
+
+### 3. Populate Widget Data in JavaScript
+
+When your app runs, you can populate your widget:
+
+<pre>
+if (ace.platform == "Android") {
+  setupWidget();
+}
+
+function setupWidget() {
+  // Handle the app being resumed by a widget click:
+  ace.addEventListener("android.intentchanged", checkForWidgetActivation);
+
+  ace.android.appWidget.clear();
+  
+  for (var i = 0; i < 10; i++) {
+    ace.android.appWidget.add("Item with index " + i);
+  }
+}
+</pre>
+
+### 4. Handle Widget Item Clicks in JavaScript
+
+When an item in a list-based widget is clicked, its index is stored in the Android activity's <i>intent</i>. The code below shows how to 
+retrieve this index. To handle your app being activated by a widget click, you should check for this data 
+as your app initializes. However, to also handle your app being <i>resumed</i> by a widget click, you should 
+attach an event handler to the global <b>android.intentchanged</b> event:
+<pre>
+ace.addEventListener("android.intentchanged", checkForWidgetActivation);
+</pre>
+
+<pre>
+function checkForWidgetActivation() {
+  if (ace.platform != "Android") {
+    return;
+  }
+
+  ace.android.getIntent().invoke("getIntExtra", "widgetSelectionIndex", -1, function (value) {
+    // value is the index of the item clicked
+    // or -1 if no item has been clicked
+  });
+}
+</pre>
+
+<br/>
 
 <a name="five"/>
-
-<br/>
-
-<br/>
 
 ## Creating Floating UI on Android
 
