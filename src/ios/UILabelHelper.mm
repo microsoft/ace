@@ -2,15 +2,14 @@
 #import "UIViewHelper.h"
 #import "InlineCollection.h"
 #import "Utils.h"
-#import "BrushConverter.h"
-#import "SolidColorBrush.h"
+#import "Color.h"
 #import "FontWeightConverter.h"
 
 @implementation UILabelHelper
 
 + (BOOL) setProperty:(UILabel*)instance propertyName:(NSString*)propertyName propertyValue:(NSObject*)propertyValue {
     // First look at UILabel-specific properties
-    
+
     // The .endsWith checks are important for supporting standard properties on custom
     // UILabels. What would have been Control.FontSize would appear as XXXTextView.FontSize.
     if ([propertyName hasSuffix:@".Content"] ||
@@ -107,24 +106,12 @@
         throw @"NYI: FontStyle";
     }
     else if ([propertyName hasSuffix:@".Foreground"]) {
-        //TODO: Helper shared with button, etc.
-        if ([propertyValue isKindOfClass:[NSNumber class]]) {
-            // It's a raw color value
-            instance.textColor = UIColorFromARGB([(NSNumber*)propertyValue intValue]);
-        }
-        else if (propertyValue == nil) {
-            throw @"Null Foreground NYI";
-        }
-        else {
-            // TODO: ImageBrush, SolidColorBrush instance, etc.
-            Brush* brush = [BrushConverter parse:(NSString*)propertyValue];
-            if ([brush isKindOfClass:[SolidColorBrush class]]) {
-                instance.textColor = [((SolidColorBrush*)brush) Color];
-            }
-            else
-                throw @"Brushes other than SolidColorBrush are NYI";
-        }
-        return true;
+      UIColor* color = [Color fromObject:propertyValue withDefault:nil];
+      if (propertyValue == nil) {
+        throw @"Null Foreground NYI";
+      }
+      instance.textColor = color;
+      return true;
     }
     else if ([propertyName hasSuffix:@".HorizontalAlignment"]) {
         NSString* alignment = [(NSString*)propertyValue lowercaseString];
@@ -164,7 +151,7 @@
         [instance sizeToFit]; // TODO: Only if size not explicitly set
         return true;
     }
-    
+
     // Now look at properties applicable to all Views
     return [UIViewHelper setProperty:instance propertyName:propertyName propertyValue:propertyValue];
 }

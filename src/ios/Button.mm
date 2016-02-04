@@ -2,8 +2,7 @@
 #import "UIViewHelper.h"
 #import "UILabelHelper.h"
 #import "Utils.h"
-#import "BrushConverter.h"
-#import "SolidColorBrush.h"
+#import "Color.h"
 #import "FontWeightConverter.h"
 #import "OutgoingMessages.h"
 
@@ -22,24 +21,11 @@
         // Also check these properties first, so things like Foreground does the right thing.
         // TODO: Or can setTitle be replaced with the other way of setting foreground on titleLabel?
         if ([propertyName hasSuffix:@".Foreground"]) {
-            if ([propertyValue isKindOfClass:[NSNumber class]]) {
-                // It's a raw color value
-                UIColor* color = UIColorFromARGB([(NSNumber*)propertyValue intValue]);
-                [self setTitleColor:color forState:UIControlStateNormal];
-            }
-            else if (propertyValue == nil) {
+            UIColor* color = [Color fromObject:propertyValue withDefault:nil];
+            if (color == nil) {
                 throw @"Null foreground NYI";
             }
-            else {
-                // TODO: ImageBrush, SolidColorBrush instance, etc.
-                Brush* brush = [BrushConverter parse:(NSString*)propertyValue];
-                if ([brush isKindOfClass:[SolidColorBrush class]]) {
-                    UIColor* color = [((SolidColorBrush*)brush) Color];
-                    [self setTitleColor:color forState:UIControlStateNormal];
-                }
-                else
-                    throw @"Brushes other than SolidColorBrush are NYI";
-            }
+            [self setTitleColor:color forState:UIControlStateNormal];
         }
         else if ([propertyName hasSuffix:@".FontSize"]) {
             double size;

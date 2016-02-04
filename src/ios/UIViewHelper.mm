@@ -1,7 +1,6 @@
 #import "UIViewHelper.h"
 #import "GridLength.h"
-#import "BrushConverter.h"
-#import "SolidColorBrush.h"
+#import "Color.h"
 #import "Thickness.h"
 #import "Utils.h"
 #import "Page.h"
@@ -30,14 +29,14 @@
             // Remove all subviews
             [[instance subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
             [instance addSubview:(UIView*)propertyValue];
-            
+
             // When we're setting content on the root view, respect the title/appbar
             // and always make it fill the view controller
             UIViewController* viewController = [Frame getNavigationController].topViewController;
             if (instance == viewController.view) {
 
                 // Fill the view controller (TODO: applicationFrame here and then fix elsewhere?)
-                ((UIView*)propertyValue).frame = [UIScreen mainScreen].bounds; 
+                ((UIView*)propertyValue).frame = [UIScreen mainScreen].bounds;
 
                 if ([propertyValue isKindOfClass:[Page class]]) {
                     Page* p = (Page*)propertyValue;
@@ -68,23 +67,14 @@
         handled = true;
     }
     else if ([propertyName hasSuffix:@".Background"]) {
-        if ([propertyValue isKindOfClass:[NSNumber class]]) {
-            // It's a raw color value
-            instance.backgroundColor = UIColorFromARGB([(NSNumber*)propertyValue intValue]);
-        }
-        else if (propertyValue == nil) {
-            // null background means windowBackground (TODO: need to reset)
-        }
-        else {
-            // TODO: ImageBrush, SolidColorBrush instance, etc.
-            Brush* brush = [BrushConverter parse:(NSString*)propertyValue];
-            if ([brush isKindOfClass:[SolidColorBrush class]]) {
-                instance.backgroundColor = [((SolidColorBrush*)brush) Color];
-            }
-            else
-                throw @"Brushes other than SolidColorBrush are NYI";
-        }
-        handled = true;
+      UIColor* color = [Color fromObject:propertyValue withDefault:nil];
+      if (propertyValue == nil) {
+          // null background means windowBackground (TODO: need to reset)
+      }
+      else {
+        instance.backgroundColor = color;
+      }
+      handled = true;
     }
     else if ([propertyName hasSuffix:@".Width"]) {
         if (propertyValue == nil) {
@@ -155,12 +145,12 @@
     }
     else if ([propertyName hasSuffix:@".BottomAppBar"]) {
         // This is valid when treating the default root view as a Page
-        [CommandBar showTabBar:propertyValue on:[Frame getNavigationController].topViewController animated:false]; 
+        [CommandBar showTabBar:propertyValue on:[Frame getNavigationController].topViewController animated:false];
         return true; // Don't adjust size based on this
     }
     else if ([propertyName hasSuffix:@".TopAppBar"]) {
         // This is valid when treating the default root view as a Page
-        [CommandBar showNavigationBar:(CommandBar*)propertyValue on:[Frame getNavigationController].topViewController animated:false]; 
+        [CommandBar showNavigationBar:(CommandBar*)propertyValue on:[Frame getNavigationController].topViewController animated:false];
         return true; // Don't adjust size based on this
     }
     else if ([propertyName hasSuffix:@".Resources"] || [propertyName hasSuffix:@".Style"]) {
@@ -196,7 +186,7 @@
         NSNumber* h = [instance.layer valueForKey:@"Ace.Height"];
         int buttonPadding = 20;
         int buttonMinWidth = 90;
-        
+
         [instance sizeToFit];
         if (w != nil || h != nil) {
             CGRect r = instance.frame;
@@ -213,7 +203,7 @@
                 r.size.height + buttonPadding);
         }
     }
-    
+
     return handled;
 }
 
