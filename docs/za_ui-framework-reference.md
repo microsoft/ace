@@ -46,6 +46,8 @@ Base Classes:
 
 <br/>
 
+<a name="Grid"/>
+
 ## Grid
 Arranges child elements into flexible rows and columns.
 
@@ -67,6 +69,8 @@ Base Classes:
 
 <br/>
 
+<a name="AppBarButton"/>
+
 ## AppBarButton
 A button meant to be displayed in a CommandBar.
 
@@ -82,6 +86,8 @@ Base Classes:
 <a href="https://github.com/adnathan/ace/blob/master/www/framework/Button.js">Button</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/ButtonBase.js">ButtonBase</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
 
 <br/>
+
+<a name="Button"/>
 
 ## Button
 A button that can respond to clicks.
@@ -114,6 +120,8 @@ Base Classes:
 
 <br/>
 
+<a name="DatePicker"/>
+
 ## DatePicker
 A control that enables a user to pick a date value.
 
@@ -143,6 +151,23 @@ Events (attach with addEventListener):
 Base Classes:
 
 <a href="https://github.com/adnathan/ace/blob/master/www/framework/Button.js">Button</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/ButtonBase.js">ButtonBase</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
+
+<br/>
+
+<a name="Image"/>
+
+## Image
+Displays an image. See [Working with Images](/docs/images) for more info.
+
+<a href="https://github.com/adnathan/ace/blob/master/www/framework/Image.js">View APIs</a>
+
+Events (attach with addEventListener):
+
+* loaded
+
+Base Classes:
+
+<a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
 
 <br/>
 
@@ -205,6 +230,8 @@ Base Classes:
 <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> > <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a>
 
 <br/>
+
+<a name="TabBar"/>
 
 ## ace:TabBar
 A command bar designed for tabs rather than buttons.
