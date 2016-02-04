@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Examples
-category: hidden
+category: docs
 permalink: /docs/examples/
 ---
 

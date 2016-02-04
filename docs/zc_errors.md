@@ -1,7 +1,7 @@
 ---
 layout: doc
 title: Troubleshooting Errors
-category: hidden
+category: docs
 permalink: /docs/errors/
 ---
 

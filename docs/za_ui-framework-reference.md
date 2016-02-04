@@ -1,8 +1,13 @@
 ---
 layout: doc
 title: UI Framework Reference
-category: hidden
+category: docs
 permalink: /docs/ref/
+section1: Layout Panels
+section2: Controls
+section3: Ace
+section4: Platform Helpers
+section5: NativeObject
 ---
 
 <a name="one"/>
