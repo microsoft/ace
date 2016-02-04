@@ -133,6 +133,9 @@
   <js-module src="www/framework/HyperlinkButton.js">
     <merges target="ace.HyperlinkButton" />
   </js-module>
+  <js-module src="www/framework/Image.js">
+    <merges target="ace.Image" />
+  </js-module>
   <js-module src="www/framework/ListBox.js">
     <merges target="ace.ListBox" />
   </js-module>
