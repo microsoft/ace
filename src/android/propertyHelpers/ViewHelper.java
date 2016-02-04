@@ -21,47 +21,41 @@ public class ViewHelper {
 				// It's a raw color value
                 if (useTintListForBackground)
     				instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf((int)(long)(Long)propertyValue));
-                else 
+                else
 				    instance.setBackgroundColor((int)(long)(Long)propertyValue);
 			}
 			else if (propertyValue instanceof Integer) {
 				// It's a raw color value
-                if (useTintListForBackground)
+        if (useTintListForBackground)
     				instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf((Integer)propertyValue));
-                else 
+        else
 				    instance.setBackgroundColor((Integer)propertyValue);
 			}
-            else if (propertyValue == null) {
-                // null background means windowBackground (doesn't work with TintList)
-                int[] attrs = { android.R.attr.windowBackground };
-                android.content.res.TypedArray ta = instance.getContext().getTheme().obtainStyledAttributes(attrs);
-                instance.setBackground(ta.getDrawable(0));
-                ta.recycle();	
-            }
+      else if (propertyValue == null) {
+          // null background means windowBackground (doesn't work with TintList)
+          int[] attrs = { android.R.attr.windowBackground };
+          android.content.res.TypedArray ta = instance.getContext().getTheme().obtainStyledAttributes(attrs);
+          instance.setBackground(ta.getDrawable(0));
+          ta.recycle();
+      }
 			else {
-                // TODO: ImageBrush:
-                String s = (String)propertyValue;
-                if (s.startsWith("www/")) {
-                    try {
-                    AssetManager assetManager = instance.getContext().getAssets();
-                    InputStream inputStream = assetManager.open(s);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                    instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
-                    }
-                    catch (IOException ex) {
-                        //TODO raise error event but keep going (sendEvent)
-                    }
-                    return true;
-                }
-				Brush brush = BrushConverter.parse((String)propertyValue);
-				if (brush instanceof SolidColorBrush) {
-                    if (useTintListForBackground)
-                        instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(((SolidColorBrush)brush).Color));
-                    else
-					    instance.setBackgroundColor(((SolidColorBrush)brush).Color);
-                }
-				else
-					throw new RuntimeException("Brushes other than SolidColorBrush are NYI");
+          String s = (String)propertyValue;
+          if (s.startsWith("www/")) {
+							// ImageBrush
+							Bitmap bitmap = Utils.getBitmap(instance.getContext(), s);
+              instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
+              return true;
+          }
+					Brush brush = BrushConverter.parse((String)propertyValue);
+					if (brush instanceof SolidColorBrush) {
+	          if (useTintListForBackground)
+	              instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(((SolidColorBrush)brush).Color));
+	          else
+					    	instance.setBackgroundColor(((SolidColorBrush)brush).Color);
+          }
+					else {
+						throw new RuntimeException("Unsupported brush type: " + brush.getClass().getSimpleName());
+					}
 			}
 			return true;
 		}
@@ -176,7 +170,7 @@ public class ViewHelper {
 
 	static void setLength(View instance, boolean isWidth, Object length) {
 		int value;
-        
+
         if (length == null)
             value = ViewGroup.LayoutParams.MATCH_PARENT; // TODO: Should be WRAP_CONTENT
 		else if (length instanceof Double)
@@ -195,21 +189,21 @@ public class ViewHelper {
             if (params instanceof AbsoluteLayout.LayoutParams) {
                 AbsoluteLayout.LayoutParams params2 = (AbsoluteLayout.LayoutParams)params;
                 params = new AbsoluteLayout.LayoutParams(
-                    isWidth ? value : params2.width, 
+                    isWidth ? value : params2.width,
                     isWidth ? params2.height : value,
                     params2.x, params2.y);
             }
             else if (params instanceof FrameLayout.LayoutParams) {
                 FrameLayout.LayoutParams params2 = (FrameLayout.LayoutParams)params;
                 params = new FrameLayout.LayoutParams(
-                    isWidth ? value : params2.width, 
+                    isWidth ? value : params2.width,
                     isWidth ? params2.height : value,
                     params2.gravity);
             }
             else if (params instanceof LinearLayout.LayoutParams) {
                 LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams)params;
                 params = new LinearLayout.LayoutParams(
-                    isWidth ? value : params2.width, 
+                    isWidth ? value : params2.width,
                     isWidth ? params2.height : value,
                     params2.weight);
             }

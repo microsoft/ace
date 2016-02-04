@@ -430,6 +430,7 @@
     <source-file src="src/android/converters/NamedColor.java" target-dir="src/run/ace" />
 
     <source-file src="src/android/framework/AppBarButton.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/BitmapImage.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Brush.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Button.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Canvas.java" target-dir="src/run/ace/framework" />
@@ -442,6 +443,8 @@
     <source-file src="src/android/framework/GridLengthConverter.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/GridUnitType.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/HyperlinkButton.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Image.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ImageSource.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ListBox.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ListBoxItem.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Page.java" target-dir="src/run/ace/framework" />
