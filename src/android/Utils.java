@@ -30,7 +30,20 @@ public class Utils {
 			obj instanceof Character
 		);
 	}
-    
+
+	public static double getDouble(Object obj) {
+		if (obj instanceof Double) {
+			return (double)(Double)obj;
+		}
+		if (obj instanceof Integer) {
+			return (double)(int)(Integer)obj;
+		}
+		if (obj instanceof Float) {
+			return (double)(float)(Float)obj;
+		}
+		throw new RuntimeException("Could not get a double value from a " + obj.getClass().getSimpleName());
+	}
+
     // Get the scale of screen content
     public static float getScaleFactor(android.content.Context context) {
         android.util.DisplayMetrics metrics = new android.util.DisplayMetrics();
@@ -84,7 +97,7 @@ public class Utils {
 			throw new RuntimeException(c.getSimpleName() + "'s " + fieldName + " field is inaccessible");
 		}
 	}
-    
+
     public static Bitmap getBitmap(android.content.Context context, String url) {
         try {
             if (url.contains("{platform}")) {
@@ -98,7 +111,7 @@ public class Utils {
             return null;
         }
     }
-    
+
     public static Object[] convertJSONArrayToArray(JSONArray array) throws JSONException {
 		int length = array.length();
         Object[] args = new Object[length];
@@ -114,7 +127,7 @@ public class Utils {
             }
             // Arrays appear as JSONArray
             else if (arg instanceof JSONArray) {
-                
+
                 JSONArray a = (JSONArray)arg;
                 Object[] newArray = new Object[a.length()];
                 for (int j = 0; j < newArray.length; j++) {
@@ -129,7 +142,7 @@ public class Utils {
                         newArray[j] = item;
                     }
                 }
-                
+
                 // Make sure it's the right type of array
                 if (true) { // TODO: parameterTypes[i] == (long[]).getClass()) {
                     long[] typedArray = new long[newArray.length];
@@ -140,7 +153,7 @@ public class Utils {
                 }
                 else {
                     arg = newArray;
-                }						
+                }
             }
             args[i] = arg;
         }
@@ -173,15 +186,15 @@ public class Utils {
 
 		return returnValue;
 	}
-    
+
     static Object[] tryToMakeArgsMatch(Object[] args, Class<?>[] parameterTypes, boolean looseMatching) {
         boolean matches = true;
         Object[] matchingArgs = new Object[args.length];
         java.lang.System.arraycopy(args, 0, matchingArgs, 0, args.length);
-        
+
         for (int i = 0; i < parameterTypes.length; i++) {
             Class p = parameterTypes[i];
-            
+
             if (matchingArgs[i] == null) {
                 if (p.isPrimitive()) {
                     matches = false;
@@ -192,7 +205,7 @@ public class Utils {
                     continue;
                 }
             }
-            
+
             Class a = matchingArgs[i].getClass();
             if (p.isPrimitive()) {
                 if (p == int.class) {
@@ -269,7 +282,7 @@ public class Utils {
                 break;
             }
         }
-        
+
         return matches ? matchingArgs : null;
     }
 

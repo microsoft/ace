@@ -12,7 +12,7 @@ import Windows.UI.Xaml.Documents.*;
 public class TextViewHelper {
 	public static boolean setProperty(TextView instance, String propertyName, Object propertyValue) {
 		// First look at TextView-specific properties
-        
+
         // The .endsWith checks are important for supporting standard properties on custom
         // TextViews. What would have been Control.FontSize would appear as XXXTextView.FontSize.
         if (propertyName.endsWith(".Content") ||
@@ -72,41 +72,28 @@ public class TextViewHelper {
             }
 			return true;
 		}
-        else if (propertyName.endsWith(".Foreground")) {
-			if (propertyValue instanceof Long) {
-				// It's a raw color value
-				instance.setTextColor((int)(long)(Long)propertyValue);
-			}
-			else if (propertyValue instanceof Integer) {
-				// It's a raw color value
-				instance.setTextColor((Integer)propertyValue);
-			}
-			else {
-				Brush brush = BrushConverter.parse((String)propertyValue);
-				if (brush instanceof SolidColorBrush)
-					instance.setTextColor(((SolidColorBrush)brush).Color);
-				else
-					throw new RuntimeException("Brushes other than SolidColorBrush are NYI");
-			}
+		else if (propertyName.endsWith(".Foreground")) {
+			int color = Color.fromObject(propertyValue);
+			instance.setTextColor(color);
 			return true;
 		}
-        else if (propertyName.endsWith(".HorizontalAlignment")) {
-            String alignment = ((String)propertyValue).toLowerCase();
+    else if (propertyName.endsWith(".HorizontalAlignment")) {
+        String alignment = ((String)propertyValue).toLowerCase();
 
-            // TODO: Do differently to preserve any vertical alignment            
-            if (alignment.equals("center") || alignment.equals("stretch")) {
-                instance.setGravity(Gravity.CENTER_HORIZONTAL);
-            }
-            else if (alignment.equals("left")) {
-                instance.setGravity(Gravity.LEFT);
-            }
-            else if (alignment.equals("right")) {
-                instance.setGravity(Gravity.RIGHT);
-            }
-            else {
-                throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
-            }
-			return true;
+        // TODO: Do differently to preserve any vertical alignment
+        if (alignment.equals("center") || alignment.equals("stretch")) {
+            instance.setGravity(Gravity.CENTER_HORIZONTAL);
+        }
+        else if (alignment.equals("left")) {
+            instance.setGravity(Gravity.LEFT);
+        }
+        else if (alignment.equals("right")) {
+            instance.setGravity(Gravity.RIGHT);
+        }
+        else {
+            throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
+        }
+				return true;
 		}
 
 		// Now look at properties applicable to all Views

@@ -17,45 +17,24 @@ import java.io.IOException;
 public class ViewHelper {
 	public static boolean setProperty(View instance, String propertyName, Object propertyValue, boolean useTintListForBackground) {
 		if (propertyName.endsWith(".Background")) {
-			if (propertyValue instanceof Long) {
-				// It's a raw color value
-                if (useTintListForBackground)
-    				instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf((int)(long)(Long)propertyValue));
-                else
-				    instance.setBackgroundColor((int)(long)(Long)propertyValue);
+			if (propertyValue == null) {
+				// null background means windowBackground (doesn't work with TintList)
+				int[] attrs = { android.R.attr.windowBackground };
+				android.content.res.TypedArray ta = instance.getContext().getTheme().obtainStyledAttributes(attrs);
+				instance.setBackground(ta.getDrawable(0));
+				ta.recycle();
 			}
-			else if (propertyValue instanceof Integer) {
-				// It's a raw color value
-        if (useTintListForBackground)
-    				instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf((Integer)propertyValue));
-        else
-				    instance.setBackgroundColor((Integer)propertyValue);
+			else if (propertyValue instanceof String && ((String)propertyValue).startsWith("www/")) {
+				// ImageBrush
+				Bitmap bitmap = Utils.getBitmap(instance.getContext(), (String)propertyValue);
+				instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
 			}
-      else if (propertyValue == null) {
-          // null background means windowBackground (doesn't work with TintList)
-          int[] attrs = { android.R.attr.windowBackground };
-          android.content.res.TypedArray ta = instance.getContext().getTheme().obtainStyledAttributes(attrs);
-          instance.setBackground(ta.getDrawable(0));
-          ta.recycle();
-      }
 			else {
-          String s = (String)propertyValue;
-          if (s.startsWith("www/")) {
-							// ImageBrush
-							Bitmap bitmap = Utils.getBitmap(instance.getContext(), s);
-              instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
-              return true;
-          }
-					Brush brush = BrushConverter.parse((String)propertyValue);
-					if (brush instanceof SolidColorBrush) {
-	          if (useTintListForBackground)
-	              instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(((SolidColorBrush)brush).Color));
-	          else
-					    	instance.setBackgroundColor(((SolidColorBrush)brush).Color);
-          }
-					else {
-						throw new RuntimeException("Unsupported brush type: " + brush.getClass().getSimpleName());
-					}
+				int color = Color.fromObject(propertyValue);
+				if (useTintListForBackground)
+					instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
+				else
+					instance.setBackgroundColor(color);
 			}
 			return true;
 		}

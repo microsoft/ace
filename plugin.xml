@@ -420,9 +420,13 @@
     <source-file src="src/android/collections/ColumnDefinitionCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/CommandBarElementCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/Dictionary.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/GradientStopCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/ItemCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/InlineCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/ObservableCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/PathFigureCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/PathSegmentCollection.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/collections/PointCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/ResourceDictionary.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/RowDefinitionCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/SetterBaseCollection.java" target-dir="src/run/ace/framework" />
@@ -433,14 +437,19 @@
     <source-file src="src/android/converters/NamedColor.java" target-dir="src/run/ace" />
 
     <source-file src="src/android/framework/AppBarButton.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/ArcSegment.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/BezierSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/BitmapImage.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Brush.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Button.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Canvas.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Color.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ColumnDefinition.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/CommandBar.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/DatePicker.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Frame.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Geometry.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GradientStop.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Grid.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/GridLength.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/GridLengthConverter.java" target-dir="src/run/ace/framework" />
@@ -448,12 +457,21 @@
     <source-file src="src/android/framework/HyperlinkButton.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Image.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ImageSource.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/LinearGradientBrush.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/LineSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ListBox.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ListBoxItem.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Page.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PathFigure.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PathSegment.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PolyBezierSegment.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PolyLineSegment.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PolyQuadraticBezierSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Popup.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/QuadraticBezierSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/RowDefinition.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Setter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Shape.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/SolidColorBrush.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/StackPanel.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/StaticResource.java" target-dir="src/run/ace/framework" />

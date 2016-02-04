@@ -8,7 +8,7 @@ class BrushConverter {
 	static final int LOWER_A_CHAR = (int)'a';
 	static final int UPPER_A_CHAR = (int)'A';
 
-	public static Brush parse(String brush) {
+	public static SolidColorBrush parse(String brush) {
 		return new SolidColorBrush(parseColor(brush));
 	}
 
