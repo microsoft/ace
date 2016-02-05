@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "RowDefinition.h"
 #import "GridLengthConverter.h"
 
@@ -10,7 +14,7 @@
     self->height = [[GridLength alloc] init];
     self->height->gridValue = 1;
     self->height->type = GridUnitTypeStar;
-    
+
     return self;
 }
 

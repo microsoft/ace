@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 if (!String.prototype.startsWith) {
     String.prototype.startsWith = function (substring) {
         return (this.slice(0, substring.length) == substring);

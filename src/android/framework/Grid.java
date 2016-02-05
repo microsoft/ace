@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 import android.view.View;
@@ -192,14 +196,14 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
             ColumnDefinition cd = (ColumnDefinition) this._columnDefinitions.get(i);
             if (cd.Width == null) {
                 numStarWidthChunks += 1;
-            } 
+            }
             else if (cd.Width.type == GridUnitType.Star) {
                 numStarWidthChunks += cd.Width.gridValue;
-            } 
+            }
             else if (cd.Width.type == GridUnitType.Pixel) {
                 cd.CalculatedWidth = cd.Width.gridValue;
                 totalStarWidth -= cd.CalculatedWidth;
-            } 
+            }
             else // if (cd.Width.type == GridUnitType.Auto)
             {
                 if (colAutoWidths != null) {

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 import android.content.Context;
@@ -17,7 +21,7 @@ public class ToggleSwitch extends android.widget.Switch implements IHaveProperti
 	{
 		if (!TextViewHelper.setProperty(this, propertyName, propertyValue)) {
 			if (propertyName.equals("ToggleSwitch.IsOn")) {
-				this.setChecked((Boolean)propertyValue);	
+				this.setChecked((Boolean)propertyValue);
 			}
 			else {
 				throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);

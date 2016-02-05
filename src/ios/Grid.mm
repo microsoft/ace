@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Grid.h"
 #import "UIViewHelper.h"
 #import "Utils.h"
@@ -45,10 +49,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     unsigned long numRows = self.RowDefinitions.Count;
     unsigned long numCols = self.ColumnDefinitions.Count;
-    
+
     double totalStarHeight = self.frame.size.height;
     double numStarHeightChunks = 0;
     double totalStarWidth = self.frame.size.width;
@@ -66,7 +70,7 @@
             for (unsigned long i = 0; i < numRows; i++) {
                 rowAutoHeights[i] = [NSNumber numberWithDouble:0];
             }
-            
+
             for (unsigned long i = 0; i < count; i++) {
                 UIView* child = (UIView*)_children[i];
                 if (child != nil && !child.hidden) {
@@ -86,7 +90,7 @@
             for (unsigned long i = 0; i < numCols; i++) {
                 colAutoWidths[i] = [NSNumber numberWithDouble:0];
             }
-            
+
             for (unsigned long i = 0; i < count; i++) {
                 UIView* child = (UIView*)_children[i];
                 if (child != nil && !child.hidden) {
@@ -102,7 +106,7 @@
             }
         }
     }
-    
+
     // Now calculate pixel and auto sizes, and see how many chunks we need to divide * into
     for (unsigned long i = 0; i < numRows; i++) {
         RowDefinition* rd = self.RowDefinitions[i];
@@ -152,7 +156,7 @@
             if (rd->height->type == GridUnitTypeStar) {
                 rd->calculatedHeight = rd->height->gridValue * starHeight;
             }
-            
+
             rd->calculatedTop = currentTop;
             currentTop += rd->calculatedHeight;
         }
@@ -165,12 +169,12 @@
             if (cd->width->type == GridUnitTypeStar) {
                 cd->calculatedWidth = cd->width->gridValue * starWidth;
             }
-            
+
             cd->calculatedLeft = currentLeft;
             currentLeft += cd->calculatedWidth;
         }
     }
-    
+
     // Now place the children
     for (unsigned long i = 0; i < count; i++) {
         UIView* child = (UIView*)_children[i];
@@ -184,12 +188,12 @@
             rowSpan = MAX(1, rowSpan);
             if (numRows == 0)
                 rowSpan = 1;
-            
+
             for (int span = 0; span < rowSpan; span++) {
                 RowDefinition* rd;
                 if (numRows > 0) {
                     unsigned long row = MIN([[child.layer valueForKey:@"Grid.Row"] intValue], numRows - 1);
-                    
+
                     // Guard against nonsense spans that are too big
                     if (row + span >= numRows)
                         break;
@@ -210,12 +214,12 @@
             colSpan = MAX(1, colSpan);
             if (numCols == 0)
                 colSpan = 1;
-            
+
             for (int span = 0; span < colSpan; span++) {
                 ColumnDefinition* cd;
                 if (numCols > 0) {
                     unsigned long column = MIN([[child.layer valueForKey:@"Grid.Column"] intValue], numCols - 1);
-                    
+
                     // Guard against nonsense spans that are too big
                     if (column + span >= numCols)
                         break;
@@ -226,7 +230,7 @@
                     cd->calculatedWidth = self.frame.size.width;
                     cd->calculatedLeft = 0;
                 }
-                
+
                 finalWidth += cd->calculatedWidth;
                 if (span == 0)
                     finalLeft = cd->calculatedLeft;

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "DatePicker.h"
 #import "UIViewHelper.h"
 #import "OutgoingMessages.h"
@@ -7,21 +11,21 @@
 - (id)init
 {
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
-    
+
     // Default property values
     _date = [NSDate date];
-    
+
     _formatter = [[NSDateFormatter alloc] init];
     [_formatter setDateFormat:@"MMMM d, yyyy"];
-    
+
     _dropDownButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
     [_dropDownButton addTarget:self action:@selector(OnDropDownOpened:) forControlEvents:UIControlEventTouchUpInside];
     _dropDownButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
-    
+
     [self.contentView addSubview:_dropDownButton];
-    
+
     _datePicker = [[UIDatePicker alloc] init];
     _datePicker.backgroundColor = [UIColor whiteColor];
     _datePicker.datePickerMode = UIDatePickerModeDate;
@@ -82,10 +86,10 @@
 - (void) layoutSubviews
 {
     [super layoutSubviews];
-    
+
     // Align the button, using the label as a guide
     CGRect r = self.textLabel.frame;
-    
+
     _dropDownButton.frame = CGRectMake(
                                        r.origin.x + r.size.width,
                                        r.origin.y - (r.size.height / 2),
@@ -109,7 +113,7 @@
 - (void)dateIsChanged:(id)sender {
     _date = [_datePicker date];
     [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
-    
+
     if (_dateChangedHandlers > 0) {
         [OutgoingMessages raiseEvent:@"datechanged" handle:_handle eventData:nil];
     }

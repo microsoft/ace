@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Popup.h"
 #import "UIViewHelper.h"
 #import "Page.h"
@@ -9,11 +13,11 @@ NSMutableArray* _visiblePopups;
 
 - (id)init {
     self = [super init];
-    
+
     // Fullscreen by default
     _isFullScreen = true;
 	_hasExplicitSize = false;
-    
+
     return self;
 }
 
@@ -22,7 +26,7 @@ NSMutableArray* _visiblePopups;
     if (![UIViewHelper setProperty:self propertyName:propertyName propertyValue:propertyValue]) {
         throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
     }
-    
+
     // Extra logic for content property
     if ([propertyName hasSuffix:@".Content"] && propertyValue != nil) {
         // Used elsewhere
@@ -43,7 +47,7 @@ NSMutableArray* _visiblePopups;
         }
         //TODO: App bar, too
     }
-        
+
     if (_visiblePopups == nil) {
         _visiblePopups = [[NSMutableArray alloc] init];
     }
@@ -69,7 +73,7 @@ NSMutableArray* _visiblePopups;
 
 - (void) SetX:(int)x andY:(int)y {
     CGRect newFrame = self.frame;
-    
+
     y += [UIApplication sharedApplication].statusBarFrame.size.height;
 
 	if (![Frame getNavigationController].navigationBarHidden) {
@@ -78,7 +82,7 @@ NSMutableArray* _visiblePopups;
 
     newFrame.origin.x = x;
     newFrame.origin.y = y;
-    
+
     self.frame = newFrame;
     _isFullScreen = false;
 }
@@ -87,10 +91,10 @@ NSMutableArray* _visiblePopups;
 	_hasExplicitSize = true;
 
     CGRect newFrame = self.frame;
-    
+
     newFrame.size.width = width;
     newFrame.size.height = height;
-    
+
     y += [UIApplication sharedApplication].statusBarFrame.size.height;
 
 	if (![Frame getNavigationController].navigationBarHidden) {
@@ -99,7 +103,7 @@ NSMutableArray* _visiblePopups;
 
     newFrame.origin.x = x;
     newFrame.origin.y = y;
-    
+
     self.frame = newFrame;
     _isFullScreen = false;
 }

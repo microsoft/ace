@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package run.ace;
 
 import android.app.PendingIntent;
@@ -44,7 +48,7 @@ public abstract class AppWidgetProvider extends android.appwidget.AppWidgetProvi
 
 	            int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
 				onClickIntent.putExtra("widgetSelectionIndex", viewIndex);
-				
+
 				context.startActivity(onClickIntent);
 			}
 			catch (Exception ex)

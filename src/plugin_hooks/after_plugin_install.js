@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 var path = require('path');
 var fs = require('fs');
 
@@ -17,7 +21,7 @@ var fs = require('fs');
 function copyInitialFiles () {
     var fsextra = require('fs-extra');
     var projectFolder = path.join(__dirname, '../../../..');
-    
+
     try {
         // Place initial native folders
         fsextra.ensureDirSync(path.join(projectFolder, "native/android/src"));
@@ -37,7 +41,7 @@ function copyInitialFiles () {
             // The file must not exist, so copy it
             var iosHeaderSrcFile = path.join(projectFolder, 'plugins/cordova-plugin-ace/src/ios/build/CustomCode.h');
             fsextra.copySync(iosHeaderSrcFile, iosHeaderDestFile);
-        }    
+        }
     }
     catch (ex2) {
         // This is for convenience, so it's not a problem if it fails.
@@ -47,8 +51,8 @@ function copyInitialFiles () {
 module.exports = function (context) {
     // Install the plugin's dependencies (fs-extra, used by the function above),
     // because this doesn't happen automatically outside of Visual Studio.
-    // 
-    // This is done by executing 'npm install' on dependencies mentioned in the 
+    //
+    // This is done by executing 'npm install' on dependencies mentioned in the
     // plugin's package.json.
     var Q = context.requireCordovaModule('q');
     var npm = context.requireCordovaModule('npm');

@@ -1,13 +1,17 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Selector.h"
 
 @implementation Selector
 
 - (id)init {
     self = [super init];
-    
+
     // Default values:
     _SelectedIndex = -1;
-    
+
     return self;
 }
 

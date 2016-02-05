@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "AppBarButton.h"
 #import "SymbolIcon.h"
 #import "BitmapIcon.h"
@@ -44,7 +48,7 @@
 
     if ([Icon isKindOfClass:[SymbolIcon class]]) {
         enum Symbol symbol = ((SymbolIcon*)Icon).Symbol;
-        
+
         _hasSystemIcon = true;
         switch (symbol)
         {
@@ -118,7 +122,7 @@
                 _hasSystemIcon = false;
                 break;
         }
-        
+
         // This is for using the AppBarButton outside of a CommandBar
         if (symbol == Back)
             [self setTitle:@"Back" forState:UIControlStateNormal];

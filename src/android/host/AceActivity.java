@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package run.ace;
 
 import android.os.Bundle;
@@ -12,7 +16,7 @@ import Windows.UI.Xaml.Controls.Page;
 // The activity used when navigating to a new native frame.
 public class AceActivity extends android.app.Activity {
     View _content;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +26,7 @@ public class AceActivity extends android.app.Activity {
             // Only show it if CommandBar is used
             actionBar.hide();
 		}
-        
+
         // TODO: Content must be passed through Bundle/extras (as handle).
         //       Bug once there are two pages and you rotate.
         _content = IncomingMessages.frameContent;
@@ -61,7 +65,7 @@ public class AceActivity extends android.app.Activity {
             Page p = (Page)_content;
             if (p.menuBar != null) {
                 p.menuBar.onMenuItemClicked(index);
-            }    
+            }
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls.Primitives;
 
 import android.app.Activity;
@@ -11,14 +15,14 @@ import Windows.UI.Xaml.Controls.*;
 public class Popup extends AbsoluteLayout implements IHaveProperties {
     // An implicit root view that holds all popups
     static android.view.ViewGroup _rootView = null;
-    
+
     static AbsoluteLayout.LayoutParams _fullScreenParams =
         new AbsoluteLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT, 0, 0);
 
     static double _scale = 0;
-    
+
     public Popup(Context context) {
         super(context);
 
@@ -38,7 +42,7 @@ public class Popup extends AbsoluteLayout implements IHaveProperties {
             // Get the scale of screen content so popups can be placed as expected
             _scale = Utils.getScaleFactor(context);
         }
-        
+
         // Fullscreen by default
         this.Maximize();
     }
@@ -50,14 +54,14 @@ public class Popup extends AbsoluteLayout implements IHaveProperties {
             throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);
         }
     }
-    
+
     public static void CloseAll() {
         // TODO: release all references, too
         if (_rootView != null) {
             _rootView.removeAllViews();
         }
     }
-    
+
     public void Show() {
         _rootView.addView(this);
     }

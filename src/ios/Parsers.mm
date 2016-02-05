@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Parsers.h"
 #import "KnownColors.h"
 #import "SolidColorBrush.h"
@@ -10,26 +14,26 @@ const int s_aUpper   = (int) 'A';
 
 + (int) ParseHexChar:(char) c {
     int intChar = (int) c;
-    
+
     if ((intChar >= s_zeroChar) && (intChar <= (s_zeroChar+9))) {
         return (intChar-s_zeroChar);
     }
-    
+
     if ((intChar >= s_aLower) && (intChar <= (s_aLower+5))) {
         return (intChar-s_aLower + 10);
     }
-    
+
     if ((intChar >= s_aUpper) && (intChar <= (s_aUpper+5))) {
         return (intChar-s_aUpper + 10);
     }
 
     @throw @"Illegal token";
 }
-        
+
 + (UIColor*) ParseHexColor:(NSString*) trimmedColor {
     float a,r,g,b;
     a = 255;
-    
+
     if ([trimmedColor length] > 7) {
         a = [Parsers ParseHexChar:[trimmedColor characterAtIndex:1]] * 16 + [Parsers ParseHexChar:[trimmedColor characterAtIndex:2]];
         r = [Parsers ParseHexChar:[trimmedColor characterAtIndex:3]] * 16 + [Parsers ParseHexChar:[trimmedColor characterAtIndex:4]];
@@ -59,7 +63,7 @@ const int s_aUpper   = (int) 'A';
         b = [Parsers ParseHexChar:[trimmedColor characterAtIndex:3]];
         b = b + b*16;
     }
-    
+
     return [UIColor colorWithRed:r/255 green:g/255 blue:b/255 alpha:a/255];
 }
 
@@ -69,14 +73,14 @@ const int s_aUpper   = (int) 'A';
     bool isScRgbColor;
     bool isContextColor;
     NSString* trimmedColor = [KnownColors MatchColor:color isKnownColor:&isPossibleKnownColor isNumericColor:&isNumericColor isContextColor:&isContextColor isScRgbColor:&isScRgbColor];
-    
+
     if (!isPossibleKnownColor &&
         !isNumericColor &&
         !isScRgbColor &&
         !isContextColor) {
         @throw @"Illegal token";
     }
-    
+
     if (isNumericColor) {
         return [Parsers ParseHexColor: trimmedColor];
     }

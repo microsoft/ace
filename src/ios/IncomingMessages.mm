@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "IncomingMessages.h"
 #import "Dictionary.h"
 #import "IHaveProperties.h"
@@ -17,19 +21,19 @@
 // Create an object instance
 + (NSObject*)create:(NSArray*)message {
     NSString* typeName = message[2];
-    
+
     // Remove any namespace
     if ([typeName containsString:@"."]) {
         NSRange range = [typeName rangeOfString:@"." options:NSBackwardsSearch];
         typeName = [typeName substringFromIndex:range.location + 1];
     }
-    
+
     // Special construction of button
     if ([typeName compare:@"UIButton"] == 0) {
         // Required for getting the right visual behavior:
         return [UIButton buttonWithType:UIButtonTypeSystem];
     }
-    
+
     NSObject* instance = nil;
     if ([message count] > 3) {
         // Parameterized constructor
@@ -50,14 +54,14 @@
 // Get an existing well-known object instance
 + (NSObject*)getInstance:(NSArray*)message webView:(UIWebView*)webView {
     NSString* typeName = message[2];
-    
+
     if ([typeName compare:@"HostPage"] == 0) {
         return [Frame getNavigationController].topViewController.view;
     }
     else if ([typeName compare:@"HostWebView"] == 0) {
         return webView;
     }
-    
+
     throw [NSString stringWithFormat:@"%@ is not a valid choice for getting an existing instance", typeName];
 }
 
@@ -71,7 +75,7 @@
         else {
             setterName = [NSString stringWithFormat:@"set%@", propertyName];
         }
-        
+
         //TODO: Need to do more permissive parameter matching in this case since everything will be strings
         //      Handle as a loose matching option in util, like Android. But need to discover signature types
         //      instead of doing it like below.
@@ -123,7 +127,7 @@
     else if ([propertyValue isKindOfClass:[NSNull class]]) {
         propertyValue = nil;
     }
-    
+
     if ([instance conformsToProtocol:@protocol(IHaveProperties)]) {
         NSObject<IHaveProperties>* ihp = (NSObject<IHaveProperties>*)instance;
         [ihp setProperty:propertyName value:propertyValue];

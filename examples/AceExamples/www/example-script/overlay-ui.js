@@ -1,4 +1,8 @@
-﻿function overlay_ui_init() {
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+function overlay_ui_init() {
     document.getElementById("overlayXaml").addEventListener('click', toggleXamlButtons, false);
     document.getElementById("overlayJS").addEventListener('click', toggleJSButtons, false);
     document.getElementById("overlayPlatformSpecific").addEventListener('click', togglePlatformSpecificUI, false);
@@ -91,7 +95,7 @@ function togglePlatformSpecificUI() {
 
             // Select the last segment
             uiSegmentedControl.invoke("setSelectedSegmentIndex", 3);
-            
+
             // Size the control
             uiSegmentedControl.invoke("sizeToFit");
 

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "CustomActionSheet.h"
 
 @implementation CustomActionSheet
@@ -17,7 +21,7 @@
     [window.rootViewController.view addSubview:_dismissBackground];
 
     self.Child.frame = CGRectMake((screen.size.width - self.Child.frame.size.width) / 2, screen.size.height, screen.size.width, self.Child.frame.size.height);
-    
+
     [UIView animateWithDuration:.3 animations:^{
         self.Child.frame = CGRectMake((screen.size.width - self.Child.frame.size.width) / 2, screen.size.height - self.Child.frame.size.height, screen.size.width, self.Child.frame.size.height);
         _dismissBackground.backgroundColor = [UIColor colorWithWhite:0 alpha:.4];

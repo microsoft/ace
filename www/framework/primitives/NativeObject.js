@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
 ﻿//
 // The base class for all objects with a corresponding native instance.
 // All objects have a handle property.
@@ -81,7 +86,7 @@ function invokeHelper(instance, className, methodName, varargsStartIndex, vararg
     var onSuccess = null;
     var onError = null;
 
-    // Process the arguments, skipping varargs[0] and perhaps varagrs[1], 
+    // Process the arguments, skipping varargs[0] and perhaps varagrs[1],
     // which were either methodName or className+methodName
     for (var i = varargsStartIndex; i < varargs.length; i++) {
         if (typeof varargs[i] === "function") {

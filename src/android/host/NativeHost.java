@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package run.ace;
 
 import android.app.Activity;
@@ -34,12 +38,12 @@ public class NativeHost extends CordovaPlugin {
     CordovaWebView _webView;
     Frame _mainFrame;
     //TODO: byte[] _startupMarkup;
-    
+
     boolean _setting_PopupsCloseOnHtmlNavigation;
-    
+
 	public NativeHost() {
 	}
-    
+
     public static Application getApplication() {
         return _application;
     }
@@ -47,7 +51,7 @@ public class NativeHost extends CordovaPlugin {
     public static Activity getMainActivity() {
         return _activity;
     }
-    
+
     public static View getRootView() {
         return _activity.findViewById(android.R.id.content);
     }
@@ -88,7 +92,7 @@ public class NativeHost extends CordovaPlugin {
         _webView = webView;
         _mainFrame = new Frame(_activity);
         this.intent = _activity.getIntent();
-        
+
         /* TODO: No point unless XBF parsing is also done in native host
                  and instances can be retrieved on managed side without
                  caching of property values
@@ -101,7 +105,7 @@ public class NativeHost extends CordovaPlugin {
             // A startup markup file doesn't exist
 		}
         */
-        
+
 		// TODO: Remove the hiding here, or do it off of some setting
 		final android.app.ActionBar actionBar = _activity.getActionBar();
 		if (actionBar != null) {
@@ -119,11 +123,11 @@ public class NativeHost extends CordovaPlugin {
         this.intent = intent;
         OutgoingMessages.raiseEvent("ace.android.intentchanged", null, null);
     }
-    
-    // Called when the URL of the webview changes. 
+
+    // Called when the URL of the webview changes.
     // TODO: Unlike iOS, this does not detect back navigation
-    @Override 
-    public boolean onOverrideUrlLoading(String url) { 
+    @Override
+    public boolean onOverrideUrlLoading(String url) {
         if (url.startsWith("native://") || url.startsWith("android://")) {
             OutgoingMessages.raiseEvent("ace.navigate", null, url);
             return false;
@@ -133,10 +137,10 @@ public class NativeHost extends CordovaPlugin {
             // Close all popups since this has been requested.
             Popup.CloseAll();
         }
-        return super.onOverrideUrlLoading(url); 
-    } 
+        return super.onOverrideUrlLoading(url);
+    }
 
-    @Override    
+    @Override
     public Object onMessage(String id, Object data) {
         if (id.equals("onCreateOptionsMenu")) {
             // For CommandBars attached onto the root activity
@@ -150,7 +154,7 @@ public class NativeHost extends CordovaPlugin {
                 Windows.UI.Xaml.Controls.Page p = (Windows.UI.Xaml.Controls.Page)root.getChildAt(0);
                 if (p.menuBar != null) {
                     p.menuBar.onMenuItemClicked(index);
-                }    
+                }
             }
         }
         return null;
@@ -340,7 +344,7 @@ public class NativeHost extends CordovaPlugin {
             callbackContext.error(exceptionWithStackTrace(ex));
 		}
 	}
-    
+
     View readAndroidXml(String layoutName) {
 		Class c = null;
 		try {
@@ -348,7 +352,7 @@ public class NativeHost extends CordovaPlugin {
 		} catch (ClassNotFoundException e) {
             throw new RuntimeException("Unable to find the R.layout class in package '" + _activity.getPackageName() + "'");
 		}
-        
+
         int id;
         try {
 			Field f = c.getField(layoutName);
@@ -371,7 +375,7 @@ public class NativeHost extends CordovaPlugin {
 		} catch (ClassNotFoundException e) {
             throw new RuntimeException("Unable to find the R.id class in package '" + _activity.getPackageName() + "'");
 		}
-        
+
         int id;
         try {
 			Field f = c.getField(name);
@@ -386,7 +390,7 @@ public class NativeHost extends CordovaPlugin {
 
         callbackContext.success(id);
 	}
-    
+
     void setPopupsCloseOnHtmlNavigation(boolean value, CallbackContext callbackContext) {
         _setting_PopupsCloseOnHtmlNavigation = value;
         callbackContext.success();

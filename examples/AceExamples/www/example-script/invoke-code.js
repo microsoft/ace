@@ -1,4 +1,8 @@
-﻿function invoke_code_init() {
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+function invoke_code_init() {
     document.getElementById("codeBattery").addEventListener('click', invokeBattery, false);
     document.getElementById("codeDevice").addEventListener('click', invokeDeviceInfo, false);
     document.getElementById("codeMisc").addEventListener('click', invokeMisc, false);

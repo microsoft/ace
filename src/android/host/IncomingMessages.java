@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package run.ace;
 
 import android.app.Activity;
@@ -32,7 +36,7 @@ public class IncomingMessages {
 
     // Holds the content during a navigation
     public static View frameContent;
-    
+
 	// Create an object instance
 	public static Object create(JSONArray message, Activity activity) throws JSONException
 	{
@@ -116,7 +120,7 @@ public class IncomingMessages {
         else if (propertyValue == JSONObject.NULL) {
             propertyValue = null;
         }
-        
+
 		try {
 			if (instance instanceof IHaveProperties) {
 				((IHaveProperties)instance).setProperty(propertyName, propertyValue);
@@ -131,7 +135,7 @@ public class IncomingMessages {
                     else {
                         setterName += propertyName;
                     }
-                    
+
                     //TODO: Need to do more permissive parameter matching in this case since everything will be strings.
                     // Started to add this with looseMatching param. Continue.
                     try {
@@ -149,9 +153,9 @@ public class IncomingMessages {
                             // Keep as string
                         }
                     }
-                    
+
                     // TODO: Enable marshaling of things like "red" to Drawable...
-                    
+
                     Utils.invokeMethodWithBestParameterMatch(instance.getClass(), setterName, instance, new Object[]{propertyValue}, true);
                 }
                 catch (Exception ex) {
@@ -159,7 +163,7 @@ public class IncomingMessages {
                     // Translate standard cross-platform (XAML) properties for well-known base types
                     //
                     if (instance instanceof TextView) {
-                        
+
                         if (propertyName.endsWith(".Children") && propertyValue instanceof ItemCollection) {
                             // This is from XAML compilation of a custom content property, which always gives an ItemCollection.
                             propertyName = "ContentControl.Content";
@@ -167,7 +171,7 @@ public class IncomingMessages {
                                 propertyValue = ((ItemCollection)propertyValue).get(0);
                             }
                         }
-                        
+
                         if (!TextViewHelper.setProperty((TextView)instance, propertyName, propertyValue)) {
                             throw new RuntimeException("Unhandled property for a custom TextView: " + propertyName + ". Implement IHaveProperties to support this.");
                         }

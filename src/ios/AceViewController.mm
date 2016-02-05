@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "AceViewController.h"
 #import "AceNavigationController.h"
 #import "Page.h"
@@ -12,7 +16,7 @@
 
     // Make the default page color white instead of black
     self.view.backgroundColor = [UIColor whiteColor];
-    
+
     [self.view addSubview:view];
 
     if ([view isKindOfClass:[Page class]] && ((Page*)view).frameTitle != nil) {
@@ -24,8 +28,8 @@
     }
 
     // instead of .bounds to account for status bar (TODO need to handle navigation bar):
-    view.frame = [UIScreen mainScreen].applicationFrame; 
-    
+    view.frame = [UIScreen mainScreen].applicationFrame;
+
     return self;
 }
 
@@ -47,21 +51,21 @@
 
 -(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        
+
         // We just hooked a back navigation
-        
+
         [self.navigationController setToolbarHidden:true animated:animated];
-        
+
         if (((AceNavigationController*)self.navigationController).NavigationMode == NavigationModeNone)
         {
             // This happened via the native navigation bar button, so we need
             // to trigger the managed navigation to keep things in sync!
             ((AceNavigationController*)self.navigationController).InsideNativeInitiatedBackNavigation = true;
-            
+
             // TODO: Send navigation events
         }
     }
-    
+
     [super viewWillDisappear:animated];
 }
 
@@ -84,7 +88,7 @@
         // (TODO still need to force show if there's a title)
         if ([p getTopAppBar] != nil)
             [CommandBar showNavigationBar:[p getTopAppBar] on:self animated:animated];
-            
+
         // Hide the navigation bar if there's no title or top app bar
         if ([p getTopAppBar] == nil && p.frameTitle == nil) {
             [Frame HideNavigationBar];

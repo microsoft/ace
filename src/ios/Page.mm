@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Page.h"
 #import "UIViewHelper.h"
 #import "Frame.h"
@@ -49,7 +53,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    
+
     // Make the content fill the page
     if (_content != nil) {
         _content.frame = self.frame;

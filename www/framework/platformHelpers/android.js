@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
 ﻿//
 // Android-specific helpers
 //
@@ -27,7 +32,7 @@ module.exports = {
     getId: function (name, onSuccess, onError) {
         ace.ToNative.getAndroidId(name, onSuccess, ace.ToNative.errorHandler(onError));
     },
-    
+
     appWidget: {
         clear: function() {
             ace.NativeObject.invoke("run.ace.AppWidgetData", "clear");

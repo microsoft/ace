@@ -4,6 +4,10 @@ import android.content.Context;
 import android.view.View;
 import run.ace.*;
 
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 public class Image extends android.widget.ImageView implements IHaveProperties {
 	public Image(Context context) {
 		super(context);

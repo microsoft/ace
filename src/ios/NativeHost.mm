@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "NativeHost.h"
 #import "Handle.h"
 #import "IncomingMessages.h"
@@ -17,7 +21,7 @@ BOOL _initialized;
             caching of property values
 - (void)pluginInitialize {
     [super pluginInitialize];
-    
+
     try {
         _startupMarkup = [self readXbf:@"www/xbf/startup.xbf"];
         // Since a startup markup file exists, detach the WebView
@@ -49,7 +53,7 @@ BOOL _initialized;
 - (void)initialize:(CDVInvokedUrlCommand*)command {
     _callbackId = command.callbackId;
     [OutgoingMessages setCallbackContext:self selector:@selector(sendOutgoingMessage:)];
-    
+
     // Make the background white instead of black for the sake of the status bar
     self.webView.backgroundColor = [UIColor whiteColor];
 
@@ -200,7 +204,7 @@ BOOL _initialized;
         CDVPluginResult* r = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:r callbackId:command.callbackId];
 }
-    
+
 - (void)loadXbf:(CDVInvokedUrlCommand*)command {
     try {
         NSString* path = [command argumentAtIndex:0];
@@ -244,10 +248,10 @@ BOOL _initialized;
     try {
         NSString* path = [command argumentAtIndex:0];
         UIView* content = nil;
-        
+
         // A NIB/XIB can contain multiple roots
         NSArray* roots = [[NSBundle mainBundle] loadNibNamed:path owner:nil options:nil];
-        
+
         // Just find the first one that's a UIView
         for (id root in roots) {
             if ([root isKindOfClass:[UIView class]]) {
@@ -255,7 +259,7 @@ BOOL _initialized;
                 break;
             }
         }
-        
+
         if (content == nil) {
             throw [NSString stringWithFormat:@"Could not find a root UIView inside '%@'", path];
         }

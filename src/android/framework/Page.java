@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 import android.view.ViewGroup;
@@ -6,11 +10,11 @@ import run.ace.NativeHost;
 import run.ace.TabBar;
 
 public class Page extends AbsoluteLayout implements IHaveProperties {
-    
+
     public TabBar tabBar;
     public CommandBar menuBar;
     public String frameTitle;
-    
+
 	public Page(android.content.Context context) {
 		super(context);
 
@@ -45,23 +49,23 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
 			throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);
 		}
 	}
-    
+
     void updateTitle(android.app.Activity activity) {
         if (this.tabBar != null) {
             this.tabBar.setTitle(this.frameTitle == null ? "" : this.frameTitle, activity);
-        }    
+        }
         if (this.menuBar != null) {
             this.menuBar.setTitle(this.frameTitle == null ? "" : this.frameTitle, activity);
-        }    
+        }
     }
-    
+
     public void processBars(android.app.Activity activity, android.view.Menu menu) {
         updateTitle(activity);
         if (this.tabBar != null) {
             this.tabBar.show(activity);
-        }    
+        }
         if (this.menuBar != null) {
             this.menuBar.show(activity, menu);
-        }    
+        }
     }
 }

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package run.ace;
 
 import android.content.Context;
@@ -14,14 +18,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import Windows.UI.Xaml.Controls.*;
 
-public class TabBar extends android.widget.Toolbar implements 
-    //ActionBar.TabListener, 
-    android.app.ActionBar.TabListener, 
+public class TabBar extends android.widget.Toolbar implements
+    //ActionBar.TabListener,
+    android.app.ActionBar.TabListener,
     IHaveProperties, IRecieveCollectionChanges {
 
     ObservableCollection _primaryCommands;
     ObservableCollection _secondaryCommands;
-	
+
 	public TabBar(Context context) {
 		super(context);
     }
@@ -42,13 +46,13 @@ public class TabBar extends android.widget.Toolbar implements
         //    }
         //}
     }
-        
+
     public void show(android.app.Activity activity) {
         //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.show();
-                mainActionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);            
+                mainActionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
                 for (int i = 0; i < _primaryCommands.size(); i++) {
                     android.app.ActionBar.Tab tab = mainActionBar.newTab();
                     AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
@@ -70,7 +74,7 @@ public class TabBar extends android.widget.Toolbar implements
         //    ActionBar actionBar = ((ActionBarActivity)activity).getSupportActionBar();
         //    if (actionBar != null) {
         //        actionBar.show();
-        //        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);            
+        //        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         //        for (int i = 0; i < _primaryCommands.size(); i++) {
         //            ActionBar.Tab tab = actionBar.newTab();
         //            AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
@@ -110,7 +114,7 @@ public class TabBar extends android.widget.Toolbar implements
         //    }
         //}
 	}
-    
+
     View getCustomTabView(AppBarButton abb, Context themedContext) {
         float scaleFactor = Utils.getScaleFactor(themedContext);
         final int IMAGEHEIGHT = (int)(17 * scaleFactor);
@@ -135,15 +139,15 @@ public class TabBar extends android.widget.Toolbar implements
             iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
             ll.addView(iv);
         }
-        
+
         TextView tv = new TextView(themedContext);
         LinearLayout.LayoutParams tvp = new LinearLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tvp.gravity = Gravity.CENTER_HORIZONTAL;        
+        tvp.gravity = Gravity.CENTER_HORIZONTAL;
         tv.setLayoutParams(tvp);
         tv.setTypeface(null, Typeface.BOLD);
         tv.setTextSize(TEXTSIZE);
-        tv.setText(abb.label.toUpperCase());        
+        tv.setText(abb.label.toUpperCase());
         ll.addView(tv);
 
         return ll;

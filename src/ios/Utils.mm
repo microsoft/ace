@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Utils.h"
 #import "Handle.h"
 #import "Thickness.h"
@@ -58,19 +62,19 @@
     SEL selector = NSSelectorFromString(methodName);
 
     NSMethodSignature* sig = [target methodSignatureForSelector:selector];
-    
+
     if (sig == nil) {
         throw [NSString stringWithFormat:@"%@ does not have selector with the name '%@'", [target description], methodName];
     }
-    
+
     NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
-    
+
     [invocation setTarget:target];
     [invocation setSelector:selector];
 
     // With NSInvocation, argument 0 is the instance, and argument 1 is the selector
     #define SKIP 2
-    
+
     if (args.count != [sig numberOfArguments] - SKIP)
         throw [NSString stringWithFormat:@"You invoked %@ with %d arguments, but it needs %d", methodName, args.count, [sig numberOfArguments] - SKIP];
 
@@ -89,7 +93,7 @@
                 [invocation setArgument:&arg atIndex:i + SKIP];
                 continue;
             }
-            
+
             NSNumber* n = (NSNumber*)arg;
             void* buffer;
             const char* type = [n objCType];
@@ -162,11 +166,11 @@
             else {
                 throw [NSString stringWithFormat:@"The type of parameter #%d for %@ is an unknown type: %s", i+1, methodName, type];
             }
-            
+
             // NSInvocation copies the value from the buffer
             [invocation setArgument:buffer atIndex:i + SKIP];
-            
-            free(buffer);            
+
+            free(buffer);
         }
         else if ([arg isKindOfClass:[NSDictionary class]]) {
             // This is a handle, or a well-known struct
@@ -178,7 +182,7 @@
             [invocation setArgument:&arg atIndex:i + SKIP];
         }
     }
-    
+
     // Do the invocation
     [invocation invoke];
 
@@ -253,7 +257,7 @@
         [invocation getReturnValue:&returnValue];
         return [NSNumber numberWithUnsignedShort:returnValue];
     }
-    
+
     // If we got here, the return type is an object
     CFTypeRef returnValue;
     [invocation getReturnValue:&returnValue];
@@ -261,7 +265,7 @@
         CFRetain(returnValue);
         return (__bridge_transfer NSObject*)returnValue;
     }
-    
+
     throw [NSString stringWithFormat:@"Unknown error processing the return type of %@", methodName];
 }
 

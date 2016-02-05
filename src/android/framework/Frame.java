@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 import android.app.Activity;
@@ -16,19 +20,19 @@ public class Frame extends AbsoluteLayout implements IHaveProperties, Applicatio
 
 	public Frame(Context context) {
 		super(context);
-        
+
         if (_application == null) {
             // Initialization for the host's main frame
             _application = (Application)context.getApplicationContext();
             _application.registerActivityLifecycleCallbacks(this);
         }
-        
+
         // Fill the area provided by the parent
 		this.setLayoutParams(new AbsoluteLayout.LayoutParams(
 			ViewGroup.LayoutParams.MATCH_PARENT,
 			ViewGroup.LayoutParams.MATCH_PARENT, 0, 0));
 	}
-    
+
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
     }
     public void onActivityDestroyed(Activity activity) {
@@ -62,11 +66,11 @@ public class Frame extends AbsoluteLayout implements IHaveProperties, Applicatio
         Activity a = _activities.peek();
         a.finish();
     }
-    
+
     public static Activity getTopmostActivity() {
         return _activities.peek();
     }
-    
+
 	// IHaveProperties.setProperty
 	public void setProperty(String propertyName, Object propertyValue)
 	{

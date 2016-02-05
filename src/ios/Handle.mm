@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Handle.h"
 
 @implementation AceHandle
@@ -38,7 +42,7 @@
         return [((UIView*)obj).layer valueForKey:@"Ace.Handle"];
     }
     else {
-        throw @"Handle fromObject NYI"; 
+        throw @"Handle fromObject NYI";
         // Need to lookup in _managedHandleLookup then _nativeHandleLookup
     }
 }

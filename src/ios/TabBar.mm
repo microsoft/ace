@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "TabBar.h"
 #import "UIViewHelper.h"
 #import "OutgoingMessages.h"
@@ -44,7 +48,7 @@
 }
 
 - (void)tabBar:(UITabBar*)tabBar didSelectItem:(UITabBarItem*)item {
-    int index = item.tag;    
+    int index = item.tag;
     [OutgoingMessages raiseEvent:@"click" instance:items[index] eventData:nil];
 }
 

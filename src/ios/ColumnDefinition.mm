@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "ColumnDefinition.h"
 #import "GridLengthConverter.h"
 
@@ -5,12 +9,12 @@
 
 -(id) init {
     self = [super init];
-    
+
     // Set default to *
     self->width = [[GridLength alloc] init];
     self->width->gridValue = 1;
     self->width->type = GridUnitTypeStar;
-    
+
     return self;
 }
 

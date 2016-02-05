@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 ﻿_eventHandlers = {};
 
 var _oldNavigatingAwayHandler = null;
@@ -47,7 +51,7 @@ module.exports = {
             // Only raise the global event if there's no handler for it
             ace.raiseEvent("navigating", _oldRoot, urlOrUIElement);
         }
-        
+
         var onLoaded = function(root) {
             _oldRoot = root;
             ace.ToNative.queueNavigateMessage(root);
@@ -115,9 +119,9 @@ module.exports = {
     },
 
     goBack: function() {
-        ace.Frame.goBack();    
+        ace.Frame.goBack();
     },
-    
+
     getHostPage: function () {
         // This is just like KnownNativeObject, but derives from Page instead, so the nice APIs are available
         function HostPage() {

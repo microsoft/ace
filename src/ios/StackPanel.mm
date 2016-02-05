@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "StackPanel.h"
 #import "UIViewHelper.h"
 #import "Thickness.h"
@@ -6,7 +10,7 @@
 
 - (id) init {
     self = [super init];
-    
+
     // Default property values
     _isVertical = true;
     // TODO: Set these to false when Width/Height are set:
@@ -72,7 +76,7 @@
             UIView* child = _children[i];
             if (child != nil) {
                 double width = child.bounds.size.width;
-                double height = child.bounds.size.height;                
+                double height = child.bounds.size.height;
 
                 Thickness* t = [child.layer valueForKey:@"Ace.Padding"];
                 if (t != nil) {
@@ -85,7 +89,7 @@
                 if (width > maxChildWidth)
                     maxChildWidth = width;
                 if (height > maxChildHeight)
-                    maxChildHeight = height;                
+                    maxChildHeight = height;
             }
         }
         double x = self.frame.origin.x;
@@ -113,7 +117,7 @@
         self.frame = CGRectMake(x, y, w, h);
     }
 
-    // Now size the children    
+    // Now size the children
     double top = 0;
     double left = 0;
     for (unsigned long i = 0; i < count; i++) {
@@ -124,7 +128,7 @@
             double halignAdjustment = 0;
 
             Thickness* t = [child.layer valueForKey:@"Ace.Padding"];
-            
+
             if (_isVertical) {
                 width = self.bounds.size.width;
 
@@ -145,7 +149,7 @@
             else {
                 height = self.bounds.size.height;
             }
-            
+
             if (t != nil) {
                 if (_isVertical)
                     child.frame = CGRectMake(left + t.left + halignAdjustment, top + t.top, width - t.right - t.left, height);
@@ -155,7 +159,7 @@
             else {
                 child.frame = CGRectMake(left + halignAdjustment, top, width, height);
             }
-            
+
             if (_isVertical) {
                 top += height;
                 if (t != nil) {

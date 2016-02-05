@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "KnownColors.h"
 
 @implementation KnownColors
@@ -147,7 +151,7 @@ NSString* UnknownColor = @"#00000001";
 
 + (NSString*) MatchColor:(NSString*) colorString isKnownColor:(bool*) isKnownColor isNumericColor:(bool*) isNumericColor isContextColor:(bool*) isContextColor isScRgbColor:(bool*) isScRgbColor {
     NSString* trimmedString = [colorString stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
-    
+
     if ((([trimmedString length] == 4) ||
             ([trimmedString length] == 5) ||
             ([trimmedString length] == 7) ||
@@ -165,14 +169,14 @@ NSString* UnknownColor = @"#00000001";
     *isScRgbColor = false;
     *isContextColor = false;
     *isKnownColor = true;
-    
+
     return trimmedString;
 }
 
 + (NSString*) ColorStringToKnownColor:(NSString*) colorString {
     if (colorString == nil)
         @throw @"Null color string";
-    
+
     NSString* colorUpper = [colorString uppercaseString];
 
     switch ([colorUpper length]) {

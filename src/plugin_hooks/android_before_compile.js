@@ -1,8 +1,12 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 var path = require('path');
 
 function copyAndroidFiles() {
     var fs = require('fs-extra');
-    
+
     // Find the destination folder
 	var dest = path.join(__dirname, '../../../../platforms/android');
 
@@ -11,7 +15,7 @@ function copyAndroidFiles() {
     //       we need to do extra work to get rid of stale files.
     //       Or perhaps we can delete everything with the right hook, and
     //       the necessary files will get copied back.
-    
+
     // See if the app has native android files
 	var nativeAndroidAppFolder = path.join(__dirname, '../../../../native/android');
 
@@ -35,7 +39,7 @@ module.exports = function (context) {
         var stats1 = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
         // Only relevant for iOS:
         // var stats2 = fs.statSync(path.join(__dirname, '../../../../node_modules/xcode/package.json'));
-        
+
         // We're good.
         copyAndroidFiles();
         return;

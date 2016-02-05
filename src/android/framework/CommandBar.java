@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 //import android.support.v7.app.ActionBar;
@@ -10,7 +14,7 @@ import run.ace.*;
 public class CommandBar extends android.widget.Toolbar implements IHaveProperties {
     ObservableCollection _primaryCommands;
     ObservableCollection _secondaryCommands;
-	
+
 	public CommandBar(Context context) {
 		super(context);
     }
@@ -31,18 +35,18 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
         //    }
         //}
     }
-    
+
     public void onMenuItemClicked(int index) {
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
     }
-        
+
     public void show(android.app.Activity activity, android.view.Menu menu) {
         //if (!(activity instanceof ActionBarActivity)) {
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.show();
                 for (int i = 0; i < _primaryCommands.size(); i++) {
-                    menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label); 
+                    menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label);
                     menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
                 }
                 return;
@@ -55,7 +59,7 @@ public class CommandBar extends android.widget.Toolbar implements IHavePropertie
         //    if (actionBar != null) {
         //        actionBar.show();
         //        for (int i = 0; i < _primaryCommands.size(); i++) {
-        //            menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label); 
+        //            menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label);
         //            menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
         //        }
         //        return;

@@ -1,4 +1,8 @@
-﻿function XamlNode(type, nodeInfo, xbfReader) {
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+function XamlNode(type, nodeInfo, xbfReader) {
     this.type = type;
     this.nodeInfo = nodeInfo;
     this.xbfReader = xbfReader;

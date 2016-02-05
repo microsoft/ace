@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "ListBox.h"
 #import "ListBoxItem.h"
 
@@ -5,13 +9,13 @@
 
 - (id)init {
     self = [super init];
-    
+
     // TODO: Derive directly from UITableView?
     _tv = [[UITableView alloc] init];
     _tv.dataSource = self;
     _tv.delegate = self;
     [self addSubview:_tv];
-    
+
     return self;
 }
 
@@ -28,9 +32,9 @@
 // Called whether user changes SelectedIndex or SelectedItem
 - (void)setSelectedIndex:(int)SelectedIndex {
     [super setSelectedIndex:SelectedIndex];
-    
+
     int index = self.SelectedIndex;
-    
+
     if (index >= 0 && [_Items Count] > index) {
         // Select but don't scroll
         NSIndexPath* indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -43,7 +47,7 @@
 
     // Listen to collection changes
     [newValue addListener:self];
-    
+
     //TODO: panel should do sizeToFit if relevant
     double defaultHeight = _Items.Count * 44;
     if (self.Header != nil)
@@ -67,7 +71,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (self.Header == nil)
         return nil;
-    
+
     if ([self.Header isKindOfClass:[NSString class]])
         return self.Header;
     else
@@ -84,7 +88,7 @@
     bool itemIsCell = false;
     id content = nil;
     id item = _Items[indexPath.row];
-    
+
     if ([item isKindOfClass:[UITableViewCell class]]) {
         itemIsCell = true;
     }
@@ -101,15 +105,15 @@
 
     if ([content isKindOfClass:[NSString class]])
         canRenderAsString = true;
-    
+
     UITableViewCell* cell;
-    
+
     if (itemIsCell)
         cell = (UITableViewCell*)item;
     else
     {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
         if (!canRenderAsString || cell == nil) {
             // TODO: Maybe don't need to do first check anymore now that we're clearing things below (need to clear background, etc., too):
             // Forcing a new one for non-string content since the recycled container would have a stale child view
@@ -138,13 +142,13 @@
 
         [cell.contentView addSubview:((UIView*)content)];
     }
-    
+
     if ([item isKindOfClass:[ListBoxItem class]] && ((ListBoxItem*)item).IsSelected)
     {
         // Select
         [tableView selectRowAtIndexPath:indexPath animated:false scrollPosition:UITableViewScrollPositionNone];
     }
-    
+
     return cell;
 }
 
@@ -160,7 +164,7 @@
 {
     // Get selected item
     NSObject* selection = _Items[indexPath.row];
-    
+
     /* TODO: And do conditionally
     int handle = [[self.layer valueForKey:@"CX.Handle"] intValue];
     int selectionHandle = [[selection.layer valueForKey:@"CX.Handle"] intValue];

@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "CommandBar.h"
 #import "AppBarButton.h"
 #import "SymbolIcon.h"
@@ -32,7 +36,7 @@
 
 + (void)showNavigationBar:(CommandBar*)bar on:(UIViewController*)viewController animated:(BOOL)animated {
     [Frame ShowNavigationBar];
-    
+
     UINavigationItem* navItem = viewController.navigationItem;
     [CommandBar addNavigationItems:bar on:navItem];
 }
@@ -47,7 +51,7 @@
         }
         return;
     }
-    
+
     if ([bar isKindOfClass:[TabBar class]]) {
         [CommandBar showTabBarTabBar:(TabBar*)bar on:viewController animated:animated];
     }
@@ -56,23 +60,23 @@
     }
 }
 
-+ (void)addNavigationItems:(CommandBar*)bar on:(UINavigationItem*)navigationItem {    
++ (void)addNavigationItems:(CommandBar*)bar on:(UINavigationItem*)navigationItem {
     NSMutableArray* items = [[NSMutableArray alloc] init];
-    
+
     //
     // SecondaryCommands
     //
     if ([bar getSecondaryCommands] != nil) {
         // TODO
     }
-    
+
     //
     // PrimaryCommands
     //
     ObservableCollection* primaryCommands = [bar getPrimaryCommands];
     if (primaryCommands != nil) {
         unsigned long primaryItemsCount = primaryCommands.Count;
-    
+
         for (unsigned long i = 0; i < primaryItemsCount; i++) {
             id command = primaryCommands[i];
             UIBarButtonItem* item = nil;
@@ -100,7 +104,7 @@
                         else {
                             image = [UIImage imageNamed:source];
                         }
-                        
+
                         item = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
                     }
                     else
@@ -110,7 +114,7 @@
             else {
                 throw @"Unhandled command bar item type";
             }
-            
+
             if (item != nil) {
                 [items addObject:item];
             }
@@ -126,16 +130,16 @@
     if (viewController.toolbarItems != nil) {
         return;
     }
-    
+
     NSMutableArray* items = [[NSMutableArray alloc] init];
-    
+
     //
     // SecondaryCommands
     //
     if ([bar getSecondaryCommands] != nil) {
         // TODO
     }
-    
+
     //
     // Then space
     //
@@ -148,7 +152,7 @@
     ObservableCollection* primaryCommands = [bar getPrimaryCommands];
     if (primaryCommands != nil) {
         unsigned long primaryItemsCount = primaryCommands.Count;
-    
+
         for (unsigned long i = 0; i < primaryItemsCount; i++) {
             id command = primaryCommands[i];
             UIBarButtonItem* item = nil;
@@ -176,7 +180,7 @@
                         else {
                             image = [UIImage imageNamed:source];
                         }
-                        
+
                         item = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
                     }
                     else
@@ -186,7 +190,7 @@
             else {
                 throw @"Unhandled command bar item type";
             }
-            
+
             if (item != nil) {
                 [items addObject:item];
                 // For centering and stretching
@@ -205,16 +209,16 @@
 
 + (void)showTabBarTabBar:(TabBar*)bar on:(UIViewController*)viewController animated:(BOOL)animated {
     [viewController.view addSubview:(TabBar*)bar];
-    
+
     // Remember the tab bar
     [viewController.view.layer setValue:bar forKey:@"Ace.TabBar"];
-    
+
     NSMutableArray* tabs = [[NSMutableArray alloc] init];
 
     ObservableCollection* items = bar->items;
     if (items != nil) {
         unsigned long itemsCount = items.Count;
-    
+
         for (unsigned long i = 0; i < itemsCount; i++) {
             id command = items[i];
             UITabBarItem* tab = nil;
@@ -250,13 +254,13 @@
             else {
                 throw @"Unhandled command bar item type";
             }
-            
+
             if (tab != nil) {
                 [tabs addObject:tab];
             }
         }
         [bar setItems:tabs animated:animated];
-        
+
         if (tabs.count > 0) {
             // Automatically select the first tab, which happens automatically on Android
             bar.selectedItem = (UITabBarItem*)tabs[0];

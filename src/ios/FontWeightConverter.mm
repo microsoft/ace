@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "FontWeightConverter.h"
 
 @implementation FontWeightConverter
@@ -27,7 +31,7 @@
         return 0.62;
     if ([text compare:@"extrablack"] == 0) // No such setting. Map to Black.
         return 0.62;
-    
+
     throw [NSString stringWithFormat:@"Invalid FontWeight: %@", text];
 }
 

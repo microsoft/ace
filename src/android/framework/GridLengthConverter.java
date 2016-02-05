@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 class GridLengthConverter {
@@ -5,9 +9,9 @@ class GridLengthConverter {
     public static GridLength parse(String text) {
         // Normalize
         text = text.toLowerCase().trim();
-        
+
         GridLength gl = new GridLength();
-            
+
         if (text.equals("auto")) {
             gl.type = GridUnitType.Auto;
             gl.gridValue = 1;
@@ -20,7 +24,7 @@ class GridLengthConverter {
         else {
             gl.type = GridUnitType.Pixel;
         }
-        
+
         gl.gridValue = Double.parseDouble(text);
 
         return gl;

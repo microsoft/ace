@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
 import android.app.TimePickerDialog;
@@ -55,10 +59,10 @@ public class TimePicker extends LinearLayout
     });
 
     _calendar = Calendar.getInstance();
-    
+
     // We don't want any seconds in the Time object
     _calendar.set(Calendar.SECOND, 0);
-    
+
     String timeString = DateFormat.getTimeInstance(DateFormat.SHORT).format(_calendar.getTime());
     updateDisplay(timeString);
   }

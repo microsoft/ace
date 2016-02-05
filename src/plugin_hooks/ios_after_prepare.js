@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 var path = require('path');
 var fs = require('fs');
 
@@ -12,7 +16,7 @@ function copyiOSResources() {
     var fsextra = require('fs-extra');
 
     var hasResources = false;
-    
+
 	var iosAppResourcesFolder = null;
     try {
         iosAppResourcesFolder = path.join(__dirname, '../../../../native/ios/resources');
@@ -29,7 +33,7 @@ function copyiOSResources() {
         // There are no custom resources, so there's nothing to do
         return;
     }
-    
+
 	var iosFolder = path.join(__dirname, '../../../../platforms/ios');
 
     // Find the path to the generated .xcodeproj folder
@@ -41,15 +45,15 @@ function copyiOSResources() {
             break;
         }
     }
-    
+
     if (projectFolder == null) {
         console.warn("Unable to find .xcodeproj");
         return;
     }
-    
+
     // The folder with the code is next to the .xcodeproj folder, without the suffix
     var codeFolder = projectFolder.substring(0, projectFolder.length - ".xcodeproj".length);
-    var targetResourcesFolder = path.join(codeFolder, "Resources"); 
+    var targetResourcesFolder = path.join(codeFolder, "Resources");
 
     // Copy any resources to the Resources folder in the project
     fsextra.copySync(iosAppResourcesFolder, targetResourcesFolder);
@@ -57,7 +61,7 @@ function copyiOSResources() {
     // Now edit the .pbxproj file inside the project folder
     var pbxFilePath = path.join(projectFolder, 'project.pbxproj');
     var project = new xcode.project(pbxFilePath);
-    
+
     project.parse(function(error) {
        if (error) {
            console.warn("Unable to parse xcode project in order to add iOS resources:");
@@ -81,7 +85,7 @@ module.exports = function (context) {
     try {
         var stats1 = fs.statSync(path.join(__dirname, '../../../../node_modules/fs-extra/package.json'));
         var stats2 = fs.statSync(path.join(__dirname, '../../../../node_modules/xcode/package.json'));
-        
+
         // We're good.
         copyiOSResources();
         return;

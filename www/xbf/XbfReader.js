@@ -1,3 +1,8 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
+
 ﻿//
 // Reads an XBF 1.0 file represented by an ArrayBuffer
 //
@@ -196,7 +201,7 @@ XbfReader.prototype = {
             this.propertyTable.push(entry);
         }
     },
-    
+
     readXmlNamespaceTable: function()
     {
         var count = this.reader.readUint32();
@@ -298,7 +303,7 @@ XbfReader.prototype = {
             nodeFlags: this.reader.readUint32()
         };
     },
-    
+
     readValueNode: function () {
         var value = null;
         var valueNodeType = this.reader.readByte();

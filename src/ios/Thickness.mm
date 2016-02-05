@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "Thickness.h"
 #import "Utils.h"
 
@@ -19,7 +23,7 @@
     t.top = p;
     t.right = p;
     t.bottom = p;
-    return t;  
+    return t;
 }
 
 + (Thickness*) parse:(NSString*)text {
@@ -52,7 +56,7 @@
         t.bottom = [Utils parseInt:parts[3]];
         return t;
     }
-    
+
     throw [NSString stringWithFormat:@"Invalid thickness string: %@", text];
 }
 

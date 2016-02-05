@@ -1,9 +1,13 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "ObservableCollection.h"
 
 @implementation ObservableCollection
 
 - (id)init {
-    self = [super init];    
+    self = [super init];
     _array = [[NSMutableArray alloc] init];
     return self;
 }

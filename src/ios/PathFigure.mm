@@ -1,13 +1,17 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "PathFigure.h"
 
 @implementation PathFigure
 
 - (id) init {
     self = [super init];
-    
+
     // Default property values
     self.Segments = [[PathSegmentCollection alloc] init];
-    
+
     return self;
 }
 

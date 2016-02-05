@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "NativeEventAttacher.h"
 #import "OutgoingMessages.h"
 
@@ -14,7 +18,7 @@
     else {
         throw @"Unhandled event type";
     }
-    
+
     // Keep this alive
     [instance.layer setValue:self forKey:@"Ace.NativeEventAttacher"];
 

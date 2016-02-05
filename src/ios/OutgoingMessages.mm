@@ -1,3 +1,7 @@
+//-------------------------------------------------------------------------------------------------------
+// Copyright (C) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
+//-------------------------------------------------------------------------------------------------------
 #import "OutgoingMessages.h"
 #import <Cordova/CDVCommandDelegate.h>
 #import <objc/message.h>
@@ -14,8 +18,8 @@ SEL _selector;
 
 + (void) raiseEvent:(NSString*)eventName instance:(NSObject*)instance eventData:(NSObject*) eventData {
     NSArray* array = [NSArray arrayWithObjects:
-        instance == nil ? nil : [[AceHandle fromObject:instance] toJSON], 
-        eventName, 
+        instance == nil ? nil : [[AceHandle fromObject:instance] toJSON],
+        eventName,
         eventData, nil];
     [self send:array];
 }
@@ -25,12 +29,12 @@ SEL _selector;
     NSArray* array;
     if (handle == nil) {
         array = [NSArray arrayWithObjects:
-            [NSNumber numberWithInt:-1] /*Because otherwise array is terminated!*/, 
+            [NSNumber numberWithInt:-1] /*Because otherwise array is terminated!*/,
             eventName, eventData, nil];
     }
     else {
         array = [NSArray arrayWithObjects:
-            [handle toJSON], 
+            [handle toJSON],
             eventName, eventData, nil];
     }
     [self send:array];
