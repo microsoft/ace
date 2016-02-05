@@ -16,7 +16,7 @@ On Android: "java.io.FileNotFoundException: www/xbf/*filename*.xbf"
 
 In order for a .xaml file to be found at runtime, it had to have been compiled to an .xbf file at build-time 
 then placed in the www/xbf folder. This happens automatically in Visual Studio if you add the custom build task 
-as described in [Getting Started](/ace/docs/getting-started).
+as described in [Getting Started](/docs/getting-started).
 
 If you don't use the Visual Studio support, you can instead compile your XAML from a command prompt by running markupcompiler.exe from the plugin's markupcompiler subfolder, then copy the .xbf files to the www/xbf folder.
 

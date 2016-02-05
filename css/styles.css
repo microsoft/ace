@@ -2430,7 +2430,7 @@ span.xml-string {
   .promo {
     height: 420px;
     background: #682079;
-    background-image: url(/ace/assets/images/background/bg.png);
+    background-image: url(/assets/images/background/bg.png);
     background-size: cover;
   }
   .promo.section .intro {
@@ -2671,7 +2671,7 @@ span.xml-string {
     height: 420px;
     padding-top: 80px;
     background: #682079;
-    background-image: url(/ace/assets/images/background/bg.png);
+    background-image: url(/assets/images/background/bg.png);
     background-size: cover;
   }
   .promo.section .intro {

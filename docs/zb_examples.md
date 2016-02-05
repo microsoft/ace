@@ -34,12 +34,12 @@ Works on iOS and Android, and in Visual Studio.
 <tr>
 <td align="center" valign="top">
 <a href="https://github.com/adnathan/ace/tree/master/examples/AceExamples">
-<img width="50%" src="/ace/assets/images/examples/examples.jpg"/>
+<img width="50%" src="/assets/images/examples/examples.jpg"/>
 </a>
 </td>
 <td align="center" valign="top">
 <a href="https://github.com/adnathan/PhoneGapDay">
-<img width="50%" src="/ace/assets/images/examples/pgd.jpg"/>
+<img width="50%" src="/assets/images/examples/pgd.jpg"/>
 </a>
 </td>
 </tr>

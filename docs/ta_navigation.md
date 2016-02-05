@@ -13,7 +13,7 @@ You have three markup options:
 * Using a .xib file created from Xcode's Interface Builder. (This only works on iOS.)
 * Using a XAML file. (This works everywhere.)
 
-When using XAML, you gain the option of using elements from the [cross-platform UI framework](/ace/docs/ref) 
+When using XAML, you gain the option of using elements from the [cross-platform UI framework](/docs/ref) 
 in addition to (or instead of) raw platform-specific elements.
 
 <br/>

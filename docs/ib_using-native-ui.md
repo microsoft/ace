@@ -27,9 +27,9 @@ There are many options for adding native UI into your app.
 
 <table>
     <tr>
-        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked1.png" height="218" width="105"/></td>
-        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked2.png" height="218" width="105"/></td>
-        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked3.png" height="218" width="105"/></td>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/assets/images/home/docked1.png" height="218" width="105"/></td>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/assets/images/home/docked2.png" height="218" width="105"/></td>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/assets/images/home/docked3.png" height="218" width="105"/></td>
     </tr>
 </table>
 
@@ -146,7 +146,7 @@ root.getChildren().add(webView);
 
 ## Overlaying Native UI
 
-<img class="img-responsive;height:218px" src="/ace/assets/images/home/overlay.png" height="218"/>
+<img class="img-responsive;height:218px" src="/assets/images/home/overlay.png" height="218"/>
 
 You accomplish this with the <b>Popup</b> class. You can create a popup, set its content to any UI object, and show/hide it.
 
@@ -184,12 +184,12 @@ ace.load("android://vector_graphics.xml", function (root) {
 
 ## Fullscreen Native UI
 
-<img class="img-responsive;height:218px" src="/ace/assets/images/home/fullscreen.png" height="218"/>
+<img class="img-responsive;height:218px" src="/assets/images/home/fullscreen.png" height="218"/>
 
 One way to accomplish fullscreen native UI is to replace the WebView, as shown in the <b>Docking Native UI</b> section, 
 but then keeping the WebView hidden.
 
-Another way is to *navigate* to a new all-native page. See [the Navigation topic](/ace/docs/navigation) for all the ways to perform navigation.
+Another way is to *navigate* to a new all-native page. See [the Navigation topic](/docs/navigation) for all the ways to perform navigation.
 
 <br/>
 
@@ -197,7 +197,7 @@ Another way is to *navigate* to a new all-native page. See [the Navigation topic
 
 ## Creating an Android Widget
 
-Check out the <a href="/ace/apps">PhoneGap Day app</a> for an example of this. Because Ace enables you to 
+Check out the <a href="/apps">PhoneGap Day app</a> for an example of this. Because Ace enables you to 
 include arbitrary Java and resources in your app, you can build completely-custom widgets the same way 
 you would in a pure native app. However, Ace provides some standard widget functionality that makes this 
 even easier.

@@ -20,7 +20,7 @@ or your own custom native code. For the latter two cases, you need to include th
 Cordova apps with Ace installed can include any native code and resources in the project's <b>native</b> folder. Code and resources 
 placed here gets compiled into your project:
 
-<img width="50%" src="/ace/assets/images/docs/native-folder.png"/>
+<img width="50%" src="/assets/images/docs/native-folder.png"/>
 
 <a name="two"/>
 
