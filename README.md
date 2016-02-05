@@ -37,15 +37,15 @@ cordova run ios
 ```
 cordova plugin add cordova-plugin-ace
 ```
-or, in Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at https://github.com/adnathan/ace.git or a local copy that you download.
+or, in Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at https://github.com/microsoft/ace.git or a local copy that you download.
 
 Then follow the examples and docs. You can find examples in the examples folder of this repository.
 
 ## COMMUNITY
 
 * Have a question that's not a feature request or bug report? [Discuss on Stack Overflow](https://stackoverflow.com/questions/tagged/ace-plugin)
-* Have a feature request or find a bug? [Submit an issue](https://github.com/adnathan/ace/issues)
-* Please [contribute](https://github.com/adnathan/ace/blob/master/CONTRIBUTING.md) to the source code!
+* Have a feature request or find a bug? [Submit an issue](https://github.com/microsoft/ace/issues)
+* Please [contribute](https://github.com/microsoft/ace/blob/master/CONTRIBUTING.md) to the source code!
 
 ## DEVELOPMENT
 
