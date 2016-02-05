@@ -48,7 +48,7 @@ There are many options for getting started with Cordova:
 ## 2. Add the Ace Plugin to Your Project
 In Visual Studio, open **config.xml** then add the plugin under **Plugins**, **Custom**. You can point it at **https://github.com/adnathan/ace** or a local copy that you download (to a path with no spaces).
 
-<img width="50%" src="/assets/images/docs/getting-started/vsconfig.png"/>
+<img width="50%" src="/ace/assets/images/docs/getting-started/vsconfig.png"/>
 
 If you're using a command-line interface, do one of the following:
 

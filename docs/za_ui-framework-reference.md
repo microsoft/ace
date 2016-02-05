@@ -157,7 +157,7 @@ Base Classes:
 <a name="Image"/>
 
 ## Image
-Displays an image. See [Working with Images](/docs/images) for more info.
+Displays an image. See [Working with Images](/ace/docs/images) for more info.
 
 <a href="https://github.com/adnathan/ace/blob/master/www/framework/Image.js">View APIs</a>
 
@@ -344,7 +344,7 @@ Base Classes:
 
 <br/>
 
-NativeObject is the base class of UIElement, but you can also <a href="/docs/native-code">use it directly to call arbitrary native code</a>.
+NativeObject is the base class of UIElement, but you can also <a href="/ace/docs/native-code">use it directly to call arbitrary native code</a>.
 
 * invoke (instance and static)
 * getField (instance and static)

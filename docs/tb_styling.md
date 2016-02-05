@@ -53,7 +53,7 @@ Common visual properties include:
 * Padding
 * Width
 
-These cross-platform properties can not only be set on objects in the [cross-platform UI framework](/docs/ref), but they can be set 
+These cross-platform properties can not only be set on objects in the [cross-platform UI framework](/ace/docs/ref), but they can be set 
 on raw platform-specific controls as well. For example:
 <pre>
 &lt;if.iOS>
