@@ -14,7 +14,7 @@ Feature contributions are welcomed, but need to be approved by Ace collaborators
 
 ## Documentation Contribution
 
-* Want to fix or add to the documentation at http://ace.run? Please submit a PR! The website lives in the gh-pages branch of this repository. 
+* Want to fix or add to the documentation at http://microsoft.github.io/ace? Please submit a PR! The website lives in the gh-pages branch of this repository. 
 
 ## Legal
 

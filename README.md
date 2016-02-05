@@ -1,4 +1,4 @@
-![Ace Logo](http://ace.run/assets/images/logo/ace.png) Visit our [homepage](http://ace.run/) & [get started](http://ace.run/docs/getting-started/) in minutes!
+![Ace Logo](http://microsoft.github.io/ace/assets/images/logo/ace.png) Visit our [homepage](http://microsoft.github.io/ace/) & [get started](http://microsoft.github.io/ace/docs/getting-started/) in minutes!
 
 ## WHAT IS ACE?
 
@@ -8,7 +8,7 @@ An Apache Cordova plugin that enables you to easily add native UI and native cod
 * Use a cross-platform native UI framework
 * Call native code without additional plugins
 
-![Ace Diagram](http://ace.run/assets/images/github/intro.png)
+![Ace Diagram](http://microsoft.github.io/ace/assets/images/github/intro.png)
 
 ## QUICK START
 
