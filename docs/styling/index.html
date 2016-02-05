@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Project Ace - Docs</title>
+    <title>Project Ace - Styling Native Controls</title>
     <meta name="description" content="Project Ace is an Apache Cordova plugin that enables you to mix native UI and native code with your JavaScript and HTML. Create cross-platform Android and iOS apps with truly native UI.
 ">
 
     <link rel="stylesheet" href="/ace/css/main.css">
-    <link rel="canonical" href="http://microsoft.github.io/ace/docs/">
+    <link rel="canonical" href="http://microsoft.github.io/ace/docs/styling/">
     <link rel="alternate" type="application/rss+xml" title="Project Ace - Cordova Plugin for Native UI" href="http://microsoft.github.io/ace/feed.xml">
 
     <link rel="shortcut icon" href="/favicon.ico">
@@ -402,10 +402,162 @@
                 </ul>
             </td>
             <td style="vertical-align:top" width="100%">
-    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Docs</h1>
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Styling Native Controls</h1>
 
     <div class="container" style="margin-left:50px">
-    
+    <div style="background-color:#3399FF;color:white;foreground:bold;padding:20px">
+<b>SUMMARY</b>
+<br />
+<ul>
+<li>A <i>style</i> is a collection of properties and their values.</li>
+<li>HTML content can be styled with CSS, as always.</li>
+<li>Native content can be styled with Style objects that can be defined in XAML or JavaScript.</li>
+<li>In JavaScript, you can use JSON, such as:</li>
+<pre>
+{
+  FontWeight: "Bold",
+  Foreground: "Violet",
+  Background: "SteelBlue"
+}</pre>
+</ul>
+
+</div>
+
+<p><br /></p>
+
+<p>For the <strong>HTML</strong> in your app, you style it the same ways as always, such as using <strong>CSS</strong>. However, 
+this topic discusses how you style <strong>native controls</strong>.</p>
+
+<h2 id="setting-properties-directly">Setting Properties Directly</h2>
+
+<p>You can set visual properties directly on UI objects. Here’s how it looks in XAML:</p>
+<pre>
+&lt;Button <b>FontWeight</b>="Bold" <b>Foreground</b>="Violet" <b>Background</b>="SteelBlue" /&gt;
+</pre>
+<p>In JavaScript, you can call set<em>PropertyName</em> functions:</p>
+<pre>
+var b = new ace.Button();
+b.<b>setFontWeight</b>("Bold");
+b.<b>setForeground</b>("Violet");
+b.<b>setBackground</b>("SteelBlue");
+</pre>
+
+<p>Common visual properties include:</p>
+
+<ul>
+  <li>Background</li>
+  <li>FontSize</li>
+  <li>FontWeight</li>
+  <li>Foreground</li>
+  <li>Height</li>
+  <li>Margin</li>
+  <li>Padding</li>
+  <li>Width</li>
+</ul>
+
+<p>These cross-platform properties can not only be set on objects in the <a href="/ace/docs/ref">cross-platform UI framework</a>, but they can be set 
+on raw platform-specific controls as well. For example:</p>
+<pre>
+&lt;if.iOS&gt;
+  &lt;ios:UISegmentedControl <b>Background</b>="LemonChiffon" /&gt;
+&lt;/if.iOS&gt;
+&lt;if.Android&gt;
+  &lt;android:RatingBar <b>Background</b>="LemonChiffon" /&gt;
+&lt;/if.Android&gt;
+</pre>
+<p>Ace maps these properties (and others, such as Content) to their most natural native counterparts.</p>
+
+<h2 id="conslidating-properties-into-a-style">Conslidating Properties Into a Style</h2>
+
+<p>A <em>style</em> is a simple object that consolidates properties and their values. In XAML, you can define and apply 
+a style to a single button as follows:</p>
+<pre>
+&lt;Button&gt;
+  &lt;Button.Style&gt;<b>
+    &lt;Style TargetType="Button"&gt;
+      &lt;Setter Property="FontWeight" Value="Bold" /&gt;
+      &lt;Setter Property="Foreground" Value="Violet" /&gt;
+      &lt;Setter Property="Background" Value="SteelBlue" /&gt;
+    &lt;/Style&gt;</b>
+  &lt;/Button.Style&gt;
+&lt;/Button&gt;
+</pre>
+<p>As all XAML can be naturally expressed in JavaScript instead, you could build up a style programmatically as follows:</p>
+<pre>
+<b>// Don't actually do this. There's a better way about to be shown:</b>
+var b = new ace.Button();
+var style = new ace.Style();
+style.setTargetType("Button");
+
+var setter1 = new ace.Setter();
+setter1.setProperty("FontWeight");
+setter1.setValue("Bold");
+style.getSetters().add(setter1);
+
+var setter2 = new ace.Setter();
+setter2.setProperty("Foreground");
+setter2.setValue("Violet");
+style.getSetters().add(setter2);
+
+var setter3 = new ace.Setter();
+setter3.setProperty("Background");
+setter3.setValue("SteelBlue");
+style.getSetters().add(setter3);
+
+b.setStyle(style);
+</pre>
+
+<p>However, as a shortcut, you can instead use JSON syntax:</p>
+<pre>
+var b = new ace.Button();
+<b>b.setStyle(
+{
+  FontWeight: "Bold",
+  Foreground: "Violet",
+  Background: "SteelBlue"
+});</b>
+</pre>
+
+<h2 id="sharing-styles">Sharing Styles</h2>
+
+<p>Usually, the purpose of defining a style is to share it among multiple objects. You can do this in XAML by 
+adding it to a parent element’s Resources collection then referencing it with {StaticResource <em>resourceName</em>} syntax:</p>
+<pre>
+&lt;StackPanel xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"&gt;
+  &lt;StackPanel.Resources&gt;
+    <b>&lt;Style x:Key="MyStyle" TargetType="Button"&gt;
+      &lt;Setter Property="FontWeight" Value="Bold"/&gt;
+      &lt;Setter Property="Foreground" Value="Violet"/&gt;
+      &lt;Setter Property="Background" Value="SteelBlue"/&gt;
+    &lt;/Style&gt;</b>
+  &lt;/StackPanel.Resources&gt;
+
+  &lt;Button <b>Style="{StaticResource MyStyle}"</b>&gt;A&lt;/Button&gt;
+  &lt;Button <b>Style="{StaticResource MyStyle}"</b>&gt;B&lt;/Button&gt;
+  &lt;Button <b>Style="{StaticResource MyStyle}"</b>&gt;C&lt;/Button&gt;    
+&lt;/StackPanel&gt;
+</pre>
+<p>In JavaScript, you can just reapply the same style instance:</p>
+<pre>
+<b>var style = {
+  FontWeight: "Bold",
+  Foreground: "Violet",
+  Background: "SteelBlue"
+};</b>
+
+var b1 = new ace.Button();
+<b>b1.setStyle(style);</b>
+b1.setContent("A");
+
+var b2 = new ace.Button();
+<b>b2.setStyle(style);</b>
+b2.setContent("B");
+
+var b3 = new ace.Button();
+<b>b3.setStyle(style);</b>
+b3.setContent("C");
+</pre>
+
     </div>
 
            </td>

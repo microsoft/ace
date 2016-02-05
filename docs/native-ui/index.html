@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Project Ace - Docs</title>
+    <title>Project Ace - Using Native UI</title>
     <meta name="description" content="Project Ace is an Apache Cordova plugin that enables you to mix native UI and native code with your JavaScript and HTML. Create cross-platform Android and iOS apps with truly native UI.
 ">
 
     <link rel="stylesheet" href="/ace/css/main.css">
-    <link rel="canonical" href="http://microsoft.github.io/ace/docs/">
+    <link rel="canonical" href="http://microsoft.github.io/ace/docs/native-ui/">
     <link rel="alternate" type="application/rss+xml" title="Project Ace - Cordova Plugin for Native UI" href="http://microsoft.github.io/ace/feed.xml">
 
     <link rel="shortcut icon" href="/favicon.ico">
@@ -402,10 +402,353 @@
                 </ul>
             </td>
             <td style="vertical-align:top" width="100%">
-    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Docs</h1>
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Using Native UI</h1>
 
     <div class="container" style="margin-left:50px">
+    <blockquote>
+  <p>Be sure to check out <a href="https://github.com/adnathan/ace/tree/master/examples">the sample code</a> to see this in action</p>
+</blockquote>
+
+<p>There are many options for adding native UI into your app.</p>
+
+<ul>
+  <li>You can use markup, or create it all from JavaScript, or a bit of both.</li>
+  <li>You can use Ace’s cross-platform controls, or use raw platform-specific controls, or a bit of both.</li>
+  <li>You can dock native UI, overlay it on top of HTML, navigate to full-native pages, or all of these.</li>
+  <li>On Android, you can create widgets or even have floating UI in a transparent activity.</li>
+</ul>
+
+<p><br /></p>
+
+<p><a name="one"></a></p>
+
+<h2 id="docking-native-ui">Docking Native UI</h2>
+
+<table>
+    <tr>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked1.png" height="218" width="105" /></td>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked2.png" height="218" width="105" /></td>
+        <td align="center" style="padding-left:4px;padding-right:4px"><img class="img-responsive;height:218px" src="/ace/assets/images/home/docked3.png" height="218" width="105" /></td>
+    </tr>
+</table>
+
+<p><br /></p>
+
+<p>To set this up, you reparent the Cordova WebView inside arbitrary UI. The layout of your native UI dictates the layout of your page:</p>
+
+<pre>
+// Surround the WebView with native UI
+ace.load("native://app.xaml", function (page) {
+    // Replace the root UI with the loaded native page
+    ace.getHostPage().setContent(page);
+
+    // Reparent the WebView inside the native page
+    page.setContent(ace.getHostWebView());
+});
+</pre>
+
+<p>This assumes the app.xaml file defines a page.  It could be one like the following that adds native tabs, plus a native action bar / navigation bar 
+to show the page titile:</p>
+
+<pre>
+&lt;Page xmlns:ace="using:run.ace" ace:Frame.Title="Schedule"&gt;
+    &lt;!-- A tab bar --&gt;
+    &lt;Page.BottomAppBar&gt;
+        &lt;ace:TabBar&gt;
+            &lt;AppBarButton Icon="www/img/tabs/calendar-{platform}.png" 
+                          Label="Schedule" 
+                          ace:On.Click="onTabClick(this, 0)" /&gt;
+            &lt;AppBarButton Icon="www/img/tabs/people-{platform}.png" 
+                          Label="Speakers" 
+                          ace:On.Click="onTabClick(this, 1)" /&gt;
+            &lt;AppBarButton Icon="www/img/tabs/map-{platform}.png" 
+                          Label="Map" 
+                          ace:On.Click="onTabClick(this, 2)" /&gt;
+            &lt;AppBarButton Icon="www/img/tabs/info-{platform}.png" 
+                          Label="About" 
+                          ace:On.Click="onTabClick(this, 3)" /&gt;
+        &lt;/ace:TabBar&gt;
+    &lt;/Page.BottomAppBar&gt;
+&lt;/Page&gt;
+</pre>
+
+<p>Instead, the app.xaml file could define a 3x3 Grid:</p>
+
+<pre>
+&lt;Grid&gt;
+    &lt;!-- Define a 3x3 grid with a center cell twice the size --&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition /&gt;
+        &lt;RowDefinition Height="2*" /&gt;
+        &lt;RowDefinition /&gt;
+    &lt;/Grid.RowDefinitions&gt;
+    &lt;Grid.ColumnDefinitions&gt;
+        &lt;ColumnDefinition /&gt;
+        &lt;ColumnDefinition Width="2*" /&gt;
+        &lt;ColumnDefinition /&gt;
+    &lt;/Grid.ColumnDefinitions&gt;
+
+    &lt;!-- Row 0 --&gt;
+    &lt;Button                                     Background="Red"    /&gt;
+    &lt;Button                     Grid.Column="1" Background="Orange" /&gt;
+    &lt;Button                     Grid.Column="2" Background="Yellow" /&gt;
+    &lt;!-- Row 1 --&gt;
+    &lt;Button        Grid.Row="1"                 Background="Green"  /&gt;
+    &lt;Button        Grid.Row="1" Grid.Column="2" Background="Aqua"   /&gt;
+    &lt;!-- Row 2 --&gt;
+    &lt;Button        Grid.Row="2"                 Background="Purple" /&gt;
+    &lt;Button        Grid.Row="2" Grid.Column="1" Background="Brown"  /&gt;
+    &lt;Button        Grid.Row="2" Grid.Column="2" Background="Gray"   /&gt;
+&lt;/Grid&gt;
+</pre>
+
+<p>In this case, the JavaScript could plop the WebView into the center cell, surrounded by the colorful buttons:</p>
+
+<pre>
+ace.load("native://Grid.xaml", function (root) {
+    // Replace the WebView with a Grid
+    ace.getHostPage().setContent(root);
     
+    var webView = ace.getHostWebView();
+
+    // Place the WebView inside the Grid
+    ace.Grid.setRow(webView, 1);
+    ace.Grid.setColumn(webView, 1);
+    root.getChildren().add(webView);
+});
+</pre>
+
+<p>As always, this could all be done without XAML:</p>
+
+<pre>
+var grid = new ace.Grid();
+grid.getRowDefintions().add(new ace.RowDefinition());
+...
+var button2 = new ace.Button();
+ace.Grid.setColumn(button2, 1);
+button2.setBackground("orange");
+grid.getChildren().add(button2);
+...
+
+// Replace the WebView with a Grid
+ace.getHostPage().setContent(grid);
+
+var webView = ace.getHostWebView();
+
+// Place the WebView inside the Grid
+ace.Grid.setRow(webView, 1);
+ace.Grid.setColumn(webView, 1);
+root.getChildren().add(webView);
+</pre>
+
+<p><a name="two"></a></p>
+
+<h2 id="overlaying-native-ui">Overlaying Native UI</h2>
+
+<p><img class="img-responsive;height:218px" src="/ace/assets/images/home/overlay.png" height="218" /></p>
+
+<p>You accomplish this with the <b>Popup</b> class. You can create a popup, set its content to any UI object, and show/hide it.</p>
+
+<p>By default, popups are fullscreen, but they have methods for sizing and positioning them.</p>
+
+<pre>
+ace.load("native://content.xaml", function (root) {
+    var popup = new ace.Popup();
+    popup.setContent(root);
+    popup.show();
+
+    root.addEventListener("click", function () {
+        popup.hide();
+    });
+});
+</pre>
+
+<p>Here’s an example that uses raw Android UI objects:</p>
+
+<pre>
+ace.load("android://vector_graphics.xml", function (root) {
+    var popup = new ace.Popup();
+    popup.setContent(root);
+    popup.show();
+
+    root.addEventListener("setOnClickListener", function () {
+        popup.hide();
+    });
+});
+</pre>
+
+<p><br /></p>
+
+<p><a name="three"></a></p>
+
+<h2 id="fullscreen-native-ui">Fullscreen Native UI</h2>
+
+<p><img class="img-responsive;height:218px" src="/ace/assets/images/home/fullscreen.png" height="218" /></p>
+
+<p>One way to accomplish fullscreen native UI is to replace the WebView, as shown in the <b>Docking Native UI</b> section, 
+but then keeping the WebView hidden.</p>
+
+<p>Another way is to <em>navigate</em> to a new all-native page. See <a href="/ace/docs/navigation">the Navigation topic</a> for all the ways to perform navigation.</p>
+
+<p><br /></p>
+
+<p><a name="four"></a></p>
+
+<h2 id="creating-an-android-widget">Creating an Android Widget</h2>
+
+<p>Check out the <a href="/ace/apps">PhoneGap Day app</a> for an example of this. Because Ace enables you to 
+include arbitrary Java and resources in your app, you can build completely-custom widgets the same way 
+you would in a pure native app. However, Ace provides some standard widget functionality that makes this 
+even easier.</p>
+
+<h3 id="define-widgets-in-androidmanifestxml">1. Define Widget(s) in AndroidManifest.xml.</h3>
+
+<p>Copy the already-produced AndroidManifest.xml from your project’s platforms/android folder to the native/android/res 
+folder so you can overwrite it with your custom entries.</p>
+
+<p>Add the following under the &lt;application&gt; element to get a list-based widget:</p>
+
+<pre>
+&lt;receiver android:label="List" android:name="<i>your.package.name</i>.ListWidgetProvider"&gt;
+  &lt;intent-filter&gt;
+    &lt;action android:name="android.appwidget.action.APPWIDGET_UPDATE" /&gt;
+  &lt;/intent-filter&gt;
+  &lt;meta-data android:name="android.appwidget.provider" android:resource="@xml/list_widget_info" /&gt;
+&lt;/receiver&gt;
+&lt;service android:exported="false" android:name="run.ace.AppWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS" /&gt;
+</pre>
+
+<h3 id="add-the-necessary-android-resources">2. Add the Necessary Android Resources</h3>
+
+<p>Add a native/android/res/xml/list_widget_info.xml file with the following content:</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;appwidget-provider
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:minWidth="180dip"
+  android:minHeight="180dip"
+  android:updatePeriodMillis="3600000"
+  android:previewImage="@drawable/list_widget_preview"
+  android:initialLayout="@layout/list_widget_layout"&gt;
+&lt;/appwidget-provider&gt;
+</pre>
+
+<p>Add an appropriate preview image as native/android/res/drawable/list_widget_preview.png.</p>
+
+<p>Add a native/android/res/layout/list_widget_layout file defining the widget layout:</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_widget_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:loopViews="true" /&gt;
+</pre>
+
+<p>Add a native/android/res/layout/list_widget_view file defining the layout of each widget item:</p>
+
+<pre>
+&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_widget_item"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+  &lt;TextView 
+    android:id="@+id/list_widget_item_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:textColor="#ffffff"
+    android:textSize="40px" /&gt;
+&lt;/FrameLayout&gt;
+</pre>
+
+<h3 id="add-a-widgetprovider-java-class">3. Add a WidgetProvider Java Class</h3>
+
+<p>Place this anywhere under native/android/src. The class and package name must match what you specified 
+in AndroidManifest.xml. This class tells Ace about the resources you’ve defined.</p>
+
+<pre>
+package <i>your.package.name</i>;
+
+public class ListWidgetProvider extends run.ace.AppWidgetProvider {
+  @Override protected int getLayoutResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_layout", "layout", context);
+  }
+
+  @Override protected int getViewResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_view", "id", context);
+  }
+
+  @Override protected int getItemResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item", "id", context);
+  }
+
+  @Override protected int getItemTextResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item_text", "id", context);
+  }
+
+  @Override protected int getItemLayoutResourceId(android.content.Context context) {
+    return run.ace.NativeHost.getResourceId("list_widget_item", "layout", context);
+  }
+}
+</pre>
+
+<h3 id="populate-widget-data-in-javascript">3. Populate Widget Data in JavaScript</h3>
+
+<p>When your app runs, you can populate your widget:</p>
+
+<pre>
+if (ace.platform == "Android") {
+  setupWidget();
+}
+
+function setupWidget() {
+  // Handle the app being resumed by a widget click:
+  ace.addEventListener("android.intentchanged", checkForWidgetActivation);
+
+  ace.android.appWidget.clear();
+  
+  for (var i = 0; i &lt; 10; i++) {
+    ace.android.appWidget.add("Item with index " + i);
+  }
+}
+</pre>
+
+<h3 id="handle-widget-item-clicks-in-javascript">4. Handle Widget Item Clicks in JavaScript</h3>
+
+<p>When an item in a list-based widget is clicked, its index is stored in the Android activity’s <i>intent</i>. The code below shows how to 
+retrieve this index. To handle your app being activated by a widget click, you should check for this data 
+as your app initializes. However, to also handle your app being <i>resumed</i> by a widget click, you should 
+attach an event handler to the global <b>android.intentchanged</b> event:</p>
+<pre>
+ace.addEventListener("android.intentchanged", checkForWidgetActivation);
+</pre>
+
+<pre>
+function checkForWidgetActivation() {
+  if (ace.platform != "Android") {
+    return;
+  }
+
+  ace.android.getIntent().invoke("getIntExtra", "widgetSelectionIndex", -1, function (value) {
+    // value is the index of the item clicked
+    // or -1 if no item has been clicked
+  });
+}
+</pre>
+
+<p><br /></p>
+
+<p><a name="five"></a></p>
+
+<h2 id="creating-floating-ui-on-android">Creating Floating UI on Android</h2>
+
+<p>Documentation coming soon.</p>
+
     </div>
 
            </td>

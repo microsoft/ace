@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Project Ace - Docs</title>
+    <title>Project Ace - UI Framework Reference</title>
     <meta name="description" content="Project Ace is an Apache Cordova plugin that enables you to mix native UI and native code with your JavaScript and HTML. Create cross-platform Android and iOS apps with truly native UI.
 ">
 
     <link rel="stylesheet" href="/ace/css/main.css">
-    <link rel="canonical" href="http://microsoft.github.io/ace/docs/">
+    <link rel="canonical" href="http://microsoft.github.io/ace/docs/ref/">
     <link rel="alternate" type="application/rss+xml" title="Project Ace - Cordova Plugin for Native UI" href="http://microsoft.github.io/ace/feed.xml">
 
     <link rel="shortcut icon" href="/favicon.ico">
@@ -402,10 +402,398 @@
                 </ul>
             </td>
             <td style="vertical-align:top" width="100%">
-    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Docs</h1>
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">UI Framework Reference</h1>
 
     <div class="container" style="margin-left:50px">
-    
+    <p><a name="one"></a></p>
+
+<h2 id="layout-panels">LAYOUT PANELS</h2>
+
+<p><br /></p>
+
+<h2 id="canvas">Canvas</h2>
+<p>Enables positioning child elements with coordinates.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/Canvas.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/Panel.js">Panel</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="stackpanel">StackPanel</h2>
+<p>Arranges child elements into a single line that can be oriented horizontally or vertically.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/StackPanel.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/Panel.js">Panel</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="Grid"></a></p>
+
+<h2 id="grid">Grid</h2>
+<p>Arranges child elements into flexible rows and columns.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/Grid.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/panels/Panel.js">Panel</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="two"></a></p>
+
+<h2 id="controls">CONTROLS</h2>
+
+<p><br /></p>
+
+<p><a name="AppBarButton"></a></p>
+
+<h2 id="appbarbutton">AppBarButton</h2>
+<p>A button meant to be displayed in a CommandBar.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/AppBarButton.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>click</li>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Button.js">Button</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/ButtonBase.js">ButtonBase</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="Button"></a></p>
+
+<h2 id="button">Button</h2>
+<p>A button that can respond to clicks.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Button.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>click</li>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/ButtonBase.js">ButtonBase</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="commandbar">CommandBar</h2>
+<p>A specialized app bar that provides layout for AppBarButton and related command elements.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/CommandBar.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="DatePicker"></a></p>
+
+<h2 id="datepicker">DatePicker</h2>
+<p>A control that enables a user to pick a date value.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/DatePicker.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>datechanged</li>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="hyperlinkbutton">HyperlinkButton</h2>
+<p>A button that functions as a hyperlink.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/HyperlinkButton.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>click</li>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Button.js">Button</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/ButtonBase.js">ButtonBase</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="Image"></a></p>
+
+<h2 id="image">Image</h2>
+<p>Displays an image. See <a href="/ace/docs/images">Working with Images</a> for more info.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Image.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="listbox">ListBox</h2>
+<p>A selectable list of items.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/ListBox.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Selector.js">Selector</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ItemsControl.js">ItemsControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="listboxitem">ListBoxItem</h2>
+<p>A container for an item in a ListBox.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/ListBoxItem.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/SelectorItem.js">SelectorItem</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="page">Page</h2>
+<p>Use this as the root content if you want app bars.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Page.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UserControl.js">UserControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="popup">Popup</h2>
+<p>A general-purpose container for hosting UI objects on top of other content, such as HTML.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/Popup.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/ContentControl.js">ContentControl</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="TabBar"></a></p>
+
+<h2 id="acetabbar">ace:TabBar</h2>
+<p>A command bar designed for tabs rather than buttons.</p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p><br /></p>
+
+<h2 id="textblock">TextBlock</h2>
+<p>A lightweight element for displaying small amounts of text.</p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="timepicker">TimePicker</h2>
+<p>A control that enables a user to pick a time value.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/TimePicker.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+  <li>timechanged</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="toggleswitch">ToggleSwitch</h2>
+<p>A switch that can be toggled between two states.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/ToggleSwitch.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>isonchanged</li>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/Control.js">Control</a> &gt; <a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<h2 id="webview">WebView</h2>
+<p>A control that hosts HTML.</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/WebView.js">View APIs</a></p>
+
+<p>Events (attach with addEventListener):</p>
+
+<ul>
+  <li>loaded</li>
+</ul>
+
+<p>Base Classes:</p>
+
+<p><a href="https://github.com/adnathan/ace/blob/master/www/framework/primitives/UIElement.js">UIElement</a></p>
+
+<p><br /></p>
+
+<p><a name="three"></a></p>
+
+<h2 id="ace">ACE</h2>
+
+<p><br /></p>
+
+<ul>
+  <li>ace.valueOn({ ios: xxx, android: xxx })</li>
+  <li>ace.navigate(url, onSuccess, onError)</li>
+  <li>ace.navigate(uiObject, onSuccess, onError)</li>
+  <li>ace.load(url, onSuccess, onError)</li>
+  <li>ace.goBack()</li>
+  <li>ace.getHostPage()</li>
+  <li>ace.getHostWebView()</li>
+  <li>ace.addEventListener(“navigating”)</li>
+  <li>ace.addEventListener(“navigated”)</li>
+  <li>ace.removeEventListener(…, func)</li>
+  <li>ace.raiseEvent(…)</li>
+</ul>
+
+<p><br /></p>
+
+<p><a name="four"></a></p>
+
+<h2 id="platform-helpers">PLATFORM HELPERS</h2>
+
+<p><br /></p>
+
+<ul>
+  <li>ace.android.appWidget.add()</li>
+  <li>ace.android.appWidget.clear()</li>
+  <li>ace.android.getContext()</li>
+  <li>ace.android.getActivity()</li>
+  <li>ace.android.getIntent()</li>
+  <li>ace.android.getId(name, onSuccess, onError)</li>
+  <li>ace.addEventListener(“android.intentchanged”)</li>
+</ul>
+
+<p><br /></p>
+
+<p><a name="five"></a></p>
+
+<h2 id="nativeobject">NATIVEOBJECT</h2>
+
+<p><br /></p>
+
+<p>NativeObject is the base class of UIElement, but you can also <a href="/ace/docs/native-code">use it directly to call arbitrary native code</a>.</p>
+
+<ul>
+  <li>invoke (instance and static)</li>
+  <li>getField (instance and static)</li>
+  <li>setField (instance and static)</li>
+  <li>get (for special properties)</li>
+  <li>set (for special properties)</li>
+  <li>addEventListener</li>
+  <li>removeEventListener</li>
+  <li>removeAllEventListeners</li>
+  <li>raiseEvent</li>
+</ul>
+
+
     </div>
 
            </td>

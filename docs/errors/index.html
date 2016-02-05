@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Project Ace - Docs</title>
+    <title>Project Ace - Troubleshooting Errors</title>
     <meta name="description" content="Project Ace is an Apache Cordova plugin that enables you to mix native UI and native code with your JavaScript and HTML. Create cross-platform Android and iOS apps with truly native UI.
 ">
 
     <link rel="stylesheet" href="/ace/css/main.css">
-    <link rel="canonical" href="http://microsoft.github.io/ace/docs/">
+    <link rel="canonical" href="http://microsoft.github.io/ace/docs/errors/">
     <link rel="alternate" type="application/rss+xml" title="Project Ace - Cordova Plugin for Native UI" href="http://microsoft.github.io/ace/feed.xml">
 
     <link rel="shortcut icon" href="/favicon.ico">
@@ -402,10 +402,28 @@
                 </ul>
             </td>
             <td style="vertical-align:top" width="100%">
-    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Docs</h1>
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">Troubleshooting Errors</h1>
 
     <div class="container" style="margin-left:50px">
-    
+    <h2 id="failure-to-loadnavigate-to-xaml-file">Failure to load/navigate to .xaml file</h2>
+<p><strong>Symptoms:</strong></p>
+
+<p>On iOS: “Compiled markup file <em>filename</em>.xbf does not exist.”</p>
+
+<p>On Android: “java.io.FileNotFoundException: www/xbf/<em>filename</em>.xbf”</p>
+
+<p><strong>Resolution:</strong></p>
+
+<p>In order for a .xaml file to be found at runtime, it had to have been compiled to an .xbf file at build-time 
+then placed in the www/xbf folder. This happens automatically in Visual Studio if you add the custom build task 
+as described in <a href="/ace/docs/getting-started">Getting Started</a>.</p>
+
+<p>If you don’t use the Visual Studio support, you can instead compile your XAML from a command prompt by running markupcompiler.exe from the plugin’s markupcompiler subfolder, then copy the .xbf files to the www/xbf folder.</p>
+
+<p>Currently, XAML compilation is Windows-only, so if you do your development on a Mac, you’d need to generate the .xbf 
+files on Windows and then copy them over to your Mac. Of course, the use of XAML is optional. Everything you declare in XAML 
+can be expressed in JavaScript by instantiating the same objects and setting the same properties, which appear as set<em>PropertyName</em> methods.</p>
+
     </div>
 
            </td>
