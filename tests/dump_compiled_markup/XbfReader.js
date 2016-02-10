@@ -2,12 +2,21 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
+var BinaryReader = require('./BinaryReader');
+var XamlNode = require('./XamlNode');
+var NodeType = require('./NodeType');
+var XbfDump = require('./XbfDump');
+
+// Extensions
+Array.prototype.peek = function () {
+    return this[this.length - 1];
+};
 
 //
 // Reads an XBF 1.0 file represented by an ArrayBuffer
 //
 function XbfReader(buffer) {
-    this.reader = new ace.BinaryReader(buffer, true);
+    this.reader = new BinaryReader(buffer, true);
     this.root = null;
 
     this.stringTable = [];
@@ -77,23 +86,6 @@ PersistedXamlValueNodeType = {
     Duration: 11
 };
 
-// Reads the specified XAML Binary Format (XBF) file and produces the root of the corresponding object tree.
-XbfReader.load = function (uri, onSuccess, onError) {
-    function onLoad(buffer) {
-        var reader = new XbfReader(buffer);
-        var root = ace.NodeToElement.convert(reader);
-        onSuccess(root);
-    }
-    ace.ToNative.loadXbf(uri, onLoad, onError);
-}
-
-// Reads the specified XAML Binary Format (XBF) bytes and produces the root of the corresponding object tree.
-XbfReader.loadBytes = function (buffer, onSuccess, onError) {
-    var reader = new XbfReader(buffer);
-    var root = ace.NodeToElement.convert(reader);
-    onSuccess(root);
-}
-
 XbfReader.prototype = {
     readHeader: function() {
         var magicNumber = this.reader.readBytes(4);
@@ -122,13 +114,15 @@ XbfReader.prototype = {
         }
     },
 
-    getRoot: function()
-    {
+    dump: function () {
+        XbfDump.dump(this);
+    },
+
+    getRoot: function() {
         return this.root;
     },
 
-    readTables: function()
-    {
+    readTables: function() {
         this.readStringTable();
         this.readAssemblyTable();
         this.readTypeNamespaceTable();
@@ -356,7 +350,7 @@ XbfReader.prototype = {
                 throw new Error("Unknown value node type: " + valueNodeType);
         }
 
-        var node = new ace.XamlNode(ace.NodeType.Value, null, this);
+        var node = new XamlNode(NodeType.Value, null, this);
         node.value = value;
         return node;
     },
@@ -372,7 +366,7 @@ XbfReader.prototype = {
     readObjectNode: function ()
     {
         var nodeInfo = this.readXamlNode();
-        var node = new ace.XamlNode(ace.NodeType.Object, nodeInfo, this);
+        var node = new XamlNode(NodeType.Object, nodeInfo, this);
         node.properties = [];
         return node;
     },
@@ -380,7 +374,7 @@ XbfReader.prototype = {
     readPropertyNode: function()
     {
         var nodeInfo = this.readXamlNode();
-        var node = new ace.XamlNode(ace.NodeType.Property, nodeInfo, this);
+        var node = new XamlNode(NodeType.Property, nodeInfo, this);
         node.values = [];
         return node;
     },
@@ -388,7 +382,7 @@ XbfReader.prototype = {
     readTextNode: function()
     {
         var nodeInfo = this.readXamlNode();
-        node = new ace.XamlNode(ace.NodeType.Text, nodeInfo, this);
+        node = new XamlNode(NodeType.Text, nodeInfo, this);
         node.value = this.stringTable[nodeInfo.nodeId];
         return node;
     }

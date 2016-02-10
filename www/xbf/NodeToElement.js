@@ -214,9 +214,9 @@ NodeToElement.setComplexProperty = function (propertyNode, element, root) {
 };
 
 NodeToElement.getConditionalElement = function (node, parent, root) {
-    // The typeName is the target platform.
-    var typeName = node.getTypeName();
-    if (typeName != ace.platform) {
+    // The type name is the target platform.
+    var platform = node.getTypeName();
+    if (platform != ace.platform) {
         return null;
     }
 

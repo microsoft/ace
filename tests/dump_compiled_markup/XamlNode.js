@@ -2,6 +2,8 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
+var NodeType = require('./NodeType');
+
 function XamlNode(type, nodeInfo, xbfReader) {
     this.type = type;
     this.nodeInfo = nodeInfo;
@@ -10,7 +12,7 @@ function XamlNode(type, nodeInfo, xbfReader) {
 
 XamlNode.prototype = {
     getNamespace: function () {
-        if (this.type != ace.NodeType.Object)
+        if (this.type != NodeType.Object)
             throw new Error("Invalid node type for getNamespace: " + this.type);
 
         var nodeId = this.nodeInfo.nodeId;
@@ -20,7 +22,7 @@ XamlNode.prototype = {
     },
 
     getTypeName: function () {
-        if (this.type != ace.NodeType.Object)
+        if (this.type != NodeType.Object)
             throw new Error("Invalid node type for getTypeName: " + this.type);
 
         var nodeId = this.nodeInfo.nodeId;
@@ -29,7 +31,7 @@ XamlNode.prototype = {
     },
 
     getPropertyName: function () {
-        if (this.type != ace.NodeType.Property)
+        if (this.type != NodeType.Property)
             throw new Error("Invalid node type for getPropertyName: " + this.type);
 
         var nodeId = this.nodeInfo.nodeId;
@@ -38,7 +40,7 @@ XamlNode.prototype = {
     },
 
     getPropertyOwner: function () {
-        if (this.type != ace.NodeType.Property)
+        if (this.type != NodeType.Property)
             throw new Error("Invalid node type for getPropertyOwner: " + this.type);
 
         var nodeId = this.nodeInfo.nodeId;
