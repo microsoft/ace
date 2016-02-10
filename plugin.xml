@@ -333,6 +333,8 @@
     <source-file src="src/ios/Popup.mm" />
     <header-file src="src/ios/QuadraticBezierSegment.h" />
     <source-file src="src/ios/QuadraticBezierSegment.mm" />
+    <header-file src="src/ios/RectUtils.h" />
+    <source-file src="src/ios/RectUtils.mm" />
     <header-file src="src/ios/ResourceDictionary.h" />
     <source-file src="src/ios/ResourceDictionary.mm" />
     <header-file src="src/ios/RowDefinition.h" />

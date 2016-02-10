@@ -10,6 +10,7 @@
 #import "Page.h"
 #import "Frame.h"
 #import "CommandBar.h"
+#import "RectUtils.h"
 
 @implementation UIViewHelper
 
@@ -83,44 +84,32 @@
     else if ([propertyName hasSuffix:@".Width"]) {
         if (propertyValue == nil) {
             // Restoring to default value
-            // TODO: Just remove "Ace.Width" and relayout
-            CGRect r = instance.frame;
-            instance.frame = CGRectMake(r.origin.x, r.origin.y, instance.superview.frame.size.width, r.size.height);
+            [instance.layer setValue:nil forKey:@"Ace.Width"];
+            instance.frame = [RectUtils replace:instance.frame width:instance.superview.frame.size.width];
         }
         else {
             //TODO: What about double?
             int value = [(NSNumber*)propertyValue intValue];
-
-            //TODO: Uniform for all views:
-            if ([instance isKindOfClass:[UIButton class]]) {
-                [instance.layer setValue:[NSNumber numberWithInt:value] forKey:@"Ace.Width"];
-            }
-            else {
-                CGRect r = instance.frame;
-                instance.frame = CGRectMake(r.origin.x, r.origin.y, value, r.size.height);
-            }
+            // Record the fact that there's an explicit width
+            [instance.layer setValue:[NSNumber numberWithInt:value] forKey:@"Ace.Width"];
+            // Update the width
+            instance.frame = [RectUtils replace:instance.frame width:value];
         }
         handled = true;
     }
     else if ([propertyName hasSuffix:@".Height"]) {
         if (propertyValue == nil) {
             // Restoring to default value
-            // TODO: Just remove "Ace.Width" and relayout
-            CGRect r = instance.frame;
-            instance.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, instance.superview.frame.size.height);
+            [instance.layer setValue:nil forKey:@"Ace.Height"];
+            instance.frame = [RectUtils replace:instance.frame height:instance.superview.frame.size.height];
         }
         else {
             //TODO: What about double?
             int value = [(NSNumber*)propertyValue intValue];
-
-            //TODO: Uniform for all views:
-            if ([instance isKindOfClass:[UIButton class]]) {
-                [instance.layer setValue:[NSNumber numberWithInt:value] forKey:@"Ace.Height"];
-            }
-            else {
-                CGRect r = instance.frame;
-                instance.frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, value);
-            }
+            // Record the fact that there's an explicit height
+            [instance.layer setValue:[NSNumber numberWithInt:value] forKey:@"Ace.Height"];
+            // Update the height
+            instance.frame = [RectUtils replace:instance.frame height:value];
         }
         handled = true;
     }
@@ -181,29 +170,25 @@
         [instance.layer setValue:propertyValue forKey:propertyName];
         return true; // Don't adjust size based on this
     }
-
-    // TODO: Do for all views, but would still need to detect setting of frame
+    
+    //
+    // Special sizing of any UIButtons (default padding and height)
+    //
     if ([instance isKindOfClass:[UIButton class]]) {
-        NSNumber* w = [instance.layer valueForKey:@"Ace.Width"];
-        NSNumber* h = [instance.layer valueForKey:@"Ace.Height"];
-        int buttonPadding = 20;
-        int buttonMinWidth = 90;
+        #define BUTTON_DEFAULT_PADDING 20
+        #define BUTTON_MIN_WIDTH 90
 
         [instance sizeToFit];
-        if (w != nil || h != nil) {
-            CGRect r = instance.frame;
-            instance.frame = CGRectMake(r.origin.x, r.origin.y,
-                w == nil ? r.size.width + buttonPadding : [w intValue],
-                h == nil ? r.size.height + buttonPadding : [h intValue]);
-        }
-        else {
-            // Specific to UIButtons: add some default padding and give a min width,
-            //                        so don't use the default size
-            CGRect r = instance.frame;
-            instance.frame = CGRectMake(r.origin.x, r.origin.y,
-                MAX(r.size.width + buttonPadding, buttonMinWidth),
-                r.size.height + buttonPadding);
-        }
+
+        // See if an explicit width/height has been assigned
+        NSNumber* w = [instance.layer valueForKey:@"Ace.Width"];
+        NSNumber* h = [instance.layer valueForKey:@"Ace.Height"];
+
+        // Add default padding to any dimension without an explicit length,
+        // and enforce a min width
+        CGFloat width = w == nil ? MAX(instance.frame.size.width + BUTTON_DEFAULT_PADDING, BUTTON_MIN_WIDTH) : [w intValue];
+        CGFloat height = h == nil ? instance.frame.size.height + BUTTON_DEFAULT_PADDING : [h intValue];
+        instance.frame = [RectUtils replace:instance.frame width:width height:height];
     }
 
     return handled;
