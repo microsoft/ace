@@ -22,7 +22,7 @@
         return [GridLength deserialize:obj];
     }
     else {
-        @throw [NSString stringWithFormat:@"Unhandled struct type: %@", type];
+        throw [NSString stringWithFormat:@"Unhandled struct type: %@", type];
     }
 }
 
@@ -276,7 +276,7 @@
         return integer;
     }
     else {
-        @throw [NSString stringWithFormat:@"Could not parse an integer from '%@'", s];
+        throw [NSString stringWithFormat:@"Could not parse an integer from '%@'", s];
     }
 }
 

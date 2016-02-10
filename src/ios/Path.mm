@@ -98,7 +98,7 @@
         else if ([self.strokeStartLineCap compare:@"Round" options:NSCaseInsensitiveSearch] == 0)
             lineCap = kCGLineCapRound;
         else
-            @throw @"Unsupported line cap (Triangle)";
+            throw @"Unsupported line cap (Triangle)";
     }
 
     CGLineJoin lineJoin = kCGLineJoinMiter;
@@ -110,7 +110,7 @@
         else if ([self.strokeLineJoin compare:@"Round" options:NSCaseInsensitiveSearch] == 0)
             lineJoin = kCGLineJoinRound;
         else
-            @throw @"Unsupported line join";
+            throw @"Unsupported line join";
     }
 
     if ([_data isKindOfClass:[PathGeometry class]]) {
@@ -203,7 +203,7 @@
                     }
                 }
                 else {
-                    @throw [NSString stringWithFormat:@"NYI: segment of type %@", [segment class]];
+                    throw [NSString stringWithFormat:@"NYI: segment of type %@", [segment class]];
                 }
             }
 

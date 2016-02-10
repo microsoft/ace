@@ -138,7 +138,7 @@
         // For inside toolbar, nothing to do here.
     }
     else
-        @throw @"Unhandled icon type";
+        throw @"Unhandled icon type";
 }
 
 @end

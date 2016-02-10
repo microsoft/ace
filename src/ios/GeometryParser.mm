@@ -37,7 +37,7 @@ const bool IsSmoothJoin = true;
                     allowComma = false; // one comma only
                 }
                 else {
-                    @throw @"Invalid token: Extra comma";
+                    throw @"Invalid token: Extra comma";
                 }
                 break;
 
@@ -89,7 +89,7 @@ const bool IsSmoothJoin = true;
 
     // Only allowed between numbers
     if (commaFound) {
-        @throw @"Invalid token: Comma in the wrong spot";
+        throw @"Invalid token: Comma in the wrong spot";
     }
 
     return false;
@@ -108,7 +108,7 @@ const bool IsSmoothJoin = true;
 
 - (double) ReadNumber:(bool) allowComma {
     if (![self IsNumber:allowComma]) {
-        @throw @"Invalid token: Non-number where a number was expected";
+        throw @"Invalid token: Non-number where a number was expected";
     }
 
     bool simple = true;
@@ -246,7 +246,7 @@ const bool IsSmoothJoin = true;
         if (first) {
             if ((cmd != 'M') && (cmd != 'm'))  // Path starts with M|m
             {
-                @throw @"Invalid token: Path must start with M or m";
+                throw @"Invalid token: Path must start with M or m";
             }
 
             first = false;
@@ -386,7 +386,7 @@ const bool IsSmoothJoin = true;
                 break;
 
             default:
-                @throw @"Invalid token";
+                throw @"Invalid token";
                 break;
         }
     }

@@ -128,7 +128,7 @@
                 }
             }
             else {
-                @throw [NSString stringWithFormat:@"NYI: segment of type %@", [segment class]];
+                throw [NSString stringWithFormat:@"NYI: segment of type %@", [segment class]];
             }
         }
     }
@@ -138,7 +138,7 @@
 }
 
 - (void)setBounds:(CGRect)newValue {
-    @throw @"Bounds NYI";
+    throw @"Bounds NYI";
 }
 
 @end

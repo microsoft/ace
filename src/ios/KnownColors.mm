@@ -175,7 +175,7 @@ NSString* UnknownColor = @"#00000001";
 
 + (NSString*) ColorStringToKnownColor:(NSString*) colorString {
     if (colorString == nil)
-        @throw @"Null color string";
+        throw @"Null color string";
 
     NSString* colorUpper = [colorString uppercaseString];
 
@@ -556,7 +556,7 @@ NSString* UnknownColor = @"#00000001";
             break;
     }
 
-    @throw [NSString stringWithFormat:@"Unknown color %@", colorString];
+    throw [NSString stringWithFormat:@"Unknown color %@", colorString];
 }
 
 @end

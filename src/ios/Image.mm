@@ -14,7 +14,7 @@
 
     // Default behavior
     self.contentMode = UIViewContentModeScaleAspectFit;
-
+    
     return self;
 }
 
@@ -27,6 +27,9 @@
             }
             else if ([propertyValue isKindOfClass:[ImageSource class]]) {
                 self.image = [Utils getImage:((ImageSource*)propertyValue).UriSource];
+            }
+            else {
+                throw [NSString stringWithFormat:@"Invalid type for Image.Source: %@", [propertyValue class]];
             }
         }
     }

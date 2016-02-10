@@ -27,7 +27,7 @@ const int s_aUpper   = (int) 'A';
         return (intChar-s_aUpper + 10);
     }
 
-    @throw @"Illegal token";
+    throw @"Illegal token";
 }
 
 + (UIColor*) ParseHexColor:(NSString*) trimmedColor {
@@ -78,17 +78,17 @@ const int s_aUpper   = (int) 'A';
         !isNumericColor &&
         !isScRgbColor &&
         !isContextColor) {
-        @throw @"Illegal token";
+        throw @"Illegal token";
     }
 
     if (isNumericColor) {
         return [Parsers ParseHexColor: trimmedColor];
     }
     else if (isContextColor) {
-        @throw @"NYI: Context colors";
+        throw @"NYI: Context colors";
     }
     else if (isScRgbColor) {
-        @throw @"NYI: ScRgb colors";
+        throw @"NYI: ScRgb colors";
     }
     else {
         // TODO: iOS-specific color customizations (not all):

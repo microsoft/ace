@@ -47,7 +47,7 @@
                   if (index == [text length] ||
                       ([text characterAtIndex:index] != '0' &&
                        [text characterAtIndex:index] != '1')) {
-                      @throw @"Illegal token: F must be followed by 0 or 1";
+                      throw @"Illegal token: F must be followed by 0 or 1";
                   }
 
                   fillRule = [text characterAtIndex:index] == '0' ? EvenOdd : Nonzero;

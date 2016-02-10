@@ -108,7 +108,7 @@
                         item = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
                     }
                     else
-                        @throw @"Unhandled AppBarButton icon type";
+                        throw @"Unhandled AppBarButton icon type";
                 }
             }
             else {
@@ -184,7 +184,7 @@
                         item = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
                     }
                     else
-                        @throw @"Unhandled AppBarButton icon type";
+                        throw @"Unhandled AppBarButton icon type";
                 }
             }
             else {
@@ -248,7 +248,7 @@
                         tab = [[UITabBarItem alloc] initWithTitle:abb.Label image:nil tag:i];
                     }
                     else
-                        @throw @"Unhandled AppBarButton icon type";
+                        throw @"Unhandled AppBarButton icon type";
                 }
             }
             else {
