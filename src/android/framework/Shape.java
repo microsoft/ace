@@ -6,7 +6,7 @@ package Windows.UI.Xaml.Controls;
 
 import android.content.Context;
 
-public class Shape extends android.view.View {
+public class Shape extends android.view.View implements IHaveProperties {
     Brush _stroke;
     double _strokeThickness;
     String _strokeStartLineCap;
@@ -24,11 +24,46 @@ public class Shape extends android.view.View {
         _strokeThickness = 1d;
     }
 
+    // IHaveProperties.setProperty
+    public void setProperty(String propertyName, Object propertyValue) {
+      if (!ViewHelper.setProperty(this, propertyName, propertyValue, false)) {
+        if (propertyName.endsWith(".Stroke")) {
+          setStroke((Brush)propertyValue);
+        }
+        else if (propertyName.endsWith(".StrokeThickness")) {
+          setStrokeThickness(run.ace.Utils.getDouble(propertyValue));
+        }
+        else if (propertyName.endsWith(".StrokeStartLineCap")) {
+          setStrokeStartLineCap((String)propertyValue);
+        }
+        else if (propertyName.endsWith(".StrokeEndLineCap")) {
+          setStrokeEndLineCap((String)propertyValue);
+        }
+        else if (propertyName.endsWith(".Fill")) {
+          setFill((Brush)propertyValue);
+        }
+        else if (propertyName.endsWith(".StrokeLineJoin")) {
+          setStrokeLineJoin((String)propertyValue);
+        }
+        else if (propertyName.endsWith(".StrokeMiterLimit")) {
+          setStrokeMiterLimit(run.ace.Utils.getDouble(propertyValue));
+        }
+        else if (propertyName.endsWith(".Stretch")) {
+          setStretch((String)propertyValue);
+        }
+        else {
+          throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);
+        }
+      }
+    }
+
     public Brush getStroke() {
         return _stroke;
     }
     public void setStroke(Brush stroke) {
         _stroke = stroke;
+        // Redraw
+        invalidate();
     }
 
     public double getStrokeThickness() {
@@ -36,6 +71,8 @@ public class Shape extends android.view.View {
     }
     public void setStrokeThickness(double strokeThickness) {
         _strokeThickness = strokeThickness;
+        // Redraw
+        invalidate();
     }
 
     public String getStrokeStartLineCap() {
@@ -43,6 +80,8 @@ public class Shape extends android.view.View {
     }
     public void setStrokeStartLineCap(String strokeStartLineCap) {
         _strokeStartLineCap = strokeStartLineCap;
+        // Redraw
+        invalidate();
     }
 
     public String getStrokeEndLineCap() {
@@ -50,6 +89,8 @@ public class Shape extends android.view.View {
     }
     public void setStrokeEndLineCap(String strokeEndLineCap) {
         _strokeEndLineCap = strokeEndLineCap;
+        // Redraw
+        invalidate();
     }
 
     public Brush getFill() {
@@ -57,6 +98,8 @@ public class Shape extends android.view.View {
     }
     public void setFill(Brush fill) {
         _fill = fill;
+        // Redraw
+        invalidate();
     }
 
     public String getStrokeLineJoin() {
@@ -64,6 +107,8 @@ public class Shape extends android.view.View {
     }
     public void setStrokeLineJoin(String strokeLineJoin) {
         _strokeLineJoin = strokeLineJoin;
+        // Redraw
+        invalidate();
     }
 
     public double getStrokeMiterLimit() {
@@ -71,6 +116,8 @@ public class Shape extends android.view.View {
     }
     public void setStrokeMiterLimit(double strokeMiterLimit) {
         _strokeMiterLimit = strokeMiterLimit;
+        // Redraw
+        invalidate();
     }
 
     public String getStretch() {
@@ -78,5 +125,7 @@ public class Shape extends android.view.View {
     }
     public void setStretch(String stretch) {
         _stretch = stretch;
+        // Redraw
+        invalidate();
     }
 }

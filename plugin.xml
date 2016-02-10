@@ -449,6 +449,9 @@
     <source-file src="src/android/framework/DatePicker.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Frame.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Geometry.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GeometryContext.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GeometryConverter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/GeometryParser.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/GradientStop.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Grid.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/GridLength.java" target-dir="src/run/ace/framework" />
@@ -462,7 +465,9 @@
     <source-file src="src/android/framework/ListBox.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ListBoxItem.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/Page.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/Path.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/PathFigure.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/PathGeometry.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/PathSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/PolyBezierSegment.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/PolyLineSegment.java" target-dir="src/run/ace/framework" />
