@@ -60,4 +60,17 @@
     throw [NSString stringWithFormat:@"Invalid thickness string: %@", text];
 }
 
+// Return a Thickness, whether the input is a number, string, or Thickness
++ (Thickness*) fromObject:(NSObject*)obj {
+  if ([obj isKindOfClass:[NSNumber class]]) {
+    return [Thickness fromNumber:(NSNumber*)obj];
+  }
+  else if ([obj isKindOfClass:[NSString class]]) {
+    return [Thickness parse:(NSString*)obj];
+  }
+  else {
+    return (Thickness*)obj;
+  }
+}
+
 @end

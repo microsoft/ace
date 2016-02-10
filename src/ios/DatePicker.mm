@@ -5,12 +5,14 @@
 #import "DatePicker.h"
 #import "UIViewHelper.h"
 #import "OutgoingMessages.h"
+#import "Thickness.h"
 
 @implementation DatePicker
 
-- (id)init
-{
+- (id)init {
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
+    
+    self.padding = UIEdgeInsetsMake(0, 0, 0, 0);
 
     // Default property values
     _date = [NSDate date];
@@ -22,7 +24,7 @@
     [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
     [_dropDownButton addTarget:self action:@selector(OnDropDownOpened:) forControlEvents:UIControlEventTouchUpInside];
     _dropDownButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+    _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 16);
 
     [self.contentView addSubview:_dropDownButton];
 
@@ -50,6 +52,11 @@
         else if ([propertyName hasSuffix:@".Date"] || [propertyName hasSuffix:@".Time"]) {
             _date = [_datePicker date];
             [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
+        }
+        else if ([propertyName hasSuffix:@".Padding"]) {
+            Thickness* padding = [Thickness fromObject:propertyValue];
+            self.padding = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
+            [self layoutSubviews];
         }
         else {
             throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
@@ -83,24 +90,35 @@
     }
 }
 
-- (void) layoutSubviews
-{
+- (void) layoutSubviews {
     [super layoutSubviews];
-
+    #define BUILT_IN_HEIGHT_PADDING 29
+    
+    // Apply any left/top/bottom padding to the label
+    [self.textLabel sizeToFit];
+    self.textLabel.frame = CGRectMake(self.textLabel.frame.origin.x + self.padding.left,
+                                0,
+                                self.textLabel.frame.size.width,
+                                self.textLabel.frame.size.height + self.padding.top + self.padding.bottom + BUILT_IN_HEIGHT_PADDING);
+                                
     // Align the button, using the label as a guide
-    CGRect r = self.textLabel.frame;
+    CGRect labelRect = self.textLabel.frame;
 
+    // Apply any right padding to the button
     _dropDownButton.frame = CGRectMake(
-                                       r.origin.x + r.size.width,
-                                       r.origin.y - (r.size.height / 2),
-                                       self.frame.size.width - r.origin.x - r.size.width,
-                                       r.size.height * 2);
+                                       labelRect.origin.x + labelRect.size.width,
+                                       labelRect.origin.y - (labelRect.size.height / 2),
+                                       self.frame.size.width - labelRect.origin.x - labelRect.size.width - self.padding.right,
+                                       labelRect.size.height * 2);
+
+    // Base the total size on the label, since it has the padding
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y,
+        self.frame.size.width,
+        labelRect.size.height);
 }
 
--(void)OnDropDownOpened:(id)sender
-{
-    if (_sheet == nil)
-    {
+-(void)OnDropDownOpened:(id)sender {
+    if (_sheet == nil) {
         _sheet = [[CustomActionSheet alloc] init];
         _sheet.Child = _datePicker;
     }

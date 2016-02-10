@@ -133,19 +133,17 @@
         }
         handled = true;
     }
-    //TODO: Padding and Margin are treated the same way
-    else if ([propertyName hasSuffix:@".Padding"] || [propertyName hasSuffix:@".Margin"]) {
-        if ([propertyValue isKindOfClass:[NSNumber class]]) {
-            [instance.layer setValue:[Thickness fromNumber:(NSNumber*)propertyValue] forKey:@"Ace.Padding"];
-        }
-        else if ([propertyValue isKindOfClass:[NSString class]]) {
-            [instance.layer setValue:[Thickness parse:(NSString*)propertyValue] forKey:@"Ace.Padding"];
-        }
-        else {
-            Thickness* t = (Thickness*)propertyValue;
-            [instance.layer setValue:t forKey:@"Ace.Padding"];
-        }
+    else if ([propertyName hasSuffix:@".Margin"]) {
+      [instance.layer setValue:[Thickness fromObject:propertyValue] forKey:@"Ace.Margin"];
+      handled = true;
+    }
+    else if ([propertyName hasSuffix:@".Padding"]) {
+      Thickness* padding = [Thickness fromObject:propertyValue];
+      if ([instance isKindOfClass:[UIButton class]]) {
+        ((UIButton*)instance).contentEdgeInsets = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
         handled = true;
+      }
+      // Leave Padding unhandled on all other view types
     }
     else if ([propertyName hasSuffix:@".BottomAppBar"]) {
         // This is valid when treating the default root view as a Page

@@ -14,4 +14,7 @@
     int _isOnChangedHandlers;
     AceHandle* _handle;
 }
+
+@property UIEdgeInsets padding;
+
 @end

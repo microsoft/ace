@@ -78,7 +78,7 @@
                 double width = child.bounds.size.width;
                 double height = child.bounds.size.height;
 
-                Thickness* t = [child.layer valueForKey:@"Ace.Padding"];
+                Thickness* t = [child.layer valueForKey:@"Ace.Margin"];
                 if (t != nil) {
                     width = width + t.left + t.right;
                     height = height + t.top + t.bottom;
@@ -127,7 +127,7 @@
             double height = child.bounds.size.height;
             double halignAdjustment = 0;
 
-            Thickness* t = [child.layer valueForKey:@"Ace.Padding"];
+            Thickness* t = [child.layer valueForKey:@"Ace.Margin"];
 
             if (_isVertical) {
                 width = self.bounds.size.width;

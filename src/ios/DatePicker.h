@@ -19,6 +19,8 @@
     AceHandle* _handle;
 }
 
+@property UIEdgeInsets padding;
+
 -(void)OnDropDownOpened:(id)sender;
 
 @end

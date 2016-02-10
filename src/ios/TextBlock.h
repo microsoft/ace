@@ -7,4 +7,7 @@
 enum TextAlignment { TextAlignmentCenter, TextAlignmentLeft, TextAlignmentRight, TextAlignmentJustify };
 
 @interface TextBlock : UILabel <IHaveProperties>
+
+@property UIEdgeInsets padding;
+
 @end

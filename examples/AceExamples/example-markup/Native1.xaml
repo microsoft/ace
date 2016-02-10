@@ -11,12 +11,12 @@
         </Style>
     </StackPanel.Resources>
     
-    <DatePicker Padding="15" Header="Choose a date" ace:On.DateChanged="onDateChanged(this)"/>
-    <TimePicker Padding="15" Header="Choose a time" ace:On.TimeChanged="onTimeChanged(this)"/>
-    <TextBlock Name="textBlock" FontSize="20" Padding="15" Foreground="Green">
+    <DatePicker Margin="15" Header="Choose a date" ace:On.DateChanged="onDateChanged(this)"/>
+    <TimePicker Margin="15" Header="Choose a time" ace:On.TimeChanged="onTimeChanged(this)"/>
+    <TextBlock Name="textBlock" FontSize="20" Margin="15" Foreground="Green">
         Text
     </TextBlock>
-    <ToggleSwitch Header="ToggleSwitch" IsOn="True" Padding="15"/>
+    <ToggleSwitch Header="ToggleSwitch" IsOn="True" Margin="15"/>
     <Button Background="Red" ace:On.Click="ace.goBack()">
         Back
     </Button>

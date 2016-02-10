@@ -5,11 +5,14 @@
 #import "ToggleSwitch.h"
 #import "UIViewHelper.h"
 #import "OutgoingMessages.h"
+#import "Thickness.h"
 
 @implementation ToggleSwitch
 
 - (id)init {
     self = [super init];
+
+    self.padding = UIEdgeInsetsMake(0, 0, 0, 0);
 
     _header = [[UILabel alloc] init];
     _switch = [[UISwitch alloc] init];
@@ -41,6 +44,11 @@
             else {
                 _header.text = [propertyValue description];
             }
+        }
+        else if ([propertyName hasSuffix:@".Padding"]) {
+            Thickness* padding = [Thickness fromObject:propertyValue];
+            self.padding = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
+            [self layoutSubviews];
         }
         else {
             throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
@@ -81,20 +89,27 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    #define LEFTMARGIN 20
-    #define RIGHTMARGIN 20
-
     if (_header.text == nil) {
         // Whatever size was given to this this wrapping view should be given entirely to the switch
-        _switch.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        // (but respecting any padding)
+        _switch.frame = CGRectMake(self.padding.left, self.padding.top, 
+            self.frame.size.width - self.padding.left - self.padding.right, 
+            self.frame.size.height - self.padding.top - self.padding.bottom);
     }
     else {
         // Do the normal header + switch layout
-        _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN,
-                                   (self.frame.size.height - _switch.frame.size.height) / 2,
-                                   _switch.frame.size.width, _switch.frame.size.height);
+        #define LEFTMARGIN 20
+        #define RIGHTMARGIN 20
 
-        _header.frame = CGRectMake(LEFTMARGIN, 0, self.frame.size.width - LEFTMARGIN, self.frame.size.height);
+        _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN - self.padding.right,
+                                   ((self.frame.size.height - self.padding.top - self.padding.bottom - _switch.frame.size.height) / 2) + self.padding.top,
+                                   _switch.frame.size.width, 
+                                   _switch.frame.size.height);
+
+        _header.frame = CGRectMake(LEFTMARGIN + self.padding.left,
+                                   self.padding.top,
+                                   self.frame.size.width - LEFTMARGIN - self.padding.left - self.padding.right,
+                                   self.frame.size.height - self.padding.top - self.padding.bottom);
     }
 }
 

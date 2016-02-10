@@ -12,5 +12,6 @@
 + (NSObject*) deserialize:(NSDictionary*)obj;
 + (Thickness*) parse:(NSString*)text;
 + (Thickness*) fromNumber:(NSNumber*)number;
++ (Thickness*) fromObject:(NSObject*)obj;
 
 @end
