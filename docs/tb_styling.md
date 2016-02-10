@@ -50,7 +50,6 @@ Common visual properties include:
 * Foreground
 * Height
 * Margin
-* Padding
 * Width
 
 These cross-platform properties can not only be set on objects in the [cross-platform UI framework](/ace/docs/ref), but they can be set 
