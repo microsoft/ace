@@ -3,7 +3,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
 
-﻿//
+//
 // A NativeObject whose instantiation was triggered in native code
 //
 function WrappedNativeObject(handle) {

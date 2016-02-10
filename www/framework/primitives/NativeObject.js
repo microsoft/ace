@@ -3,7 +3,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
 
-﻿//
+//
 // The base class for all objects with a corresponding native instance.
 // All objects have a handle property.
 //
