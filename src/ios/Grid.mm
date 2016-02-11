@@ -80,6 +80,7 @@
     NSMutableArray* colAutoWidths = nil;
 
     if (count > 0) {
+        // Calculate what would be the auto height of each row
         if (numRows > 0) {
             rowAutoHeights = [NSMutableArray arrayWithCapacity:numRows];
             for (unsigned long i = 0; i < numRows; i++) {
@@ -94,12 +95,22 @@
                     if (rowSpan == 1) {
                         unsigned long row = MIN([[child.layer valueForKey:@"Grid.Row"] intValue], numRows - 1);
                         double h = [rowAutoHeights[row] doubleValue];
-                        //TODO: Shouldn't this be MAX(h, ...height)?
-                        rowAutoHeights[row] = [NSNumber numberWithDouble:h + child.frame.size.height];
+                        float childHeight = child.frame.size.height;
+
+                        // Apply any margin
+                        Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
+                        if (margin != nil) {
+                            childHeight += margin.top + margin.bottom;
+                        }
+
+                        //TODO: Shouldn't this be MAX(h, childHeight)?
+                        rowAutoHeights[row] = [NSNumber numberWithDouble:h + childHeight];
                     }
                 }
             }
         }
+
+        // Calculate what would be the auto width of each column
         if (numCols > 0) {
             colAutoWidths = [NSMutableArray arrayWithCapacity:numCols];
             for (unsigned long i = 0; i < numCols; i++) {
@@ -114,8 +125,16 @@
                     if (colSpan == 1) {
                         unsigned long col = MIN([[child.layer valueForKey:@"Grid.Column"] intValue], numCols - 1);
                         double w = [colAutoWidths[col] doubleValue];
-                        //TODO: Shouldn't this be MAX(w, ...width)?
-                        colAutoWidths[col] = [NSNumber numberWithDouble:w + child.frame.size.width];
+                        float childWidth = child.frame.size.width;
+
+                        // Apply any margin
+                        Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
+                        if (margin != nil) {
+                            childWidth += margin.left + margin.right;
+                        }
+
+                        //TODO: Shouldn't this be MAX(w, childWidth)?
+                        colAutoWidths[col] = [NSNumber numberWithDouble:w + childWidth];
                     }
                 }
             }
@@ -271,6 +290,15 @@
                 finalWidth += cd->calculatedWidth;
                 if (span == 0)
                     finalLeft = cd->calculatedLeft;
+            }
+
+            // Margins were factored into the calculated width/height, so we must adjust accordingly
+            Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
+            if (margin != nil) {
+                finalLeft += margin.left;
+                finalTop += margin.top;
+                finalWidth -= (margin.left + margin.right);
+                finalHeight -= (margin.top + margin.bottom);
             }
 
             child.frame = CGRectMake(finalLeft, finalTop, finalWidth, finalHeight);

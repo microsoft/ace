@@ -87,8 +87,8 @@
             double height = child.bounds.size.height;
             Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
             if (margin != nil) {
-                width = width + margin.left + margin.right;
-                height = height + margin.top + margin.bottom;
+                width += margin.left + margin.right;
+                height += margin.top + margin.bottom;
             }
 
             // Keep track of total width and height (for the direction of stacking)
