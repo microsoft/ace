@@ -74,18 +74,20 @@ XbfDump.dumpComplexProperty = function (propertyNode, indent) {
     var propertyName = propertyNode.getPropertyName();
     var propertyOwner = propertyNode.getPropertyOwner();
 
+    console.log(indent + "<" + propertyOwner + "." + propertyName + ">");
+
     var valuesCount = propertyNode.values.length;
     for (var i = 0; i < valuesCount; i++) {
         var childNode = propertyNode.values[i];
         if (childNode != null) {
-            console.log(indent + "<" + propertyOwner + "." + propertyName + ">");
             XbfDump.dumpElement(childNode, indent + "  ");
-            console.log(indent + "</" + propertyOwner + "." + propertyName + ">");
         }
         else {
             throw new Error("Null child property object");
         }
     }
+
+    console.log(indent + "</" + propertyOwner + "." + propertyName + ">");
 };
 
 XbfDump.convertValue = function (value) {
