@@ -115,7 +115,16 @@
             [instance.layer setValue:[(NSString*)propertyValue lowercaseString] forKey:@"Ace.HorizontalAlignment"];
         }
         else {
-            throw "NYI: non-string horizontalalignment";
+            throw "NYI: non-string HorizontalAlignment";
+        }
+        return true;
+    }
+    else if ([propertyName hasSuffix:@".VerticalAlignment"]) {
+        if ([propertyValue isKindOfClass:[NSString class]]) {
+            [instance.layer setValue:[(NSString*)propertyValue lowercaseString] forKey:@"Ace.VerticalAlignment"];
+        }
+        else {
+            throw "NYI: non-string VerticalAlignment";
         }
         return true;
     }
