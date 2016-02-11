@@ -9,6 +9,10 @@
     UIView* _content;
     BOOL _isFullScreen;
 	BOOL _hasExplicitSize;
+    CGFloat _explicitX;
+    CGFloat _explicitY;
+    CGFloat _explicitWidth;
+    CGFloat _explicitHeight;
 }
 
 + (void) CloseAll;

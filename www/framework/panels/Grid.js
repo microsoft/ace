@@ -38,6 +38,9 @@ Grid.prototype.getColumnDefinitions = function () {
 };
 Grid.prototype.setColumnDefinitions = function (collection) { this.set("Grid.ColumnDefinitions", collection); };
 
+Grid.prototype.getPadding = function () { return this.get("Grid.Padding"); };
+Grid.prototype.setPadding = function (thickness) { this.set("Grid.Padding", thickness); };
+
 Grid.prototype.getRowDefinitions = function () {
     // Give an empty collection by default rather than null
     var definitions = this.get("Grid.RowDefinitions");

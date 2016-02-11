@@ -26,4 +26,14 @@
     return CGRectMake(r.origin.x, r.origin.y, width, height);
 }
 
++ (CGRect) replace:(CGRect)r size:(CGSize)size {
+    return CGRectMake(r.origin.x, r.origin.y, size.width, size.height);
+}
+
++ (CGRect) increaseSize:(CGRect)r withPadding:(UIEdgeInsets)padding {
+    return CGRectMake(r.origin.x, r.origin.y,
+            r.size.width + padding.left + padding.right,
+            r.size.height + padding.top + padding.bottom);
+}
+
 @end

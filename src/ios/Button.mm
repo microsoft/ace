@@ -128,6 +128,19 @@
     }
 }
 
+- (CGSize) sizeThatFits:(CGSize)size {
+    CGSize desiredSize = [super sizeThatFits:size];
+
+    #define BUTTON_DEFAULT_PADDING 20
+    #define BUTTON_MIN_WIDTH 90
+
+    // Add default padding and enforce a min width
+    CGFloat width = MAX(desiredSize.width + BUTTON_DEFAULT_PADDING, BUTTON_MIN_WIDTH);
+    CGFloat height = desiredSize.height + BUTTON_DEFAULT_PADDING;
+    
+    return CGSizeMake(width, height);
+}
+
 // Note: This is sometimes invoked externally, like by the consumption of AppBarButtons in the view controller:
 - (void)onClick:(id)sender {
     [OutgoingMessages raiseEvent:@"click" handle:_handle eventData:nil];

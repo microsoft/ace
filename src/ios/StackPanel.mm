@@ -11,11 +11,10 @@
 - (id) init {
     self = [super init];
 
+    self.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+
     // Default property values
     _isVertical = true;
-    // TODO: Set these to false when Width/Height are set:
-    _autoWidth = true;
-    _autoHeight = true;
 
     return self;
 }
@@ -42,6 +41,11 @@
                 _isVertical = true;
             }
         }
+        else if ([propertyName hasSuffix:@".Padding"]) {
+            Thickness* padding = [Thickness fromObject:propertyValue];
+            self.padding = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
+            [self layoutSubviews];
+        }
         else {
             throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
         }
@@ -52,6 +56,7 @@
 - (void) add:(NSObject*)collection item:(NSObject*)item {
     //assert collection == _children;
     [self addSubview:(UIView*)item];
+    [UIViewHelper resize:self];
 }
 
 // IRecieveCollectionChanges.removeAt
@@ -59,67 +64,77 @@
     //assert collection == _children;
     UIView* view = [self subviews][index];
     [view removeFromSuperview];
+    [UIViewHelper resize:self];
+}
+
+- (CGSize) sizeThatFits:(CGSize)size {
+    CGSize desiredSize = size;
+
+    // UIViewHelper.resize must be called on each child for correct layout behavior
+    double maxChildWidth = 0;
+    double maxChildHeight = 0;
+    double totalWidth = 0;
+    double totalHeight = 0;
+    unsigned long count = _children.Count;
+    for (unsigned long i = 0; i < count; i++) {
+        UIView* child = _children[i];
+        if (child != nil) {
+            // Start out with each child as its natural size
+            [UIViewHelper resize:child];
+            
+            // Apply any margin
+            double width = child.bounds.size.width;
+            double height = child.bounds.size.height;
+            Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
+            if (margin != nil) {
+                width = width + margin.left + margin.right;
+                height = height + margin.top + margin.bottom;
+            }
+
+            // Keep track of total width and height (for the direction of stacking)
+            // and max child width and height (for the perpendicular direction)
+            totalWidth += width;
+            totalHeight += height;
+            if (width > maxChildWidth)
+                maxChildWidth = width;
+            if (height > maxChildHeight)
+                maxChildHeight = height;
+        }
+    }
+
+    // Size to content if auto width or height.
+    // Explicit width/height is taken care of externally.
+    NSNumber* explicitWidth = [self.layer valueForKey:@"Ace.Width"];
+    NSNumber* explicitHeight = [self.layer valueForKey:@"Ace.Height"];    
+    if (explicitWidth == nil || explicitHeight == nil) {
+        // Apply the calculated width/height based on the orientation
+        double w;
+        double h;
+        if (_isVertical) {
+            w = (explicitWidth == nil)  ? maxChildWidth : [explicitWidth intValue];
+            h = (explicitHeight == nil) ? totalHeight   : [explicitHeight intValue];
+        }
+        else {
+            w = (explicitWidth == nil)  ? totalWidth     : [explicitWidth intValue];
+            h = (explicitHeight == nil) ? maxChildHeight : [explicitHeight intValue];
+        }
+        
+        // Apply any padding
+        CGFloat finalWidth = w + self.padding.left + self.padding.right;
+        CGFloat finalHeight = h + self.padding.top + self.padding.bottom;
+        desiredSize = CGSizeMake(finalWidth, finalHeight);
+    }
+
+    // Now we've got the entire size
+    return desiredSize;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
     unsigned long count = _children.Count;
 
-    // Size to content if auto width or height
-    if (_autoWidth || _autoHeight) {
-        double maxChildWidth = 0;
-        double maxChildHeight = 0;
-        double totalWidth = 0;
-        double totalHeight = 0;
-        for (unsigned long i = 0; i < count; i++) {
-            UIView* child = _children[i];
-            if (child != nil) {
-                double width = child.bounds.size.width;
-                double height = child.bounds.size.height;
-
-                Thickness* t = [child.layer valueForKey:@"Ace.Margin"];
-                if (t != nil) {
-                    width = width + t.left + t.right;
-                    height = height + t.top + t.bottom;
-                }
-
-                totalWidth += width;
-                totalHeight += height;
-                if (width > maxChildWidth)
-                    maxChildWidth = width;
-                if (height > maxChildHeight)
-                    maxChildHeight = height;
-            }
-        }
-        double x = self.frame.origin.x;
-        double y = self.frame.origin.y;
-        double w = self.frame.size.width;
-        double h = self.frame.size.height;
-        if (_isVertical) {
-            if (_autoWidth && w == 0) {
-                // Only update width if the current width was 0
-                w = maxChildWidth;
-            }
-            if (_autoHeight) {
-                h = totalHeight;
-            }
-        }
-        else {
-            if (_autoWidth) {
-                w = totalWidth;
-            }
-            if (_autoHeight && h == 0) {
-                // Only update height if the current height was 0
-                h = maxChildHeight;
-            }
-        }
-        self.frame = CGRectMake(x, y, w, h);
-    }
-
-    // Now size the children
-    double top = 0;
-    double left = 0;
+    double top = self.padding.top;
+    double left = self.padding.left;
     for (unsigned long i = 0; i < count; i++) {
         UIView* child = _children[i];
         if (child != nil) {
@@ -127,49 +142,53 @@
             double height = child.bounds.size.height;
             double halignAdjustment = 0;
 
-            Thickness* t = [child.layer valueForKey:@"Ace.Margin"];
+            Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
 
             if (_isVertical) {
-                width = self.bounds.size.width;
+                width = self.bounds.size.width - self.padding.left - self.padding.right;
 
                 // TODO: Only handling this one case for now
                 NSString* halign = [child.layer valueForKey:@"Ace.HorizontalAlignment"];
                 if (halign != nil) {
                     if ([halign compare:@"center"] == 0) {
+                        double parentWidth = width;
                         width = child.bounds.size.width;
-                        if (t != nil) {
-                            halignAdjustment = (self.bounds.size.width - child.bounds.size.width - t.left - t.right) / 2;
+                        if (margin != nil) {
+                            halignAdjustment = (parentWidth - width - margin.left - margin.right) / 2;
+                            // Add margins to the width, simply because they're going to be subtracted below
+                            width += margin.left + margin.right;
                         }
                         else {
-                            halignAdjustment = (self.bounds.size.width - child.bounds.size.width) / 2;
+                            halignAdjustment = (parentWidth - width) / 2;
                         }
                     }
                 }
             }
             else {
-                height = self.bounds.size.height;
+                height = self.bounds.size.height - self.padding.top - self.padding.bottom;
             }
 
-            if (t != nil) {
+            if (margin != nil) {
                 if (_isVertical)
-                    child.frame = CGRectMake(left + t.left + halignAdjustment, top + t.top, width - t.right - t.left, height);
+                    child.frame = CGRectMake(left + halignAdjustment + margin.left, top + margin.top, width - margin.right - margin.left, height);
                 else
-                    child.frame = CGRectMake(left + t.left, top + t.top, width, height - t.bottom - t.top);
+                    child.frame = CGRectMake(left + margin.left, top + margin.top, width, height - margin.bottom - margin.top);
             }
             else {
                 child.frame = CGRectMake(left + halignAdjustment, top, width, height);
             }
 
+            // Move the top/left pointers
             if (_isVertical) {
                 top += height;
-                if (t != nil) {
-                    top = top + t.top + t.bottom;
+                if (margin != nil) {
+                    top = top + margin.top + margin.bottom;
                 }
             }
             else {
                 left += width;
-                if (t != nil) {
-                    left = left + t.left + t.right;
+                if (margin != nil) {
+                    left = left + margin.left + margin.right;
                 }
             }
         }

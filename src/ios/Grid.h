@@ -18,4 +18,6 @@
 @property RowDefinitionCollection* RowDefinitions;
 @property ColumnDefinitionCollection* ColumnDefinitions;
 
+@property UIEdgeInsets padding;
+
 @end

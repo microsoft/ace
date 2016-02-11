@@ -25,14 +25,14 @@
         else {
             instance.text = [propertyValue description];
         }
-        [instance sizeToFit]; // TODO: Only if size not explicitly set
+        [UIViewHelper resize:instance];
         return true;
     }
     else if ([propertyName hasSuffix:@".Inlines"]) {
         InlineCollection* inlines = (InlineCollection*)propertyValue;
         // TODO: Handling of multiple Runs and with separate formatting
         instance.text = (NSString*)inlines[0];
-        [instance sizeToFit]; // TODO: Only if size not explicitly set
+        [UIViewHelper resize:instance];
         return true;
     }
     else if ([propertyName hasSuffix:@".FontSize"]) {
@@ -46,7 +46,7 @@
         }
         UIFont* f = [instance.font fontWithSize:size];
         [instance setFont:f];
-        [instance sizeToFit]; // TODO: Only if size not explicitly set
+        [UIViewHelper resize:instance];
         return true;
     }
     else if ([propertyName hasSuffix:@".FontWeight"]) {
@@ -103,7 +103,7 @@
         }
         UIFont* f = [UIFont systemFontOfSize:instance.font.pointSize weight:weight];
         [instance setFont:f];
-        [instance sizeToFit]; // TODO: Only if size not explicitly set
+        [UIViewHelper resize:instance];
         return true;
     }
     else if ([propertyName hasSuffix:@".FontStyle"]) {
@@ -152,7 +152,7 @@
         else {
             throw [NSString stringWithFormat:@"Unknown %@: %@", propertyName, propertyValue];
         }
-        [instance sizeToFit]; // TODO: Only if size not explicitly set
+        [UIViewHelper resize:instance];
         return true;
     }
 

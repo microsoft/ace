@@ -4,9 +4,17 @@
 //-------------------------------------------------------------------------------------------------------
 #import "Grid.h"
 #import "UIViewHelper.h"
-#import "Utils.h"
+#import "Thickness.h"
 
 @implementation Grid
+
+- (id) init {
+    self = [super init];
+
+    self.padding = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    return self;
+}
 
 // IHaveProperties.setProperty
 - (void) setProperty:(NSString*)propertyName value:(NSObject*)propertyValue {
@@ -28,6 +36,11 @@
         else if ([propertyName compare:@"Grid.ColumnDefinitions"] == 0) {
             self.ColumnDefinitions = (ColumnDefinitionCollection*)propertyValue;
         }
+        else if ([propertyName hasSuffix:@".Padding"]) {
+            Thickness* padding = [Thickness fromObject:propertyValue];
+            self.padding = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
+            [self layoutSubviews];
+        }
         else {
             throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
         }
@@ -38,6 +51,7 @@
 - (void) add:(NSObject*)collection item:(NSObject*)item {
     //assert collection == _children;
     [self addSubview:(UIView*)item];
+    [UIViewHelper resize:self];
 }
 
 // IRecieveCollectionChanges.removeAt
@@ -45,20 +59,21 @@
     //assert collection == _children;
     UIView* view = [self subviews][index];
     [view removeFromSuperview];
+    [UIViewHelper resize:self];
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-
+- (CGSize) sizeThatFits:(CGSize)size {
+    CGSize desiredSize = size;
+    
+    // UIViewHelper.resize must be called on each child for correct layout behavior
+    unsigned long count = _children.Count;
     unsigned long numRows = self.RowDefinitions.Count;
     unsigned long numCols = self.ColumnDefinitions.Count;
 
-    double totalStarHeight = self.frame.size.height;
+    double totalStarHeight = size.height - self.padding.top - self.padding.bottom;
     double numStarHeightChunks = 0;
-    double totalStarWidth = self.frame.size.width;
+    double totalStarWidth = size.width - self.padding.left - self.padding.right;
     double numStarWidthChunks = 0;
-
-    unsigned long count = _children.Count;
 
     // First get actual child sizes for the sake of Auto rows and columns
     NSMutableArray* rowAutoHeights = nil;
@@ -148,34 +163,56 @@
     }
 
     // Now divvy up the star chunks and calculate positions
-    {
-        double starHeight = totalStarHeight / numStarHeightChunks;
-        double currentTop = 0;
-        for (unsigned long i = 0; i < numRows; i++) {
-            RowDefinition* rd = self.RowDefinitions[i];
-            if (rd->height->type == GridUnitTypeStar) {
-                rd->calculatedHeight = rd->height->gridValue * starHeight;
-            }
+    double currentTop = self.padding.top;
+    double currentLeft = self.padding.left;
+    double starHeight = totalStarHeight / numStarHeightChunks;
+    double starWidth = totalStarWidth / numStarWidthChunks;
 
-            rd->calculatedTop = currentTop;
-            currentTop += rd->calculatedHeight;
+    for (unsigned long i = 0; i < numRows; i++) {
+        RowDefinition* rd = self.RowDefinitions[i];
+        if (rd->height->type == GridUnitTypeStar) {
+            rd->calculatedHeight = rd->height->gridValue * starHeight;
         }
+
+        rd->calculatedTop = currentTop;
+        currentTop += rd->calculatedHeight;
     }
-    {
-        double starWidth = totalStarWidth / numStarWidthChunks;
-        double currentLeft = 0;
-        for (unsigned long i = 0; i < numCols; i++) {
-            ColumnDefinition* cd = self.ColumnDefinitions[i];
-            if (cd->width->type == GridUnitTypeStar) {
-                cd->calculatedWidth = cd->width->gridValue * starWidth;
-            }
-
-            cd->calculatedLeft = currentLeft;
-            currentLeft += cd->calculatedWidth;
+    for (unsigned long i = 0; i < numCols; i++) {
+        ColumnDefinition* cd = self.ColumnDefinitions[i];
+        if (cd->width->type == GridUnitTypeStar) {
+            cd->calculatedWidth = cd->width->gridValue * starWidth;
         }
+
+        cd->calculatedLeft = currentLeft;
+        currentLeft += cd->calculatedWidth;
     }
 
-    // Now place the children
+    // Size to content if auto width or height.
+    // Explicit width/height is taken care of externally.
+    NSNumber* explicitWidth = [self.layer valueForKey:@"Ace.Width"];
+    NSNumber* explicitHeight = [self.layer valueForKey:@"Ace.Height"];    
+    if (explicitWidth == nil || explicitHeight == nil) {
+        // Apply the remainder of the padding (if any)
+        CGFloat finalWidth = currentLeft + self.padding.right;
+        CGFloat finalHeight = currentTop + self.padding.bottom;
+        desiredSize = CGSizeMake(finalWidth, finalHeight);
+    }
+
+    // Now we've got the entire size
+    return desiredSize;
+}
+
+- (void)layoutSubviews {
+    // Update all row/column calculations for the current size
+    [self sizeToFit];
+    
+    [super layoutSubviews];
+    
+    unsigned long count = _children.Count;
+    unsigned long numRows = self.RowDefinitions.Count;
+    unsigned long numCols = self.ColumnDefinitions.Count;
+
+    // Place the children, based on the calculations done in sizeThatFits
     for (unsigned long i = 0; i < count; i++) {
         UIView* child = (UIView*)_children[i];
         if (child != nil) {

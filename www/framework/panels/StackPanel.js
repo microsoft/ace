@@ -16,4 +16,7 @@ StackPanel.prototype = Object.create(ace.Panel.prototype);
 StackPanel.prototype.getOrientation = function () { return this.get("StackPanel.Orientation"); };
 StackPanel.prototype.setOrientation = function (orientation) { this.set("StackPanel.Orientation", orientation); };
 
+StackPanel.prototype.getPadding = function () { return this.get("StackPanel.Padding"); };
+StackPanel.prototype.setPadding = function (thickness) { this.set("StackPanel.Padding", thickness); };
+
 module.exports = StackPanel;

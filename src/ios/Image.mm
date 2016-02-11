@@ -19,6 +19,13 @@
     return self;
 }
 
+- (CGSize) sizeThatFits:(CGSize)size {
+    // Set to natural image size by default
+    CGFloat width = self.image == nil ? 0 : self.image.size.width * self.image.scale;
+    CGFloat height = self.image == nil ? 0 : self.image.size.height * self.image.scale;
+    return CGSizeMake(width, height);
+}
+
 // IHaveProperties.setProperty
 - (void) setProperty:(NSString*)propertyName value:(NSObject*)propertyValue {
     if (![UIViewHelper setProperty:self propertyName:propertyName propertyValue:propertyValue]) {
@@ -32,16 +39,8 @@
             else {
                 throw [NSString stringWithFormat:@"Invalid type for Image.Source: %@", [propertyValue class]];
             }
-
-            // Set to natural image size by default
-            NSNumber* w = [self.layer valueForKey:@"Ace.Width"];
-            NSNumber* h = [self.layer valueForKey:@"Ace.Height"];
-            if (w == nil) {
-                self.frame = [RectUtils replace:self.frame width:self.image.size.width * self.image.scale];
-            }
-            if (h == nil) {
-                self.frame = [RectUtils replace:self.frame height:self.image.size.height * self.image.scale];
-            }
+            // A source change could change this element's size
+            [UIViewHelper resize:self];
         }
     }
 }

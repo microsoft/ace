@@ -10,7 +10,6 @@
 - (id)init {
     self = [super init];
     self.delegate = self;
-    self.frame = CGRectMake(0, 0, 300.0, 500.0); // TODO: Default size
     return self;
 }
 
@@ -26,6 +25,11 @@
             throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
         }
     }
+}
+
+- (CGSize) sizeThatFits:(CGSize)size {
+    // Choose an arbitrary default size
+    return CGSizeMake(300, 500);
 }
 
 - (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {

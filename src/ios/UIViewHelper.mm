@@ -15,7 +15,6 @@
 @implementation UIViewHelper
 
 + (BOOL) setProperty:(UIView*)instance propertyName:(NSString*)propertyName propertyValue:(NSObject*)propertyValue {
-    bool handled = false;
     if ([propertyName hasSuffix:@".Content"]) {
         if (propertyValue == nil) {
             // Remove all subviews
@@ -60,8 +59,6 @@
                     //TODO: App bar, too
                 }
             }
-
-            handled = true;
         }
         else {
             if ([instance isKindOfClass:[UIButton class]])
@@ -69,7 +66,7 @@
             else
                 throw [NSString stringWithFormat:@"NYI non-string, non-UIView content on non-Button %@", [instance description]];
         }
-        handled = true;
+        return true;
     }
     else if ([propertyName hasSuffix:@".Background"]) {
       UIColor* color = [Color fromObject:propertyValue withDefault:nil];
@@ -79,7 +76,7 @@
       else {
         instance.backgroundColor = color;
       }
-      handled = true;
+      return true;
     }
     else if ([propertyName hasSuffix:@".Width"]) {
         if (propertyValue == nil) {
@@ -95,7 +92,7 @@
             // Update the width
             instance.frame = [RectUtils replace:instance.frame width:value];
         }
-        handled = true;
+        return true;
     }
     else if ([propertyName hasSuffix:@".Height"]) {
         if (propertyValue == nil) {
@@ -111,7 +108,7 @@
             // Update the height
             instance.frame = [RectUtils replace:instance.frame height:value];
         }
-        handled = true;
+        return true;
     }
     else if ([propertyName hasSuffix:@".HorizontalAlignment"]) {
         if ([propertyValue isKindOfClass:[NSString class]]) {
@@ -120,78 +117,63 @@
         else {
             throw "NYI: non-string horizontalalignment";
         }
-        handled = true;
+        return true;
     }
     else if ([propertyName hasSuffix:@".Margin"]) {
       [instance.layer setValue:[Thickness fromObject:propertyValue] forKey:@"Ace.Margin"];
-      handled = true;
+      return true;
     }
     else if ([propertyName hasSuffix:@".Padding"]) {
       Thickness* padding = [Thickness fromObject:propertyValue];
       if ([instance isKindOfClass:[UIButton class]]) {
         ((UIButton*)instance).contentEdgeInsets = UIEdgeInsetsMake(padding.top, padding.left, padding.bottom, padding.right);
-        handled = true;
+        return true;
       }
       // Leave Padding unhandled on all other view types
     }
     else if ([propertyName hasSuffix:@".BottomAppBar"]) {
         // This is valid when treating the default root view as a Page
         [CommandBar showTabBar:propertyValue on:[Frame getNavigationController].topViewController animated:false];
-        return true; // Don't adjust size based on this
+        return true;
     }
     else if ([propertyName hasSuffix:@".TopAppBar"]) {
         // This is valid when treating the default root view as a Page
         [CommandBar showNavigationBar:(CommandBar*)propertyValue on:[Frame getNavigationController].topViewController animated:false];
-        return true; // Don't adjust size based on this
+        return true;
     }
     else if ([propertyName hasSuffix:@".Resources"] || [propertyName hasSuffix:@".Style"]) {
         // Accept this, but don't actually do anything with the object.
         // Resources and styles are handled on the managed side.
-        return true; // Don't adjust size based on this
+        return true;
     }
-    else if ([propertyName compare:@"Canvas.Left"] == 0) {
-        float pos = [(NSNumber*)propertyValue floatValue];
-        CGRect newFrame = instance.frame;
-        newFrame.origin.x = pos;
-        instance.frame = newFrame;
-        return true; // Don't adjust size based on this
-    }
-    else if ([propertyName compare:@"Canvas.Top"] == 0) {
-        float pos = [(NSNumber*)propertyValue floatValue];
-        CGRect newFrame = instance.frame;
-        newFrame.origin.y = pos;
-        instance.frame = newFrame;
-        return true; // Don't adjust size based on this
-    }
-    else if ([propertyName compare:@"Grid.Row"] == 0 ||
+    // Attached layout properties
+    else if ([propertyName compare:@"Canvas.Left"] == 0 ||
+             [propertyName compare:@"Canvas.Top"] == 0 ||
+             [propertyName compare:@"Grid.Row"] == 0 ||
              [propertyName compare:@"Grid.RowSpan"] == 0 ||
              [propertyName compare:@"Grid.Column"] == 0 ||
              [propertyName compare:@"Grid.ColumnSpan"] == 0) {
         [instance.layer setValue:propertyValue forKey:propertyName];
-        return true; // Don't adjust size based on this
+        // TODO: Invalidate relevant layout
+        return true;
     }
     
-    //
-    // Special sizing of any UIButtons (default padding and height)
-    //
-    if ([instance isKindOfClass:[UIButton class]]) {
-        #define BUTTON_DEFAULT_PADDING 20
-        #define BUTTON_MIN_WIDTH 90
+    return false;
+}
 
-        [instance sizeToFit];
-
-        // See if an explicit width/height has been assigned
-        NSNumber* w = [instance.layer valueForKey:@"Ace.Width"];
-        NSNumber* h = [instance.layer valueForKey:@"Ace.Height"];
-
-        // Add default padding to any dimension without an explicit length,
-        // and enforce a min width
-        CGFloat width = w == nil ? MAX(instance.frame.size.width + BUTTON_DEFAULT_PADDING, BUTTON_MIN_WIDTH) : [w intValue];
-        CGFloat height = h == nil ? instance.frame.size.height + BUTTON_DEFAULT_PADDING : [h intValue];
-        instance.frame = [RectUtils replace:instance.frame width:width height:height];
+// Takes care of applying explict width/height to override natural size
++ (void) resize:(UIView*)view {
+    // First resize to natural size
+    [view sizeToFit];
+    // Then set explicit width and/or height if applicable
+    NSNumber* explicitWidth = [view.layer valueForKey:@"Ace.Width"];
+    NSNumber* explicitHeight = [view.layer valueForKey:@"Ace.Height"];    
+    if (explicitWidth != nil) {
+        view.frame = [RectUtils replace:view.frame width:[explicitWidth intValue]];
     }
-
-    return handled;
+    if (explicitHeight != nil) {
+        view.frame = [RectUtils replace:view.frame height:[explicitHeight intValue]];
+    }
 }
 
 @end

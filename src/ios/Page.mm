@@ -56,7 +56,7 @@
 
     // Make the content fill the page
     if (_content != nil) {
-        _content.frame = self.frame;
+        _content.frame = [UIScreen mainScreen].bounds;
     }
 }
 

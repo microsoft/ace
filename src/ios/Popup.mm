@@ -6,6 +6,7 @@
 #import "UIViewHelper.h"
 #import "Page.h"
 #import "Frame.h"
+#import "RectUtils.h"
 
 @implementation Popup
 
@@ -55,7 +56,6 @@ NSMutableArray* _visiblePopups;
 
 	if (!_hasExplicitSize && _content != nil) {
 		// Auto-size
-		[_content layoutSubviews];
 		[self layoutSubviews];
 	}
 }
@@ -72,40 +72,22 @@ NSMutableArray* _visiblePopups;
 }
 
 - (void) SetX:(int)x andY:(int)y {
-    CGRect newFrame = self.frame;
-
-    y += [UIApplication sharedApplication].statusBarFrame.size.height;
-
-	if (![Frame getNavigationController].navigationBarHidden) {
-		y += 44;
-	}
-
-    newFrame.origin.x = x;
-    newFrame.origin.y = y;
-
-    self.frame = newFrame;
+    _explicitX = x;
+    _explicitY = y;
     _isFullScreen = false;
+
+    [self positionPopup];
 }
 
 - (void) SetX:(int)x andY:(int)y width:(int)width height:(int)height {
-	_hasExplicitSize = true;
-
-    CGRect newFrame = self.frame;
-
-    newFrame.size.width = width;
-    newFrame.size.height = height;
-
-    y += [UIApplication sharedApplication].statusBarFrame.size.height;
-
-	if (![Frame getNavigationController].navigationBarHidden) {
-		y += 44;
-	}
-
-    newFrame.origin.x = x;
-    newFrame.origin.y = y;
-
-    self.frame = newFrame;
+    _explicitX = x;
+    _explicitY = y;
+    _explicitWidth = width;
+    _explicitHeight = height;
     _isFullScreen = false;
+	_hasExplicitSize = true;
+    
+    [self positionPopup];
 }
 
 + (void) CloseAll {
@@ -119,17 +101,46 @@ NSMutableArray* _visiblePopups;
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    [self positionPopup];
+}
+
+- (void)positionPopup {
+    // Adjust for the navigation bar, if present
+    CGFloat navBarHeight = 0;
+    if (![Frame getNavigationController].navigationBarHidden) {
+        navBarHeight = [Frame getNavigationController].navigationBar.frame.size.height;
+    }
+
     if (_isFullScreen) {
-        self.frame = [UIScreen mainScreen].applicationFrame;
-		if (![Frame getNavigationController].navigationBarHidden) {
-            CGRect r = self.frame;
-            self.frame = CGRectMake(r.origin.x, r.origin.y + 44, r.size.width, r.size.height - 44);
-		}
+        // Occupy the entire application frame, but adjust for the navigation bar
+        CGRect r = [UIScreen mainScreen].applicationFrame;
+        self.frame = CGRectMake(r.origin.x, r.origin.y + navBarHeight, r.size.width, r.size.height - navBarHeight);
+        if (_content != nil) {
+            _content.frame = [RectUtils replace:_content.frame size:self.frame.size];
+        }
 	}
-	else if (!_hasExplicitSize && _content != nil) {
-		// Match the size of the content
-		self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, _content.frame.size.width, _content.frame.size.height);
-	}
+	else {
+        // Start with the entire application frame, but adjust for the navigation bar
+        CGRect r = [UIScreen mainScreen].applicationFrame;
+        r = CGRectMake(r.origin.x, r.origin.y + navBarHeight, r.size.width, r.size.height - navBarHeight);
+        
+        // Add the explicit position to this adjusted rectangle
+        r = CGRectMake(r.origin.x + _explicitX, r.origin.y + _explicitY, r.size.width, r.size.height);
+        
+        if (_hasExplicitSize) {
+            // Apply the specified size
+            r = CGRectMake(r.origin.x, r.origin.y, _explicitWidth, _explicitHeight);
+            if (_content != nil) {
+                _content.frame = [RectUtils replace:_content.frame size:r.size];
+            }
+        }
+        else if (_content != nil) {
+            // Match the size of the content
+            r = CGRectMake(r.origin.x, r.origin.y, _content.frame.size.width, _content.frame.size.height);            
+        }
+        
+        self.frame = r;
+    }
 }
 
 @end
