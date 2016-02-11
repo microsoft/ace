@@ -6,6 +6,7 @@
 #import "ImageSource.h"
 #import "UIViewHelper.h"
 #import "Utils.h"
+#import "RectUtils.h"
 
 @implementation Image
 
@@ -30,6 +31,16 @@
             }
             else {
                 throw [NSString stringWithFormat:@"Invalid type for Image.Source: %@", [propertyValue class]];
+            }
+
+            // Set to natural image size by default
+            NSNumber* w = [self.layer valueForKey:@"Ace.Width"];
+            NSNumber* h = [self.layer valueForKey:@"Ace.Height"];
+            if (w == nil) {
+                self.frame = [RectUtils replace:self.frame width:self.image.size.width * self.image.scale];
+            }
+            if (h == nil) {
+                self.frame = [RectUtils replace:self.frame height:self.image.size.height * self.image.scale];
             }
         }
     }
