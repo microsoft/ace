@@ -7,8 +7,6 @@
 
 @implementation AceNavigationController
 
-#define TABBARHEIGHT 56
-
 - (id)init {
     self = [super init];
 
@@ -31,13 +29,17 @@
     else if (subviews.count == 2) {
         if ([subviews[0] isKindOfClass:[UITabBar class]]) {
             CGRect r = [UIScreen mainScreen].bounds;
-            ((UITabBar*)subviews[0]).frame = CGRectMake(r.origin.x, r.size.height - TABBARHEIGHT, r.size.width, TABBARHEIGHT);
-            ((UIView*)subviews[1]).frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height - TABBARHEIGHT);
+            UITabBar* tabBar = (UITabBar*)subviews[0];
+            [tabBar sizeToFit];
+            tabBar.frame = CGRectMake(r.origin.x, r.size.height - tabBar.frame.size.height, r.size.width, tabBar.frame.size.height);
+            ((UIView*)subviews[1]).frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height - tabBar.frame.size.height);
         }
         else if ([subviews[1] isKindOfClass:[UITabBar class]]) {
             CGRect r = [UIScreen mainScreen].bounds;
-            ((UITabBar*)subviews[1]).frame = CGRectMake(r.origin.x, r.size.height - TABBARHEIGHT, r.size.width, TABBARHEIGHT);
-            ((UIView*)subviews[0]).frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height - TABBARHEIGHT);
+            UITabBar* tabBar = (UITabBar*)subviews[1];
+            [tabBar sizeToFit];
+            tabBar.frame = CGRectMake(r.origin.x, r.size.height - tabBar.frame.size.height, r.size.width, tabBar.frame.size.height);
+            ((UIView*)subviews[0]).frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height - tabBar.frame.size.height);
         }
     }
 }
