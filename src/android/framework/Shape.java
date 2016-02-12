@@ -2,9 +2,10 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
-package Windows.UI.Xaml.Controls;
+package Windows.UI.Xaml.Shapes;
 
 import android.content.Context;
+import Windows.UI.Xaml.Controls.*;
 
 public class Shape extends android.view.View implements IHaveProperties {
     Brush _stroke;

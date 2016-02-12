@@ -12,7 +12,7 @@ public class PathFigure {
     boolean _isFilled;
     PathSegmentCollection _segments;
 
-    boolean getIsClosed() {
+    public boolean getIsClosed() {
         return _isClosed;
     }
     public void setIsClosed(boolean isClosed) {
@@ -26,7 +26,7 @@ public class PathFigure {
         _startPoint = startPoint;
     }
 
-    boolean getIsFilled() {
+    public boolean getIsFilled() {
         return _isFilled;
     }
     public void setIsFilled(boolean isFilled) {

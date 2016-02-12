@@ -2,7 +2,7 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
-package Windows.UI.Xaml.Controls;
+package Windows.UI.Xaml.Shapes;
 
 import android.content.Context;
 import android.graphics.*;
@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
+import Windows.UI.Xaml.Controls.*;
 
 public class Path extends Shape {
   Geometry _data;
