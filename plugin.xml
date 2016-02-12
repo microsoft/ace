@@ -30,6 +30,9 @@
   <js-module src="www/framework/platformHelpers/android.js">
     <merges target="ace.android" />
   </js-module>
+  <js-module src="www/framework/platformHelpers/ios.js">
+    <merges target="ace.ios" />
+  </js-module>
 
   <js-module src="www/framework/primitives/NativeObject.js">
     <merges target="ace.NativeObject" />
