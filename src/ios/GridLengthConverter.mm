@@ -21,6 +21,10 @@
     else if ([text hasSuffix:@"*"]) {
         gl->type = GridUnitTypeStar;
         text = [text substringToIndex:text.length - 1];
+        if (text.length == 0) {
+            // Treat * as 1*, which is needed for the number conversion below
+            text = @"1";
+        }
     }
     else {
         gl->type = GridUnitTypePixel;
