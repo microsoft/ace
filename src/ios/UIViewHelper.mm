@@ -30,35 +30,7 @@
                 throw [NSString stringWithFormat:@"NYI string content on non-Button %@", [instance description]];
         }
         else if ([propertyValue isKindOfClass:[UIView class]]) {
-            // Remove all subviews
-            [[instance subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-            [instance addSubview:(UIView*)propertyValue];
-
-            // When we're setting content on the root view, respect the title/appbar
-            // and always make it fill the view controller
-            UIViewController* viewController = [Frame getNavigationController].topViewController;
-            if (instance == viewController.view) {
-
-                // Fill the view controller (TODO: applicationFrame here and then fix elsewhere?)
-                ((UIView*)propertyValue).frame = [UIScreen mainScreen].bounds;
-
-                if ([propertyValue isKindOfClass:[Page class]]) {
-                    Page* p = (Page*)propertyValue;
-                    if (p.frameTitle != nil) {
-                        [Frame ShowNavigationBar];
-                        [viewController setTitle:p.frameTitle];
-                    }
-                    if ([p getTopAppBar] != nil) {
-                        [CommandBar showNavigationBar:[p getTopAppBar] on:[Frame getNavigationController].topViewController animated:false];
-                    }
-                    //TODO: Hide navbar if no title and no topappbar
-                    [CommandBar showTabBar:[p getBottomAppBar] on:[Frame getNavigationController].topViewController animated:false];
-                }
-                else {
-                    [Frame HideNavigationBar];
-                    //TODO: App bar, too
-                }
-            }
+            [UIViewHelper replaceContentIn:instance with:(UIView*)propertyValue];
         }
         else {
             if ([instance isKindOfClass:[UIButton class]])
@@ -182,6 +154,45 @@
     }
     if (explicitHeight != nil) {
         view.frame = [RectUtils replace:view.frame height:[explicitHeight intValue]];
+    }
+}
+
++ (void) replaceContentIn:(UIView*)view with:(UIView*)content {
+
+    // Remove all subviews
+    [[view subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    // Add the new content
+    [view addSubview:(UIView*)content];
+
+    // When we're setting content on a root view, respect the title/appbar
+    // and always make it fill the view controller
+
+    // Must do this instead of superview, which gives internal classes like UIViewControllerWrapperView
+    UIResponder* parent = [view nextResponder];
+    if ([parent isKindOfClass:[UIViewController class]]) {
+        UIViewController* viewController = (UIViewController*)parent;
+        UINavigationController* navigationController = [Utils getParentNavigationController:viewController];
+
+        // Fill the view controller (TODO: applicationFrame here and then fix elsewhere?)
+        content.frame = [UIScreen mainScreen].bounds;
+        
+        if ([content isKindOfClass:[Page class]]) {
+            Page* p = (Page*)content;
+            if (p.frameTitle != nil) {
+                navigationController.navigationBarHidden = false;
+                [viewController setTitle:p.frameTitle];
+            }
+            if ([p getTopAppBar] != nil) {
+                [CommandBar showNavigationBar:[p getTopAppBar] on:viewController animated:false];
+            }
+            //TODO: Hide navbar if no title and no topappbar
+            [CommandBar showTabBar:[p getBottomAppBar] on:viewController animated:false];
+        }
+        else {
+            navigationController.navigationBarHidden = true;
+            //TODO: App bar, too
+        }
     }
 }
 

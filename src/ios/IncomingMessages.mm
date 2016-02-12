@@ -64,12 +64,19 @@
     else if ([typeName compare:@"UINavigationController"] == 0) {
         return [Frame getNavigationController];
     }
-    else if ([typeName compare:@"CurrentModalDialog"] == 0) {
+    else if ([typeName compare:@"CurrentModalRoot"] == 0) {
         UIViewController* c = [Frame getNavigationController].presentedViewController;
         if (c == nil) {
-            throw @"There is no current modal dialog. Did you attempt to get it too soon?";
+            throw @"There is no current modal content. Did you attempt to get it too soon?";
         }
         return c.view;
+    }
+    else if ([typeName compare:@"CurrentModalContent"] == 0) {
+        UIViewController* c = [Frame getNavigationController].presentedViewController;
+        if (c == nil) {
+            throw @"There is no current modal content. Did you attempt to get it too soon?";
+        }
+        return c.view.subviews[0];
     }
 
     throw [NSString stringWithFormat:@"%@ is not a valid choice for getting an existing instance", typeName];

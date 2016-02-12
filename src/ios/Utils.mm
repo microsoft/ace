@@ -270,6 +270,19 @@
     return nil;
 }
 
++ (UINavigationController*) getParentNavigationController:(UIViewController*)viewController {
+    if (viewController.navigationController != nil) {
+        return viewController.navigationController;
+    }
+    else if (viewController.presentingViewController != nil && [viewController.presentingViewController isKindOfClass:[UINavigationController class]]) {
+        return (UINavigationController*)viewController.presentingViewController;
+    }
+    else if (viewController.parentViewController != nil && [viewController.parentViewController isKindOfClass:[UINavigationController class]]) {
+        return (UINavigationController*)viewController.parentViewController;
+    }
+    return nil;
+}
+
 + (int) parseInt:(NSString*)s {
     NSScanner *scanner = [[NSScanner alloc] initWithString:s];
     NSInteger integer;

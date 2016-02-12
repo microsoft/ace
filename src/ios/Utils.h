@@ -9,6 +9,8 @@
 + (NSObject*) invokeStaticMethod:(NSString*)typeName methodName:(NSString*)methodName args:(NSArray*)args;
 + (NSObject*) deserializeObjectOrStruct:(NSDictionary*)obj;
 
++ (UINavigationController*) getParentNavigationController:(UIViewController*)viewController;
+
 + (int) parseInt:(NSString*)s;
 + (void) alert:(NSString*)s;
 

@@ -6,5 +6,6 @@
 
 + (BOOL) setProperty:(UIView*)instance propertyName:(NSString*)propertyName propertyValue:(NSObject*)propertyValue;
 + (void) resize:(UIView*)view;
++ (void) replaceContentIn:(UIView*)view with:(UIView*)content;
 
 @end

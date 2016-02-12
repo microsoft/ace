@@ -26,6 +26,9 @@
   <js-module src="www/ace.js">
     <merges target="ace" />
   </js-module>
+  <js-module src="www/external.js">
+    <merges target="ace.external" />
+  </js-module>
 
   <js-module src="www/framework/platformHelpers/android.js">
     <merges target="ace.android" />
