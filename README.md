@@ -30,7 +30,7 @@ cordova run ios
 
 * Ensure you have [Tools for Apache Cordova](https://www.visualstudio.com/en-us/features/cordova-vs.aspx) installed
 * Open examples/AceExamples/AceExamples.sln
-* Deploy to either an Android emulator, Android device, or iOS remote device
+* Deploy to either an Android emulator or device (Lollipop or later, ideally Marshmallow), or an iOS remote device
 
 ### ADDING TO A NEW OR EXISTING CORDOVA PROJECT
 **Just add the plugin to your Cordova project.** Whether you use Visual Studio or command-line tools, Windows or Mac, you can add this plugin the standard way.  For example:
