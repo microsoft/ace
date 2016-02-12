@@ -13,4 +13,15 @@ function CommandBar() {
 // Inheritance
 CommandBar.prototype = Object.create(ace.ContentControl.prototype);
 
+CommandBar.prototype.getPrimaryCommands = function () {
+    // Give an empty collection by default rather than null
+    var items = this.get("CommandBar.PrimaryCommands");
+    if (!items) {
+        items = new ace.CommandBarElementCollection();
+        this.setPrimaryCommands(items);
+    }
+    return items;
+};
+CommandBar.prototype.setPrimaryCommands = function (items) { this.set("CommandBar.PrimaryCommands", items); };
+
 module.exports = CommandBar;
