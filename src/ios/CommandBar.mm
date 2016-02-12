@@ -191,7 +191,8 @@
                 throw @"Unhandled command bar item type";
             }
 
-            if (item != nil) {
+            // Add space after all but the last item
+            if (item != nil && i < primaryItemsCount-1) {
                 [items addObject:item];
                 // For centering and stretching
                 UIBarButtonItem* flexBarTemp = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
