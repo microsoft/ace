@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
            id="cordova-plugin-ace"
-      version="0.0.9">
+      version="0.0.10">
 
   <name>Ace</name>
   <description>Enables you to mix native UI and native code with your JavaScript and HTML.</description>
