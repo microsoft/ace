@@ -177,21 +177,25 @@
         // Fill the view controller (TODO: applicationFrame here and then fix elsewhere?)
         content.frame = [UIScreen mainScreen].bounds;
         
-        if ([content isKindOfClass:[Page class]]) {
-            Page* p = (Page*)content;
-            if (p.frameTitle != nil) {
-                navigationController.navigationBarHidden = false;
-                [viewController setTitle:p.frameTitle];
+        // More needs to happen to support doing this on external NavigationControllers,
+        // so limit to the main one:
+        if (navigationController == [Frame getNavigationController]) {
+            if ([content isKindOfClass:[Page class]]) {
+                Page* p = (Page*)content;
+                if (p.frameTitle != nil) {
+                    navigationController.navigationBarHidden = false;
+                    [viewController setTitle:p.frameTitle];
+                }
+                if ([p getTopAppBar] != nil) {
+                    [CommandBar showNavigationBar:[p getTopAppBar] on:viewController animated:false];
+                }
+                //TODO: Hide navbar if no title and no topappbar
+                [CommandBar showTabBar:[p getBottomAppBar] on:viewController animated:false];
             }
-            if ([p getTopAppBar] != nil) {
-                [CommandBar showNavigationBar:[p getTopAppBar] on:viewController animated:false];
+            else {
+                navigationController.navigationBarHidden = true;
+                //TODO: App bar, too
             }
-            //TODO: Hide navbar if no title and no topappbar
-            [CommandBar showTabBar:[p getBottomAppBar] on:viewController animated:false];
-        }
-        else {
-            navigationController.navigationBarHidden = true;
-            //TODO: App bar, too
         }
     }
 }

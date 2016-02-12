@@ -271,7 +271,10 @@
 }
 
 + (UINavigationController*) getParentNavigationController:(UIViewController*)viewController {
-    if (viewController.navigationController != nil) {
+    if ([viewController isKindOfClass:[UINavigationController class]]) {
+        return viewController;
+    }
+    else if (viewController.navigationController != nil) {
         return viewController.navigationController;
     }
     else if (viewController.presentingViewController != nil && [viewController.presentingViewController isKindOfClass:[UINavigationController class]]) {
