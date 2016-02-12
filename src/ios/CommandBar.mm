@@ -191,12 +191,15 @@
                 throw @"Unhandled command bar item type";
             }
 
-            // Add space after all but the last item
-            if (item != nil && i < primaryItemsCount-1) {
+            if (item != nil) {
                 [items addObject:item];
-                // For centering and stretching
-                UIBarButtonItem* flexBarTemp = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-                [items addObject:flexBarTemp];
+
+                // Add space after all but the last item
+                if (i < primaryItemsCount-1) {
+                    // For centering and stretching
+                    UIBarButtonItem* flexBarTemp = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+                    [items addObject:flexBarTemp];
+                }
             }
         }
     }
