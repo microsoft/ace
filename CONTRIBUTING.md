@@ -2,7 +2,7 @@ Ace welcomes and strongly encourages community contributions! Please don't be sh
 
 ## Issue Contribution
 
-* Your PR should have a link to [the issue](https://github.com/adnathan/ace/issues) that you are fixing. 
+* Your PR should have a link to [the issue](https://github.com/microsoft/ace/issues) that you are fixing. 
 
 ## Feature Contribution
 

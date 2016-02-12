@@ -8,8 +8,8 @@
   <description>Enables you to mix native UI and native code with your JavaScript and HTML.</description>
   <license>MIT</license>
   <keywords>cordova,native,ui,xaml</keywords>
-  <repo>https://github.com/adnathan/ace.git</repo>
-  <issue>https://github.com/adnathan/ace/issues</issue>
+  <repo>https://github.com/microsoft/ace.git</repo>
+  <issue>https://github.com/microsoft/ace/issues</issue>
 
   <!-- Sets up app native folders for convenience -->
   <hook type="after_plugin_install" src="src/plugin_hooks/after_plugin_install.js" />
