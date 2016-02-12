@@ -265,8 +265,9 @@
         CFRetain(returnValue);
         return (__bridge_transfer NSObject*)returnValue;
     }
-
-    throw [NSString stringWithFormat:@"Unknown error processing the return type of %@", methodName];
+    
+    // The returned object is nil
+    return nil;
 }
 
 + (int) parseInt:(NSString*)s {
