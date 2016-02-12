@@ -25,7 +25,7 @@ NSMutableArray* _visiblePopups;
 // IHaveProperties.setProperty
 - (void) setProperty:(NSString*)propertyName value:(NSObject*)propertyValue {
     if (![UIViewHelper setProperty:self propertyName:propertyName propertyValue:propertyValue]) {
-        throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
+        throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
     }
 
     // Extra logic for content property

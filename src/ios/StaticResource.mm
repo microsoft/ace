@@ -12,7 +12,7 @@
         // Ignore. This is handled on the managed side.
     }
     else {
-        throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
+        throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
     }
 }
 

@@ -23,7 +23,7 @@
             }
         }
         else {
-            throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
+            throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
         }
     }
 }

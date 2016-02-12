@@ -100,7 +100,7 @@
         // If there was no match, check for UILabel matches on the titleLabel:
         // TODO: Because of this, we should be able to remove the stuff above:
         else if (![UILabelHelper setProperty:self.titleLabel propertyName:propertyName propertyValue:propertyValue]) {
-            throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
+            throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
         }
     }
 }

@@ -47,7 +47,7 @@
         _content = (UIView*)propertyValue;
     }
     else if (![UIViewHelper setProperty:self propertyName:propertyName propertyValue:propertyValue]) {
-        throw [NSString stringWithFormat:@"Unhandled property for %s: %@", object_getClassName(self), propertyName];
+        throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
     }
 }
 
