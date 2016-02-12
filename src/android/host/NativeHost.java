@@ -172,6 +172,17 @@ public class NativeHost extends CordovaPlugin {
 			this.loadXbf(args.getString(0), callbackContext);
 		}
 		else if (action.equals("initialize")) {
+            //
+            // Do an Android version check
+            //
+            if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.LOLLIPOP) {
+                callbackContext.error("Unable to initialize the Ace plugin: Android version " + 
+                    android.os.Build.VERSION.RELEASE + 
+                    " is not yet supported. Marshmallow (6.0) or later is recommended, " +
+                    " although Lollipop (5.0) will also work.");
+                return true;            
+            }
+                        
 			OutgoingMessages.setCallbackContext(callbackContext);
             /* TODO: No startup markup
             if (_startupMarkup != null) {

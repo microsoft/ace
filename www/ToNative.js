@@ -35,9 +35,15 @@ MessageType = {
 };
 
 function onInitializeFailed(error) {
-    var message = "Unable to initialize the Ace plugin: " + error +
-        ". The most common reason is that <feature name=\"NativeHost\">...</feature> is missing from the copy of config.xml in the platforms directory. " +
+    var prefix = "Unable to initialize the Ace plugin: ";
+    var suffix = ". The most common reason is that <feature name=\"NativeHost\">...</feature> is missing from the copy of config.xml in the platforms directory. " +
         "Try uninstalling the plugin then reinstalling it.";
+        
+    var message = error;
+    if (!message.startsWith(prefix)) {
+        message = prefix + error + suffix;
+    }
+
     alert(message);
     throw new Error(message);
 }
