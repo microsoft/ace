@@ -25,6 +25,7 @@ cordova run ios</pre>
 * Ensure you have [Tools for Apache Cordova](https://www.visualstudio.com/en-us/features/cordova-vs.aspx) installed
 * Open examples/AceExamples/AceExamples.sln
 * Deploy to either an Android emulator or device (**Lollipop or later, ideally Marshmallow**), or an iOS remote device
+* If you need a Marshmallow Android emulator, run the "Visual Studio Emulator for Android" program from the Start menu to download one.
 
 <br/>
 
