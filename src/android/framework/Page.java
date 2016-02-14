@@ -30,7 +30,15 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
         if (propertyName.endsWith(".BottomAppBar")) {
             // TODO: Need to handle this being set after already inside activity,
             //       and also handling invalidations inside buttons, etc.
-            tabBar = (TabBar)propertyValue;
+            if (propertyValue instanceof TabBar) {
+                tabBar = (TabBar)propertyValue;
+            }
+            else if (propertyValue instanceof CommandBar) {
+                menuBar = (CommandBar)propertyValue;
+            }
+            else {
+    			throw new RuntimeException("Unhandled value for BottomAppBar: " + propertyValue);
+            }
         }
         else if (propertyName.endsWith(".TopAppBar")) {
             // TODO: Need to handle this being set after already inside activity,
