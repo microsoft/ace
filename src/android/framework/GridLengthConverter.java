@@ -20,6 +20,10 @@ class GridLengthConverter {
         else if (text.endsWith("*")) {
             gl.type = GridUnitType.Star;
             text = text.substring(0, text.length() - 1);
+            if (text.length() == 0) {
+                // Treat * as 1*, which is needed for the number parsing below
+                text = "1";
+            }
         }
         else {
             gl.type = GridUnitType.Pixel;
