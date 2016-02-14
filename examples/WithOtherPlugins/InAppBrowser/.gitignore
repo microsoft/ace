@@ -1,0 +1,10 @@
+﻿# .gitignore
+bin/
+bld/
+.vs/
+node_modules/
+[Pp]lugins/
+[Pp]latforms/
+
+*.user
+changeList.json
