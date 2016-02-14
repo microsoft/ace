@@ -223,8 +223,10 @@ NativeObject.prototype.raiseEvent = function (eventName, eventData) {
     // Call any handlers
     // Currently, derived collections do not have the _eventHandlers member
     if (this._eventHandlers) {
-        var handlers = this._eventHandlers[eventName];
-        if (handlers) {
+        if (this._eventHandlers[eventName]) {
+            // Create a clone of the current event handlers list to ensure that we continue to notify
+            // all handlers even if one calls back into removeEventListener
+            var handlers = this._eventHandlers[eventName].slice(0);
             for (var i = 0; i < handlers.length; i++) {
                 handlers[i](this, eventData);
             }
