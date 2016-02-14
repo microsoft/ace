@@ -7,17 +7,15 @@
 // Interacts with external native UI, perhaps from other plugins.
 //
 module.exports = {
-    getCurrentModalContent: function () {
-        return new ace.KnownNativeObject("CurrentModalContent");
-    },
-
-    setCurrentModalContent: function (content) {
-        var root = new ace.KnownNativeObject("CurrentModalRoot");
-        if (ace.platform == "iOS") {
-            ace.NativeObject.invoke("UIViewHelper", "replaceContentIn:with:", root, content);
+    getPluginAsync: function (serviceName, onSuccess) {
+        if (ace.platform == "Android") {
+            var pm = new ace.KnownNativeObject("PluginManager");
+            pm.invoke("getPlugin", serviceName, function(instance) {
+               onSuccess(instance); 
+            });
         }
         else {
-            throw new Error("Not supported on the current platform.");
+            throw new Error("Not yet supported on the current platform.");
         }
     }
 };

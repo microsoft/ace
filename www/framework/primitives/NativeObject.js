@@ -52,7 +52,7 @@ function unwrapResult(result) {
     }
 }
 
-function fieldHelper(instance, className, fieldName, onSuccess, onError) {
+function fieldHelper(instance, isPrivate, className, fieldName, onSuccess, onError) {
     if (!fieldName) {
         throw new Error("You must specify a field");
     }
@@ -68,11 +68,18 @@ function fieldHelper(instance, className, fieldName, onSuccess, onError) {
     ace.ToNative.sendPendingMessages();
 
     // Now queue this single message
-    if (instance)
-        ace.ToNative.queueFieldGetMessage(instance, fieldName);
-    else
+    if (instance) {
+        if (isPrivate) {
+            ace.ToNative.queuePrivateFieldGetMessage(instance, fieldName);
+        }
+        else {
+            ace.ToNative.queueFieldGetMessage(instance, fieldName);
+        }
+    }
+    else {
         ace.ToNative.queueStaticFieldGetMessage(className, fieldName);
-
+    }
+    
     // Send this out as a batch of one, with the passed-in callbacks
     ace.ToNative.sendPendingMessages(function (result) { onSuccess(unwrapResult(result)) }, onError);
 }
@@ -182,12 +189,17 @@ NativeObject.prototype.invalidate = function (propertyName, propertyValue) {
 
 // Get the value of an instance (or static) field
 NativeObject.prototype.getField = function (fieldName, onSuccess, onError) {
-    fieldHelper(this, null, fieldName, onSuccess, onError);
+    fieldHelper(this, false, null, fieldName, onSuccess, onError);
 };
 
 // Get the value of a static field
 NativeObject.getField = function (className, fieldName, onSuccess, onError) {
-    fieldHelper(null, className, fieldName, onSuccess, onError);
+    fieldHelper(null, false, className, fieldName, onSuccess, onError);
+};
+
+// Get the value of a private instance (or static) field
+NativeObject.prototype.getPrivateField = function (fieldName, onSuccess, onError) {
+    fieldHelper(this, true, null, fieldName, onSuccess, onError);
 };
 
 // Set the value of an instance (or static) field

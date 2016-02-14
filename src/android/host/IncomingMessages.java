@@ -33,6 +33,7 @@ public class IncomingMessages {
 	public static final int MSG_GETINSTANCE = 8;
 	public static final int MSG_NAVIGATE = 9;
 	public static final int MSG_FIELDSET = 10;
+	public static final int MSG_PRIVATEFIELDGET = 11;
 
     // Holds the content during a navigation
     public static View frameContent;
@@ -103,6 +104,9 @@ public class IncomingMessages {
 		else if (fullTypeName.equals("HostWebView")) {
             return webView.getView();
 		}
+        else if (fullTypeName.equals("PluginManager")) {
+            return webView.getPluginManager();
+        }
 
 		throw new RuntimeException(fullTypeName + " is not a valid choice for getting an existing instance");
 	}
@@ -231,6 +235,13 @@ public class IncomingMessages {
 		Object instance = Handle.deserialize(message.getJSONObject(1));
 		String fieldName = message.getString(2);
 		return Utils.getField(instance.getClass(), instance, fieldName);
+	}
+
+	public static Object privateFieldGet(JSONArray message) throws JSONException
+	{
+		Object instance = Handle.deserialize(message.getJSONObject(1));
+		String fieldName = message.getString(2);
+		return Utils.getPrivateField(instance.getClass(), instance, fieldName);
 	}
 
 	public static Object staticFieldGet(JSONArray message) throws JSONException

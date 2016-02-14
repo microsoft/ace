@@ -31,7 +31,8 @@ MessageType = {
     StaticFieldGet: 7,
     GetInstance: 8,
     Navigate: 9,
-    FieldSet: 10
+    FieldSet: 10,
+    PrivateFieldGet: 11
 };
 
 function onInitializeFailed(error) {
@@ -133,6 +134,8 @@ function debugPrintMessage(messageArray) {
                 s = "Navigate";
             else if (s == MessageType.FieldSet)
                 s = "FieldSet";
+            else if (s == MessageType.PrivateFieldGet)
+                s = "PrivateFieldGet";
             else
                 s = "UNKNOWN";
         }
@@ -228,6 +231,10 @@ ToNative.queueFieldGetMessage = function (instance, fieldName) {
 
 ToNative.queueStaticFieldGetMessage = function (className, fieldName) {
     queueMessage([MessageType.StaticFieldGet, className, fieldName]);
+};
+
+ToNative.queuePrivateFieldGetMessage = function (instance, fieldName) {
+    queueMessage([MessageType.PrivateFieldGet, instance.handle, fieldName]);
 };
 
 ToNative.queueSetMessage = function (instance, propertyName, propertyValue) {

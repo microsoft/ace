@@ -20,5 +20,14 @@ module.exports = {
         this.getNavigationController().invoke("presentedViewController", function (viewController) {
             onSuccess(viewController);
         });
+    },
+    
+    getCurrentModalContent: function () {
+        return new ace.KnownNativeObject("CurrentModalContent");
+    },
+
+    setCurrentModalContent: function (content) {
+        var root = new ace.KnownNativeObject("CurrentModalRoot");
+        ace.NativeObject.invoke("UIViewHelper", "replaceContentIn:with:", root, content);
     }
 };

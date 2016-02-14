@@ -89,6 +89,20 @@ public class Utils {
 		}
 	}
 
+	public static Object getPrivateField(Class c, Object instance, String fieldName) {
+		try {
+            Field f = c.getDeclaredField(fieldName);
+            f.setAccessible(true);
+            return f.get(instance);
+		}
+		catch (NoSuchFieldException ex) {
+            throw new RuntimeException(c.getSimpleName() + " does not have a " + fieldName + " field");
+		}
+		catch (IllegalAccessException ex) {
+            throw new RuntimeException(c.getSimpleName() + "'s " + fieldName + " field is inaccessible");
+		}
+	}
+
 	public static void setField(Class c, Object instance, String fieldName, Object fieldValue) {
 		try {
 			Field f = c.getField(fieldName);

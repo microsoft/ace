@@ -271,6 +271,10 @@ public class NativeHost extends CordovaPlugin {
 							case IncomingMessages.MSG_FIELDSET:
 								IncomingMessages.fieldSet(message);
 								break;
+							case IncomingMessages.MSG_PRIVATEFIELDGET:
+								returnValue = IncomingMessages.privateFieldGet(message);
+								hasReturnValue = true;
+								break;
 							default:
 								throw new RuntimeException("Unknown message type: " + messageType);
 						}
