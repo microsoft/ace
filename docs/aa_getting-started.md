@@ -86,7 +86,7 @@ This enables you to leverage the markup in your app.
 
 <i class="fa fa-warning"></i> 
 
-> XAML compilation currently must be done on Windows. However, Visual Studio is not a requirement. You can compile your XAML from a command prompt by running **markupcompiler.exe** from [the plugin's markupcompiler subfolder](https://github.com/microsoft/ace/tree/master/markupcompiler) then 
+> XAML compilation currently must be done on Windows 8.1 or later. However, Visual Studio is not a requirement. You can compile your XAML from a command prompt by running **markupcompiler.exe** from [the plugin's markupcompiler subfolder](https://github.com/microsoft/ace/tree/master/markupcompiler) then 
 manually copying the .xbf files to the www\xbf folder. You can then add these to source control so you can do the rest of your development on a Mac.
 
 <br/>
