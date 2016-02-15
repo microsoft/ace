@@ -15,6 +15,9 @@
 #import "SolidColorBrush.h"
 #import "BrushConverter.h"
 #import "NativeEventAttacher.h"
+#import "AcePluginManager.h"
+
+AcePluginManager* _pluginManager = nil;
 
 @implementation IncomingMessages
 
@@ -52,7 +55,7 @@
 }
 
 // Get an existing well-known object instance
-+ (NSObject*)getInstance:(NSArray*)message webView:(UIWebView*)webView {
++ (NSObject*)getInstance:(NSArray*)message webView:(UIWebView*)webView viewController:(UIViewController*)viewController {
     NSString* typeName = message[2];
 
     if ([typeName compare:@"HostPage"] == 0) {
@@ -63,6 +66,13 @@
     }
     else if ([typeName compare:@"UINavigationController"] == 0) {
         return [Frame getNavigationController];
+    }
+    else if ([typeName compare:@"PluginManager"] == 0) {
+        // Create on-demand
+        if (_pluginManager == nil) {
+            _pluginManager = [[AcePluginManager alloc] initWithViewController:viewController];
+        }
+        return _pluginManager;
     }
     else if ([typeName compare:@"CurrentModalRoot"] == 0) {
         UIViewController* c = [Frame getNavigationController].presentedViewController;

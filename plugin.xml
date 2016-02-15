@@ -214,6 +214,8 @@
 
     <header-file src="src/ios/AceNavigationController.h" />
     <source-file src="src/ios/AceNavigationController.mm" />
+    <header-file src="src/ios/AcePluginManager.h" />
+    <source-file src="src/ios/AcePluginManager.mm" />
     <header-file src="src/ios/AceViewController.h" />
     <source-file src="src/ios/AceViewController.mm" />
     <header-file src="src/ios/AppBarButton.h" />

@@ -22,7 +22,7 @@ enum MessageTypes {
 + (void)set:(NSArray*)message;
 + (NSObject*)invoke:(NSArray*)message;
 + (NSObject*)staticInvoke:(NSArray*)message;
-+ (NSObject*)getInstance:(NSArray*)message webView:(UIWebView*)webView;
++ (NSObject*)getInstance:(NSArray*)message webView:(UIWebView*)webView viewController:(UIViewController*)viewController;
 + (void)eventAdd:(NSArray*)message;
 + (void)navigate:(UIView*)view;
 

@@ -122,7 +122,7 @@ BOOL _initialized;
                 case MSG_STATICFIELDGET:
                     throw @"You cannot get fields on iOS";
                 case MSG_GETINSTANCE:
-                    instance = [IncomingMessages getInstance:message webView:self.webView];
+                    instance = [IncomingMessages getInstance:message webView:self.webView viewController:self.viewController];
                     handle = [AceHandle fromJSON:message[1]];
                     [handle register:instance];
                     break;
