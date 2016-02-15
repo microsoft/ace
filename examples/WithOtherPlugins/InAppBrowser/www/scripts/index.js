@@ -49,7 +49,7 @@ function onButtonClick(index) {
     }
     else if (index == 1) {
         // Open "on top" of the existing UI
-        cordova.InAppBrowser.open('http://ace.run', '_blank');
+        cordova.InAppBrowser.open('http://ace.run', '_blank', "location=no");
         
         // Give the dialog a chance to be created    
         setTimeout(function () {
@@ -79,17 +79,15 @@ function onButtonClick(index) {
 
                         // Grab one of the Android views by its id, 
                         // then traverse up to the root view (specific to this plugin)
-                        dialog.invoke("findViewById", 1, function (actionButtonContainer) {
-                            actionButtonContainer.invoke("getParent", function (toolbar) {
-                                toolbar.invoke("getParent", function (mainView) {
-                                    // Replace the modal content with the new native content
+                        dialog.invoke("findViewById", 6, function (inAppWebView) {
+                            inAppWebView.invoke("getParent", function (mainView) {
+                                // Replace the modal content with the new native content
                                     dialog.invoke("setContentView", grid);
 
                                     // Place the old root view inside the native UI
                                     ace.Grid.setRow(mainView, 1);
                                     ace.Grid.setColumn(mainView, 1);
                                     grid.getChildren().add(mainView);
-                                });
                             });
                         });
                     });
