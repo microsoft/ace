@@ -50,8 +50,11 @@ public class ViewHelper {
 			setLength(instance, false, propertyValue);
 			return true;
         }
-        // TODO: Treating margin like padding
-		else if (propertyName.endsWith(".Padding") || propertyName.endsWith(".Margin")) {
+		else if (propertyName.endsWith(".Margin")) {
+            Utils.setTag(instance, "ace_margin", propertyValue);
+            return true;
+		}
+		else if (propertyName.endsWith(".Padding")) {
             if (propertyValue == null) {
                 instance.setPadding(0,0,0,0);
             }

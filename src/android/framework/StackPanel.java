@@ -5,6 +5,7 @@
 package Windows.UI.Xaml.Controls;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import run.ace.*;
 
@@ -46,6 +47,33 @@ public class StackPanel extends LinearLayout implements IHaveProperties, IReciev
 			}
 		}
 	}
+    
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        for (int i = 0; i < _children.size(); i++) {
+            positionChild((View)_children.get(i));
+        }
+        super.onLayout(changed, left, top, right, bottom);
+    }
+    
+    void positionChild(View view) {
+        Object margin = Utils.getTag(view, "ace_margin", null);
+
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (params instanceof ViewGroup.MarginLayoutParams) {
+            if (margin == null) {
+                ((ViewGroup.MarginLayoutParams)params).setMargins(0,0,0,0);
+            }
+            else {
+                Thickness t = Thickness.fromObject(margin);
+                // Get the scale of screen content
+                float scale = Utils.getScaleFactor(getContext());
+                ((ViewGroup.MarginLayoutParams)params).setMargins(
+                    (int)(t.left * scale),  (int)(t.top * scale),
+                    (int)(t.right * scale), (int)(t.bottom * scale));
+            }
+        }
+    }
 
 	// IRecieveCollectionChanges.add
 	public void add(Object collection, Object item) {
