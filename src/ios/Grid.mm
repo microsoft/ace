@@ -5,6 +5,7 @@
 #import "Grid.h"
 #import "UIViewHelper.h"
 #import "Thickness.h"
+#import "Utils.h"
 
 @implementation Grid
 
@@ -79,7 +80,12 @@
     NSMutableArray* rowAutoHeights = nil;
     NSMutableArray* colAutoWidths = nil;
 
-    if (count > 0) {
+    for (unsigned long i = 0; i < count; i++) {
+        // Start out with each child as its natural size
+        [UIViewHelper resize:_children[i]];
+    }
+
+    if (count > 0) {       
         // Calculate what would be the auto height of each row
         if (numRows > 0) {
             rowAutoHeights = [NSMutableArray arrayWithCapacity:numRows];
@@ -292,16 +298,9 @@
                     finalLeft = cd->calculatedLeft;
             }
 
-            // Margins were factored into the calculated width/height, so we must adjust accordingly
-            Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
-            if (margin != nil) {
-                finalLeft += margin.left;
-                finalTop += margin.top;
-                finalWidth -= (margin.left + margin.right);
-                finalHeight -= (margin.top + margin.bottom);
-            }
-
-            child.frame = CGRectMake(finalLeft, finalTop, finalWidth, finalHeight);
+            // Position the child, factoring in margin and alignment
+            CGRect availableSpace = CGRectMake(finalLeft, finalTop, finalWidth, finalHeight);
+            [Utils positionView:child availableSpace:availableSpace];
         }
     }
 }
