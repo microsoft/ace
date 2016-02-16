@@ -361,4 +361,20 @@ public class Utils {
 		}
 		throw new RuntimeException(c + " does not have a public constructor with " + numArgs + " matching parameter type(s).");
 	}
+    
+    public static Object getTag(android.view.View view, String name, Object defaultValue) {
+        int id = run.ace.NativeHost.getResourceId(name, "integer", view.getContext());
+        Object obj = view.getTag(id);
+        if (obj == null) {
+            return defaultValue;
+        }
+        else {
+            return obj;
+        }
+    }
+    
+    public static void setTag(android.view.View view, String name, Object value) {
+        int id = run.ace.NativeHost.getResourceId(name, "integer", view.getContext());
+        view.setTag(id, value);
+    }
 }

@@ -62,45 +62,20 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
 		this.removeViewAt(index);
 	}
 
-    public static int GetRow(View element)
-    {
-        // TODO: Helper for all tags, with default value specified
-        int id = run.ace.NativeHost.getResourceId("grid_rowproperty", "integer", element.getContext());
-        Object obj = element.getTag(id);
-        if (obj == null)
-            return 0;
-        else
-            return (int)(Integer)obj;
+    public static int GetRow(View element) {
+        return (Integer)Utils.getTag(element, "grid_rowproperty", 0);
     }
 
-    public static int GetColumn(View element)
-    {
-        int id = run.ace.NativeHost.getResourceId("grid_columnproperty", "integer", element.getContext());
-        Object obj = element.getTag(id);
-        if (obj == null)
-            return 0;
-        else
-            return (int)(Integer)obj;
+    public static int GetColumn(View element) {
+        return (Integer)Utils.getTag(element, "grid_columnproperty", 0);
     }
 
-    public static int GetRowSpan(View element)
-    {
-        int id = run.ace.NativeHost.getResourceId("grid_rowspanproperty", "integer", element.getContext());
-        Object obj = element.getTag(id);
-        if (obj == null)
-            return 1;
-        else
-            return (int)(Integer)obj;
+    public static int GetRowSpan(View element) {
+        return (Integer)Utils.getTag(element, "grid_rowspanproperty", 1);
     }
 
-    public static int GetColumnSpan(View element)
-    {
-        int id = run.ace.NativeHost.getResourceId("grid_columnspanproperty", "integer", element.getContext());
-        Object obj = element.getTag(id);
-        if (obj == null)
-            return 1;
-        else
-            return (int)(Integer)obj;
+    public static int GetColumnSpan(View element) {
+        return (Integer)Utils.getTag(element, "grid_columnspanproperty", 1);
     }
 
     @Override

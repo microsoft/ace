@@ -52,12 +52,17 @@ public class ViewHelper {
         }
         // TODO: Treating margin like padding
 		else if (propertyName.endsWith(".Padding") || propertyName.endsWith(".Margin")) {
-            Thickness t = Thickness.fromObject(propertyValue);
-            // Get the scale of screen content
-            float scale = Utils.getScaleFactor(instance.getContext());
-            instance.setPadding(
-                (int)(t.left * scale),  (int)(t.top * scale),
-                (int)(t.right * scale), (int)(t.bottom * scale));            
+            if (propertyValue == null) {
+                instance.setPadding(0,0,0,0);
+            }
+            else {
+                Thickness t = Thickness.fromObject(propertyValue);
+                // Get the scale of screen content
+                float scale = Utils.getScaleFactor(instance.getContext());
+                instance.setPadding(
+                    (int)(t.left * scale),  (int)(t.top * scale),
+                    (int)(t.right * scale), (int)(t.bottom * scale));
+            }
             return true;
 		}
         else if (propertyName.endsWith(".BottomAppBar")) {
@@ -80,23 +85,19 @@ public class ViewHelper {
 			return true;
 		}
 		else if (propertyName.equals("Grid.Row")) {
-            int id = run.ace.NativeHost.getResourceId("grid_rowproperty", "integer", instance.getContext());
-            instance.setTag(id, propertyValue);
+            Utils.setTag(instance, "grid_rowproperty", propertyValue);
 			return true;
         }
 		else if (propertyName.equals("Grid.RowSpan")) {
-            int id = run.ace.NativeHost.getResourceId("grid_rowspanproperty", "integer", instance.getContext());
-            instance.setTag(id, propertyValue);
+            Utils.setTag(instance, "grid_rowspanproperty", propertyValue);
 			return true;
         }
 		else if (propertyName.equals("Grid.Column")) {
-            int id = run.ace.NativeHost.getResourceId("grid_columnproperty", "integer", instance.getContext());
-            instance.setTag(id, propertyValue);
+            Utils.setTag(instance, "grid_columnproperty", propertyValue);
 			return true;
         }
 		else if (propertyName.equals("Grid.ColumnSpan")) {
-            int id = run.ace.NativeHost.getResourceId("grid_columnspanproperty", "integer", instance.getContext());
-            instance.setTag(id, propertyValue);
+            Utils.setTag(instance, "grid_columnspanproperty", propertyValue);
 			return true;
         }
 
