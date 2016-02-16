@@ -123,7 +123,7 @@ As always, this could all be done without XAML:
 
 <pre>
 var grid = new ace.Grid();
-grid.getRowDefintions().add(new ace.RowDefinition());
+grid.getRowDefinitions().add(new ace.RowDefinition());
 ...
 var button2 = new ace.Button();
 ace.Grid.setColumn(button2, 1);
@@ -139,7 +139,7 @@ var webView = ace.getHostWebView();
 // Place the WebView inside the Grid
 ace.Grid.setRow(webView, 1);
 ace.Grid.setColumn(webView, 1);
-root.getChildren().add(webView);
+grid.getChildren().add(webView);
 </pre>
 
 <a name="two"/>
