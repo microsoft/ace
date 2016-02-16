@@ -5,9 +5,11 @@
 package Windows.UI.Xaml.Controls;
 
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AbsoluteLayout;
 import run.ace.*;
 
-public class Canvas extends android.widget.AbsoluteLayout implements IHaveProperties, IRecieveCollectionChanges {
+public class Canvas extends AbsoluteLayout implements IHaveProperties, IRecieveCollectionChanges {
 	UIElementCollection _children;
 
 	public Canvas(android.content.Context context) {
@@ -15,8 +17,7 @@ public class Canvas extends android.widget.AbsoluteLayout implements IHaveProper
 	}
 
 	// IHaveProperties.setProperty
-	public void setProperty(String propertyName, Object propertyValue)
-	{
+	public void setProperty(String propertyName, Object propertyValue) {
 		if (!ViewGroupHelper.setProperty(this, propertyName, propertyValue)) {
 			if (propertyName.equals("Panel.Children")) {
 				if (propertyValue == null) {
@@ -34,6 +35,36 @@ public class Canvas extends android.widget.AbsoluteLayout implements IHaveProper
 			}
 		}
 	}
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        for (int i = 0; i < _children.size(); i++) {
+            positionChild((View)_children.get(i));
+        }
+        super.onLayout(changed, left, top, right, bottom);
+    }
+    
+    void positionChild(View view) {
+        Object margin = Utils.getTag(view, "ace_margin", null);
+        int x = (Integer)Utils.getTag(view, "canvas_left", 0);
+        int y = (Integer)Utils.getTag(view, "canvas_top", 0);
+
+        // Get the scale of screen content
+        float scale = Utils.getScaleFactor(getContext());
+
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (params instanceof AbsoluteLayout.LayoutParams) {
+            if (margin == null) {
+                ((AbsoluteLayout.LayoutParams)params).x = (int)(x * scale);
+                ((AbsoluteLayout.LayoutParams)params).y = (int)(y * scale);
+            }
+            else {
+                Thickness t = Thickness.fromObject(margin);
+                ((AbsoluteLayout.LayoutParams)params).x = (int)((t.left + x) * scale);
+                ((AbsoluteLayout.LayoutParams)params).y = (int)((t.top + y) * scale);
+            }
+        }
+    }
 
 	// IRecieveCollectionChanges.add
 	public void add(Object collection, Object item) {

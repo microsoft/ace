@@ -35,9 +35,22 @@ public class Utils {
 		);
 	}
 
+	public static int getInt(Object obj) {
+		if (obj instanceof Double) {
+			return (int)(double)(Double)obj;
+		}
+		if (obj instanceof Integer) {
+			return (Integer)obj;
+		}
+		if (obj instanceof Float) {
+			return (int)(float)(Float)obj;
+		}
+		throw new RuntimeException("Could not get an int value from a " + obj.getClass().getSimpleName());
+	}
+
 	public static double getDouble(Object obj) {
 		if (obj instanceof Double) {
-			return (double)(Double)obj;
+			return (Double)obj;
 		}
 		if (obj instanceof Integer) {
 			return (double)(int)(Integer)obj;

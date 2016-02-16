@@ -4,4 +4,6 @@
     <integer name="grid_rowspanproperty">4</integer>
     <integer name="grid_columnspanproperty">5</integer>
     <integer name="ace_margin">6</integer>
+    <integer name="canvas_left">7</integer>
+    <integer name="canvas_top">8</integer>
 </resources>

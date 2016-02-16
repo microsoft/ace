@@ -80,11 +80,11 @@ public class ViewHelper {
 			return true;
 		}
 		else if (propertyName.equals("Canvas.Left")) {
-			setCoordinate(instance, true, propertyValue);
+            Utils.setTag(instance, "canvas_left", Utils.getInt(propertyValue));
 			return true;
 		}
 		else if (propertyName.equals("Canvas.Top")) {
-			setCoordinate(instance, false, propertyValue);
+            Utils.setTag(instance, "canvas_top", Utils.getInt(propertyValue));
 			return true;
 		}
 		else if (propertyName.equals("Grid.Row")) {
@@ -105,37 +105,6 @@ public class ViewHelper {
         }
 
 		return false;
-	}
-
-	static void setCoordinate(View instance, boolean isX, Object position) {
-		int value;
-		if (position instanceof Double)
-			value = (int)(double)(Double)position;
-		else
-			value = (Integer)position;
-
-        // Get the scale of screen content
-        value *= Utils.getScaleFactor(instance.getContext());
-
-		ViewGroup.LayoutParams params = instance.getLayoutParams();
-		if (params != null && params instanceof AbsoluteLayout.LayoutParams)
-		{
-			// Keep the other coordinate intact while setting the new one
-			AbsoluteLayout.LayoutParams params2 = (AbsoluteLayout.LayoutParams)params;
-			params = new AbsoluteLayout.LayoutParams(params2.width, params2.height,
-				isX ? value : params2.x,
-				isX ? params2.y : value);
-		}
-		else
-		{
-			// Set the new coordinate to the passed-in value,
-			// making the other coordinate zero
-			params = new AbsoluteLayout.LayoutParams(
-				ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,
-				isX ? value : 0,
-				isX ? 0 : value);
-		}
-		instance.setLayoutParams(params);
 	}
 
 	static void setLength(View instance, boolean isWidth, Object length) {
