@@ -272,7 +272,7 @@
 
 + (UINavigationController*) getParentNavigationController:(UIViewController*)viewController {
     if ([viewController isKindOfClass:[UINavigationController class]]) {
-        return viewController;
+        return (UINavigationController*)viewController;
     }
     else if (viewController.navigationController != nil) {
         return viewController.navigationController;
@@ -284,6 +284,73 @@
         return (UINavigationController*)viewController.parentViewController;
     }
     return nil;
+}
+
++ (CGRect) positionView:(UIView*)view availableSpace:(CGRect)availableSpace {
+    BOOL unconstrainedWidth = (availableSpace.size.width == -1);
+    BOOL unconstrainedHeight = (availableSpace.size.height == -1);
+
+    // Check for any margin
+    Thickness* margin = [view.layer valueForKey:@"Ace.Margin"];
+    float leftMargin = 0, rightMargin = 0, topMargin = 0, bottomMargin = 0;
+    if (margin != nil) {
+        leftMargin = margin.left;
+        topMargin = margin.top;
+        rightMargin = margin.right;
+        bottomMargin = margin.bottom;
+    }
+    
+    // Stretching is the default behavior
+    float left = availableSpace.origin.x + leftMargin;
+    float top = availableSpace.origin.y + topMargin;
+    float width = unconstrainedWidth ? view.bounds.size.width : availableSpace.size.width - leftMargin - rightMargin;
+    float height = unconstrainedHeight ? view.bounds.size.height : availableSpace.size.height - topMargin - bottomMargin;
+
+    if (!unconstrainedWidth) {
+        // Handle HorizontalAlignment
+        NSString* halign = [view.layer valueForKey:@"Ace.HorizontalAlignment"];
+        if (halign != nil) {
+            if ([halign compare:@"center"] == 0) {
+                width = view.bounds.size.width;
+                left = availableSpace.origin.x + leftMargin + (availableSpace.size.width - width - leftMargin - rightMargin) / 2;
+            }
+            else if ([halign compare:@"left"] == 0) {
+                width = view.bounds.size.width;
+                left = availableSpace.origin.x + leftMargin;
+            }
+            else if ([halign compare:@"right"] == 0) {
+                width = view.bounds.size.width;
+                left = availableSpace.origin.x + availableSpace.size.width - width - rightMargin;
+            }
+        }
+    }
+
+    if (!unconstrainedHeight) {
+        // Handle VerticalAlignment
+        NSString* valign = [view.layer valueForKey:@"Ace.VerticalAlignment"];
+        if (valign != nil) {
+            if ([valign compare:@"center"] == 0) {
+                height = view.bounds.size.height;
+                top = availableSpace.origin.y + topMargin + (availableSpace.size.height - height - topMargin - bottomMargin) / 2;
+            }
+            else if ([valign compare:@"top"] == 0) {
+                height = view.bounds.size.height;
+                top = availableSpace.origin.y + topMargin;
+            }
+            else if ([valign compare:@"bottom"] == 0) {
+                height = view.bounds.size.height;
+                top = availableSpace.origin.y + availableSpace.size.height - height - bottomMargin;
+            }
+        }
+    }
+    
+    // Position the view
+    view.frame = CGRectMake(left, top, width, height);
+    
+    // Return the available space rectangle, expanded by margins in unconstrained dimensions
+    return CGRectMake(availableSpace.origin.x, availableSpace.origin.y,
+                      unconstrainedWidth ? view.bounds.size.width + leftMargin + rightMargin : availableSpace.size.width,
+                      unconstrainedHeight ? view.bounds.size.height + topMargin + bottomMargin : availableSpace.size.height);
 }
 
 + (int) parseInt:(NSString*)s {

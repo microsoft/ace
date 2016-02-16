@@ -11,6 +11,9 @@
 
 + (UINavigationController*) getParentNavigationController:(UIViewController*)viewController;
 
+// Takes care of margins and horizontal/vertical alignment
++ (CGRect) positionView:(UIView*)view availableSpace:(CGRect)availableSpace;
+
 + (int) parseInt:(NSString*)s;
 + (void) alert:(NSString*)s;
 

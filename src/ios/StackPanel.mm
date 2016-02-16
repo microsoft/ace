@@ -5,6 +5,7 @@
 #import "StackPanel.h"
 #import "UIViewHelper.h"
 #import "Thickness.h"
+#import "Utils.h"
 
 @implementation StackPanel
 
@@ -138,58 +139,27 @@
     for (unsigned long i = 0; i < count; i++) {
         UIView* child = _children[i];
         if (child != nil) {
-            double width = child.bounds.size.width;
-            double height = child.bounds.size.height;
-            double halignAdjustment = 0;
-
-            Thickness* margin = [child.layer valueForKey:@"Ace.Margin"];
+            double availableWidth = -1; // Natural size
+            double availableHeight = -1; // Natural size
 
             if (_isVertical) {
-                width = self.bounds.size.width - self.padding.left - self.padding.right;
-
-                // TODO: Only handling this one case for now
-                NSString* halign = [child.layer valueForKey:@"Ace.HorizontalAlignment"];
-                if (halign != nil) {
-                    if ([halign compare:@"center"] == 0) {
-                        double parentWidth = width;
-                        width = child.bounds.size.width;
-                        if (margin != nil) {
-                            halignAdjustment = (parentWidth - width - margin.left - margin.right) / 2;
-                            // Add margins to the width, simply because they're going to be subtracted below
-                            width += margin.left + margin.right;
-                        }
-                        else {
-                            halignAdjustment = (parentWidth - width) / 2;
-                        }
-                    }
-                }
+                // The child can stretch fo fill all the horizontal space
+                availableWidth = self.bounds.size.width - self.padding.left - self.padding.right;
             }
             else {
-                height = self.bounds.size.height - self.padding.top - self.padding.bottom;
+                // The child can stretch to fill all the vertical space
+                availableHeight = self.bounds.size.height - self.padding.top - self.padding.bottom;
             }
-
-            if (margin != nil) {
-                if (_isVertical)
-                    child.frame = CGRectMake(left + halignAdjustment + margin.left, top + margin.top, width - margin.right - margin.left, height);
-                else
-                    child.frame = CGRectMake(left + margin.left, top + margin.top, width, height - margin.bottom - margin.top);
-            }
-            else {
-                child.frame = CGRectMake(left + halignAdjustment, top, width, height);
-            }
+            
+            CGRect availableSpace = CGRectMake(left, top, availableWidth, availableHeight);
+            CGRect boundingBox = [Utils positionView:child availableSpace:availableSpace];
 
             // Move the top/left pointers
             if (_isVertical) {
-                top += height;
-                if (margin != nil) {
-                    top = top + margin.top + margin.bottom;
-                }
+                top = boundingBox.origin.y + boundingBox.size.height;
             }
             else {
-                left += width;
-                if (margin != nil) {
-                    left = left + margin.left + margin.right;
-                }
+                left = boundingBox.origin.x + boundingBox.size.width;
             }
         }
     }
