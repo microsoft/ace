@@ -52,29 +52,12 @@ public class ViewHelper {
         }
         // TODO: Treating margin like padding
 		else if (propertyName.endsWith(".Padding") || propertyName.endsWith(".Margin")) {
-			if (propertyValue instanceof Long) {
-                int p = (int)(long)(Long)propertyValue;
-                // Get the scale of screen content
-                p *= Utils.getScaleFactor(instance.getContext());
-
-                instance.setPadding(p, p, p, p);
-            }
-            else if (propertyValue instanceof Integer) {
-                int p = (Integer)propertyValue;
-                // Get the scale of screen content
-                p *= Utils.getScaleFactor(instance.getContext());
-
-                instance.setPadding(p, p, p, p);
-            }
-            //TODO: Can be a string like x,y or x,y,a,b when set on a custom control. Need to have parsers on native side.
-            // Move all of this code (Long/Integer/String/Thickness) to a converter.ConvertThickness.
-            // Then same with brushes, etc., too.
-            else {
-                Thickness thickness = (Thickness)propertyValue;
-                // Get the scale of screen content
-                float scale = Utils.getScaleFactor(instance.getContext());
-                instance.setPadding((int)(thickness.left * scale), (int)(thickness.top * scale), (int)(thickness.right * scale), (int)(thickness.bottom * scale));
-            }
+            Thickness t = Thickness.fromObject(propertyValue);
+            // Get the scale of screen content
+            float scale = Utils.getScaleFactor(instance.getContext());
+            instance.setPadding(
+                (int)(t.left * scale),  (int)(t.top * scale),
+                (int)(t.right * scale), (int)(t.bottom * scale));            
             return true;
 		}
         else if (propertyName.endsWith(".BottomAppBar")) {
