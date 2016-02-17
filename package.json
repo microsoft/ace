@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-ace",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Enables you to mix native UI and native code with your JavaScript and HTML. http://microsoft.github.io/ace",
   "cordova": {
     "id": "cordova-plugin-ace",
