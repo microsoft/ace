@@ -51,7 +51,7 @@ public class ViewHelper {
 			return true;
         }
 		else if (propertyName.endsWith(".Margin")) {
-            Utils.setTag(instance, "ace_margin", propertyValue);
+            Utils.setTag(instance, "ace_margin", Thickness.fromObject(propertyValue));
             return true;
 		}
 		else if (propertyName.endsWith(".Padding")) {
@@ -118,6 +118,13 @@ public class ViewHelper {
             value = (int)(double)Double.parseDouble((String)length);
 		else
 			value = (Integer)length;
+
+        if (isWidth) {
+            Utils.setTag(instance, "ace_width", value);
+        }
+        else {
+            Utils.setTag(instance, "ace_height", value);
+        }
 
         // Get the scale of screen content
         value *= Utils.getScaleFactor(instance.getContext());

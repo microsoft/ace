@@ -57,7 +57,7 @@ public class StackPanel extends LinearLayout implements IHaveProperties, IReciev
     }
     
     void positionChild(View view) {
-        Object margin = Utils.getTag(view, "ace_margin", null);
+        Thickness margin = (Thickness)Utils.getTag(view, "ace_margin", null);
 
         ViewGroup.LayoutParams params = view.getLayoutParams();
         if (params instanceof ViewGroup.MarginLayoutParams) {
@@ -65,12 +65,11 @@ public class StackPanel extends LinearLayout implements IHaveProperties, IReciev
                 ((ViewGroup.MarginLayoutParams)params).setMargins(0,0,0,0);
             }
             else {
-                Thickness t = Thickness.fromObject(margin);
                 // Get the scale of screen content
                 float scale = Utils.getScaleFactor(getContext());
                 ((ViewGroup.MarginLayoutParams)params).setMargins(
-                    (int)(t.left * scale),  (int)(t.top * scale),
-                    (int)(t.right * scale), (int)(t.bottom * scale));
+                    (int)(margin.left * scale),  (int)(margin.top * scale),
+                    (int)(margin.right * scale), (int)(margin.bottom * scale));
             }
         }
     }

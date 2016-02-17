@@ -5,6 +5,7 @@
 package Windows.UI.Xaml.Controls;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import java.util.ArrayList;
 import run.ace.*;
@@ -101,6 +102,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
         ArrayList<Integer> colAutoWidths = null;
 
         if (count > 0) {
+            // Calculate what would be the auto height of each row
             if (numRows > 0) {
                 rowAutoHeights = new ArrayList(numRows);
                 for (int i = 0; i < numRows; i++) {
@@ -115,12 +117,22 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                         if (rowSpan == 1) {
                             int row = Math.min(Grid.GetRow(child), numRows - 1);
                             int h = rowAutoHeights.get(row);
+                            int childHeight = child.getMeasuredHeight();
+                            
+                            // Apply any margin
+                            Thickness margin = (Thickness)Utils.getTag(child, "ace_margin", null);
+                            if (margin != null) {
+                                childHeight += margin.top + margin.bottom;
+                            }
+
                             //TODO: Shouldn't this be MAX(h, ...height)?
-                            rowAutoHeights.set(row, h + child.getMeasuredHeight());
+                            rowAutoHeights.set(row, h + childHeight);
                         }
                     }
                 }
             }
+
+            // Calculate what would be the auto width of each column
             if (numCols > 0) {
                 colAutoWidths = new ArrayList(numCols);
                 for (int i = 0; i < numCols; i++) {
@@ -135,8 +147,16 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                         if (colSpan == 1) {
                             int col = Math.min(Grid.GetColumn(child), numCols - 1);
                             int w = colAutoWidths.get(col);
+                            int childWidth = child.getMeasuredWidth();
+
+                            // Apply any margin
+                            Thickness margin = (Thickness)Utils.getTag(child, "ace_margin", null);
+                            if (margin != null) {
+                                childWidth += margin.left + margin.right;
+                            }
+
                             //TODO: Shouldn't this be MAX(w, ...width)?
-                            colAutoWidths.set(col, w + child.getMeasuredWidth());
+                            colAutoWidths.set(col, w + childWidth);
                         }
                     }
                 }
@@ -191,35 +211,32 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
         }
 
         // Now divvy up the star chunks and calculate positions
-        {
-            double starHeight = totalStarHeight / numStarHeightChunks;
-            double currentTop = 0;
-            for (int i = 0; i < numRows; i++) {
-                RowDefinition rd = (RowDefinition) this._rowDefinitions.get(i);
-                if (rd.Height == null) {
-                    rd.CalculatedHeight = 1 * starHeight;
-                } else if (rd.Height.type == GridUnitType.Star) {
-                    rd.CalculatedHeight = rd.Height.gridValue * starHeight;
-                }
-
-                rd.CalculatedTop = currentTop;
-                currentTop += rd.CalculatedHeight;
+        double starHeight = totalStarHeight / numStarHeightChunks;
+        double currentTop = 0;
+        for (int i = 0; i < numRows; i++) {
+            RowDefinition rd = (RowDefinition) this._rowDefinitions.get(i);
+            if (rd.Height == null) {
+                rd.CalculatedHeight = 1 * starHeight;
+            } else if (rd.Height.type == GridUnitType.Star) {
+                rd.CalculatedHeight = rd.Height.gridValue * starHeight;
             }
+
+            rd.CalculatedTop = currentTop;
+            currentTop += rd.CalculatedHeight;
         }
-        {
-            double starWidth = totalStarWidth / numStarWidthChunks;
-            double currentLeft = 0;
-            for (int i = 0; i < numCols; i++) {
-                ColumnDefinition cd = (ColumnDefinition) this._columnDefinitions.get(i);
-                if (cd.Width == null) {
-                    cd.CalculatedWidth = 1 * starWidth;
-                } else if (cd.Width.type == GridUnitType.Star) {
-                    cd.CalculatedWidth = cd.Width.gridValue * starWidth;
-                }
 
-                cd.CalculatedLeft = currentLeft;
-                currentLeft += cd.CalculatedWidth;
+        double starWidth = totalStarWidth / numStarWidthChunks;
+        double currentLeft = 0;
+        for (int i = 0; i < numCols; i++) {
+            ColumnDefinition cd = (ColumnDefinition) this._columnDefinitions.get(i);
+            if (cd.Width == null) {
+                cd.CalculatedWidth = 1 * starWidth;
+            } else if (cd.Width.type == GridUnitType.Star) {
+                cd.CalculatedWidth = cd.Width.gridValue * starWidth;
             }
+
+            cd.CalculatedLeft = currentLeft;
+            currentLeft += cd.CalculatedWidth;
         }
 
         // Now place the children
@@ -284,8 +301,35 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                 }
 
                 // Place the child
-                child.layout((int)finalLeft, (int)finalTop, (int)(finalLeft + finalWidth), (int)(finalTop + finalHeight));
+                positionChild(child, (int)finalLeft, (int)finalTop, (int)(finalLeft + finalWidth), (int)(finalTop + finalHeight));
             }
         }
+    }
+
+    void positionChild(View view, int left, int top, int right, int bottom) {
+        Thickness margin = (Thickness)Utils.getTag(view, "ace_margin", null);
+
+        // Get the scale of screen content
+        float scale = Utils.getScaleFactor(getContext());
+
+        if (margin != null) {
+            left += (int)(margin.left * scale);
+            top += (int)(margin.top * scale);
+            right -= (int)(margin.right * scale);
+            bottom -= (int)(margin.bottom * scale);
+        }
+        
+        // Apply any explicit width/height
+        Object explicitWidth = Utils.getTag(view, "ace_width", null);
+        Object explicitHeight = Utils.getTag(view, "ace_height", null);
+        
+        if (explicitWidth != null) {
+            right = left + (int)((Integer)explicitWidth * scale);
+        }
+        if (explicitHeight != null) {
+            bottom = top + (int)((Integer)explicitHeight * scale);
+        }
+
+        view.layout(left, top, right, bottom);
     }
 }

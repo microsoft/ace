@@ -6,4 +6,6 @@
     <integer name="ace_margin">6</integer>
     <integer name="canvas_left">7</integer>
     <integer name="canvas_top">8</integer>
+    <integer name="ace_width">9</integer>
+    <integer name="ace_height">10</integer>
 </resources>

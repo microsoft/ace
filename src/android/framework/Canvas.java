@@ -45,7 +45,7 @@ public class Canvas extends AbsoluteLayout implements IHaveProperties, IRecieveC
     }
     
     void positionChild(View view) {
-        Object margin = Utils.getTag(view, "ace_margin", null);
+        Thickness margin = (Thickness)Utils.getTag(view, "ace_margin", null);
         int x = (Integer)Utils.getTag(view, "canvas_left", 0);
         int y = (Integer)Utils.getTag(view, "canvas_top", 0);
 
@@ -59,9 +59,8 @@ public class Canvas extends AbsoluteLayout implements IHaveProperties, IRecieveC
                 ((AbsoluteLayout.LayoutParams)params).y = (int)(y * scale);
             }
             else {
-                Thickness t = Thickness.fromObject(margin);
-                ((AbsoluteLayout.LayoutParams)params).x = (int)((t.left + x) * scale);
-                ((AbsoluteLayout.LayoutParams)params).y = (int)((t.top + y) * scale);
+                ((AbsoluteLayout.LayoutParams)params).x = (int)((margin.left + x) * scale);
+                ((AbsoluteLayout.LayoutParams)params).y = (int)((margin.top + y) * scale);
             }
         }
     }
