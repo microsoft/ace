@@ -331,6 +331,69 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
             bottom = top + (int)((Integer)explicitHeight * scale);
         }
 
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        if (params instanceof FrameLayout.LayoutParams) {
+            FrameLayout.LayoutParams flp = (FrameLayout.LayoutParams)params;
+            
+            String halign = (String)Utils.getTag(view, "ace_horizontalalignment", null);
+            if (halign != null) {
+                if (halign.equals("center")) {
+                    flp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    int w = view.getMeasuredWidth();
+                    int delta = (int)((right - left - w) / 2);
+                    left += delta;
+                    right = left + w;
+                }
+                else if (halign.equals("left")) {
+                    flp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    right = left + view.getMeasuredWidth();
+                }
+                else if (halign.equals("right")) {
+                    flp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    left = right - view.getMeasuredWidth();
+                }
+                else if (halign.equals("stretch")) {
+                    flp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+                else {
+                    throw new RuntimeException("Unknown HorizontalAlignment: " + halign);
+                }
+            }
+            else {
+                // Stretch by default
+                flp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            }
+
+            String valign = (String)Utils.getTag(view, "ace_verticalalignment", null);
+            if (valign != null) {
+                if (valign.equals("center")) {
+                    flp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    int h = view.getMeasuredHeight();
+                    int delta = (int)((bottom - top - h) / 2);
+                    top += delta;
+                    bottom = top + h;
+                }
+                else if (valign.equals("top")) {
+                    flp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    bottom = top + view.getMeasuredHeight();
+                }
+                else if (valign.equals("bottom")) {
+                    flp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    top = bottom - view.getMeasuredHeight();
+                }
+                else if (valign.equals("stretch")) {
+                    flp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+                else {
+                    throw new RuntimeException("Unknown VerticalAlignment: " + valign);
+                }
+            }
+            else {
+                // Stretch by default
+                flp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+            }
+        }
+
         view.layout(left, top, right, bottom);
     }
 }
