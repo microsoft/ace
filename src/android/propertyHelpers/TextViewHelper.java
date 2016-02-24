@@ -81,23 +81,23 @@ public class TextViewHelper {
 			instance.setTextColor(color);
 			return true;
 		}
-    else if (propertyName.endsWith(".HorizontalAlignment")) {
-        String alignment = ((String)propertyValue).toLowerCase();
+        else if (propertyName.endsWith(".HorizontalContentAlignment")) {
+            String alignment = ((String)propertyValue).toLowerCase();
 
-        // TODO: Do differently to preserve any vertical alignment
-        if (alignment.equals("center") || alignment.equals("stretch")) {
-            instance.setGravity(Gravity.CENTER_HORIZONTAL);
-        }
-        else if (alignment.equals("left")) {
-            instance.setGravity(Gravity.LEFT);
-        }
-        else if (alignment.equals("right")) {
-            instance.setGravity(Gravity.RIGHT);
-        }
-        else {
-            throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
-        }
-				return true;
+            // TODO: Do differently to preserve any vertical alignment
+            if (alignment.equals("center") || alignment.equals("stretch")) {
+                instance.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+            else if (alignment.equals("left")) {
+                instance.setGravity(Gravity.LEFT);
+            }
+            else if (alignment.equals("right")) {
+                instance.setGravity(Gravity.RIGHT);
+            }
+            else {
+                throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
+            }
+            return true;
 		}
 
 		// Now look at properties applicable to all Views

@@ -103,6 +103,14 @@ public class ViewHelper {
             Utils.setTag(instance, "grid_columnspanproperty", propertyValue);
 			return true;
         }
+        else if (propertyName.endsWith(".HorizontalAlignment")) {
+            Utils.setTag(instance, "ace_horizontalalignment", ((String)propertyValue).toLowerCase());
+            return true;
+        }
+        else if (propertyName.endsWith(".VerticalAlignment")) {
+            Utils.setTag(instance, "ace_verticalalignment", ((String)propertyValue).toLowerCase());
+            return true;
+        }
 
 		return false;
 	}

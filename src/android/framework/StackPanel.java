@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -70,6 +71,69 @@ public class StackPanel extends LinearLayout implements IHaveProperties, IReciev
                 ((ViewGroup.MarginLayoutParams)params).setMargins(
                     (int)(margin.left * scale),  (int)(margin.top * scale),
                     (int)(margin.right * scale), (int)(margin.bottom * scale));
+            }
+        }
+        
+        if (params instanceof LinearLayout.LayoutParams) {
+            LinearLayout.LayoutParams llp = (LinearLayout.LayoutParams)params;
+            
+            if (this.getOrientation() == LinearLayout.VERTICAL) {
+                String halign = (String)Utils.getTag(view, "ace_horizontalalignment", null);
+                if (halign != null) {
+                    if (halign.equals("center")) {
+                        llp.gravity = Gravity.CENTER_HORIZONTAL;
+                        llp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (halign.equals("left")) {
+                        llp.gravity = Gravity.LEFT;
+                        llp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (halign.equals("right")) {
+                        llp.gravity = Gravity.RIGHT;
+                        llp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (halign.equals("stretch")) {
+                        llp.gravity = Gravity.FILL_HORIZONTAL;
+                        llp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown HorizontalAlignment: " + halign);
+                    }
+                }
+                else {
+                    // Stretch by default
+                    llp.gravity = Gravity.FILL_HORIZONTAL;
+                    llp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+            }
+            else {
+                String valign = (String)Utils.getTag(view, "ace_verticalalignment", null);
+                if (valign != null) {
+                    if (valign.equals("center")) {
+                        llp.gravity = Gravity.CENTER_VERTICAL;
+                        llp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (valign.equals("top")) {
+                        llp.gravity = Gravity.TOP;
+                        llp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (valign.equals("bottom")) {
+                        llp.gravity = Gravity.BOTTOM;
+                        llp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                    }
+                    else if (valign.equals("stretch")) {
+                        llp.gravity = Gravity.FILL_VERTICAL;
+                        llp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    }
+                    else {
+                        throw new RuntimeException("Unknown VerticalAlignment: " + valign);
+                    }
+                }
+                else {
+                    // Stretch by default
+                    llp.gravity = Gravity.FILL_VERTICAL;
+                    llp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                }
             }
         }
     }
