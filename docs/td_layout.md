@@ -89,6 +89,14 @@ stacked (vertically by default). You can set StackPanel's Orientation property t
 By default, children are given their natural size in the direction of stacking, and they are stretched to fill the perpendicular direction. 
 You can change this with the HorizontalAlignment/VerticalAlignment properties discussed later in this topic.
 
+**Vertical StackPanel (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-vertical-ios.png"/>
+
+**Horizontal StackPanel (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-horizontal-ios.png"/>
+
 ### Grid
 Grid enables you to define rows and columns, then place each child in specific rows/columns. There are many options 
 for configuring how rows and columns are sized. They can be auto-sized, given explicit sizes, or given proportional 
