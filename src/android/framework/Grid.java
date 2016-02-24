@@ -353,7 +353,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                     left = right - view.getMeasuredWidth();
                 }
                 else if (halign.equals("stretch")) {
-                    flp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                    flp.width = right - left;
                 }
                 else {
                     throw new RuntimeException("Unknown HorizontalAlignment: " + halign);
@@ -361,7 +361,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
             }
             else {
                 // Stretch by default
-                flp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                flp.width = right - left;
             }
 
             String valign = (String)Utils.getTag(view, "ace_verticalalignment", null);
@@ -382,7 +382,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                     top = bottom - view.getMeasuredHeight();
                 }
                 else if (valign.equals("stretch")) {
-                    flp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                    flp.height = bottom - top;
                 }
                 else {
                     throw new RuntimeException("Unknown VerticalAlignment: " + valign);
@@ -390,7 +390,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
             }
             else {
                 // Stretch by default
-                flp.height = ViewGroup.LayoutParams.MATCH_PARENT;
+                flp.height = bottom - top;
             }
         }
 
