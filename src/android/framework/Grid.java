@@ -84,9 +84,10 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
         int numRows = this._rowDefinitions == null ? 0 : this._rowDefinitions.size();
         int numCols = this._columnDefinitions == null ? 0 : this._columnDefinitions.size();
 
-        double totalStarHeight = bottom - top;
+        // Automatic padding must be accounted for
+        double totalStarHeight = bottom - top - getPaddingTop() - getPaddingBottom();
         double numStarHeightChunks = 0;
-        double totalStarWidth = right - left;
+        double totalStarWidth = right - left - getPaddingLeft() - getPaddingRight();
         double numStarWidthChunks = 0;
 
         UIElementCollection children = this._children;
@@ -212,7 +213,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
 
         // Now divvy up the star chunks and calculate positions
         double starHeight = totalStarHeight / numStarHeightChunks;
-        double currentTop = 0;
+        double currentTop = getPaddingTop();
         for (int i = 0; i < numRows; i++) {
             RowDefinition rd = (RowDefinition) this._rowDefinitions.get(i);
             if (rd.Height == null) {
@@ -226,7 +227,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
         }
 
         double starWidth = totalStarWidth / numStarWidthChunks;
-        double currentLeft = 0;
+        double currentLeft = getPaddingLeft();
         for (int i = 0; i < numCols; i++) {
             ColumnDefinition cd = (ColumnDefinition) this._columnDefinitions.get(i);
             if (cd.Width == null) {
@@ -243,8 +244,8 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
         for (int i = 0; i < count; i++) {
             View child = (View)children.get(i);
             if (child != null) {
-                double finalLeft = 0;
-                double finalTop = 0;
+                double finalLeft = getPaddingLeft();
+                double finalTop = getPaddingTop();
                 double finalWidth = 0;
                 double finalHeight = 0;
 
