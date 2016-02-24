@@ -29,6 +29,7 @@ and <a href="#two">layout properties</a>.
 
 ## Layout Panels
 There are currently three cross-platform panels available:
+
 * <b>Canvas</b> for absolute positioning
 * <b>StackPanel</b> for horizontal or vertical stacking
 * <b>Grid</b> for complex layout
