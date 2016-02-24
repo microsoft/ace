@@ -285,7 +285,7 @@
                     // Guard against nonsense spans that are too big
                     if (column + span >= numCols)
                         break;
-                    cd = self.ColumnDefinitions[column];
+                    cd = self.ColumnDefinitions[column + span];
                 }
                 else {
                     cd = [[ColumnDefinition alloc] init];
