@@ -83,16 +83,36 @@ public class TextViewHelper {
 		}
         else if (propertyName.endsWith(".HorizontalContentAlignment")) {
             String alignment = ((String)propertyValue).toLowerCase();
-
-            // TODO: Do differently to preserve any vertical alignment
             if (alignment.equals("center") || alignment.equals("stretch")) {
-                instance.setGravity(Gravity.CENTER_HORIZONTAL);
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.VERTICAL_GRAVITY_MASK) | Gravity.CENTER_HORIZONTAL);
             }
             else if (alignment.equals("left")) {
-                instance.setGravity(Gravity.LEFT);
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.VERTICAL_GRAVITY_MASK) | Gravity.LEFT);
             }
             else if (alignment.equals("right")) {
-                instance.setGravity(Gravity.RIGHT);
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.VERTICAL_GRAVITY_MASK) | Gravity.RIGHT);
+            }
+            else {
+                throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
+            }
+            return true;
+		}
+        else if (propertyName.endsWith(".VerticalContentAlignment")) {
+            String alignment = ((String)propertyValue).toLowerCase();
+            if (alignment.equals("center") || alignment.equals("stretch")) {
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) | Gravity.CENTER_VERTICAL);
+            }
+            else if (alignment.equals("top")) {
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) | Gravity.TOP);
+            }
+            else if (alignment.equals("bottom")) {
+                int gravity = instance.getGravity();
+                instance.setGravity((gravity & Gravity.HORIZONTAL_GRAVITY_MASK) | Gravity.BOTTOM);
             }
             else {
                 throw new RuntimeException("Unknown " + propertyName + ": " + propertyValue);
