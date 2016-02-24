@@ -288,7 +288,7 @@ public class Grid extends FrameLayout implements IHaveProperties, IRecieveCollec
                         // Guard against nonsense spans that are too big
                         if (column + span >= numCols)
                             break;
-                        cd = (ColumnDefinition) this._columnDefinitions.get(column);
+                        cd = (ColumnDefinition) this._columnDefinitions.get(column + span);
                     }
                     else {
                         cd = new ColumnDefinition();
