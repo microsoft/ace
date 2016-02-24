@@ -45,6 +45,9 @@ UIElement.prototype.findName = function (name) {
 UIElement.prototype.getHeight = function () { return this.get("FrameworkElement.Height"); };
 UIElement.prototype.setHeight = function (height) { this.set("FrameworkElement.Height", height); };
 
+UIElement.prototype.getHorizontalAlignment = function () { return this.get("FrameworkElement.HorizontalAlignment"); };
+UIElement.prototype.setHorizontalAlignment = function (alignment) { this.set("FrameworkElement.HorizontalAlignment", alignment); };
+
 UIElement.prototype.getMargin = function () { return this.get("FrameworkElement.Margin"); };
 UIElement.prototype.setMargin = function (thickness) { this.set("FrameworkElement.Margin", thickness); };
 
@@ -86,6 +89,9 @@ UIElement.prototype.setStyle = function (style) {
     // Just cache locally for the sake of getStyle()
     this.invalidate("FrameworkElement.Style", style);
 };
+
+UIElement.prototype.getVerticalAlignment = function () { return this.get("FrameworkElement.VerticalAlignment"); };
+UIElement.prototype.setVerticalAlignment = function (alignment) { this.set("FrameworkElement.VerticalAlignment", alignment); };
 
 UIElement.prototype.getWidth = function () { return this.get("FrameworkElement.Width"); };
 UIElement.prototype.setWidth = function (width) { this.set("FrameworkElement.Width", width); };
