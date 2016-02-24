@@ -6,8 +6,12 @@
 //
 // Defines column-specific properties that apply to Grid elements.
 //
-function ColumnDefinition() {
+function ColumnDefinition(optionalWidth) {
   ace.UIElement.call(this, "Windows.UI.Xaml.Controls.ColumnDefinition");
+  
+  if (optionalWidth) {
+    this.setWidth(optionalWidth);    
+  }
 };
 
 // Inheritance
