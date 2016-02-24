@@ -100,7 +100,11 @@ Here's an example that uses a Grid in XAML:
 &lt;/Grid>
 </pre>
 
-And here's the same example purely in JavaScript:
+If you navigate to this markup file, you get the following result, which stretches to fill the screen regardless of size/orientation:
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-android.png"/>
+
+Here's the same example purely in JavaScript, which produces the identical result with no markup involved:
 
 <pre>
 var grid = new ace.Grid();
@@ -165,7 +169,47 @@ grid.getChildren().add(b9);
 ace.navigate(grid);
 </pre>
 
-Children can span multiple rows/columns with the <b>Grid.RowSpan</b> and <b>Grid.ColumnSpan</b> properties, whose default value is 1.
+Children can span multiple rows/columns with the <b>Grid.RowSpan</b> and <b>Grid.ColumnSpan</b> properties, whose default value is 1. The following Grid produces 
+the result below:
+
+<pre>
+&lt;Grid>
+    &lt;!-- Define a 3x3 grid with a center cell twice the size -->
+    &lt;Grid.RowDefinitions>
+        &lt;RowDefinition />
+        &lt;RowDefinition Height="2*" />
+        &lt;RowDefinition />
+    &lt;/Grid.RowDefinitions>
+    &lt;Grid.ColumnDefinitions>
+        &lt;ColumnDefinition />
+        &lt;ColumnDefinition Width="2*" />
+        &lt;ColumnDefinition />
+    &lt;/Grid.ColumnDefinitions>
+
+    &lt;!-- Row 0 -->
+    &lt;Button        <b>Grid.ColumnSpan="2"</b>                              Background="Red"       />
+    &lt;Button                                         Grid.Column="2" Background="Yellow"    />
+    &lt;!-- Row 1 -->
+    &lt;Button                            Grid.Row="1"                 Background="Green"     />
+    &lt;Button                            Grid.Row="1" Grid.Column="1" Background="Aqua"      />
+    &lt;Button        <b>Grid.RowSpan="2"</b>    Grid.Row="1" Grid.Column="2" Background="SteelBlue" />
+    &lt;!-- Row 2 -->
+    &lt;Button                            Grid.Row="2"                 Background="Purple"    />
+    &lt;Button                            Grid.Row="2" Grid.Column="1" Background="Brown"     />
+&lt;/Grid>
+</pre>
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-span-android.png"/>
+
+In JavaScript, you can set these properties as follows:
+
+<pre>
+...
+ace.Grid.setColumnSpan(b1, 2);
+...
+ace.Grid.setRowSpan(b6, 2);
+...
+</pre>
 
 <a name="two"/>
 
