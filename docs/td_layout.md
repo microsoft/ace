@@ -244,6 +244,24 @@ If a layout panel gives a child element more space than it needs, you can use th
 
 **VerticalAlignment** can be set to **Top**, **Bottom**, **Center**, or **Stretch**
 
+In a Grid, each element is stretched both horizontally and vertically by default in order to fill the "cell" given to it. The image below demonstrates 
+what happens if each Button in the earlier Grid example (the one leveraging RowSpan and ColumnSpan) is marked with either the following in XAML:
+<pre>
+&lt;Button ... HorizontalAlignment="Right" VerticalAlignment="Bottom" />
+</pre>
+or the following in JavaScript:
+<pre>
+...
+b1.setHorizontalAlignment("Right");
+b1.setVerticalAlignment("Bottom");
+...
+</pre>
+
+The original Button layout is shown faded in the background just to make the cell sizes more obvious. In reality, the smaller buttons, now given their natural non-stretched size, 
+are on top of a plain white background.
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-span-bottomright-android.png"/>
+
 ### HorizontalContentAlignment and VerticalContentAlignment
 
 These two properties can be set on some controls, such as TextBlock and Button, to control the alignment of its inner content. They accept the same values as 
