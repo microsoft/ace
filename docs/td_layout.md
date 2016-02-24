@@ -44,7 +44,7 @@ In XAML, you set these coordinates as "attached properties," e.g.:
     &lt;!-- The default position is 0,0: -->
     &lt;Button                                    Background="Red"    />
     &lt;Button <b>Canvas.Left="100"                 </b> Background="Orange" />
-    &lt;Button <b>                  Canvas.Top="50" </b> Background="Yellow" />
+    &lt;Button <b>                  Canvas.Top="150"</b> Background="Yellow" />
     &lt;Button <b>Canvas.Left="150" Canvas.Top="200"</b> Background="Green"  />
 &lt;/Canvas>
 </pre>
@@ -52,10 +52,35 @@ In XAML, you set these coordinates as "attached properties," e.g.:
 In JavaScript, you set the coordinates via static methods on Canvas to get the same results:
 
 <pre>
-var b = new ace.Button();
-<b>ace.Canvas.setLeft(b, 150);
-ace.Canvas.setTop(b, 200);</b>
+var canvas = new ace.Canvas();
+
+var b1 = new ace.Button();
+b1.setBackground("Red");
+canvas.getChildren().add(b1);
+    
+var b2 = new ace.Button();
+b2.setBackground("Orange");
+<b>ace.Canvas.setLeft(b2, 100);</b>
+canvas.getChildren().add(b2);
+
+var b3 = new ace.Button();
+b3.setBackground("Yellow");
+<b>ace.Canvas.setTop(b3, 150);</b>
+canvas.getChildren().add(b3);
+
+var b4 = new ace.Button();
+b4.setBackground("Green");
+<b>ace.Canvas.setLeft(b4, 150);
+ace.Canvas.setTop(b4, 200);</b>
+canvas.getChildren().add(b4);
+
+// Navigate to this Canvas
+ace.navigate(canvas);
 </pre>
+
+Here is the result of using either approach, shown on iOS:
+
+<img width="50%" src="/ace/assets/images/docs/layout/canvas-ios.png"/>
 
 ### StackPanel
 StackPanel doesn't provide any attached properties for controlling the layout of its children. You just add children, and they get 
@@ -257,10 +282,22 @@ b1.setVerticalAlignment("Bottom");
 ...
 </pre>
 
+Examples are also given with values of "Left" and "Top" as well as "Center" and "Center".
+
 The original Button layout is shown faded in the background just to make the cell sizes more obvious. In reality, the smaller buttons, now given their natural non-stretched size, 
 are on top of a plain white background.
 
+**HorizontalAlignment=Right, VerticalAlignment=Bottom (Android)**
+
 <img width="50%" src="/ace/assets/images/docs/layout/grid-span-bottomright-android.png"/>
+
+**HorizontalAlignment=Left, VerticalAlignment=Top (Android)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-span-topleft-android.png"/>
+
+**HorizontalAlignment=Center, VerticalAlignment=Center (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-span-centercenter-ios.png"/>
 
 ### HorizontalContentAlignment and VerticalContentAlignment
 
