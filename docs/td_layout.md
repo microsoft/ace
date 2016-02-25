@@ -86,6 +86,9 @@ And here it is on Android:
 
 <img width="50%" src="/ace/assets/images/docs/layout/canvas-android.png"/>
 
+The different default Button size on each platform makes the results look a bit different from each other, but you could always explicitly 
+set each Button's Width and Height properties if the exact sizes matter.
+
 ### StackPanel
 StackPanel doesn't provide any attached properties for controlling the layout of its children. You just add children, and they get 
 stacked (vertically by default). You can set StackPanel's Orientation property to either "vertical" or "horizontal".
@@ -204,7 +207,13 @@ Here's an example that uses a Grid in XAML:
 
 If you navigate to this markup file, you get the following result, which stretches to fill the screen regardless of size/orientation:
 
+**Simple Grid (Android)**
+
 <img width="50%" src="/ace/assets/images/docs/layout/grid-android.png"/>
+
+**Simple Grid (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-ios.png"/>
 
 Here's the same example purely in JavaScript, which produces the identical result with no markup involved:
 
@@ -301,7 +310,13 @@ the result below:
 &lt;/Grid>
 </pre>
 
+**Grid with RowSpan, ColumnSpan (Android)**
+
 <img width="50%" src="/ace/assets/images/docs/layout/grid-span-android.png"/>
+
+**Grid with RowSpan, ColumnSpan (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/grid-span-ios.png"/>
 
 In JavaScript, you can set these properties as follows:
 
