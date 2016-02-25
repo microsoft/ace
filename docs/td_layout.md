@@ -82,6 +82,10 @@ Here is the result of using either approach, shown on iOS:
 
 <img width="50%" src="/ace/assets/images/docs/layout/canvas-ios.png"/>
 
+And here it is on Android:
+
+<img width="50%" src="/ace/assets/images/docs/layout/canvas-android.png"/>
+
 ### StackPanel
 StackPanel doesn't provide any attached properties for controlling the layout of its children. You just add children, and they get 
 stacked (vertically by default). You can set StackPanel's Orientation property to either "vertical" or "horizontal".
@@ -89,9 +93,74 @@ stacked (vertically by default). You can set StackPanel's Orientation property t
 By default, children are given their natural size in the direction of stacking, and they are stretched to fill the perpendicular direction. 
 You can change this with the HorizontalAlignment/VerticalAlignment properties discussed later in this topic.
 
+Here's a simple vertical StackPanel defined in XAML:
+
+<pre>
+&lt;StackPanel>
+    &lt;Button Background="Red"    />
+    &lt;Button Background="Orange" />
+    &lt;Button Background="Yellow" />
+    &lt;Button Background="Green"  />
+&lt;/StackPanel>
+</pre>
+
+And here it is defined in JavaScript:
+
+<pre>
+var stackPanel = new ace.StackPanel();
+
+var b1 = new ace.Button();
+b1.setBackground("Red");
+stackPanel.getChildren().add(b1);
+    
+var b2 = new ace.Button();
+b2.setBackground("Orange");
+stackPanel.getChildren().add(b2);
+
+var b3 = new ace.Button();
+b3.setBackground("Yellow");
+stackPanel.getChildren().add(b3);
+
+var b4 = new ace.Button();
+b4.setBackground("Green");
+stackPanel.getChildren().add(b4);
+
+// Navigate to this StackPanel
+ace.navigate(stackPanel);
+</pre>
+
+**Vertical StackPanel (Android)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-vertical-android.png"/>
+
 **Vertical StackPanel (iOS)**
 
 <img width="50%" src="/ace/assets/images/docs/layout/stackpanel-vertical-ios.png"/>
+
+(Unlike on iOS, Android buttons render with a small amount of built-in margin, rounded corners, and a shadow.)
+
+To make it stack horizontally, add the following property in XAML:
+
+<pre>
+&lt;StackPanel <b>Orientation="Horizontal"</b>>
+    &lt;Button Background="Red"    />
+    &lt;Button Background="Orange" />
+    &lt;Button Background="Yellow" />
+    &lt;Button Background="Green"  />
+&lt;/StackPanel>
+</pre>
+
+or in JavaScript:
+
+<pre>
+var stackPanel = new ace.StackPanel();
+<b>stackPanel.setOrientation("Horizontal");</b>
+...
+</pre>
+
+**Horizontal StackPanel (Android)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-horizontal-android.png"/>
 
 **Horizontal StackPanel (iOS)**
 
