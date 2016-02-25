@@ -28,6 +28,9 @@ At any spot in your code, you can check the current platform and act accordingly
 
 With logic like this, you could load different markup files, programmatically construct different UI, and so on.
 
+In addition to this, the [ace.android.ifVersionAtLeast API](/ace/docs/ref/#four) 
+enables you to perform Android-specific logic conditionally based on the current Android version.
+
 ## Conditional Markup
 
 Perhaps you have a XAML file that defines an entire page in a cross-platform way, but you have a couple of spots that need to differ based 
@@ -81,5 +84,5 @@ var obj = new ace.NativeObject("my.package.MyClass");
 ## Platform Helpers
 
 Currently, there are only platform-specific helpers for Android. These can be accessed via <b>ace.android</b>, and you can 
-see all the APIs [here](/ace/docs/ref/#four). The helpers give your code access to the current context, activity, and intent. 
-There are also app widget APIs, and event raised when the intent changes, and a helper for retrieving resource IDs.
+see all the APIs [here](/ace/docs/ref/#four). The helpers give your code access to the current context, activity, and intent, 
+and enable you to do Android version checking. There are also app widget APIs, an event raised when the intent changes, and a helper for retrieving resource IDs.

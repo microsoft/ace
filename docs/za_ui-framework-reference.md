@@ -324,17 +324,70 @@ Base Classes:
 
 <a name="four"/>
 
-## PLATFORM HELPERS
+## PLATFORM HELPERS (ANDROID)
+
+### ace.android.appWidget.add(text)
+
+Adds the passed-in string as a new item in your list-based Android app widget.
+
+### ace.android.appWidget.clear()
+
+Clears all the items in your list-based Android app widget.
+
+### ace.android.getContext()
+
+Returns the current Android application context object.
+
+### ace.android.getActivity()
+
+Returns the current activity.
+
+### ace.android.getIntent()
+
+Returns the current intent associated with the current activity.
+
+### ace.android.getId(name, onSuccess, onError)
+
+Gets the numeric Android resource ID for the given resource name.
+
+### ace.android.ifVersionAtLeast(version, onTrue, onFalse)
+
+Calls your onTrue callback if the current version of Android is greater than or equal to the version you specify. Otherwise, your optional 
+onFalse callback is called.
+
+<pre>
+// setBackgroundTintList only works on LOLLIPOP_MR1 or later
+ace.android.ifVersionAtLeast(ace.android.version.LOLLIPOP_MR1, function (actualVersion) {
+    button2.invoke("setBackgroundTintList", tintList2);
+}, function (actualVersion) {
+    button2.invoke("setBackgroundColor", color2);
+});
+</pre>
+
+### ace.addEventListener("android.intentchanged")
+
+Attaches an event handler that gets invoked whenever the current activity's intent changes. One thing that causes this is 
+the selection of an item on a list-based app widget.
 
 <br/>
 
-* ace.android.appWidget.add()
-* ace.android.appWidget.clear()
-* ace.android.getContext()
-* ace.android.getActivity()
-* ace.android.getIntent()
-* ace.android.getId(name, onSuccess, onError)
-* ace.addEventListener("android.intentchanged")
+## PLATFORM HELPERS (iOS)
+
+### ace.ios.getNavigationController()
+
+Returns the current UINavigationController instance.
+
+### ace.ios.getPresentedViewControllerAsync(onSuccess)
+
+If a view controller has been "presented" (e.g. a modal dialog), this retrieves that view controller.
+    
+### ace.ios.getCurrentModalContent()
+
+If a modal dialog is showing, this retrieves the root UI element from it.
+
+### ace.ios.setCurrentModalContent(content)
+
+If a modal dialog is showing, this replaces its root UI element.
 
 <br/>
 
