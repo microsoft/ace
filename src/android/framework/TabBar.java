@@ -18,7 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import Windows.UI.Xaml.Controls.*;
 
-public class TabBar extends android.widget.Toolbar implements
+// This derived from android.widget.Toolbar, but (a) that's not needed
+// and (b) Toolbar is only for Lollipop or later
+public class TabBar extends android.widget.LinearLayout implements
     //ActionBar.TabListener,
     android.app.ActionBar.TabListener,
     IHaveProperties, IRecieveCollectionChanges {

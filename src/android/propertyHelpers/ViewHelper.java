@@ -34,11 +34,13 @@ public class ViewHelper {
 				instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
 			}
 			else {
-				int color = Color.fromObject(propertyValue);
-				if (useTintListForBackground)
-					instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
-				else
-					instance.setBackgroundColor(color);
+                int color = Color.fromObject(propertyValue);
+                // setBackgroundTintList is only suported in Lollipop (5.0)+, and it doesn't work
+                // unless running on 5.1 (API 22, aka LOLLIPOP_MR1).
+                if (useTintListForBackground && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP_MR1)
+                    instance.setBackgroundTintList(android.content.res.ColorStateList.valueOf(color));
+                else
+                    instance.setBackgroundColor(color);
 			}
 			return true;
 		}

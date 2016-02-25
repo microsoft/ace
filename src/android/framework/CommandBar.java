@@ -11,7 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import run.ace.*;
 
-public class CommandBar extends android.widget.Toolbar implements IHaveProperties {
+// This derived from android.widget.Toolbar, but (a) that's not needed
+// and (b) Toolbar is only for Lollipop or later
+public class CommandBar extends android.widget.LinearLayout implements IHaveProperties {
     ObservableCollection _primaryCommands;
     ObservableCollection _secondaryCommands;
 
