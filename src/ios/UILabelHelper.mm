@@ -117,7 +117,7 @@
       instance.textColor = color;
       return true;
     }
-    else if ([propertyName hasSuffix:@".HorizontalAlignment"]) {
+    else if ([propertyName hasSuffix:@".HorizontalContentAlignment"]) {
         NSString* alignment = [(NSString*)propertyValue lowercaseString];
 
         if ([alignment compare:@"center"] == 0) {
