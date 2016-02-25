@@ -7,25 +7,19 @@
         Native Abstractions
     </ios:UILabel>
 
-    <!--
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
-    -->
         <ios:UIButton Name="iosButton" Background="red" Content="A" />
         <Button Name="xamlButton" Background="yellow" ace:On.Click="ace.goBack()">Back</Button>
         <ios:UIButton Background="lime">C</ios:UIButton>
-    <!--
     </StackPanel>
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
-    -->
         <ios:UISwitch Margin="10" />
         <ios:UISwitch Margin="10" On="True" />
-    <!--
         <ios:UISwitch Margin="10" />
         <ios:UISwitch Margin="10" On="True" />
         <ios:UISwitch Margin="10" />
     </StackPanel>
-    -->
     
     <ios:UIStepper Margin="10" />
     <ios:UIStepper Margin="10" TintColor="Chartreuse" />
