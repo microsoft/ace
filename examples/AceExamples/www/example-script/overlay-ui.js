@@ -122,11 +122,23 @@ function togglePlatformSpecificUI() {
                 // Change the background colors
                 ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#660000ff", function (color) {
                     ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color, function (tintList) {
-                        button1.invoke("setBackgroundTintList", tintList);
+
+                        // setBackgroundTintList only works on LOLLIPOP_MR1 or later
+                        ace.android.ifVersionAtLeast(ace.android.version.LOLLIPOP_MR1, function () {
+                            button1.invoke("setBackgroundTintList", tintList);
+                        }, function () {
+                            button1.invoke("setBackgroundColor", color);
+                        });
 
                         ace.NativeObject.invoke("android.graphics.Color", "parseColor", "#6600ff00", function (color2) {
                             ace.NativeObject.invoke("android.content.res.ColorStateList", "valueOf", color2, function (tintList2) {
-                                button2.invoke("setBackgroundTintList", tintList2);
+
+                                // setBackgroundTintList only works on LOLLIPOP_MR1 or later
+                                ace.android.ifVersionAtLeast(ace.android.version.LOLLIPOP_MR1, function () {
+                                    button2.invoke("setBackgroundTintList", tintList2);
+                                }, function () {
+                                    button2.invoke("setBackgroundColor", color2);
+                                });
 
                                 // Add the Buttons to the LinearLayout
                                 linearLayout.invoke("addView", button1);
