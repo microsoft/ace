@@ -391,6 +391,37 @@ are on top of a plain white background.
 
 <img width="50%" src="/ace/assets/images/docs/layout/grid-span-centercenter-ios.png"/>
 
+In a StackPanel, alignment only has an impact in the direction that is perpendicular to stacking, because children are given the exact amount of space 
+they need in the direction of stacking. No more, no less. Here's an example that uses different values of HorizontalAlignment in a vertical StackPanel:
+
+<pre>
+&lt;StackPanel>
+    &lt;Button <b>HorizontalAlignment="Left"</b>    Foreground="White" Background="Red" />
+    &lt;Button <b>HorizontalAlignment="Right"</b>   Background="Orange" />
+    &lt;Button <b>HorizontalAlignment="Center"</b>  Background="Yellow" />
+    &lt;Button <b>HorizontalAlignment="Stretch"</b> Foreground="White" Background="Green" />
+&lt;/StackPanel>
+</pre>
+
+**HorizontalAlignment in a Vertical StackPanel (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-horizontalalignment-ios.png"/>
+
+And here's an example that uses different values of VerticalAlignment in a horizontal StackPanel:
+
+<pre>
+&lt;StackPanel Orientation="Horizontal">
+    &lt;Button <b>VerticalAlignment="Top"</b>     Foreground="White" Background="Red" />
+    &lt;Button <b>VerticalAlignment="Bottom"</b>  Background="Orange" />
+    &lt;Button <b>VerticalAlignment="Center"</b>  Background="Yellow" />
+    &lt;Button <b>VerticalAlignment="Stretch"</b> Foreground="White" Background="Green" />
+&lt;/StackPanel>
+</pre>
+
+**VerticalAlignment in a Horizontal StackPanel (iOS)**
+
+<img width="50%" src="/ace/assets/images/docs/layout/stackpanel-verticalalignment-ios.png"/>
+
 ### HorizontalContentAlignment and VerticalContentAlignment
 
 These two properties can be set on some controls, such as TextBlock and Button, to control the alignment of its inner content. They accept the same values as 
