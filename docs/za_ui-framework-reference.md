@@ -369,6 +369,10 @@ ace.android.ifVersionAtLeast(ace.android.version.LOLLIPOP_MR1, function (actualV
 Attaches an event handler that gets invoked whenever the current activity's intent changes. One thing that causes this is 
 the selection of an item on a list-based app widget.
 
+### ace.android.version
+
+An enumeration of Android version codes, such as KITKAT, LOLLIPOP, LOLLIPOP_MR1, and M (for Marshmallow). This matches Android's [VERSION_CODES enumeration](http://developer.android.com/reference/android/os/Build.VERSION_CODES.html).
+
 <br/>
 
 ## PLATFORM HELPERS (iOS)
