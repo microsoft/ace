@@ -137,6 +137,10 @@
         }
         return true;
     }
+    else if ([propertyName hasSuffix:@".VerticalContentAlignment"]) {
+        // TODO: Need to reposition the UILabel, or consider using UITextView
+        return true;
+    }
     else if ([propertyName hasSuffix:@".TextWrapping"]) {
         NSString* value = [(NSString*)propertyValue lowercaseString];
 
