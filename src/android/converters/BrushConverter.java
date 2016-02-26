@@ -6,7 +6,7 @@ package Windows.UI.Xaml.Controls;
 
 import android.graphics.Color;
 
-class BrushConverter {
+public class BrushConverter {
 
 	static final int ZERO_CHAR = (int)'0';
 	static final int LOWER_A_CHAR = (int)'a';

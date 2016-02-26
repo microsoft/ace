@@ -4,7 +4,7 @@
 //-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
-class Color {
+public class Color {
 	public static int fromObject(Object value) {
 		if (value == null) {
 			throw new RuntimeException("NYI: Null color value");

@@ -29,7 +29,10 @@ public class Shape extends android.view.View implements IHaveProperties {
     public void setProperty(String propertyName, Object propertyValue) {
       if (!ViewHelper.setProperty(this, propertyName, propertyValue, false)) {
         if (propertyName.endsWith(".Stroke")) {
-          setStroke((Brush)propertyValue);
+            if (propertyValue instanceof Brush)
+                setStroke((Brush)propertyValue);
+            else
+                setStroke(BrushConverter.parse((String)propertyValue));
         }
         else if (propertyName.endsWith(".StrokeThickness")) {
           setStrokeThickness(run.ace.Utils.getDouble(propertyValue));
@@ -41,7 +44,10 @@ public class Shape extends android.view.View implements IHaveProperties {
           setStrokeEndLineCap((String)propertyValue);
         }
         else if (propertyName.endsWith(".Fill")) {
-          setFill((Brush)propertyValue);
+            if (propertyValue instanceof Brush)
+                setFill((Brush)propertyValue);
+            else
+                setFill(BrushConverter.parse((String)propertyValue));
         }
         else if (propertyName.endsWith(".StrokeLineJoin")) {
           setStrokeLineJoin((String)propertyValue);

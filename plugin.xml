@@ -442,9 +442,10 @@
     <source-file src="src/android/collections/SetterBaseCollection.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/collections/UIElementCollection.java" target-dir="src/run/ace/framework" />
 
-    <source-file src="src/android/converters/BrushConverter.java" target-dir="src/run/ace" />
-    <source-file src="src/android/converters/FontWeightConverter.java" target-dir="src/run/ace" />
-    <source-file src="src/android/converters/NamedColor.java" target-dir="src/run/ace" />
+    <source-file src="src/android/converters/BrushConverter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/converters/FontWeightConverter.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/converters/NamedColor.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/converters/PointFConverter.java" target-dir="src/run/ace/framework" />
 
     <source-file src="src/android/framework/AppBarButton.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ArcSegment.java" target-dir="src/run/ace/framework" />
