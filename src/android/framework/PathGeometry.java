@@ -5,14 +5,14 @@
 package Windows.UI.Xaml.Controls;
 
 enum SegmentType {
-    SegmentTypeNone,
-    SegmentTypeLine,
-    SegmentTypeBezier,
-    SegmentTypeQuadraticBezier,
-    SegmentTypeArc,
-    SegmentTypePolyLine,
-    SegmentTypePolyBezier,
-    SegmentTypePolyQuadraticBezier
+    None,
+    Line,
+    Bezier,
+    QuadraticBezier,
+    Arc,
+    PolyLine,
+    PolyBezier,
+    PolyQuadraticBezier
 }
 
 public class PathGeometry extends Geometry {
