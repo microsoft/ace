@@ -21,7 +21,7 @@ public class GeometryContext {
     FillRule s_defaultFillRule;
     boolean s_defaultValueForPathFigureIsClosed;
     boolean s_defaultValueForPathFigureIsFilled;
-    PointF s_defaultValueForPathFigureStartPoint;
+    PointF s_defaultValueForPathFigureStartPoint = new PointF(0, 0);
     boolean s_defaultValueForPathSegmentIsStroked;
     boolean s_defaultValueForPathSegmentIsSmoothJoin;
     boolean s_defaultValueForArcSegmentIsLargeArc;

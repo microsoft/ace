@@ -21,6 +21,7 @@ public class Path extends Shape {
 
   public Path(Context context) {
     super(context);
+    // Only needed for ViewGroup, but here anyway:
     this.setWillNotDraw(false);
 
     _strokePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
