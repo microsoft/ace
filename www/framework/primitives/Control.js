@@ -29,7 +29,13 @@ Control.prototype.setFontWeight = function (weight) { this.set("Control.FontWeig
 Control.prototype.getForeground = function () { return this.get("Control.Foreground"); };
 Control.prototype.setForeground = function (brush) { this.set("Control.Foreground", brush); };
 
+Control.prototype.getHorizontalContentAlignment = function () { return this.get("Control.HorizontalContentAlignment"); };
+Control.prototype.setHorizontalContentAlignment = function (alignment) { this.set("Control.HorizontalContentAlignment", alignment); };
+
 Control.prototype.getPadding = function () { return this.get("Control.Padding"); };
 Control.prototype.setPadding = function (thickness) { this.set("Control.Padding", thickness); };
+
+Control.prototype.getVerticalContentAlignment = function () { return this.get("Control.VerticalContentAlignment"); };
+Control.prototype.setVerticalContentAlignment = function (alignment) { this.set("Control.VerticalContentAlignment", alignment); };
 
 module.exports = Control;
