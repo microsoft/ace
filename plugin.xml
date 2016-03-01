@@ -166,6 +166,12 @@
   <js-module src="www/framework/TabBar.js">
     <merges target="ace.TabBar" />
   </js-module>
+  <js-module src="www/framework/TableView.js">
+    <merges target="ace.TableView" />
+  </js-module>
+  <js-module src="www/framework/TableViewCell.js">
+    <merges target="ace.TableViewCell" />
+  </js-module>
   <js-module src="www/framework/TextBlock.js">
     <merges target="ace.TextBlock" />
   </js-module>
@@ -369,6 +375,10 @@
     <source-file src="src/ios/SymbolIcon.mm" />
     <header-file src="src/ios/TabBar.h" />
     <source-file src="src/ios/TabBar.mm" />
+    <header-file src="src/ios/TableView.h" />
+    <source-file src="src/ios/TableView.mm" />
+    <header-file src="src/ios/TableViewCell.h" />
+    <source-file src="src/ios/TableViewCell.mm" />
     <header-file src="src/ios/TextBlock.h" />
     <source-file src="src/ios/TextBlock.mm" />
     <header-file src="src/ios/Thickness.h" />
