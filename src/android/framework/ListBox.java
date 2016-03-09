@@ -59,9 +59,8 @@ public class ListBox extends ListView implements IHaveProperties, IFireEvents, I
 				// Set up the message sending, which goes to all handlers
 				this.setOnItemClickListener(new ListView.OnItemClickListener() {
 					public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
-						View selection = (View)adapter.getItemAtPosition(position);
-						int selectionHandle = 0; //TODO: Must get handle for selection
-						OutgoingMessages.raiseEvent(eventName, handle, selectionHandle);
+						Object selection = adapter.getItemAtPosition(position);
+						OutgoingMessages.raiseEvent(eventName, handle, selection);
 					}
 				});
 			}
