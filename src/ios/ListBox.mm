@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------------------------------------------
 #import "ListBox.h"
 #import "ListBoxItem.h"
+#import "OutgoingMessages.h"
 
 @implementation ListBox
 
@@ -152,24 +153,20 @@
     return cell;
 }
 
--(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     //TODO: Must handle when SelectedIndex is changed later
     if (self.SelectedIndex == indexPath.row) {
         [tableView selectRowAtIndexPath:indexPath animated:true scrollPosition:UITableViewScrollPositionNone];
     }
 }
 
-- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath
-{
+- (void) tableView: (UITableView *) tableView didSelectRowAtIndexPath: (NSIndexPath *) indexPath {
     // Get selected item
     NSObject* selection = _Items[indexPath.row];
-
-    /* TODO: And do conditionally
-    int handle = [[self.layer valueForKey:@"CX.Handle"] intValue];
-    int selectionHandle = [[selection.layer valueForKey:@"CX.Handle"] intValue];
-    [OutgoingMessages sendEvent:@"Selector.SelectionChanged" withTargetId:handle withSourceId:handle withDataId:selectionHandle];
-    */
+    
+    if (_selectionChangedHandlers > 0) {
+        [OutgoingMessages raiseEvent:@"selectionchanged" instance:self eventData:selection];
+    }
 }
 
 - (void)layoutSubviews {

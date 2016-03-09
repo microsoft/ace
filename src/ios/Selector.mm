@@ -10,9 +10,24 @@
     self = [super init];
 
     // Default values:
+    _selectionChangedHandlers = 0;
     _SelectedIndex = -1;
 
     return self;
+}
+
+// IFireEvents.addEventHandler
+- (void) addEventHandler:(NSString*) eventName handle:(AceHandle*)handle {
+    if ([eventName compare:@"selectionchanged"] == 0) {
+        _selectionChangedHandlers++;
+    }
+}
+
+// IFireEvents.removeEventHandler
+- (void) removeEventHandler:(NSString*) eventName {
+    if ([eventName compare:@"selectionchanged"] == 0) {
+        _selectionChangedHandlers--;
+    }
 }
 
 - (id)getSelectedItem {
