@@ -42,6 +42,8 @@
     else {
       self.data = [GeometryConverter parse:(NSString*)propertyValue];
     }
+    // Redraw
+    [self setNeedsDisplay];
   }
   else {
     [super setProperty:propertyName value:propertyValue];
