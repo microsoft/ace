@@ -64,7 +64,7 @@ on raw platform-specific controls as well. For example:
 </pre>
 Ace maps these properties (and others, such as Content) to their most natural native counterparts.
 
-## Conslidating Properties Into a Style
+## Consolidating Properties Into a Style
 
 A *style* is a simple object that consolidates properties and their values. In XAML, you can define and apply 
 a style to a single button as follows:
