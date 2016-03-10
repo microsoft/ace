@@ -9,6 +9,7 @@
 
 + (void) setCallbackContext:(NSObject*)callback selector:(SEL)selector;
 + (void) raiseEvent:(NSString*)eventName instance:(NSObject*)instance eventData:(NSObject*) eventData;
++ (void) raiseEvent:(NSString*)eventName instance:(NSObject*)instance eventData:(NSObject*) eventData eventData2:(NSObject*) eventData2;
 + (void) raiseEvent:(NSString*)eventName handle:(AceHandle*)handle eventData:(NSObject*) eventData;
 
 @end

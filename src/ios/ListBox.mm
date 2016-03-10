@@ -165,7 +165,7 @@
     NSObject* selection = _Items[indexPath.row];
     
     if (_selectionChangedHandlers > 0) {
-        [OutgoingMessages raiseEvent:@"selectionchanged" instance:self eventData:selection];
+        [OutgoingMessages raiseEvent:@"selectionchanged" instance:self eventData:selection eventData2:[NSNumber numberWithInt:indexPath.row]];
     }
 }
 

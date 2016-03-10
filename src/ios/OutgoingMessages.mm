@@ -19,8 +19,14 @@ SEL _selector;
 + (void) raiseEvent:(NSString*)eventName instance:(NSObject*)instance eventData:(NSObject*) eventData {
     NSArray* array = [NSArray arrayWithObjects:
         instance == nil ? nil : [[AceHandle fromObject:instance] toJSON],
-        eventName,
-        eventData, nil];
+        eventName, eventData, nil];
+    [self send:array];
+}
+
++ (void) raiseEvent:(NSString*)eventName instance:(NSObject*)instance eventData:(NSObject*) eventData eventData2:(NSObject*) eventData2 {
+    NSArray* array = [NSArray arrayWithObjects:
+        instance == nil ? nil : [[AceHandle fromObject:instance] toJSON],
+        eventName, eventData, eventData2, nil];
     [self send:array];
 }
 
