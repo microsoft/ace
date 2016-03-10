@@ -38,8 +38,10 @@ public class Canvas extends AbsoluteLayout implements IHaveProperties, IRecieveC
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        for (int i = 0; i < _children.size(); i++) {
-            positionChild((View)_children.get(i));
+        if (_children != null) {
+            for (int i = 0; i < _children.size(); i++) {
+                positionChild((View)_children.get(i));
+            }
         }
         super.onLayout(changed, left, top, right, bottom);
     }
