@@ -86,6 +86,12 @@
   <js-module src="www/framework/collections/ItemCollection.js">
     <merges target="ace.ItemCollection" />
   </js-module>
+  <js-module src="www/framework/collections/PathFigureCollection.js">
+    <merges target="ace.PathFigureCollection" />
+  </js-module>
+  <js-module src="www/framework/collections/PathSegmentCollection.js">
+    <merges target="ace.PathSegmentCollection" />
+  </js-module>
   <js-module src="www/framework/collections/ResourceDictionary.js">
     <merges target="ace.ResourceDictionary" />
   </js-module>
@@ -136,17 +142,38 @@
   <js-module src="www/framework/AppBarButton.js">
     <merges target="ace.AppBarButton" />
   </js-module>
+  <js-module src="www/framework/Geometry.js">
+    <merges target="ace.Geometry" />
+  </js-module>
   <js-module src="www/framework/HyperlinkButton.js">
     <merges target="ace.HyperlinkButton" />
   </js-module>
   <js-module src="www/framework/Image.js">
     <merges target="ace.Image" />
   </js-module>
+  <js-module src="www/framework/PathSegment.js">
+    <merges target="ace.PathSegment" />
+  </js-module>
+  <js-module src="www/framework/LineSegment.js">
+    <merges target="ace.LineSegment" />
+  </js-module>
   <js-module src="www/framework/ListBox.js">
     <merges target="ace.ListBox" />
   </js-module>
   <js-module src="www/framework/ListBoxItem.js">
     <merges target="ace.ListBoxItem" />
+  </js-module>
+  <js-module src="www/framework/Shape.js">
+    <merges target="ace.Shape" />
+  </js-module>
+  <js-module src="www/framework/Path.js">
+    <merges target="ace.Path" />
+  </js-module>
+  <js-module src="www/framework/PathFigure.js">
+    <merges target="ace.PathFigure" />
+  </js-module>
+  <js-module src="www/framework/PathGeometry.js">
+    <merges target="ace.PathGeometry" />
   </js-module>
   <js-module src="www/framework/Popup.js">
     <merges target="ace.Popup" />
