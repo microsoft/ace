@@ -60,7 +60,7 @@ public class ListBox extends ListView implements IHaveProperties, IFireEvents, I
 				this.setOnItemClickListener(new ListView.OnItemClickListener() {
 					public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 						Object selection = adapter.getItemAtPosition(position);
-						OutgoingMessages.raiseEvent(eventName, handle, selection);
+						OutgoingMessages.raiseEvent(eventName, handle, selection, position);
 					}
 				});
 			}

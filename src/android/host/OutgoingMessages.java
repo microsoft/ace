@@ -26,6 +26,14 @@ public class OutgoingMessages {
 		send(new Object[]{handle == null ? null : handle.toJSONObject(), eventName, eventData});
 	}
 
+	public static void raiseEvent(String eventName, Object instance, Object eventData1, Object eventData2) {
+		send(new Object[]{instance == null ? null : Handle.fromObject(instance).toJSONObject(), eventName, eventData1, eventData2});
+	}
+
+	public static void raiseEvent(String eventName, Handle handle, Object eventData1, Object eventData2) {
+		send(new Object[]{handle == null ? null : handle.toJSONObject(), eventName, eventData1, eventData2});
+	}
+
 	static void send(Object[] data) {
 		PluginResult r = null;
 		try {

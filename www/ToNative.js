@@ -77,6 +77,10 @@ function onNativeEventRaised(message) {
     var handle = message[0];
     var eventName = message[1];
     var eventData = message[2];
+    var eventData2 = null;
+    if (message.length > 3) {
+        eventData2 = message[3];
+    }
 
     // iOS sets a null handle to -1 because otherwise the marshalled array gets cut off
     if (handle == null || handle == -1) {
@@ -101,7 +105,7 @@ function onNativeEventRaised(message) {
         instance = _objectsFromManaged[handle.value];
     }
 
-    if (!instance.raiseEvent(eventName, eventData)) {
+    if (!instance.raiseEvent(eventName, eventData, eventData2)) {
         // The event should only be raised if there are existing handlers
         console.warn(eventName + " raised from native code, but there are no handlers");
     }

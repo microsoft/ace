@@ -231,7 +231,7 @@ NativeObject.prototype.removeAllEventListeners = function () {
     this._eventHandlers = {};
 };
 
-NativeObject.prototype.raiseEvent = function (eventName, eventData) {
+NativeObject.prototype.raiseEvent = function (eventName, eventData, eventData2) {
     // Call any handlers
     // Currently, derived collections do not have the _eventHandlers member
     if (this._eventHandlers) {
@@ -240,7 +240,7 @@ NativeObject.prototype.raiseEvent = function (eventName, eventData) {
             // all handlers even if one calls back into removeEventListener
             var handlers = this._eventHandlers[eventName].slice(0);
             for (var i = 0; i < handlers.length; i++) {
-                handlers[i](this, eventData);
+                handlers[i](this, eventData, eventData2);
             }
             return true;
         }
