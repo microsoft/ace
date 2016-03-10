@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
+import run.ace.Utils;
 import Windows.UI.Xaml.Controls.*;
 import Windows.UI.Xaml.Media.*;
 
@@ -65,8 +66,11 @@ public class Path extends Shape {
 
     final android.graphics.Path path = new android.graphics.Path();
 
-    //TODO: Otherwise the top/left strokes get cut off
-    int shift = 1;
+    // Get the scale of screen content
+    float scale = Utils.getScaleFactor(getContext());
+
+    //TODO: Perhaps not needed (for preventing top/left strokes from getting cut off):
+    int shift = 0;
 
     // Stroke
     int strokeColor = Color.TRANSPARENT;
@@ -77,7 +81,7 @@ public class Path extends Shape {
       throw new RuntimeException("Unhandled stroke type: " + _stroke.getClass().getSimpleName());
     }
     _strokePaint.setColor(strokeColor);
-    _strokePaint.setStrokeWidth((float)getStrokeThickness());
+    _strokePaint.setStrokeWidth((float)getStrokeThickness() * scale);
 
     // Fill
     int fillColor = Color.TRANSPARENT;
@@ -123,7 +127,7 @@ public class Path extends Shape {
             PathFigure figure = (PathFigure)figures.get(i);
             PointF previousPoint = figure.getStartPoint();
             PointF startPoint = previousPoint;
-            path.moveTo(startPoint.x + shift, startPoint.y + shift);
+            path.moveTo(startPoint.x * scale + shift, startPoint.y * scale + shift);
 
             // Loop thru segments
             PathSegmentCollection segments = (PathSegmentCollection)figure.getSegments();
@@ -132,14 +136,14 @@ public class Path extends Shape {
 
                 if (segment instanceof LineSegment) {
                     PointF currentPoint = ((LineSegment)segment).getPoint();
-                    path.lineTo(currentPoint.x + shift, currentPoint.y + shift);
+                    path.lineTo(currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                     previousPoint = currentPoint;
                 }
                 else if (segment instanceof PolyLineSegment) {
                     PointCollection points = ((PolyLineSegment)segment).getPoints();
                     for (int k = 0; k < points.size(); k++) {
                         PointF currentPoint = (PointF) points.get(k);
-                        path.lineTo(currentPoint.x + shift, currentPoint.y + shift);
+                        path.lineTo(currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                         previousPoint = currentPoint;
                     }
                 }
@@ -150,7 +154,9 @@ public class Path extends Shape {
                     PointF controlPoint1 = ((BezierSegment)segment).getPoint1();
                     PointF controlPoint2 = ((BezierSegment)segment).getPoint2();
                     PointF currentPoint = ((BezierSegment)segment).getPoint3();
-                    path.cubicTo(controlPoint1.x + shift, controlPoint1.y + shift, controlPoint2.x + shift, controlPoint2.y + shift, currentPoint.x + shift, currentPoint.y + shift);
+                    path.cubicTo(controlPoint1.x * scale + shift, controlPoint1.y * scale + shift, 
+                                controlPoint2.x * scale + shift, controlPoint2.y * scale + shift, 
+                                currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                     previousPoint = currentPoint;
                 }
                 else if (segment instanceof PolyBezierSegment) {
@@ -162,14 +168,17 @@ public class Path extends Shape {
                         k++;
                         PointF currentPoint = (PointF) points.get(k);
 
-                        path.cubicTo(controlPoint1.x + shift, controlPoint1.y + shift, controlPoint2.x + shift, controlPoint2.y + shift, currentPoint.x + shift, currentPoint.y + shift);
+                        path.cubicTo(controlPoint1.x * scale + shift, controlPoint1.y * scale + shift, 
+                                    controlPoint2.x * scale + shift, controlPoint2.y * scale + shift, 
+                                    currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                         previousPoint = currentPoint;
                     }
                 }
                 else if (segment instanceof QuadraticBezierSegment) {
                     PointF controlPoint = ((QuadraticBezierSegment)segment).getPoint1();
                     PointF currentPoint = ((QuadraticBezierSegment)segment).getPoint2();
-                    path.quadTo(controlPoint.x + shift, controlPoint.y + shift, currentPoint.x + shift, currentPoint.y + shift);
+                    path.quadTo(controlPoint.x * scale + shift, controlPoint.y * scale + shift, 
+                                currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                     previousPoint = currentPoint;
                 }
                 else if (segment instanceof PolyQuadraticBezierSegment) {
@@ -179,7 +188,8 @@ public class Path extends Shape {
                         k++;
                         PointF currentPoint = (PointF) points.get(k);
 
-                        path.quadTo(controlPoint.x + shift, controlPoint.y + shift, currentPoint.x + shift, currentPoint.y + shift);
+                        path.quadTo(controlPoint.x * scale + shift, controlPoint.y * scale + shift, 
+                                    currentPoint.x * scale + shift, currentPoint.y * scale + shift);
                         previousPoint = currentPoint;
                     }
                 }
