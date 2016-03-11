@@ -139,7 +139,7 @@ public class TabBar extends android.widget.LinearLayout implements
             p.topMargin = (int)(4 * scaleFactor);
             p.bottomMargin = (int)(3 * scaleFactor);
             iv.setLayoutParams(p);
-            Bitmap bitmap = Utils.getBitmap(themedContext, abb.icon.toString());
+            Bitmap bitmap = Utils.getBitmapAsset(themedContext, abb.icon.toString());
             iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
             ll.addView(iv);
         }

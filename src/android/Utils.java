@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.io.InputStream;
 import java.io.IOException;
+import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -129,18 +130,55 @@ public class Utils {
 		}
 	}
 
-    public static Bitmap getBitmap(android.content.Context context, String url) {
+    public static Bitmap getBitmapAsset(android.content.Context context, String url) {
+        InputStream inputStream = null;
+        Bitmap b = null;
+
         try {
             if (url.contains("{platform}")) {
                 url = url.replace("{platform}", "android");
             }
+
             AssetManager assetManager = context.getAssets();
-            InputStream inputStream = assetManager.open(url);
-            return BitmapFactory.decodeStream(inputStream);
+            inputStream = assetManager.open(url);
         }
         catch (IOException ex) {
-            return null;
         }
+
+        if (inputStream != null) {
+            b = BitmapFactory.decodeStream(inputStream);
+            try {
+                inputStream.close();
+            }
+            catch (IOException ex) {
+            }
+        }
+        return b;
+    }
+
+    public static Bitmap getBitmapHttp(android.content.Context context, String url) {
+        InputStream inputStream = null;
+        Bitmap b = null;
+
+        try {
+            if (url.contains("{platform}")) {
+                url = url.replace("{platform}", "android");
+            }
+            
+            inputStream = (InputStream)new URL(url).getContent();
+        }
+        catch (IOException ex) {
+        }
+
+        if (inputStream != null) {
+            b = BitmapFactory.decodeStream(inputStream);
+            try {
+                inputStream.close();
+            }
+            catch (IOException ex) {
+            }
+        }
+        return b;
     }
 
     public static Object[] convertJSONArrayToArray(JSONArray array) throws JSONException {

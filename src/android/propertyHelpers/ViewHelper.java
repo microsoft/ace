@@ -30,7 +30,7 @@ public class ViewHelper {
 			}
 			else if (propertyValue instanceof String && ((String)propertyValue).startsWith("www/")) {
 				// ImageBrush
-				Bitmap bitmap = Utils.getBitmap(instance.getContext(), (String)propertyValue);
+				Bitmap bitmap = Utils.getBitmapAsset(instance.getContext(), (String)propertyValue);
 				instance.setBackground(new android.graphics.drawable.BitmapDrawable(bitmap));
 			}
 			else {
