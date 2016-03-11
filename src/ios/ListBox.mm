@@ -164,6 +164,11 @@
     // Get selected item
     NSObject* selection = _Items[indexPath.row];
     
+    // TODO: Need to enable marshaling arbitrary objects back to event handlers
+    if (![selection isKindOfClass:[NSString class]] && ![selection isKindOfClass:[NSNumber class]]) {
+        selection = nil;
+    }
+    
     if (_selectionChangedHandlers > 0) {
         [OutgoingMessages raiseEvent:@"selectionchanged" instance:self eventData:selection eventData2:[NSNumber numberWithInt:indexPath.row]];
     }
