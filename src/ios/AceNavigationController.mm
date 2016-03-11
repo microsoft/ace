@@ -3,6 +3,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
 #import "AceNavigationController.h"
+#import "AceViewController.h"
 #import "Utils.h"
 
 @implementation AceNavigationController
@@ -24,7 +25,13 @@
 
     // Only resize to fullscreen if there's a single (non-TabBar) subview.
     if (subviews.count == 1) {
-        ((UIView*)subviews[0]).frame = [UIScreen mainScreen].bounds;
+        if ([self.topViewController isKindOfClass:[AceViewController class]]) {
+            ((UIView*)subviews[0]).frame = [UIScreen mainScreen].bounds;
+        }
+        else {
+            // Adjustment for the default Cordova view controller
+            ((UIView*)subviews[0]).frame = [UIScreen mainScreen].applicationFrame;
+        }
     }
     else if (subviews.count == 2) {
         if ([subviews[0] isKindOfClass:[UITabBar class]]) {
