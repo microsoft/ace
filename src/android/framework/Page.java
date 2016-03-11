@@ -36,6 +36,10 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
             else if (propertyValue instanceof CommandBar) {
                 menuBar = (CommandBar)propertyValue;
             }
+            else if (propertyValue == null) {
+                tabBar = null;
+                menuBar = null;
+            }
             else {
     			throw new RuntimeException("Unhandled value for BottomAppBar: " + propertyValue);
             }
