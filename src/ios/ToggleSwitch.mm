@@ -98,8 +98,8 @@
     }
     else {
         // Do the normal header + switch layout
-        #define LEFTMARGIN 20
-        #define RIGHTMARGIN 20
+        #define LEFTMARGIN 15
+        #define RIGHTMARGIN 15
 
         _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN - self.padding.right,
                                    ((self.frame.size.height - self.padding.top - self.padding.bottom - _switch.frame.size.height) / 2) + self.padding.top,

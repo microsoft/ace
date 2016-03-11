@@ -92,7 +92,7 @@
 
 - (void) layoutSubviews {
     [super layoutSubviews];
-    #define BUILT_IN_HEIGHT_PADDING 29
+    #define BUILT_IN_HEIGHT_PADDING 24
     
     // Apply any left/top/bottom padding to the label
     [self.textLabel sizeToFit];
