@@ -110,7 +110,7 @@ module.exports = {
         }
         else if (url.startsWith("ios://")) {
             // INTERFACE BUILDER NIB/XIB
-            url = convertAndroidUrlToPath(url);
+            url = convertiOSUrlToPath(url);
             ace.ToNative.loadPlatformSpecificMarkup(url, function (handle) { onSuccess(ace.ToNative.instanceFromHandle(handle)); }, ace.ToNative.errorHandler(onError));
         }
         else {
