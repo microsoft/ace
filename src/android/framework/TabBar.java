@@ -55,17 +55,19 @@ public class TabBar extends android.widget.LinearLayout implements
             if (mainActionBar != null) {
                 mainActionBar.show();
                 mainActionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
-                for (int i = 0; i < _primaryCommands.size(); i++) {
-                    android.app.ActionBar.Tab tab = mainActionBar.newTab();
-                    AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
-                    if (abb.icon != null) {
-                        tab.setCustomView(getCustomTabView(abb, mainActionBar.getThemedContext()));
+                if (_primaryCommands != null) {
+                    for (int i = 0; i < _primaryCommands.size(); i++) {
+                        android.app.ActionBar.Tab tab = mainActionBar.newTab();
+                        AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
+                        if (abb.icon != null) {
+                            tab.setCustomView(getCustomTabView(abb, mainActionBar.getThemedContext()));
+                        }
+                        else {
+                            tab.setText(abb.label);
+                        }
+                        tab.setTabListener(this);
+                        mainActionBar.addTab(tab, i == 0);
                     }
-                    else {
-                        tab.setText(abb.label);
-                    }
-                    tab.setTabListener(this);
-                    mainActionBar.addTab(tab, i == 0);
                 }
                 return;
             }

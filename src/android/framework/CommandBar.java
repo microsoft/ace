@@ -47,9 +47,11 @@ public class CommandBar extends android.widget.LinearLayout implements IHaveProp
             android.app.ActionBar mainActionBar = activity.getActionBar();
             if (mainActionBar != null) {
                 mainActionBar.show();
-                for (int i = 0; i < _primaryCommands.size(); i++) {
-                    menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label);
-                    menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
+                if (_primaryCommands != null) {
+                    for (int i = 0; i < _primaryCommands.size(); i++) {
+                        menu.add(0, i, 0, ((AppBarButton)_primaryCommands.get(i)).label);
+                        menu.getItem(i).setShowAsAction(android.view.MenuItem.SHOW_AS_ACTION_ALWAYS);
+                    }
                 }
                 return;
             }
