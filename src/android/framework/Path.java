@@ -93,22 +93,9 @@ public class Path extends Shape {
         _fillPaint.setColor(fillColor);
     }
     else if (_fill instanceof LinearGradientBrush) {
-        RectF bounds = new RectF();
-        path.computeBounds(bounds, false);
-
-        // TODO: Support more fully (such as StartPoint/EndPoint)
-        LinearGradientBrush lgb = (LinearGradientBrush)_fill;
-        int count = lgb.getGradientStops().size();
-        int[] colors = new int[count];
-        float[] offsets = new float[count];
-        for (int i = 0; i < count; i++) {
-            colors[i] = ((GradientStop)lgb.getGradientStops().get(i)).color;
-            offsets[i] = (float)((GradientStop)lgb.getGradientStops().get(i)).offset;
-        }
-
-        // TODO: Vertical only
-        _fillPaint.setShader(new LinearGradient(0f, 0f, 0f, (bounds.bottom - bounds.top), colors[0], colors[1], Shader.TileMode.MIRROR));
-        _fillPaint.setColor(Color.WHITE); // TODO: Need to fill with a color for some reason
+        // TODO: Need to fill with a color for some reason
+        _fillPaint.setColor(Color.WHITE);
+        // The actual gradient is done at the end, because it needs to know the path's final bounds
     }
     else if (_fill != null) {
         throw new RuntimeException("Unhandled fill type: " + _fill.getClass().getSimpleName());
@@ -209,6 +196,25 @@ public class Path extends Shape {
         path.transform(m);
         _strokePaint.setStrokeWidth((float)(double)get_StrokeThickness() * Viewbox.Scale);
     }*/
+
+    if (_fill instanceof LinearGradientBrush) {
+        // Now that we can get the bounds, do the actual gradient
+        RectF bounds = new RectF();
+        path.computeBounds(bounds, false);
+
+        // TODO: Support more fully (such as StartPoint/EndPoint)
+        LinearGradientBrush lgb = (LinearGradientBrush)_fill;
+        int count = lgb.getGradientStops().size();
+        int[] colors = new int[count];
+        float[] offsets = new float[count];
+        for (int i = 0; i < count; i++) {
+            colors[i] = ((GradientStop)lgb.getGradientStops().get(i)).color;
+            offsets[i] = (float)((GradientStop)lgb.getGradientStops().get(i)).offset;
+        }
+
+        // TODO: Vertical only
+        _fillPaint.setShader(new LinearGradient(0f, 0f, 0f, (bounds.bottom - bounds.top), colors[0], colors[1], Shader.TileMode.MIRROR));
+    }
 
     if (_stroke != null)
       canvas.drawPath(path, _strokePaint);
