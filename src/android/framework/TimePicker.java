@@ -46,6 +46,9 @@ public class TimePicker extends LinearLayout
     this.addView(_header, lp);
     this.addView(_button, lp2);
 
+    // Default padding
+    this.setPadding(19,24,0,26);
+
     // Show the dialog when the button is clicked
     final TimePicker instance = this;
     _button.setOnClickListener(new View.OnClickListener() {

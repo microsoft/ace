@@ -14,6 +14,9 @@ public class ToggleSwitch extends android.widget.Switch implements IHaveProperti
 
 	public ToggleSwitch(Context context) {
 		super(context);
+
+        // Default padding
+        this.setPadding(29,26,28,27);
 	}
 
 	// IHaveProperties.setProperty
