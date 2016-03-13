@@ -98,8 +98,12 @@
     }
     else {
         // Do the normal header + switch layout
-        #define LEFTMARGIN 15
-        #define RIGHTMARGIN 15
+        
+        // TODO: Depends on phone?
+        //       Seems like 20 is the right value for iPhone 6s,
+        //       But 15 is the right value for iPhone 6.
+        #define LEFTMARGIN 20
+        #define RIGHTMARGIN 20
 
         _switch.frame = CGRectMake(self.frame.size.width - _switch.frame.size.width - RIGHTMARGIN - self.padding.right,
                                    ((self.frame.size.height - self.padding.top - self.padding.bottom - _switch.frame.size.height) / 2) + self.padding.top,
