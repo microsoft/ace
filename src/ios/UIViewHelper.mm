@@ -138,6 +138,10 @@
         // TODO: Invalidate relevant layout
         return true;
     }
+    else if ([propertyName hasSuffix:@".Uid"]) {
+        instance.accessibilityIdentifier = (NSString*)propertyValue;
+        return true;
+    }
     
     return false;
 }
