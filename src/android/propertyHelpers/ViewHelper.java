@@ -113,6 +113,10 @@ public class ViewHelper {
             Utils.setTag(instance, "ace_verticalalignment", ((String)propertyValue).toLowerCase());
             return true;
         }
+        else if (propertyName.endsWith(".Uid")) {
+            instance.setContentDescription((String)propertyValue);
+            return true;
+        }
 
 		return false;
 	}
