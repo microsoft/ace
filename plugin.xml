@@ -534,6 +534,7 @@
     <source-file src="src/android/framework/Thickness.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/TimePicker.java" target-dir="src/run/ace/framework" />
     <source-file src="src/android/framework/ToggleSwitch.java" target-dir="src/run/ace/framework" />
+    <source-file src="src/android/framework/WebView.java" target-dir="src/run/ace/framework" />
 
     <source-file src="src/android/host/AceActivity.java" target-dir="src/run/ace" />
     <source-file src="src/android/host/IncomingMessages.java" target-dir="src/run/ace" />
