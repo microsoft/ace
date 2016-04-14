@@ -45,8 +45,8 @@
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    throw error.description;
+    NSString* description = error.description;
+    throw description;
 }
-
 
 @end
