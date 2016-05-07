@@ -61,14 +61,8 @@
 }
 
 + (void)addNavigationItems:(CommandBar*)bar on:(UINavigationItem*)navigationItem {
-    NSMutableArray* items = [[NSMutableArray alloc] init];
-
-    //
-    // SecondaryCommands
-    //
-    if ([bar getSecondaryCommands] != nil) {
-        // TODO
-    }
+    NSMutableArray* primaryItems = [[NSMutableArray alloc] init];
+    NSMutableArray* secondaryItems = [[NSMutableArray alloc] init];
 
     //
     // PrimaryCommands
@@ -116,12 +110,65 @@
             }
 
             if (item != nil) {
-                [items addObject:item];
+                [primaryItems addObject:item];
             }
         }
     }
+    
+    navigationItem.rightBarButtonItems = primaryItems;
+    
+    //
+    // SecondaryCommands
+    //
+    ObservableCollection* secondaryCommands = [bar getSecondaryCommands];
+    if (secondaryCommands != nil) {
+        unsigned long secondaryItemsCount = secondaryCommands.Count;
 
-    navigationItem.rightBarButtonItems = items;
+        for (unsigned long i = 0; i < secondaryItemsCount; i++) {
+            id command = secondaryCommands[i];
+            UIBarButtonItem* item = nil;
+
+            if ([command isKindOfClass:[AppBarButton class]]) {
+                AppBarButton* abb = (AppBarButton*)command;
+                if (true) { //TODO: if visible
+                    if ([abb.Icon isKindOfClass:[SymbolIcon class]] || abb.Icon == nil)
+                    {
+                        if (abb.hasSystemIcon)
+                            item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:abb.systemIcon target:abb action:@selector(onClick:)];
+                        else
+                            item = [[UIBarButtonItem alloc] initWithTitle:abb.Label style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
+                    }
+                    else if ([abb.Icon isKindOfClass:[BitmapIcon class]]) {
+                        NSString* source = ((BitmapIcon*)abb.Icon).UriSource;
+                        // TODO: Need util:
+                        UIImage* image;
+                        if ([source hasPrefix:@"ms-appx:///"]) {
+                            image = [UIImage imageNamed:[source substringFromIndex:11]];
+                        }
+                        else if ([source containsString:@"://"]) {
+                            image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:source]]];
+                        }
+                        else {
+                            image = [UIImage imageNamed:source];
+                        }
+
+                        item = [[UIBarButtonItem alloc] initWithImage:image style:UIBarButtonItemStylePlain target:abb action:@selector(onClick:)];
+                    }
+                    else
+                        throw @"Unhandled AppBarButton icon type";
+                }
+            }
+            else {
+                throw @"Unhandled command bar item type";
+            }
+
+            if (item != nil) {
+                [secondaryItems addObject:item];
+            }
+        }
+    }
+    
+    navigationItem.leftBarButtonItems = secondaryItems;
 }
 
 + (void)showTabBarToolBar:(CommandBar*)bar on:(UIViewController*)viewController animated:(BOOL)animated {

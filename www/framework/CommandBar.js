@@ -24,4 +24,15 @@ CommandBar.prototype.getPrimaryCommands = function () {
 };
 CommandBar.prototype.setPrimaryCommands = function (items) { this.set("CommandBar.PrimaryCommands", items); };
 
+CommandBar.prototype.getSecondaryCommands = function () {
+    // Give an empty collection by default rather than null
+    var items = this.get("CommandBar.SecondaryCommands");
+    if (!items) {
+        items = new ace.CommandBarElementCollection();
+        this.setSecondaryCommands(items);
+    }
+    return items;
+};
+CommandBar.prototype.setSecondaryCommands = function (items) { this.set("CommandBar.SecondaryCommands", items); };
+
 module.exports = CommandBar;
