@@ -123,6 +123,7 @@ public class TabBar extends android.widget.LinearLayout implements
         float scaleFactor = Utils.getScaleFactor(themedContext);
         final int IMAGEHEIGHT = (int)(17 * scaleFactor);
         final int TEXTSIZE = 12;
+        final int ICON_ONLY_MARGIN = 12;
 
         LinearLayout ll = new LinearLayout(themedContext);
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
@@ -133,12 +134,23 @@ public class TabBar extends android.widget.LinearLayout implements
 
         if (abb.icon != null) {
             ImageView iv = new ImageView(themedContext);
-            LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, IMAGEHEIGHT);
-            p.gravity = Gravity.CENTER_HORIZONTAL;
-            p.topMargin = (int)(4 * scaleFactor);
-            p.bottomMargin = (int)(3 * scaleFactor);
-            iv.setLayoutParams(p);
+            if (abb.label != null) {
+                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, IMAGEHEIGHT);
+                p.topMargin = (int)(4 * scaleFactor);
+                p.bottomMargin = (int)(3 * scaleFactor);
+                p.gravity = Gravity.CENTER_HORIZONTAL;
+                iv.setLayoutParams(p);
+            } else {
+                LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                p.gravity = Gravity.CENTER_HORIZONTAL;
+                float d = themedContext.getResources().getDisplayMetrics().density;
+                int margin = (int)(ICON_ONLY_MARGIN * d);
+                p.topMargin = margin;
+                p.bottomMargin = margin;
+                iv.setLayoutParams(p);
+            }
             Bitmap bitmap = Utils.getBitmapAsset(themedContext, abb.icon.toString());
             iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
             ll.addView(iv);
