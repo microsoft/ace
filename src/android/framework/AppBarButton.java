@@ -15,6 +15,7 @@ public class AppBarButton extends Button {
 
 	public AppBarButton(Context context) {
 		super(context);
+		this.setTextSize(12);
 	}
 
 	@Override
