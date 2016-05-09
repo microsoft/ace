@@ -42,6 +42,10 @@ module.exports = {
         return platformValues[ace.platform.toLowerCase()];
     },
 
+    isSupported: function (onSuccess, onError) {
+        return ace.ToNative.isSupported(onSuccess, onError);
+    },
+
     navigate: function (urlOrUIElement, onNavigated, onNavigatingAway, onError) {
         if (_oldNavigatingAwayHandler) {
             _oldNavigatingAwayHandler(_oldRoot);
