@@ -144,15 +144,17 @@ public class TabBar extends android.widget.LinearLayout implements
             ll.addView(iv);
         }
 
-        TextView tv = new TextView(themedContext);
-        LinearLayout.LayoutParams tvp = new LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        tvp.gravity = Gravity.CENTER_HORIZONTAL;
-        tv.setLayoutParams(tvp);
-        tv.setTypeface(null, Typeface.BOLD);
-        tv.setTextSize(TEXTSIZE);
-        tv.setText(abb.label.toUpperCase());
-        ll.addView(tv);
+        if (abb.label != null) {
+            TextView tv = new TextView(themedContext);
+            LinearLayout.LayoutParams tvp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            tvp.gravity = Gravity.CENTER_HORIZONTAL;
+            tv.setLayoutParams(tvp);
+            tv.setTypeface(null, Typeface.BOLD);
+            tv.setTextSize(TEXTSIZE);
+            tv.setText(abb.label.toUpperCase());
+            ll.addView(tv);
+        }
 
         return ll;
     }
