@@ -122,7 +122,6 @@ public class TabBar extends android.widget.LinearLayout implements
     View getCustomTabView(AppBarButton abb, Context themedContext) {
         float scaleFactor = Utils.getScaleFactor(themedContext);
         final int IMAGEHEIGHT = (int)(17 * scaleFactor);
-        final int TEXTSIZE = 12;
 
         LinearLayout ll = new LinearLayout(themedContext);
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(
@@ -150,7 +149,7 @@ public class TabBar extends android.widget.LinearLayout implements
         tvp.gravity = Gravity.CENTER_HORIZONTAL;
         tv.setLayoutParams(tvp);
         tv.setTypeface(null, Typeface.BOLD);
-        tv.setTextSize(TEXTSIZE);
+        tv.setTextSize(abb.getTextSize());
         tv.setText(abb.label.toUpperCase());
         ll.addView(tv);
 
