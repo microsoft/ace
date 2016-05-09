@@ -7,6 +7,7 @@
 #import <Cordova/CDVPlugin.h>
 
 // Bring in any custom code included by the app
+#define SYSTEM_VERSION_GREATER_THAN(v) ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #if defined(__has_include)
 #if __has_include("../../../../../native/ios/CustomCode.h")
 #include "../../../../../native/ios/CustomCode.h"
