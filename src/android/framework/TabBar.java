@@ -17,6 +17,7 @@ import android.graphics.drawable.ShapeDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -195,7 +196,7 @@ public class TabBar extends android.widget.LinearLayout implements
     }
 
 	public void onTabSelected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
-        if (overwriteBarTintColor && barTintColor) {
+        if (overwriteBarTintColor && overwriteTintColor) {
             LinearLayout tabLayout = (LinearLayout) tab.getCustomView();
             ShapeDrawable background = new ShapeDrawable();
             background.getPaint().setColor(tintColor);
