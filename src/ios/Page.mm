@@ -2,6 +2,7 @@
 // Copyright (C) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
 //-------------------------------------------------------------------------------------------------------
+#import "AceNavigationController.h"
 #import "Page.h"
 #import "UIViewHelper.h"
 #import "Frame.h"
@@ -36,6 +37,16 @@
         if ([self superview] == [Frame getNavigationController].topViewController.view) {
             [[Frame getNavigationController].topViewController setTitle:_frameTitle];
         }
+    }
+    else if ([propertyName hasSuffix:@".TintColor"]) {
+        UINavigationController* nc = [Frame getNavigationController];
+        AceNavigationController* anc = (AceNavigationController *) nc;
+        [anc setProperty:propertyName value:propertyValue];
+    }
+    else if ([propertyName hasSuffix:@".BarTintColor"]) {
+        UINavigationController* nc = [Frame getNavigationController];
+        AceNavigationController* anc = (AceNavigationController *) nc;
+        [anc setProperty:propertyName value:propertyValue];
     }
     else if ([propertyName hasSuffix:@".Content"]) {
         if (_content != nil) {

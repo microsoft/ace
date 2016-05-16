@@ -6,12 +6,18 @@ package run.ace;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 //import android.support.v7.app.ActionBar;
 //import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.util.TypedValue;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +33,11 @@ public class TabBar extends android.widget.LinearLayout implements
 
     ObservableCollection _primaryCommands;
     ObservableCollection _secondaryCommands;
+
+    int barTintColor;
+    int tintColor;
+    boolean overwriteBarTintColor;
+    boolean overwriteTintColor;
 
 	public TabBar(Context context) {
 		super(context);
@@ -55,18 +66,37 @@ public class TabBar extends android.widget.LinearLayout implements
             if (mainActionBar != null) {
                 mainActionBar.show();
                 mainActionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+
+                if (overwriteBarTintColor) {
+                    mainActionBar.setStackedBackgroundDrawable(
+                        new ColorDrawable(barTintColor)
+                    );
+                    mainActionBar.setBackgroundDrawable(
+                        new ColorDrawable(barTintColor)
+                    );
+
+                    Window mainWindow = activity.getWindow();
+                    mainWindow.setStatusBarColor(barTintColor);
+                }
+
                 if (_primaryCommands != null) {
                     for (int i = 0; i < _primaryCommands.size(); i++) {
                         android.app.ActionBar.Tab tab = mainActionBar.newTab();
                         AppBarButton abb = (AppBarButton)_primaryCommands.get(i);
+
                         if (abb.icon != null) {
                             tab.setCustomView(getCustomTabView(abb, mainActionBar.getThemedContext()));
+                            tab.setTabListener(this);
+                            mainActionBar.addTab(tab, i == 0);
+
+                            final View parent = (View) tab.getCustomView().getParent();
+                            parent.setPadding(0, 0, 0, 0);
                         }
                         else {
                             tab.setText(abb.label);
+                            tab.setTabListener(this);
+                            mainActionBar.addTab(tab, i == 0);
                         }
-                        tab.setTabListener(this);
-                        mainActionBar.addTab(tab, i == 0);
                     }
                 }
                 return;
@@ -130,6 +160,11 @@ public class TabBar extends android.widget.LinearLayout implements
         llp.gravity = Gravity.CENTER_HORIZONTAL;
         ll.setLayoutParams(llp);
         ll.setOrientation(LinearLayout.VERTICAL);
+        ll.setPadding(0, 0, 0, 0);
+
+        if (overwriteBarTintColor) {
+            ll.setBackgroundColor(barTintColor);
+        }
 
         if (abb.icon != null) {
             ImageView iv = new ImageView(themedContext);
@@ -141,6 +176,11 @@ public class TabBar extends android.widget.LinearLayout implements
             iv.setLayoutParams(p);
             Bitmap bitmap = Utils.getBitmapAsset(themedContext, abb.icon.toString());
             iv.setImageDrawable(new android.graphics.drawable.BitmapDrawable(bitmap));
+
+            if (overwriteTintColor) {
+                iv.setColorFilter(tintColor);
+            }
+
             ll.addView(iv);
         }
 
@@ -158,11 +198,34 @@ public class TabBar extends android.widget.LinearLayout implements
     }
 
 	public void onTabSelected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+        if (overwriteBarTintColor && overwriteTintColor) {
+            LinearLayout tabLayout = (LinearLayout) tab.getCustomView();
+            ShapeDrawable background = new ShapeDrawable();
+            background.getPaint().setColor(tintColor);
+
+            ShapeDrawable border = new ShapeDrawable();
+            border.getPaint().setColor(barTintColor);
+
+            Drawable[] layers = {background, border};
+            LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+            layerDrawable.setLayerInset(0, 0, 0, 0, 0);
+            layerDrawable.setLayerInset(1, 0, 0, 0, 5);
+
+            tabLayout.setBackgroundDrawable(layerDrawable);
+            tab.setCustomView(tabLayout);
+        }
         int index = tab.getPosition();
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
  	}
+
 	public void onTabUnselected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+        if (overwriteBarTintColor) {
+            LinearLayout tabLayout = (LinearLayout) tab.getCustomView();
+            tabLayout.setBackgroundColor(barTintColor);
+        }
  	}
+
 	public void onTabReselected(android.app.ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         int index = tab.getPosition();
         OutgoingMessages.raiseEvent("click", _primaryCommands.get(index), null);
@@ -207,6 +270,14 @@ public class TabBar extends android.widget.LinearLayout implements
                 // Listen to collection changes
                 _secondaryCommands.addListener(this);
             }
+        }
+        else if (propertyName.endsWith(".BarTintColor")) {
+            barTintColor = Color.parseColor((String) propertyValue);
+            overwriteBarTintColor = true;
+        }
+        else if (propertyName.endsWith(".TintColor")) {
+            tintColor = Color.parseColor((String) propertyValue);
+            overwriteTintColor = true;
         }
 		else if (!ViewGroupHelper.setProperty(this, propertyName, propertyValue)) {
 			throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);

@@ -4,7 +4,9 @@
 //-------------------------------------------------------------------------------------------------------
 package Windows.UI.Xaml.Controls;
 
+import android.graphics.Color;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AbsoluteLayout;
 import run.ace.NativeHost;
 import run.ace.TabBar;
@@ -56,6 +58,15 @@ public class Page extends AbsoluteLayout implements IHaveProperties {
             if (this.getParent() == NativeHost.getRootView()) {
                 updateTitle(NativeHost.getMainActivity());
             }
+        }
+        else if (propertyName.endsWith(".BarTintColor")) {
+            if (this.getParent() == NativeHost.getRootView()) {
+                Window mainWindow = NativeHost.getMainActivity().getWindow();
+                mainWindow.setNavigationBarColor(Color.parseColor((String) propertyValue));
+            }
+        }
+        else if (propertyName.endsWith(".TintColor")) {
+
         }
 		else if (!ViewGroupHelper.setProperty(this, propertyName, propertyValue)) {
 			throw new RuntimeException("Unhandled property for " + this.getClass().getSimpleName() + ": " + propertyName);

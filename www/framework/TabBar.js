@@ -14,4 +14,11 @@ function TabBar() {
 // Inheritance
 TabBar.prototype = Object.create(ace.CommandBar.prototype);
 
+// Helpers for navigation bar colors
+TabBar.prototype.getTintColor = function () { return this.get("TabBar.TintColor"); };
+TabBar.prototype.setTintColor = function (brush) { this.set("TabBar.TintColor", brush); };
+
+TabBar.prototype.getBarTintColor = function () { return this.get("TabBar.BarTintColor"); };
+TabBar.prototype.setBarTintColor = function (brush) { this.set("TabBar.BarTintColor", brush); };
+
 module.exports = TabBar;

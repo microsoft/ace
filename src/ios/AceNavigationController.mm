@@ -4,6 +4,7 @@
 //-------------------------------------------------------------------------------------------------------
 #import "AceNavigationController.h"
 #import "AceViewController.h"
+#import "Color.h"
 #import "Utils.h"
 
 @implementation AceNavigationController
@@ -48,6 +49,21 @@
             tabBar.frame = CGRectMake(r.origin.x, r.size.height - tabBar.frame.size.height, r.size.width, tabBar.frame.size.height);
             ((UIView*)subviews[0]).frame = CGRectMake(r.origin.x, r.origin.y, r.size.width, r.size.height - tabBar.frame.size.height);
         }
+    }
+}
+
+// IHaveProperties.setProperty
+- (void) setProperty:(NSString*)propertyName value:(NSObject*)propertyValue {
+    if ([propertyName hasSuffix:@".TintColor"]) {
+        UIColor* color = [Color fromObject:propertyValue withDefault:nil];
+        self.navigationBar.tintColor = color;
+        self.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    }
+    else if ([propertyName hasSuffix:@".BarTintColor"]) {
+        self.navigationBar.barTintColor = [Color fromObject:propertyValue withDefault:nil];
+    }
+    else {
+        throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
     }
 }
 

@@ -19,8 +19,18 @@
         return UIColorFromARGB([(NSNumber*)value intValue]);
     }
     else if ([value isKindOfClass:[NSString class]]) {
-        Brush* brush = [BrushConverter parse:(NSString*)value];
-        return ((SolidColorBrush*)brush).Color;
+        NSString* stringValue = (NSString *)value;
+        if ([stringValue hasPrefix:@"#"]) {
+            unsigned rgbValue = 0;
+            NSScanner *scanner = [NSScanner scannerWithString:stringValue];
+            [scanner setScanLocation:1]; // bypass '#' character
+            [scanner scanHexInt:&rgbValue];
+            return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
+        }
+        else {
+            Brush* brush = [BrushConverter parse:stringValue];
+            return ((SolidColorBrush*)brush).Color;
+        }
     }
     else if ([value isKindOfClass:[SolidColorBrush class]]) {
         return ((SolidColorBrush*)value).Color;

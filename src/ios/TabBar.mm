@@ -29,6 +29,12 @@
                 [items addListener:self];
             }
         }
+        else if ([propertyName hasSuffix:@".TintColor"]) {
+            self.tintColor = [Color fromObject:propertyValue withDefault:nil];
+        }
+        else if ([propertyName hasSuffix:@".BarTintColor"]) {
+            self.barTintColor = [Color fromObject:propertyValue withDefault:nil];
+        }
         else {
             throw [NSString stringWithFormat:@"Unhandled property for %@: %@", [self class], propertyName];
         }
