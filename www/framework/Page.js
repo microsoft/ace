@@ -16,6 +16,9 @@ Page.prototype = Object.create(ace.UserControl.prototype);
 Page.prototype.getBottomAppBar = function () { return this.get("Page.BottomAppBar"); };
 Page.prototype.setBottomAppBar = function (commandBar) { this.set("Page.BottomAppBar", commandBar); };
 
+Page.prototype.getTopAppBar = function () { return this.get("Page.TopAppBar"); };
+Page.prototype.setTopAppBar = function (commandBar) { this.set("Page.TopAppBar", commandBar); };
+
 // The same as get/set BottomAppBar, but with a better name:
 Page.prototype.getCommandBar = function () { return this.get("Page.BottomAppBar"); };
 Page.prototype.setCommandBar = function (commandBar) { this.set("Page.BottomAppBar", commandBar); };
