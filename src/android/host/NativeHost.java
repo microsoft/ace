@@ -202,7 +202,7 @@ public class NativeHost extends CordovaPlugin {
 			this.setPopupsCloseOnHtmlNavigation(args.getBoolean(0), callbackContext);
 		}
 		else if (action.equals("isSupported")) {
-			boolean supported = android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.KITKAT;
+			boolean supported = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT;
 			callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, supported));
 		}
 		else {
