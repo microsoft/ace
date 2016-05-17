@@ -282,6 +282,13 @@ BOOL _initialized;
     }
 }
 
+// Returns if there is support for ace plugin
+- (void)isSupported:(CDVInvokedUrlCommand*)command {
+    BOOL isSupported = SYSTEM_VERSION_GREATER_THAN(@"8.0");
+    CDVPluginResult* r = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:isSupported];
+    [self.commandDelegate sendPluginResult:r callbackId:command.callbackId];
+}
+
 - (void) sendOutgoingMessage:(NSArray*)data {
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsArray:data];
 	[pluginResult setKeepCallbackAsBool:YES];

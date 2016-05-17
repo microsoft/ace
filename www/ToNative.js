@@ -291,6 +291,10 @@ ToNative.getAndroidId = function (name, onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "getAndroidId", [name]);
 };
 
+ToNative.isSupported = function (onSuccess, onError) {
+    exec(onSuccess, onError, "NativeHost", "isSupported", []);
+};
+
 ToNative.navigate = function (root, onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "navigate", [root.handle]);
 };
