@@ -47,7 +47,10 @@ BOOL _initialized;
         // Close all popups since this has been requested.
         [Popup CloseAll];
     }
-    return false;
+    
+    // Before Cordova 4.0, we must return false in order for HTML navigation to work.
+    // Starting with Cordova 4.0, we must return true.
+    return CORDOVA_VERSION_MIN_REQUIRED >= __CORDOVA_4_0_0;
 }
 
 - (void)initialize:(CDVInvokedUrlCommand*)command {
