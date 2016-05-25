@@ -139,13 +139,19 @@
 
 - (void)dateIsChanged:(id)sender {
     _date = [_datePicker date];
-    [_dropDownButton setTitle:[_displayFormatter stringFromDate:_date] forState:UIControlStateNormal];
+    NSString* formattedDate = [_displayFormatter stringFromDate:_date];
+    
+    // Update the display
+    [_dropDownButton setTitle:formattedDate forState:UIControlStateNormal];
 
+    // Raise the event (and send the data)
     if (_dateChangedHandlers > 0) {
-        [OutgoingMessages raiseEvent:@"datechanged" handle:_handle eventData:nil];
+        [OutgoingMessages raiseEvent:@"datechanged" handle:_handle eventData:formattedDate];
     }
     if (_timeChangedHandlers > 0) {
-        [OutgoingMessages raiseEvent:@"timechanged" handle:_handle eventData:nil];
+        NSTimeInterval totalSeconds = [_date timeIntervalSince1970];
+        double totalMilliseconds = totalSeconds * 1000;
+        [OutgoingMessages raiseEvent:@"timechanged" handle:_handle eventData:[NSNumber numberWithDouble:totalMilliseconds]];
     }
 }
 
