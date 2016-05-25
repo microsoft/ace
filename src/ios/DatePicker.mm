@@ -17,11 +17,11 @@
     // Default property values
     _date = [NSDate date];
 
-    _formatter = [[NSDateFormatter alloc] init];
-    [_formatter setDateFormat:@"MMMM d, yyyy"];
+    _displayFormatter = [[NSDateFormatter alloc] init];
+    [_displayFormatter setDateFormat:@"MMMM d, yyyy"];
 
     _dropDownButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
+    [_dropDownButton setTitle:[_displayFormatter stringFromDate:_date] forState:UIControlStateNormal];
     [_dropDownButton addTarget:self action:@selector(OnDropDownOpened:) forControlEvents:UIControlEventTouchUpInside];
     _dropDownButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     _dropDownButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 16);
@@ -50,8 +50,17 @@
                 self.textLabel.text = [propertyValue description];
         }
         else if ([propertyName hasSuffix:@".Date"] || [propertyName hasSuffix:@".Time"]) {
-            _date = [_datePicker date];
-            [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
+            // The date/time is marshaled from JavaScript as a string.
+            // Convert to an NSDate and set _date accordingly.
+            if (_incomingFormatter == nil) {
+                _incomingFormatter = [[NSDateFormatter alloc] init];
+                [_incomingFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+            }
+
+            _date = [_incomingFormatter dateFromString:(NSString*)propertyValue];
+
+            // Update the display
+            [_dropDownButton setTitle:[_displayFormatter stringFromDate:_date] forState:UIControlStateNormal];
         }
         else if ([propertyName hasSuffix:@".Padding"]) {
             Thickness* padding = [Thickness fromObject:propertyValue];
@@ -130,7 +139,7 @@
 
 - (void)dateIsChanged:(id)sender {
     _date = [_datePicker date];
-    [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
+    [_dropDownButton setTitle:[_displayFormatter stringFromDate:_date] forState:UIControlStateNormal];
 
     if (_dateChangedHandlers > 0) {
         [OutgoingMessages raiseEvent:@"datechanged" handle:_handle eventData:nil];

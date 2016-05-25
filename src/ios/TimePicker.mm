@@ -10,8 +10,8 @@
     self = [super init];
 
     _datePicker.datePickerMode = UIDatePickerModeTime;
-    [_formatter setDateFormat:@"h:mm a"];
-    [_dropDownButton setTitle:[_formatter stringFromDate:_date] forState:UIControlStateNormal];
+    [_displayFormatter setDateFormat:@"h:mm a"];
+    [_dropDownButton setTitle:[_displayFormatter stringFromDate:_date] forState:UIControlStateNormal];
 
     return self;
 }

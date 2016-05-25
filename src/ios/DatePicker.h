@@ -12,7 +12,8 @@
     UIButton* _dropDownButton;
     UIDatePicker* _datePicker;
     CustomActionSheet* _sheet;
-    NSDateFormatter* _formatter;
+    NSDateFormatter* _displayFormatter;
+    NSDateFormatter* _incomingFormatter;
     NSDate* _date;
     int _dateChangedHandlers;
     int _timeChangedHandlers;
