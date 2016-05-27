@@ -50,7 +50,9 @@ BOOL _initialized;
     
     // Before Cordova 4.0, we must return false in order for HTML navigation to work.
     // Starting with Cordova 4.0, we must return true.
-    return CORDOVA_VERSION_MIN_REQUIRED >= __CORDOVA_4_0_0;
+    // The __CORDOVA_4_0_0 constant isn't used so this still compiles with older versions
+    // that don't have it defined.
+    return CORDOVA_VERSION_MIN_REQUIRED >= 40000 /*__CORDOVA_4_0_0*/;
 }
 
 - (void)initialize:(CDVInvokedUrlCommand*)command {
