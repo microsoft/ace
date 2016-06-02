@@ -33,6 +33,12 @@ function copyAndroidFiles() {
 
 module.exports = function (context) {
     var fs = require('fs');
+    
+    // Do not allow theme with no action bar
+    var dest = path.join(__dirname, '../../../../platforms/android/AndroidManifest.xml');
+    var manifest = fs.readFileSync(dest, 'utf8');
+    manifest = manifest.replace('android:theme="@android:style/Theme.DeviceDefault.NoActionBar"', '');
+    fs.writeFileSync(dest, manifest);
 
     // Make sure the dependencies are installed
     try {
