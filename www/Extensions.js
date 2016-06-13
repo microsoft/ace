@@ -38,4 +38,8 @@ Array.prototype.peek = function () {
     return this[this.length - 1];
 };
 
+Object.defineProperty(Array.prototype, "removeAt", { enumerable: false });
+Object.defineProperty(Array.prototype, "remove", { enumerable: false });
+Object.defineProperty(Array.prototype, "peek", { enumerable: false });
+
 module.exports = {};
