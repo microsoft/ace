@@ -46,7 +46,7 @@ function onInitializeFailed(error) {
     }
 
     alert(message);
-    throw new Error(message);
+    console.log(message);
 }
 
 function defaultOnError(error) {
