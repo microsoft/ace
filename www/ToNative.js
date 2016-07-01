@@ -45,17 +45,11 @@ function onInitializeFailed(error) {
         message = prefix + error + suffix;
     }
 
-    alert(message);
     throw new Error(message);
 }
 
 function defaultOnError(error) {
     var help = "See http://ace.run/docs/errors for help.";
-    // So this doesn't block the throwing below:
-    setTimeout(function () {
-        alert("NATIVE ERROR\r\n\r\n" + help
-            + "\r\n\r\n" + error);
-    }, 0);
     throw new Error("Native error: " + error + "\r\n\r\n" + help);
 }
 
