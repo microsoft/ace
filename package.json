@@ -14,7 +14,7 @@
     "url": "https://github.com/microsoft/ace"
   },
   "dependencies": {
-    "fs-extra": "^0.26.4",
+    "fs-extra": "^0.30.0",
     "xcode": "0.8.3"
   },
   "keywords": [
