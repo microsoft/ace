@@ -45,7 +45,7 @@ function onInitializeFailed(error) {
         message = prefix + error + suffix;
     }
 
-    throw new Error(message);
+    console.log(message);
 }
 
 function defaultOnError(error) {
@@ -55,7 +55,7 @@ function defaultOnError(error) {
 
 ToNative.errorHandler = function (handler) {
     return handler ? handler : defaultOnError;
-}
+};
 
 function onNativeEventRaised(message) {
     /* TODO: No startupMarkup event:
