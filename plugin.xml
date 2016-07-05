@@ -17,11 +17,11 @@
   <!-- Platform-neutral JavaScript: -->
 
   <!-- These must be listed first: -->
-  <js-module src="www/ToNative.js">
-    <merges target="ace.ToNative" />
-  </js-module>
   <js-module src="www/Extensions.js">
     <merges target="ace.Extensions" />
+  </js-module>
+  <js-module src="www/ToNative.js">
+    <merges target="ace.ToNative" />
   </js-module>
   <js-module src="www/ace.js">
     <merges target="ace" />
