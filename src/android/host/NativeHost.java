@@ -71,8 +71,6 @@ public class NativeHost extends CordovaPlugin {
         return id;
     }
 
-    // Can be used by third-party JavaScript to start an activity
-    // TODO: Or just expose JavaScript API using Class.forName, etc.
     public static void startActivity(String name) {
         Class c = null;
         try {
@@ -80,8 +78,8 @@ public class NativeHost extends CordovaPlugin {
         } catch (ClassNotFoundException e) {
                 throw new RuntimeException("Unable to find a class named '" + name + "'");
         }
-        android.content.Intent intent = new android.content.Intent(NativeHost._activity, c);
-        NativeHost._activity.startActivity(intent);
+        android.content.Intent intent = new android.content.Intent(_activity, c);
+        _activity.startActivity(intent);
     }
 
 	@Override
@@ -197,6 +195,9 @@ public class NativeHost extends CordovaPlugin {
 		}
 		else if (action.equals("getAndroidId")) {
 			this.getAndroidId(args.getString(0), callbackContext);
+		}
+		else if (action.equals("startAndroidActivity")) {
+			this.startAndroidActivity(args.getString(0), callbackContext);
 		}
 		else if (action.equals("setPopupsCloseOnHtmlNavigation")) {
 			this.setPopupsCloseOnHtmlNavigation(args.getBoolean(0), callbackContext);
@@ -405,6 +406,12 @@ public class NativeHost extends CordovaPlugin {
 
         callbackContext.success(id);
 	}
+
+    // Exposed to JavaScript
+    public void startAndroidActivity(String name, CallbackContext callbackContext) {
+		NativeHost.startActivity(name);
+		callbackContext.success();
+    }
 
     void setPopupsCloseOnHtmlNavigation(boolean value, CallbackContext callbackContext) {
         _setting_PopupsCloseOnHtmlNavigation = value;

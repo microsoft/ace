@@ -48,6 +48,10 @@ module.exports = {
         ace.ToNative.getAndroidId(name, onSuccess, ace.ToNative.errorHandler(onError));
     },
 
+    startActivity: function (name, onSuccess, onError) {
+        ace.ToNative.startAndroidActivity(name, onSuccess, ace.ToNative.errorHandler(onError));
+    },
+
     appWidget: {
         clear: function() {
             ace.NativeObject.invoke("run.ace.AppWidgetData", "clear");

@@ -281,10 +281,6 @@ ToNative.loadPlatformSpecificMarkup = function (uri, onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "loadPlatformSpecificMarkup", [uri]);
 };
 
-ToNative.getAndroidId = function (name, onSuccess, onError) {
-    exec(onSuccess, onError, "NativeHost", "getAndroidId", [name]);
-};
-
 ToNative.isSupported = function (onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "isSupported", []);
 };
@@ -295,6 +291,17 @@ ToNative.navigate = function (root, onSuccess, onError) {
 
 ToNative.setPopupsCloseOnHtmlNavigation = function (bool, onSuccess, onError) {
     exec(onSuccess, onError, "NativeHost", "setPopupsCloseOnHtmlNavigation", [bool]);
+};
+
+//
+// Android-specific entry points:
+//
+ToNative.getAndroidId = function (name, onSuccess, onError) {
+    exec(onSuccess, onError, "NativeHost", "getAndroidId", [name]);
+};
+
+ToNative.startAndroidActivity = function (name, onSuccess, onError) {
+    exec(onSuccess, onError, "NativeHost", "startAndroidActivity", [name]);
 };
 
 module.exports = ToNative;
