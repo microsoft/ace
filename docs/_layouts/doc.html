@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  {% include head.html %}
+
+  <body class="blog-page blog-page-single">
+
+    {% include header-main.html %}
+    
+    <table width="100%">
+        <tr>
+            <td style="vertical-align:top" nowrap>
+                <div style="margin-top:18px;margin-left:18px;font-size:small">
+            {% for my_page in site.pages %}
+                {% if my_page.category == 'docs' %}
+                    <p><b><a href="{{ my_page.url | prepend: site.baseurl }}">{{ my_page.title }}</a></b></p>
+                    {% if my_page.section1 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#one">{{ my_page.section1 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section2 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#two">{{ my_page.section2 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section3 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#three">{{ my_page.section3 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section4 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#four">{{ my_page.section4 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section5 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#five">{{ my_page.section5 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section6 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#six">{{ my_page.section6 }}</a></p>
+                    {% endif %}
+                    {% if my_page.section7 != '' %}
+                        <p style="margin-left:12px"><a href="{{ my_page.url | prepend: site.baseurl }}#seven">{{ my_page.section7 }}</a></p>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+                </ul>
+            </td>
+            <td style="vertical-align:top" width="100%">
+    <h1 align="left" style="text-transform: uppercase; margin-top:50px; margin-bottom:30px; margin-left:50px">{{page.title}}</h1>
+
+    <div class="container" style="margin-left:50px">
+    {{ content }}
+    </div>
+
+           </td>
+        </tr>
+    </table>
+    
+    <br/>
+    <div style="background-color:#3399FF;color:white;foreground:bold;text-align:center;margin-left:100px;margin-right:100px;padding:20px">
+    What do you think? <a style="color:yellow" href="https://github.com/microsoft/ace/issues">Please give us feedback!</a> 
+    <br/>
+    Interested in contributing to the code or the website?  <a style="color:yellow" href="https://github.com/microsoft/ace/blob/master/CONTRIBUTING.md">Please do!</a>
+    </div>
+ 
+    <p style="margin-top:50px"></p>
+    {% include footer.html %}
+  </body>
+
+</html>
