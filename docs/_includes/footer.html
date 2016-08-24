@@ -1,28 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="1404.47">
-  <style type="text/css">
-    p.p2 {margin: 0.0px 0.0px 12.0px 0.0px; text-align: right; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    li.li1 {margin: 0.0px 0.0px 0.0px 0.0px; line-height: 14.0px; font: 12.0px Times; color: #000000; -webkit-text-stroke: #000000}
-    span.s1 {-webkit-text-stroke: 0px #000000}
-    span.s2 {font-kerning: none}
-    ul.ul1 {list-style-type: disc}
-  </style>
-</head>
-<body>
-<p class="p2">This content is open source. Please <a href="https://github.com/{{ site.github.repository_nwo }}/edit/master/{{ page.path }}">help improve it</a>.</p>
-<ul class="ul1">
-  <li class="li1"><span class="s1"></span><span class="s2">{% if site.github_username %}</span></li>
-  <li class="li1"><span class="s1"></span><span class="s2">{% include icon-github.html username=site.github_username %}<span class="Apple-converted-space"> </span></span></li>
-  <li class="li1"><span class="s1"></span><span class="s2">{% endif %} {% if site.twitter_username %}</span></li>
-  <li class="li1"><span class="s1"></span><span class="s2">{% include icon-twitter.html username=site.twitter_username %}<span class="Apple-converted-space"> </span></span></li>
-  <li class="li1"><span class="s1"></span><span class="s2">{% endif %}<span class="Apple-converted-space"> </span></span></li>
-</ul>
-<p class="p2"><span class="s2">Â© 2016 Microsoft</span></p>
-</body>
-</html>
+<footer class="site-footer">
+
+  <div class="wrapper">
+
+      <div>
+        <p>This content is open source. Please <a href="https://github.com/{{ site.github.repository_nwo }}/edit/master/docs/{{ page.path }}">help improve it</a>.</p>
+      </div>
+
+      <div style="float:left">
+        <ul class="social-media-list">
+          {% if site.github_username %}
+          <li>
+            {% include icon-github.html username=site.github_username %}
+          </li>
+          {% endif %}
+
+          {% if site.twitter_username %}
+          <li>
+            {% include icon-twitter.html username=site.twitter_username %}
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      <div style="float:right;padding-right:10px;text-align:right">
+        <p>© 2016 Microsoft</p>
+      </div>
+
+  </div>
+
+</footer>
+
+<!-- Javascript -->
+<script type="text/javascript" src="/ace/assets/plugins/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="/ace/assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="/ace/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/ace/assets/plugins/bootstrap-hover-dropdown.min.js"></script>
+<script type="text/javascript" src="/ace/assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="/ace/assets/plugins/jquery-placeholder/jquery.placeholder.js"></script>
+<script type="text/javascript" src="/ace/assets/js/main.js"></script>
