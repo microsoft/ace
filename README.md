@@ -1,3 +1,5 @@
+> As of December 2016, this project is no longer maintained by Microsoft. We built ACE to provide developers with an “escape hatch” to  access native code from within JavaScript. After nearly a year in production, we learned that most developers are satisfied with the access granted by Cordova’s Plugin Model. Thus, we’ve discontinued active development. We appreciate your interest in the project and hope you found it exemplary of Microsoft’s commitment to experimentation and open source software. if you're interested in continuing this project, please feel free to fork it. As of December 2016, we will no longer monitor or respond to open issues. You can keep up with other projects from Microsoft’s Cordova team by visiting http://taco.visualstudio.com. Thanks for your support!
+
 ![Ace Logo](http://microsoft.github.io/ace/assets/images/logo/ace.png) Visit our [homepage](http://microsoft.github.io/ace/) & [get started](http://microsoft.github.io/ace/docs/getting-started/) in minutes!
 
 ## WHAT IS ACE?
