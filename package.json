@@ -5,8 +5,7 @@
   "cordova": {
     "id": "cordova-plugin-ace",
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   },
   "repository": {
